@@ -42,6 +42,7 @@ Ordered by aggressiveness top to bottom, choose one
 _Supporting_:
 
 - `-c` | Opens all capsules (keyless chests) before disenchanting champion shards
+- `-k` | Combines key fragments to keys
 
 ### Example
 

@@ -32,6 +32,7 @@ def run
     player_loot = []
     loot_shards = []
     loot_chests = []
+    loot_keys = []
     loot_mastery_tokens = []
     player_mastery = []
     
@@ -70,6 +71,13 @@ def run
             capsule_ids.include? chest["lootId"]
         end
         puts "Found #{count_loot_items(loot_chests)} capsules to open"
+    end
+
+    if options[:keyfragments]
+        loot_keys = player_loot.select do |loot|
+            loot["lootId"] == "MATERIAL_key_fragment"
+        end
+        puts "Found #{count_loot_items(loot_keys)} key fragments"
     end
 
     if options[:owned]
@@ -297,6 +305,10 @@ class OptParser
 
             opts.on('-c', '--capsules', TrueClass, 'Open champion capsules') do |c|
                 options[:capsules] = c.nil? ? false : c
+            end
+
+            opts.on('-k', '--keyfragments', TrueClass, 'Forge keys from key fragments') do |k|
+                options[:keyfragments] = k.nil? ? false : k
             end
 
             opts.on('-a', '--all', TrueClass, 'Disenchant everything') do |a|
