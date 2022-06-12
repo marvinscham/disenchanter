@@ -9,15 +9,30 @@ def run
     ARGV << '-h' if ARGV.empty?
     options = OptParser.parse(ARGV)
 
+    shardOptions = true
+    suppOptions = true
+
     if !options[:all] && !options[:owned] && !options[:tokens] && !options[:mastery] && !options[:fullmastery]
-        puts "Please provide an option to properly run the script. Run disenchanter.rb -h for help."
+        shardOptions = false
+        puts "Note: No shard disenchantment options provided."
+    end
+
+    if !options[:capsules]
+        suppOptions = false
+        puts "Note: No supporting disenchantment options provided."
+    end
+
+    if !shardOptions && !suppOptions
+        puts "You're missing options to make the script do anything. Run ruby disenchanter.rb -h for help."
         exit
     end
 
     port, token = read_lockfile
     host = "https://127.0.0.1:#{port}"
     player_loot = []
-    loot_tokens = []
+    loot_shards = []
+    loot_chests = []
+    loot_mastery_tokens = []
     player_mastery = []
     
     create_client(port) do |http|
@@ -31,7 +46,6 @@ def run
         set_headers(loot_req, token)
         loot_res = http.request loot_req
         player_loot = JSON.parse(loot_res.body)
-        loot_tokens = player_loot
         puts "Found a total of #{count_loot_items(player_loot)} loot items"
         
         mastery_req = get_mastery(host, http, current_summoner["summonerId"])
@@ -40,27 +54,40 @@ def run
         player_mastery = JSON.parse(mastery_res.body)
     end
 
-    player_loot = player_loot.select do |loot|
+    loot_shards = player_loot.select do |loot|
         loot["type"] == "CHAMPION_RENTAL"
     end
-    puts "Found #{count_loot_items(player_loot)} champion shards"
+    puts "Found #{count_loot_items(loot_shards)} champion shards"
+
+    if options[:capsules]
+        loot_chests = player_loot.select do |loot|
+            loot["type"] == "CHEST"
+        end
+
+        capsule_ids = ["CHEST_128"]
+        
+        loot_chests = loot_chests.select do |chest|
+            capsule_ids.include? chest["lootId"]
+        end
+        puts "Found #{count_loot_items(loot_chests)} capsules to open"
+    end
 
     if options[:owned]
-        player_loot = player_loot.select do |loot|
+        loot_shards = loot_shards.select do |loot|
             loot["redeemableStatus"] == "ALREADY_OWNED"
         end
-        puts "Filtered down to #{count_loot_items(player_loot)} shards of champions you already own"
+        puts "Filtered down to #{count_loot_items(loot_shards)} shards of champions you already own"
     end
 
     if options[:tokens]
         token6_champion_ids = []
         token7_champion_ids = []
 
-        loot_tokens = loot_tokens.select do |loot|
+        loot_mastery_tokens = loot_player.select do |loot|
             loot["type"] == "CHAMPION_TOKEN"
         end
 
-        loot_tokens.each do |token|
+        loot_mastery_tokens.each do |token|
             if token["lootName"] = "CHAMPION_TOKEN_6"
                 token6_champion_ids << token["refId"].to_i
             elsif token["lootName"] = "CHAMPION_TOKEN_7"
@@ -70,7 +97,7 @@ def run
 
         puts "Found #{token6_champion_ids.length + token7_champion_ids.length} champions with owned mastery tokens"
 
-        player_loot = player_loot.each do |loot|
+        loot_shards = loot_shards.each do |loot|
             if token6_champion_ids.include? loot["storeItemId"]
                 loot["count"] -= 2
             elsif token7_champion_ids.include? loot["storeItemId"]
@@ -78,11 +105,11 @@ def run
             end
         end
 
-        player_loot = player_loot.select do |loot|
+        loot_shards = loot_shards.select do |loot|
             loot["count"] > 0
         end
 
-        puts "Filtered down to #{count_loot_items(player_loot)} shards you have no tokens for"
+        puts "Filtered down to #{count_loot_items(loot_shards)} shards you have no tokens for"
     end
 
     if options[:mastery]
@@ -99,7 +126,7 @@ def run
 
         puts "Found #{mastery5_champion_ids.length + mastery6_champion_ids.length} champions at or above specified level threshold of #{options[:mastery]}"
 
-        player_loot.each do |loot|
+        loot_shards.each do |loot|
             if mastery5_champion_ids.include? loot["storeItemId"]
                 loot["count"] -= 2
             elsif mastery6_champion_ids.include? loot["storeItemId"]
@@ -107,11 +134,11 @@ def run
             end
         end
 
-        player_loot = player_loot.select do |loot|
+        loot_shards = loot_shards.select do |loot|
             loot["count"] > 0
         end
 
-        puts "Filtered down to #{count_loot_items(player_loot)} shards that aren't needed for champions above level #{options[:mastery]}"
+        puts "Filtered down to #{count_loot_items(loot_shards)} shards that aren't needed for champions above level #{options[:mastery]}"
     end
 
     if options[:fullmastery]        
@@ -129,7 +156,7 @@ def run
         puts "Found #{mastery6_champion_ids.length} champions at mastery level 6"
         puts "Found #{mastery7_champion_ids.length} champions at mastery level 7"
 
-        player_loot.each do |loot|
+        loot_shards.each do |loot|
             if mastery6_champion_ids.include? loot["storeItemId"]
                 loot["count"] -= 1
             elsif !mastery7_champion_ids.include? loot["storeItemId"]
@@ -137,48 +164,63 @@ def run
             end
         end
 
-        player_loot = player_loot.select do |loot|
+        loot_shards = loot_shards.select do |loot|
             loot["count"] > 0
         end
 
-        puts "Filtered down to #{count_loot_items(player_loot)} shards that aren't needed for fully mastering champions"
+        puts "Filtered down to #{count_loot_items(loot_shards)} shards that aren't needed for fully mastering champions"
     end
 
     if options[:exclude]
-        player_loot = player_loot.select do |loot|
+        loot_shards = loot_shards.select do |loot|
             !options[:exclude].include? loot["itemDesc"]
         end
 
-        puts "Filtered down to #{count_loot_items(player_loot)} shards that aren't manually excluded"
+        puts "Filtered down to #{count_loot_items(loot_shards)} shards that aren't manually excluded"
+    end
+
+    if !shardOptions
+        loot_shards = []
     end
     
     total_value = 0
-    player_loot = player_loot.sort_by {|loot| loot["itemDesc"]}
+    loot_shards = loot_shards.sort_by {|loot| loot["itemDesc"]}
     if options[:verbose]
-        player_loot.each do |loot|
+        loot_shards.each do |loot|
             loot_value = loot["disenchantValue"] * loot["count"]
             total_value += loot_value
             puts "Disenchanting #{loot["count"]} #{loot["itemDesc"]} shards for #{loot_value} BE"
         end
     end
 
-    threads = player_loot.map do |loot|
-        Thread.new do
-            create_client(port) do |disenchant_http|                
-                if !options[:dry]
-                    disenchant_req = disenchant(host, disenchant_http, loot["lootName"], loot["count"])
+    if !options[:dry]
+        chest_threads = loot_chests.map do |chest|
+            Thread.new do
+                create_client(port) do |open_http|
+                    open_req = open_chest(host, open_http, chest["lootName"], chest["count"])
+                    set_headers(open_req, token)
+                    open_http.request open_req
+                end
+            end
+        end
+        chest_threads.each(&:join)
+    
+        shard_threads = loot_shards.map do |shard|
+            Thread.new do
+                create_client(port) do |disenchant_http|
+                    disenchant_req = disenchant_champion_shard(host, disenchant_http, shard["lootName"], shard["count"])
                     set_headers(disenchant_req, token)
                     disenchant_http.request disenchant_req
                 end
             end
-        end
-    end
+        end    
+        shard_threads.each(&:join)
 
-    threads.each(&:join)
-    if options[:dry]
-        puts "Dry Run: would disenchant #{count_loot_items(player_loot)} champion shards for a total of #{total_value} BE."
+        puts "Opened #{count_loot_items(loot_chests)} chests!"
+        puts "Disenchanted #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE!"
     else
-        puts "Disenchanted #{count_loot_items(player_loot)} champion shards for a total of #{total_value} BE!"
+        puts "Would open #{count_loot_items(loot_chests)} chests."
+        puts "Dry Run: would disenchant #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE."
     end
 end
 
@@ -216,8 +258,15 @@ def get_current_summoner(host, http)
     Net::HTTP::Get.new(uri)
 end
 
-def disenchant(host, http, loot_name, repeat)
+def disenchant_champion_shard(host, http, loot_name, repeat)
     uri = URI("#{host}/lol-loot/v1/recipes/CHAMPION_RENTAL_disenchant/craft?repeat=#{repeat}")
+    req = Net::HTTP::Post.new(uri, 'Content-Type': "application/json")
+    req.body = "[\"#{loot_name}\"]"
+    req
+end
+
+def open_chest(host, http, loot_name, repeat)
+    uri = URI("#{host}/lol-loot/v1/recipes/#{loot_name}_OPEN/craft?repeat=#{repeat}")
     req = Net::HTTP::Post.new(uri, 'Content-Type': "application/json")
     req.body = "[\"#{loot_name}\"]"
     req
@@ -235,7 +284,7 @@ class OptParser
     def self.parse(args)
         options = {}
         opts = OptionParser.new do |opts|
-            opts.banner = "Usage: disenchanter.rb [-d] [-v] [-h] [-a | -o | -t | -m LEVEL | -f] [-x NAME]"
+            opts.banner = "Usage: disenchanter.rb [options]"
 
             opts.on('-d', '--dry', TrueClass, 'Show results without disenchanting (applies -v)') do |d|
                 options[:dry] = d.nil? ? false : d
@@ -244,6 +293,10 @@ class OptParser
 
             opts.on('-v', '--verbose', TrueClass, 'Run verbosely') do |v|
                 options[:verbose] = v.nil? ? false : v
+            end
+
+            opts.on('-c', '--capsules', TrueClass, 'Open champion capsules') do |c|
+                options[:capsules] = c.nil? ? false : c
             end
 
             opts.on('-a', '--all', TrueClass, 'Disenchant everything') do |a|

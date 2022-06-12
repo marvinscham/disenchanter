@@ -22,7 +22,7 @@ Running the script (`ruby disenchanter.rb`) without any options will present you
 
 ### Options
 
-_Supporting_:
+_Meta_:
 
 - `-h` | Display a help message
 - `-d` | Dry run: show what the chosen option would result in without actually disenchanting
@@ -38,6 +38,10 @@ Ordered by aggressiveness top to bottom, choose one
 - `-m LEVEL` | Keeps shards for champions you have at mastery level LEVEL or above
 - `-f` | Keeps shards for all champions you don't have at mastery level 7 yet
 - `-x X,Y,Z` | Excludes champions' shards by name. You need to enter the **exact** spelling; e.g. `Rek'Sai`, champions with whitespace need to be wrapped in quotation marks like `"Renata Glasc"`.
+
+_Supporting_:
+
+- `-c` | Opens all capsules (keyless chests) before disenchanting champion shards
 
 ### Example
 
