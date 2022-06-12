@@ -35,13 +35,15 @@ Ordered by aggressiveness top to bottom, choose one
 - `-t` | Keeps shards for champions you own mastery tokens for
 - `-m LEVEL` | Keeps shards for champions you have at mastery level LEVEL or above
 - `-f` | Keeps shards for all champions you don't have at mastery level 7 yet
-- `-x X,Y,Z` | Excludes champions' shards by name. You need to enter the **exact** spelling; e.g. `Rek'Sai`, champions with whitespace need to be wrapped in quotation marks like `"Renata Glasc"`
+- `-x X,Y,Z` | Excludes champions' shards by name. You need to enter the **exact** spelling; e.g. `Rek'Sai`, champions with whitespace need to be wrapped in quotation marks like `"Renata Glasc"`.
 
 ### Example
 
 I want to see what the script would disenchant if I wanted to keep shards for champions at mastery level 4 or higher:
 
-`ruby disenchanter.rb -d -m 4`
+```
+ruby disenchanter.rb -d -m 4
+```
 
 Example output:
 
@@ -62,4 +64,6 @@ Dry Run: would disenchant 9 champion shards for a total of 9360 BE.
 
 Now, I'd like to keep my champion shards for Rell and Renata Glasc despite them not meeting the mastery level cutoff, so I manually exclude them when running the script again.
 
-`ruby disenchanter.rb -m 4 -x "Renata Glasc",Rell`
+```
+ruby disenchanter.rb -m 4 -x "Renata Glasc",Rell
+```
