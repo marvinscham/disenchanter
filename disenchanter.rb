@@ -17,7 +17,7 @@ def run
         puts "Note: No shard disenchantment options provided."
     end
 
-    if !options[:capsules]
+    if !options[:capsules] && !options[:keyfragments]
         suppOptions = false
         puts "Note: No supporting disenchantment options provided."
     end
@@ -58,7 +58,7 @@ def run
     loot_shards = player_loot.select do |loot|
         loot["type"] == "CHAMPION_RENTAL"
     end
-    puts "Found #{count_loot_items(loot_shards)} champion shards"
+    if shardOptions then puts "Found #{count_loot_items(loot_shards)} champion shards" end
 
     if options[:capsules]
         loot_chests = player_loot.select do |loot|
@@ -201,7 +201,20 @@ def run
         end
     end
 
+    puts "______________________________"
+
     if !options[:dry]
+        key_threads = loot_keys.map do |key|
+            Thread.new do
+                create_client(port) do |forge_http|
+                    forge_req = forge_chest(host, forge_http, chest["lootName"], (key["count"] / 3).floor)
+                    set_headers(forge_req, token)
+                    forge_http.request forge_req
+                end
+            end
+        end
+        key_threads.each(&:join)
+
         chest_threads = loot_chests.map do |chest|
             Thread.new do
                 create_client(port) do |open_http|
@@ -224,11 +237,13 @@ def run
         end    
         shard_threads.each(&:join)
 
-        puts "Opened #{count_loot_items(loot_chests)} chests!"
-        puts "Disenchanted #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE!"
+        if options[:capsules] then puts "Opened #{count_loot_items(loot_chests)} capsules!" end
+        if options[:keyfragments] then puts "Combined #{(count_loot_items(loot_keys) / 3).floor} keys!" end
+        if shardOptions then puts "Disenchanted #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE!" end
     else
-        puts "Would open #{count_loot_items(loot_chests)} chests."
-        puts "Dry Run: would disenchant #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE."
+        if options[:capsules] then puts "Dry Run: would open #{count_loot_items(loot_chests)} capsules." end
+        if options[:keyfragments] then puts "Dry Run: would combine #{(count_loot_items(loot_keys) / 3).floor} keys." end
+        if shardOptions then puts "Dry Run: would disenchant #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE." end
     end
 end
 
