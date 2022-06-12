@@ -16,6 +16,8 @@ No, the script only uses [official Riot APIs](https://developer.riotgames.com/do
 
 Put the `disenchanter.rb` file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends`.
 
+You need to be logged into your League Client for this to work properly.
+
 Running the script (`ruby disenchanter.rb`) without any options will present you with a help message.
 
 ### Options
