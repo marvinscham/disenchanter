@@ -35,6 +35,7 @@ Ordered by aggressiveness top to bottom, choose one
 - `-t` | Keeps shards for champions you own mastery tokens for
 - `-m LEVEL` | Keeps shards for champions you have at mastery level LEVEL or above
 - `-f` | Keeps shards for all champions you don't have at mastery level 7 yet
+- `-x X,Y,Z` | Excludes champions' shards by name. You need to enter the **exact** spelling; e.g. `Rek'Sai`, champions with whitespace need to be wrapped in quotation marks like `"Renata Glasc"`
 
 ### Example
 
@@ -59,6 +60,6 @@ Disenchanting 1 Yuumi shards for 1260 BE
 Dry Run: would disenchant 9 champion shards for a total of 9360 BE.
 ```
 
-If you're satisfied with the suggested disenchantments, run the script again without the dry run option `-d`.
+Now, I'd like to keep my champion shards for Rell and Renata Glasc despite them not meeting the mastery level cutoff, so I manually exclude them when running the script again.
 
-`ruby disenchanter.rb -m 4`
+`ruby disenchanter.rb -m 4 -x "Renata Glasc",Rell`

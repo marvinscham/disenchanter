@@ -143,6 +143,14 @@ def run
 
         puts "Filtered down to #{count_loot_items(player_loot)} shards that aren't needed for fully mastering champions"
     end
+
+    if options[:exclude]
+        player_loot = player_loot.select do |loot|
+            !options[:exclude].include? loot["itemDesc"]
+        end
+
+        puts "Filtered down to #{count_loot_items(player_loot)} shards that aren't manually excluded"
+    end
     
     total_value = 0
     player_loot = player_loot.sort_by {|loot| loot["itemDesc"]}
@@ -227,7 +235,7 @@ class OptParser
     def self.parse(args)
         options = {}
         opts = OptionParser.new do |opts|
-            opts.banner = "Usage: disenchanter.rb [-d] [-v] [-h] [-a | -o | -t | -m | -f]"
+            opts.banner = "Usage: disenchanter.rb [-d] [-v] [-h] [-a | -o | -t | -m LEVEL | -f] [-x NAME]"
 
             opts.on('-d', '--dry', TrueClass, 'Show results without disenchanting (applies -v)') do |d|
                 options[:dry] = d.nil? ? false : d
@@ -256,6 +264,10 @@ class OptParser
 
             opts.on('-f', '--fullmastery', TrueClass, 'Keep shards for champions not at mastery level 7') do |f|
                 options[:fullmastery] = f.nil? ? false : f
+            end
+
+            opts.on('-x', '--exclude X,Y,Z', Array, "Manually exclude champions's shards") do |x|
+                options[:exclude] = x
             end
 
             opts.on('-h', '--help', "Show this message") do
