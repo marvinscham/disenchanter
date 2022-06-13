@@ -28,7 +28,12 @@ def run
         exit
     end
 
-    port, token = read_lockfile
+    begin
+        port, token = read_lockfile
+    rescue
+        puts "Could not grab session. Make sure your League Client is running."
+    end
+
     host = "https://127.0.0.1:#{port}"
     player_loot = []
     loot_shards = []
@@ -44,6 +49,12 @@ def run
         set_headers(summoner_req, token)
         summoner_res = http.request summoner_req
         current_summoner = JSON.parse(summoner_res.body)
+
+        if current_summoner["displayName"] == "" || current_summoner["displayName"].nil?
+            puts "Could not grab summoner info. Try restarting your League Client."
+            exit 1
+        end
+
         puts "Logged in as #{current_summoner["displayName"]}"        
 
         loot_req =  get_loot(host, http)
