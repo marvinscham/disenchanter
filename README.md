@@ -50,7 +50,7 @@ _Extra_:
 
 ### TURN IT ALL TO BLUE ESSENCE
 
-Turns tokens into random champion shards, open all keyless capsules and then disenchant all of your champion shards.
+Turns tokens into random champion shards, open all keyless capsules and then disenchant all of your champion shards (dry run).
 
 ```
 ruby disenchanter.rb -dcka -e essence
@@ -58,10 +58,10 @@ ruby disenchanter.rb -dcka -e essence
 
 ### Tokens, Capsules and Key Fragments
 
-This will turn tokens to champion shards, open those and other keyless capsules and also combine key fragments to keys.
+This will turn tokens to champion shards, open those and other keyless capsules and also combine key fragments to keys (dry run).
 
 ```
-ruby disenchanter.rb -ck -e essence
+ruby disenchanter.rb -dck -e essence
 ```
 
 ### Champion Shards by Mastery Threshold
