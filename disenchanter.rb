@@ -6,6 +6,7 @@ require "json"
 require "optparse"
 
 def run
+    separator = "____________________________________________________________"
     ARGV << '-h' if ARGV.empty?
     options = OptParser.parse(ARGV)
 
@@ -17,7 +18,7 @@ def run
         puts "Note: No shard disenchantment options provided."
     end
 
-    if !options[:capsules] && !options[:keyfragments]
+    if !options[:capsules] && !options[:keyfragments] && !options[:eventtokens]
         suppOptions = false
         puts "Note: No supporting disenchantment options provided."
     end
@@ -33,6 +34,8 @@ def run
     loot_shards = []
     loot_chests = []
     loot_keys = []
+    loot_event_tokens = []
+    event_token_recipes = []
     loot_mastery_tokens = []
     player_mastery = []
     
@@ -47,30 +50,64 @@ def run
         set_headers(loot_req, token)
         loot_res = http.request loot_req
         player_loot = JSON.parse(loot_res.body)
-        puts "Found a total of #{count_loot_items(player_loot)} loot items"
+        puts "Found a total of #{player_loot.length} unique loot items"
+        puts separator
         
-        mastery_req = get_mastery(host, http, current_summoner["summonerId"])
-        set_headers(mastery_req, token)
-        mastery_res = http.request mastery_req
-        player_mastery = JSON.parse(mastery_res.body)
-    end
-
-    loot_shards = player_loot.select do |loot|
-        loot["type"] == "CHAMPION_RENTAL"
-    end
-    if shardOptions then puts "Found #{count_loot_items(loot_shards)} champion shards" end
-
-    if options[:capsules]
-        loot_chests = player_loot.select do |loot|
-            loot["type"] == "CHEST"
+        if options[:mastery] || options[:fullmastery]
+            mastery_req = get_mastery(host, http, current_summoner["summonerId"])
+            set_headers(mastery_req, token)
+            mastery_res = http.request mastery_req
+            player_mastery = JSON.parse(mastery_res.body)
         end
 
-        capsule_ids = ["CHEST_128"]
-        
-        loot_chests = loot_chests.select do |chest|
-            capsule_ids.include? chest["lootId"]
+        if options[:eventtokens]
+            loot_event_tokens = player_loot.select do |loot|
+                loot["type"] == "MATERIAL" && loot["displayCategories"] == "CHEST" && \
+                loot["lootId"].start_with?("MATERIAL_") && !loot["lootId"].start_with?("MATERIAL_key")
+            end    
+
+            puts "Found Event Tokens: #{loot_event_tokens[0]["count"]}x #{loot_event_tokens[0]["localizedName"]} (#{loot_event_tokens[0]["lootName"]})"
+
+            recipes_req = get_recipes(host, http, loot_event_tokens[0]["lootId"])
+            set_headers(recipes_req, token)
+            recipes_res = http.request recipes_req
+            event_token_recipes = JSON.parse(recipes_res.body)
         end
-        puts "Found #{count_loot_items(loot_chests)} capsules to open"
+    end
+
+    if options[:eventtokens]
+        # CHEST_187 = Random Emote
+        # CHEST_241 = Random Champion Shard
+        # CURRENCY_champion = Blue Essence
+        if options[:eventtokens] == "essence" then recipe_targets = ["CHEST_241", "CURRENCY_champion"] end
+        if options[:eventtokens] == "emotes" then recipe_targets = ["CHEST_187"] end
+
+        event_token_recipes = event_token_recipes.select do |recipe|
+            recipe_targets.include? recipe["outputs"][0]["lootName"]
+        end
+        event_token_recipes = event_token_recipes.sort_by {|recipe| recipe["slots"][0]["quantity"]}.reverse!
+
+        if options[:verbose]
+            event_token_recipes.each do |recipe|
+                puts "Recipe found: #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens (#{recipe["recipeName"]})"
+            end
+        end
+
+        if !options[:dry]
+            token_threads = event_token_recipes.map do |recipe|
+                Thread.new do
+                    create_client(port) do |craft_http|
+                        recipe["could_craft"] = (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor
+                        loot_event_tokens[0]["count"] -= (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]
+                        if (recipe["could_craft"] > 0 || options[:verbose]) then puts "Crafted #{recipe["could_craft"]}x #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens each" end
+                        craft_req = craft_recipe(host, craft_http, recipe["lootName"], recipe["recipeName"], recipe["could_craft"])
+                        set_headers(craft_req, token)
+                        craft_http.request craft_req
+                    end
+                end
+            end
+            token_threads.each(&:join)
+        end
     end
 
     if options[:keyfragments]
@@ -78,7 +115,61 @@ def run
             loot["lootId"] == "MATERIAL_key_fragment"
         end
         puts "Found #{count_loot_items(loot_keys)} key fragments"
+
+        if !options[:dry]
+            key_threads = loot_keys.map do |key|
+                Thread.new do
+                    create_client(port) do |forge_http|
+                        forge_req = craft_recipe(host, forge_http, "MATERIAL_key_fragment", "MATERIAL_key_fragment_forge", (key["count"] / 3).floor)
+                        set_headers(forge_req, token)
+                        forge_http.request forge_req
+                    end
+                end
+            end            
+            key_threads.each(&:join)
+            puts "Forged #{(count_loot_items(loot_keys) / 3).floor} keys!"
+        end
     end
+
+    if options[:capsules]
+        loot_chests = player_loot.select do |loot|
+            loot["type"] == "CHEST"
+        end
+
+        # CHEST_128 = Champion Capsule
+        # CHEST_187 = Random Emote
+        # CHEST_241 = Random Champion Shard
+        capsule_ids = ["CHEST_128", "CHEST_187", "CHEST_241"]
+        
+        loot_chests = loot_chests.select do |chest|
+            capsule_ids.include? chest["lootId"]
+        end
+        puts "Found #{count_loot_items(loot_chests)} capsules to open"
+
+        if !options[:dry]
+            chest_threads = loot_chests.map do |chest|
+                Thread.new do
+                    create_client(port) do |open_http|
+                        open_req = craft_recipe(host, open_http, chest["lootName"], chest["lootName"] + "_OPEN", chest["count"])
+                        set_headers(open_req, token)
+                        open_http.request open_req
+                    end
+                end
+            end
+            chest_threads.each(&:join)
+            puts "Opened #{count_loot_items(loot_chests)} capsules!"
+        end
+    end
+
+    # Operational
+
+    loot_shards = player_loot.select do |loot|
+        loot["type"] == "CHAMPION_RENTAL"
+    end
+    if shardOptions 
+        puts "Found #{count_loot_items(loot_shards)} champion shards"
+    end
+
 
     if options[:owned]
         loot_shards = loot_shards.select do |loot|
@@ -91,7 +182,7 @@ def run
         token6_champion_ids = []
         token7_champion_ids = []
 
-        loot_mastery_tokens = loot_player.select do |loot|
+        loot_mastery_tokens = player_loot.select do |loot|
             loot["type"] == "CHAMPION_TOKEN"
         end
 
@@ -161,8 +252,7 @@ def run
             end
         end
 
-        puts "Found #{mastery6_champion_ids.length} champions at mastery level 6"
-        puts "Found #{mastery7_champion_ids.length} champions at mastery level 7"
+        puts "Found #{mastery6_champion_ids.length + mastery7_champion_ids.length} champions at mastery level 6+"
 
         loot_shards.each do |loot|
             if mastery6_champion_ids.include? loot["storeItemId"]
@@ -194,38 +284,17 @@ def run
     total_value = 0
     loot_shards = loot_shards.sort_by {|loot| loot["itemDesc"]}
     if options[:verbose]
+        puts separator
         loot_shards.each do |loot|
             loot_value = loot["disenchantValue"] * loot["count"]
             total_value += loot_value
-            puts "Disenchanting #{loot["count"]} #{loot["itemDesc"]} shards for #{loot_value} BE"
+            puts "Found #{loot["count"]} #{loot["itemDesc"]} shards, total value: #{loot_value} BE"
         end
     end
 
-    puts "______________________________"
+    puts separator
 
-    if !options[:dry]
-        key_threads = loot_keys.map do |key|
-            Thread.new do
-                create_client(port) do |forge_http|
-                    forge_req = forge_chest(host, forge_http, chest["lootName"], (key["count"] / 3).floor)
-                    set_headers(forge_req, token)
-                    forge_http.request forge_req
-                end
-            end
-        end
-        key_threads.each(&:join)
-
-        chest_threads = loot_chests.map do |chest|
-            Thread.new do
-                create_client(port) do |open_http|
-                    open_req = open_chest(host, open_http, chest["lootName"], chest["count"])
-                    set_headers(open_req, token)
-                    open_http.request open_req
-                end
-            end
-        end
-        chest_threads.each(&:join)
-    
+    if !options[:dry]    
         shard_threads = loot_shards.map do |shard|
             Thread.new do
                 create_client(port) do |disenchant_http|
@@ -236,13 +305,21 @@ def run
             end
         end    
         shard_threads.each(&:join)
-
-        if options[:capsules] then puts "Opened #{count_loot_items(loot_chests)} capsules!" end
-        if options[:keyfragments] then puts "Combined #{(count_loot_items(loot_keys) / 3).floor} keys!" end
         if shardOptions then puts "Disenchanted #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE!" end
     else
-        if options[:capsules] then puts "Dry Run: would open #{count_loot_items(loot_chests)} capsules." end
-        if options[:keyfragments] then puts "Dry Run: would combine #{(count_loot_items(loot_keys) / 3).floor} keys." end
+        if options[:eventtokens]
+            event_token_recipes.each do |recipe|
+                recipe["could_craft"] = (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor
+                loot_event_tokens[0]["count"] -= (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]
+                if (recipe["could_craft"] > 0 || options[:verbose]) then puts "Dry Run: would craft #{recipe["could_craft"]}x #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens each" end
+                if recipe["could_craft"] > 0 && recipe["outputs"][0]["lootName"] == "CHEST_241" && shardOptions
+                    puts "Note: when running this command, you will get random champion shards that might be immediately disenchanted."
+                    puts "If you want to review the shards first, run ruby disenchanter.rb -e [essence|emotes] separately before using a shard disenchanting option."
+                end
+            end
+        end
+        if options[:keyfragments] then puts "Dry Run: would forge #{(count_loot_items(loot_keys) / 3).floor} keys." end
+        if options[:capsules] then puts "Dry Run: would open #{count_loot_items(loot_chests)} capsules." end        
         if shardOptions then puts "Dry Run: would disenchant #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE." end
     end
 end
@@ -271,6 +348,11 @@ def get_loot(host, http)
     Net::HTTP::Get.new(uri)
 end
 
+def get_recipes(host, http, loot_id)
+    uri = URI("#{host}/lol-loot/v1/recipes/initial-item/#{loot_id}")
+    Net::HTTP::Get.new(uri)
+end
+
 def get_mastery(host, http, summoner_id)
     uri = URI("#{host}/lol-collections/v1/inventories/#{summoner_id}/champion-mastery")
     Net::HTTP::Get.new(uri)
@@ -288,8 +370,8 @@ def disenchant_champion_shard(host, http, loot_name, repeat)
     req
 end
 
-def open_chest(host, http, loot_name, repeat)
-    uri = URI("#{host}/lol-loot/v1/recipes/#{loot_name}_OPEN/craft?repeat=#{repeat}")
+def craft_recipe(host, http, loot_name, recipe, repeat)
+    uri = URI("#{host}/lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}")
     req = Net::HTTP::Post.new(uri, 'Content-Type': "application/json")
     req.body = "[\"#{loot_name}\"]"
     req
@@ -316,6 +398,10 @@ class OptParser
 
             opts.on('-v', '--verbose', TrueClass, 'Run verbosely') do |v|
                 options[:verbose] = v.nil? ? false : v
+            end
+
+            opts.on('-e', '--eventtokens [essence|emotes]', 'Craft event tokens to Shards/BE or Random Emotes') do |e|
+                options[:eventtokens] = e
             end
 
             opts.on('-c', '--capsules', TrueClass, 'Open champion capsules') do |c|

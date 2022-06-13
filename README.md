@@ -22,7 +22,7 @@ Running the script (`ruby disenchanter.rb`) without any options will present you
 
 ### Options
 
-_Meta_:
+_Supporting_:
 
 - `-h` | Display a help message
 - `-d` | Dry run: show what the chosen option would result in without actually disenchanting
@@ -39,12 +39,32 @@ Ordered by aggressiveness top to bottom, choose one
 - `-f` | Keeps shards for all champions you don't have at mastery level 7 yet
 - `-x X,Y,Z` | Excludes champions' shards by name. You need to enter the **exact** spelling; e.g. `Rek'Sai`, champions with whitespace need to be wrapped in quotation marks like `"Renata Glasc"`.
 
-_Supporting_:
+_Extra_:
 
-- `-c` | Opens all capsules (keyless chests) before disenchanting champion shards
 - `-k` | Combines key fragments to keys
+- `-c` | Opens all capsules (keyless chests) before disenchanting champion shards
+- `-e [essence|emotes]` | Will forge all event tokens into Random Champion Shards, 100 BE and 10 BE or Random Emote
+  - Note: If you'd like to keep certain shards you might want to run this separately from operational options to not accidentally craft, open and instantly disenchant them
 
-### Example
+## Examples
+
+### TURN IT ALL TO BLUE ESSENCE
+
+Turns tokens into random champion shards, open all keyless capsules and then disenchant all of your champion shards.
+
+```
+ruby disenchanter.rb -dcka -e essence
+```
+
+### Tokens, Capsules and Key Fragments
+
+This will turn tokens to champion shards, open those and other keyless capsules and also combine key fragments to keys.
+
+```
+ruby disenchanter.rb -ck -e essence
+```
+
+### Champion Shards by Mastery Threshold
 
 I want to see what the script would disenchant if I wanted to keep shards for champions at mastery level 4 or higher:
 
@@ -55,18 +75,20 @@ ruby disenchanter.rb -d -m 4
 Example output:
 
 ```
-Logged in as <summoner_name>
-Found a total of 12613 loot items
-Found 153 champion shards
-Found 104 champions at or above specified level threshold of 4
-Filtered down to 9 shards that aren't needed for champions above level 4
-Disenchanting 2 Kled shards for 2520 BE
-Disenchanting 2 Rakan shards for 2520 BE
-Disenchanting 1 Rell shards for 1260 BE
-Disenchanting 1 Renata Glasc shards for 1260 BE
-Disenchanting 2 Taric shards for 540 BE
-Disenchanting 1 Yuumi shards for 1260 BE
-Dry Run: would disenchant 9 champion shards for a total of 9360 BE.
+Logged in as Summoner
+Found a total of 128 unique loot items
+____________________________________________________________
+Found 112 champion shards
+Found 74 champions at or above specified level threshold of 4
+Filtered down to 7 shards that aren't needed for champions above level 4
+____________________________________________________________
+Found 1 Irelia shards, total value: 960 BE
+Found 2 Olaf shards, total value: 1260 BE
+Found 2 Qiyana shards, total value: 2520 BE
+Found 1 Rell shards, total value: 1260 BE
+Found 1 Renata Glasc shards, total value: 1260 BE
+____________________________________________________________
+Dry Run: would disenchant 7 champion shards for a total of 7260 BE.
 ```
 
 Now, I'd like to keep my champion shards for Rell and Renata Glasc despite them not meeting the mastery level cutoff, so I manually exclude them when running the script again.
