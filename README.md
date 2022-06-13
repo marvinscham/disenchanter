@@ -10,7 +10,9 @@ You'll need to have [Ruby](https://www.ruby-lang.org/) installed to use the scri
 
 ## Is this going to get me banned?
 
-No, the script only uses [official Riot APIs](https://developer.riotgames.com/docs/lol#league-client).
+No, the script only uses [official Riot APIs](https://developer.riotgames.com/docs/lol#league-client). 
+
+The script triggers the same server requests as you would in your League Client – just without the animations.
 
 ## Usage
 
