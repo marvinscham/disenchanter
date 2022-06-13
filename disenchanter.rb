@@ -18,7 +18,7 @@ def run
         puts "Note: No shard disenchantment options provided."
     end
 
-    if !options[:capsules] && !options[:keyfragments] && !options[:eventtokens]
+    if !options[:capsules] && !options[:keyfragments] && !options[:eventtokens] && !options[:emotes]
         suppOptions = false
         puts "Note: No supporting disenchantment options provided."
     end
@@ -38,6 +38,7 @@ def run
     player_loot = []
     loot_shards = []
     loot_chests = []
+    loot_emotes = []
     loot_keys = []
     loot_event_tokens = []
     event_token_recipes = []
@@ -111,7 +112,7 @@ def run
                         recipe["could_craft"] = (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor
                         loot_event_tokens[0]["count"] -= (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]
                         if (recipe["could_craft"] > 0 || options[:verbose]) then puts "Crafted #{recipe["could_craft"]}x #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens each" end
-                        craft_req = open_chest(host, craft_http, recipe["lootName"], recipe["recipeName"], recipe["could_craft"])
+                        craft_req = craft_recipe(host, craft_http, recipe["lootName"], recipe["recipeName"], recipe["could_craft"])
                         set_headers(craft_req, token)
                         craft_http.request craft_req
                     end
@@ -131,7 +132,7 @@ def run
             key_threads = loot_keys.map do |key|
                 Thread.new do
                     create_client(port) do |forge_http|
-                        forge_req = open_chest(host, forge_http, "MATERIAL_key_fragment", "MATERIAL_key_fragment_forge", (key["count"] / 3).floor)
+                        forge_req = craft_recipe(host, forge_http, "MATERIAL_key_fragment", "MATERIAL_key_fragment_forge", (key["count"] / 3).floor)
                         set_headers(forge_req, token)
                         forge_http.request forge_req
                     end
@@ -161,7 +162,7 @@ def run
             chest_threads = loot_chests.map do |chest|
                 Thread.new do
                     create_client(port) do |open_http|
-                        open_req = open_chest(host, open_http, chest["lootName"], chest["lootName"] + "_OPEN", chest["count"])
+                        open_req = craft_recipe(host, open_http, chest["lootName"], chest["lootName"] + "_OPEN", chest["count"])
                         set_headers(open_req, token)
                         open_http.request open_req
                     end
@@ -169,6 +170,32 @@ def run
             end
             chest_threads.each(&:join)
             puts "Opened #{count_loot_items(loot_chests)} capsules!"
+        end
+    end
+
+    if options[:emotes]
+        loot_emotes = player_loot.select do |loot|
+            loot["type"] == "EMOTE" && loot["redeemableStatus"] == "ALREADY_OWNED"
+        end
+        puts "Found #{count_loot_items(loot_emotes)} emotes you already own"
+
+        total_oe_value = 0
+        loot_emotes.each do |emote|
+            total_oe_value += emote["disenchantValue"]
+        end
+
+        if !options[:dry]
+            emote_threads = loot_emotes.map do |emote|
+                Thread.new do
+                    create_client(port) do |open_http|
+                        open_req = craft_recipe(host, open_http, emote["lootName"], "EMOTE_disenchant", emote["count"])
+                        set_headers(open_req, token)
+                        open_http.request open_req
+                    end
+                end
+            end
+            emote_threads.each(&:join)
+            puts "Disenchanted #{count_loot_items(loot_emotes)} emotes for #{total_oe_value}!"
         end
     end
 
@@ -292,15 +319,14 @@ def run
         loot_shards = []
     end
     
-    total_value = 0
+    total_be_value = 0
     loot_shards = loot_shards.sort_by {|loot| loot["itemDesc"]}
-    if options[:verbose]
-        puts separator
-        loot_shards.each do |loot|
-            loot_value = loot["disenchantValue"] * loot["count"]
-            total_value += loot_value
-            puts "Found #{loot["count"]} #{loot["itemDesc"]} shards, total value: #{loot_value} BE"
-        end
+    
+    if options[:verbose] then puts separator end
+    loot_shards.each do |loot|
+        loot_value = loot["disenchantValue"] * loot["count"]
+        total_be_value += loot_value
+        if options[:verbose] then puts "Found #{loot["count"]} #{loot["itemDesc"]} shards, total value: #{loot_value} BE" end
     end
 
     puts separator
@@ -309,14 +335,14 @@ def run
         shard_threads = loot_shards.map do |shard|
             Thread.new do
                 create_client(port) do |disenchant_http|
-                    disenchant_req = disenchant_champion_shard(host, disenchant_http, shard["lootName"], shard["count"])
+                    disenchant_req = craft_recipe(host, disenchant_http, shard["lootName"], "CHAMPION_RENTAL_disenchant", shard["count"])
                     set_headers(disenchant_req, token)
                     disenchant_http.request disenchant_req
                 end
             end
         end    
         shard_threads.each(&:join)
-        if shardOptions then puts "Disenchanted #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE!" end
+        if shardOptions then puts "Disenchanted #{count_loot_items(loot_shards)} champion shards for a total of #{total_be_value} BE!" end
     else
         if options[:eventtokens]
             event_token_recipes.each do |recipe|
@@ -330,8 +356,9 @@ def run
             end
         end
         if options[:keyfragments] then puts "Dry Run: would forge #{(count_loot_items(loot_keys) / 3).floor} keys." end
-        if options[:capsules] then puts "Dry Run: would open #{count_loot_items(loot_chests)} capsules." end        
-        if shardOptions then puts "Dry Run: would disenchant #{count_loot_items(loot_shards)} champion shards for a total of #{total_value} BE." end
+        if options[:capsules] then puts "Dry Run: would open #{count_loot_items(loot_chests)} capsules." end
+        if options[:emotes] then puts "Dry Run: would disenchant #{count_loot_items(loot_emotes)} emotes for #{total_oe_value} OE!" end
+        if shardOptions then puts "Dry Run: would disenchant #{count_loot_items(loot_shards)} champion shards for a total of #{total_be_value} BE." end
     end
 end
 
@@ -374,23 +401,16 @@ def get_current_summoner(host, http)
     Net::HTTP::Get.new(uri)
 end
 
-def disenchant_champion_shard(host, http, loot_name, repeat)
-    uri = URI("#{host}/lol-loot/v1/recipes/CHAMPION_RENTAL_disenchant/craft?repeat=#{repeat}")
-    req = Net::HTTP::Post.new(uri, 'Content-Type': "application/json")
-    req.body = "[\"#{loot_name}\"]"
-    req
-end
-
-def open_chest(host, http, loot_name, recipe, repeat)
+def craft_recipe(host, http, loot_name, recipe, repeat)
     uri = URI("#{host}/lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}")
     req = Net::HTTP::Post.new(uri, 'Content-Type': "application/json")
     req.body = "[\"#{loot_name}\"]"
     req
 end
 
-def count_loot_items(player_loot)
+def count_loot_items(loot_items)
     count = 0
-    player_loot.each do |loot|
+    loot_items.each do |loot|
         count += loot["count"]
     end
     count
@@ -415,8 +435,12 @@ class OptParser
                 options[:eventtokens] = e
             end
 
-            opts.on('-c', '--capsules', TrueClass, 'Open champion capsules') do |c|
+            opts.on('-c', '--capsules', TrueClass, 'Open all (keyless) capsules') do |c|
                 options[:capsules] = c.nil? ? false : c
+            end
+
+            opts.on('-w', '--emotes', TrueClass, 'Disenchant owned emotes') do |w|
+                options[:emotes] = w.nil? ? false : w
             end
 
             opts.on('-k', '--keyfragments', TrueClass, 'Forge keys from key fragments') do |k|

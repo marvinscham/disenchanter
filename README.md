@@ -45,6 +45,7 @@ _Extra_:
 - `-c` | Opens all capsules (keyless chests) before disenchanting champion shards
 - `-e [essence|emotes]` | Will forge all event tokens into Random Champion Shards, 100 BE and 10 BE or Random Emote
   - Note: If you'd like to keep certain shards you might want to run this separately from operational options to not accidentally craft, open and instantly disenchant them
+- `-w` | Disenchants all owned emotes to Orange Essence
 
 ## Examples
 
