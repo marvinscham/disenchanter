@@ -100,7 +100,7 @@ def run
                         recipe["could_craft"] = (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor
                         loot_event_tokens[0]["count"] -= (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]
                         if (recipe["could_craft"] > 0 || options[:verbose]) then puts "Crafted #{recipe["could_craft"]}x #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens each" end
-                        craft_req = craft_recipe(host, craft_http, recipe["lootName"], recipe["recipeName"], recipe["could_craft"])
+                        craft_req = open_chest(host, craft_http, recipe["lootName"], recipe["recipeName"], recipe["could_craft"])
                         set_headers(craft_req, token)
                         craft_http.request craft_req
                     end
@@ -120,7 +120,7 @@ def run
             key_threads = loot_keys.map do |key|
                 Thread.new do
                     create_client(port) do |forge_http|
-                        forge_req = craft_recipe(host, forge_http, "MATERIAL_key_fragment", "MATERIAL_key_fragment_forge", (key["count"] / 3).floor)
+                        forge_req = open_chest(host, forge_http, "MATERIAL_key_fragment", "MATERIAL_key_fragment_forge", (key["count"] / 3).floor)
                         set_headers(forge_req, token)
                         forge_http.request forge_req
                     end
@@ -150,7 +150,7 @@ def run
             chest_threads = loot_chests.map do |chest|
                 Thread.new do
                     create_client(port) do |open_http|
-                        open_req = craft_recipe(host, open_http, chest["lootName"], chest["lootName"] + "_OPEN", chest["count"])
+                        open_req = open_chest(host, open_http, chest["lootName"], chest["lootName"] + "_OPEN", chest["count"])
                         set_headers(open_req, token)
                         open_http.request open_req
                     end
@@ -370,7 +370,7 @@ def disenchant_champion_shard(host, http, loot_name, repeat)
     req
 end
 
-def craft_recipe(host, http, loot_name, recipe, repeat)
+def open_chest(host, http, loot_name, recipe, repeat)
     uri = URI("#{host}/lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}")
     req = Net::HTTP::Post.new(uri, 'Content-Type': "application/json")
     req.body = "[\"#{loot_name}\"]"
