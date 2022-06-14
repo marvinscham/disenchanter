@@ -431,23 +431,23 @@ class OptParser
                 options[:verbose] = v.nil? ? false : v
             end
 
-            opts.on('-e', '--eventtokens [essence|emotes]', 'Craft event tokens to Shards/BE or Random Emotes') do |e|
-                options[:eventtokens] = e
+            opts.on('-t', '--tokens [essence|emotes]', 'Craft event tokens to Shards/BE or Random Emotes') do |t|
+                options[:eventtokens] = t
             end
 
             opts.on('-c', '--capsules', TrueClass, 'Open all (keyless) capsules') do |c|
                 options[:capsules] = c.nil? ? false : c
             end
 
-            opts.on('-w', '--emotes', TrueClass, 'Disenchant owned emotes') do |w|
-                options[:emotes] = w.nil? ? false : w
+            opts.on('-e', '--emotes', TrueClass, 'Disenchant owned emotes') do |e|
+                options[:emotes] = e.nil? ? false : e
             end
 
             opts.on('-k', '--keyfragments', TrueClass, 'Forge keys from key fragments') do |k|
                 options[:keyfragments] = k.nil? ? false : k
             end
 
-            opts.on('-a', '--all', TrueClass, 'Disenchant everything') do |a|
+            opts.on('-a', '--all', TrueClass, 'Disenchant all champion shards') do |a|
                 options[:all] = a.nil? ? false : a
             end
 
@@ -455,12 +455,12 @@ class OptParser
                 options[:owned] = o.nil? ? false : o
             end
 
-            opts.on('-t', '--tokens', TrueClass, 'Keep shards for champions with owned mastery tokens') do |t|
-                options[:tokens] = t.nil? ? false : t
+            opts.on('-m', '--masterytokens', TrueClass, 'Keep shards for champions with owned mastery tokens') do |m|
+                options[:tokens] = m.nil? ? false : m
             end
 
-            opts.on('-m', '--mastery LEVEL', OptionParser::OctalInteger, 'Keep shards for champions at mastery level x or above') do |m|
-                options[:mastery] = m
+            opts.on('-l', '--level LEVEL', OptionParser::OctalInteger, 'Keep shards for champions at mastery level x or above') do |l|
+                options[:mastery] = l
             end
 
             opts.on('-f', '--fullmastery', TrueClass, 'Keep shards for champions not at mastery level 7') do |f|

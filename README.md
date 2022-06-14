@@ -10,7 +10,7 @@ You'll need to have [Ruby](https://www.ruby-lang.org/) installed to use the scri
 
 ## Is this going to get me banned?
 
-No, the script only uses [official Riot APIs](https://developer.riotgames.com/docs/lol#league-client). 
+No, the script only uses [official Riot APIs](https://developer.riotgames.com/docs/lol#league-client).
 
 The script triggers the same server requests as you would in your League Client – just without the animations.
 
@@ -36,8 +36,8 @@ Ordered by aggressiveness top to bottom, choose one
 
 - `-a` | Disenchants ALL champion shards
 - `-o` | Keeps shards for champions you don't own
-- `-t` | Keeps shards for champions you own mastery tokens for
-- `-m LEVEL` | Keeps shards for champions you have at mastery level LEVEL or above
+- `-m` | Keeps shards for champions you own mastery tokens for
+- `-l LEVEL` | Keeps shards for champions you have at mastery level LEVEL or above
 - `-f` | Keeps shards for all champions you don't have at mastery level 7 yet
 - `-x X,Y,Z` | Excludes champions' shards by name. You need to enter the **exact** spelling; e.g. `Rek'Sai`, champions with whitespace need to be wrapped in quotation marks like `"Renata Glasc"`.
 
@@ -45,9 +45,9 @@ _Extra_:
 
 - `-k` | Combines key fragments to keys
 - `-c` | Opens all capsules (keyless chests) before disenchanting champion shards
-- `-e [essence|emotes]` | Will forge all event tokens into Random Champion Shards, 100 BE and 10 BE or Random Emote
+- `-t [essence|emotes]` | Will forge all event tokens into Random Champion Shards, 100 BE and 10 BE or Random Emote
   - Note: If you'd like to keep certain shards you might want to run this separately from operational options to not accidentally craft, open and instantly disenchant them
-- `-w` | Disenchants all owned emotes to Orange Essence
+- `-e` | Disenchants all owned emotes to Orange Essence
 
 ## Examples
 
