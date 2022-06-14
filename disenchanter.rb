@@ -112,7 +112,7 @@ def run
                         recipe["could_craft"] = (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor
                         loot_event_tokens[0]["count"] -= (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]
                         if (recipe["could_craft"] > 0 || options[:verbose]) then puts "Crafted #{recipe["could_craft"]}x #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens each" end
-                        craft_req = craft_recipe(host, craft_http, recipe["lootName"], recipe["recipeName"], recipe["could_craft"])
+                        craft_req = craft_recipe(host, craft_http, loot_event_tokens[0]["lootName"], recipe["recipeName"], recipe["could_craft"])
                         set_headers(craft_req, token)
                         craft_http.request craft_req
                     end
