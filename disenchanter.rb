@@ -1,493 +1,500 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require "net/https"
 require "base64"
 require "json"
-require "optparse"
 
 def run
-    separator = "____________________________________________________________"
-    ARGV << '-h' if ARGV.empty?
-    options = OptParser.parse(ARGV)
+  sep = "____________________________________________________________"
+  $ans_yesno = %w[y yes n no true false]
+  $ans_yes = %w[y yes true]
+  ans_false = %w[n no false]
+  $ans_yesno_disp = "[y|n]"
 
-    shardOptions = true
-    suppOptions = true
+  puts "Hi! :)"
+  puts "You can exit this script at any point by pressing CTRL + C."
+  puts sep
 
-    if !options[:all] && !options[:owned] && !options[:tokens] && !options[:mastery] && !options[:fullmastery]
-        shardOptions = false
-        puts "Note: No shard disenchantment options provided."
-    end
+  set_globals
 
-    if !options[:capsules] && !options[:keyfragments] && !options[:eventtokens] && !options[:emotes]
-        suppOptions = false
-        puts "Note: No supporting disenchantment options provided."
-    end
+  summoner = get_current_summoner
+  if summoner["displayName"].nil? || summoner["displayName"].empty?
+    puts "Could not grab summoner info. Try restarting your League Client."
+    exit 1
+  end
+  puts "You're logged in as #{summoner["displayName"]}."
+  puts sep
 
-    if !shardOptions && !suppOptions
-        puts "You're missing options to make the script do anything. Run ruby disenchanter.rb -h for help."
-        exit
-    end
+  handle_event_tokens
+  puts sep
 
-    begin
-        port, token = read_lockfile
-    rescue
-        puts "Could not grab session. Make sure your League Client is running."
-    end
+  handle_key_fragments
+  puts sep
 
-    host = "https://127.0.0.1:#{port}"
-    player_loot = []
-    loot_shards = []
-    loot_chests = []
-    loot_emotes = []
-    loot_keys = []
-    loot_event_tokens = []
-    event_token_recipes = []
-    loot_mastery_tokens = []
-    player_mastery = []
-    
-    create_client(port) do |http|
-        summoner_req = get_current_summoner(host, http)
-        set_headers(summoner_req, token)
-        summoner_res = http.request summoner_req
-        current_summoner = JSON.parse(summoner_res.body)
+  handle_capsules
+  puts sep
 
-        if current_summoner["displayName"] == "" || current_summoner["displayName"].nil?
-            puts "Could not grab summoner info. Try restarting your League Client."
-            exit 1
-        end
+  handle_emotes
+  puts sep
 
-        puts "Logged in as #{current_summoner["displayName"]}"        
+  handle_champion_shards
+  puts sep
 
-        loot_req =  get_loot(host, http)
-        set_headers(loot_req, token)
-        loot_res = http.request loot_req
-        player_loot = JSON.parse(loot_res.body)
-        puts "Found a total of #{player_loot.length} unique loot items"
-        puts separator
-        
-        if options[:mastery] || options[:fullmastery]
-            mastery_req = get_mastery(host, http, current_summoner["summonerId"])
-            set_headers(mastery_req, token)
-            mastery_res = http.request mastery_req
-            player_mastery = JSON.parse(mastery_res.body)
-        end
+  puts "That's it!"
+  if $actions > 0
+    puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish."
+  end
+  puts "See you next time :)"
+end
 
-        if options[:eventtokens]
-            loot_event_tokens = player_loot.select do |loot|
-                loot["type"] == "MATERIAL" && loot["displayCategories"] == "CHEST" && \
-                loot["lootId"].start_with?("MATERIAL_") && !loot["lootId"].start_with?("MATERIAL_key")
-            end    
+def ask(q)
+  print(q)
+  q = gets
+  q.chomp
+end
 
-            puts "Found Event Tokens: #{loot_event_tokens[0]["count"]}x #{loot_event_tokens[0]["localizedName"]} (#{loot_event_tokens[0]["lootName"]})"
-
-            recipes_req = get_recipes(host, http, loot_event_tokens[0]["lootId"])
-            set_headers(recipes_req, token)
-            recipes_res = http.request recipes_req
-            event_token_recipes = JSON.parse(recipes_res.body)
-        end
-    end
-
-    if options[:eventtokens]
-        # CHEST_187 = Random Emote
-        # CHEST_241 = Random Champion Shard
-        # CURRENCY_champion = Blue Essence
-        if options[:eventtokens] == "essence" then recipe_targets = ["CHEST_241", "CURRENCY_champion"] end
-        if options[:eventtokens] == "emotes" then recipe_targets = ["CHEST_187"] end
-
-        event_token_recipes = event_token_recipes.select do |recipe|
-            recipe_targets.include? recipe["outputs"][0]["lootName"]
-        end
-        event_token_recipes = event_token_recipes.sort_by {|recipe| recipe["slots"][0]["quantity"]}.reverse!
-
-        if options[:verbose]
-            event_token_recipes.each do |recipe|
-                puts "Recipe found: #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens (#{recipe["recipeName"]})"
-            end
-        end
-
-        if !options[:dry]
-            token_threads = event_token_recipes.map do |recipe|
-                Thread.new do
-                    create_client(port) do |craft_http|
-                        recipe["could_craft"] = (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor
-                        loot_event_tokens[0]["count"] -= (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]
-                        if (recipe["could_craft"] > 0 || options[:verbose]) then puts "Crafted #{recipe["could_craft"]}x #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens each" end
-                        craft_req = craft_recipe(host, craft_http, loot_event_tokens[0]["lootName"], recipe["recipeName"], recipe["could_craft"])
-                        set_headers(craft_req, token)
-                        craft_http.request craft_req
-                    end
-                end
-            end
-            token_threads.each(&:join)
-        end
-    end
-
-    if options[:keyfragments]
-        loot_keys = player_loot.select do |loot|
-            loot["lootId"] == "MATERIAL_key_fragment"
-        end
-        puts "Found #{count_loot_items(loot_keys)} key fragments"
-
-        if !options[:dry]
-            key_threads = loot_keys.map do |key|
-                Thread.new do
-                    create_client(port) do |forge_http|
-                        forge_req = craft_recipe(host, forge_http, "MATERIAL_key_fragment", "MATERIAL_key_fragment_forge", (key["count"] / 3).floor)
-                        set_headers(forge_req, token)
-                        forge_http.request forge_req
-                    end
-                end
-            end            
-            key_threads.each(&:join)
-            puts "Forged #{(count_loot_items(loot_keys) / 3).floor} keys!"
-        end
-    end
-
-    if options[:capsules]
-        loot_chests = player_loot.select do |loot|
-            loot["type"] == "CHEST"
-        end
-
-        # CHEST_128 = Champion Capsule
-        # CHEST_187 = Random Emote
-        # CHEST_241 = Random Champion Shard
-        capsule_ids = ["CHEST_128", "CHEST_187", "CHEST_241"]
-        
-        loot_chests = loot_chests.select do |chest|
-            capsule_ids.include? chest["lootId"]
-        end
-        puts "Found #{count_loot_items(loot_chests)} capsules to open"
-
-        if !options[:dry]
-            chest_threads = loot_chests.map do |chest|
-                Thread.new do
-                    create_client(port) do |open_http|
-                        open_req = craft_recipe(host, open_http, chest["lootName"], chest["lootName"] + "_OPEN", chest["count"])
-                        set_headers(open_req, token)
-                        open_http.request open_req
-                    end
-                end
-            end
-            chest_threads.each(&:join)
-            puts "Opened #{count_loot_items(loot_chests)} capsules!"
-        end
-    end
-
-    if options[:emotes]
-        loot_emotes = player_loot.select do |loot|
-            loot["type"] == "EMOTE" && loot["redeemableStatus"] == "ALREADY_OWNED"
-        end
-        puts "Found #{count_loot_items(loot_emotes)} emotes you already own"
-
-        total_oe_value = 0
-        loot_emotes.each do |emote|
-            total_oe_value += emote["disenchantValue"]
-        end
-
-        if !options[:dry]
-            emote_threads = loot_emotes.map do |emote|
-                Thread.new do
-                    create_client(port) do |open_http|
-                        open_req = craft_recipe(host, open_http, emote["lootName"], "EMOTE_disenchant", emote["count"])
-                        set_headers(open_req, token)
-                        open_http.request open_req
-                    end
-                end
-            end
-            emote_threads.each(&:join)
-            puts "Disenchanted #{count_loot_items(loot_emotes)} emotes for #{total_oe_value}!"
-        end
-    end
-
-    # Operational
-
-    loot_shards = player_loot.select do |loot|
-        loot["type"] == "CHAMPION_RENTAL"
-    end
-    if shardOptions 
-        puts "Found #{count_loot_items(loot_shards)} champion shards"
-    end
-
-
-    if options[:owned]
-        loot_shards = loot_shards.select do |loot|
-            loot["redeemableStatus"] == "ALREADY_OWNED"
-        end
-        puts "Filtered down to #{count_loot_items(loot_shards)} shards of champions you already own"
-    end
-
-    if options[:tokens]
-        token6_champion_ids = []
-        token7_champion_ids = []
-
-        loot_mastery_tokens = player_loot.select do |loot|
-            loot["type"] == "CHAMPION_TOKEN"
-        end
-
-        loot_mastery_tokens.each do |token|
-            if token["lootName"] = "CHAMPION_TOKEN_6"
-                token6_champion_ids << token["refId"].to_i
-            elsif token["lootName"] = "CHAMPION_TOKEN_7"
-                token7_champion_ids << token["refId"].to_i
-            end
-        end
-
-        puts "Found #{token6_champion_ids.length + token7_champion_ids.length} champions with owned mastery tokens"
-
-        loot_shards = loot_shards.each do |loot|
-            if token6_champion_ids.include? loot["storeItemId"]
-                loot["count"] -= 2
-            elsif token7_champion_ids.include? loot["storeItemId"]
-                loot["count"] -= 1
-            end
-        end
-
-        loot_shards = loot_shards.select do |loot|
-            loot["count"] > 0
-        end
-
-        puts "Filtered down to #{count_loot_items(loot_shards)} shards you have no tokens for"
-    end
-
-    if options[:mastery]
-        mastery5_champion_ids = []
-        mastery6_champion_ids = []
-
-        player_mastery.each do |mastery|
-            if mastery["championLevel"] >= options[:mastery] && mastery["championLevel"] <= 5
-                mastery5_champion_ids << mastery["championId"]
-            elsif mastery["championLevel"] == 6
-                mastery6_champion_ids << mastery["championId"]
-            end
-        end
-
-        puts "Found #{mastery5_champion_ids.length + mastery6_champion_ids.length} champions at or above specified level threshold of #{options[:mastery]}"
-
-        loot_shards.each do |loot|
-            if mastery5_champion_ids.include? loot["storeItemId"]
-                loot["count"] -= 2
-            elsif mastery6_champion_ids.include? loot["storeItemId"]
-                loot["count"] -= 1
-            end
-        end
-
-        loot_shards = loot_shards.select do |loot|
-            loot["count"] > 0
-        end
-
-        puts "Filtered down to #{count_loot_items(loot_shards)} shards that aren't needed for champions above level #{options[:mastery]}"
-    end
-
-    if options[:fullmastery]        
-        mastery6_champion_ids = []
-        mastery7_champion_ids = []
-
-        player_mastery.each do |mastery|
-            if mastery["championLevel"] == 6
-                mastery6_champion_ids << mastery["championId"]
-            elsif mastery["championLevel"] == 7
-                mastery7_champion_ids << mastery["championId"]
-            end
-        end
-
-        puts "Found #{mastery6_champion_ids.length + mastery7_champion_ids.length} champions at mastery level 6+"
-
-        loot_shards.each do |loot|
-            if mastery6_champion_ids.include? loot["storeItemId"]
-                loot["count"] -= 1
-            elsif !mastery7_champion_ids.include? loot["storeItemId"]
-                loot["count"] -= 2
-            end
-        end
-
-        loot_shards = loot_shards.select do |loot|
-            loot["count"] > 0
-        end
-
-        puts "Filtered down to #{count_loot_items(loot_shards)} shards that aren't needed for fully mastering champions"
-    end
-
-    if options[:exclude]
-        loot_shards = loot_shards.select do |loot|
-            !options[:exclude].include? loot["itemDesc"]
-        end
-
-        puts "Filtered down to #{count_loot_items(loot_shards)} shards that aren't manually excluded"
-    end
-
-    if !shardOptions
-        loot_shards = []
-    end
-    
-    total_be_value = 0
-    loot_shards = loot_shards.sort_by {|loot| loot["itemDesc"]}
-    
-    if options[:verbose] then puts separator end
-    loot_shards.each do |loot|
-        loot_value = loot["disenchantValue"] * loot["count"]
-        total_be_value += loot_value
-        if options[:verbose] then puts "Found #{loot["count"]} #{loot["itemDesc"]} shards, total value: #{loot_value} BE" end
-    end
-
-    puts separator
-
-    if !options[:dry]    
-        shard_threads = loot_shards.map do |shard|
-            Thread.new do
-                create_client(port) do |disenchant_http|
-                    disenchant_req = craft_recipe(host, disenchant_http, shard["lootName"], "CHAMPION_RENTAL_disenchant", shard["count"])
-                    set_headers(disenchant_req, token)
-                    disenchant_http.request disenchant_req
-                end
-            end
-        end    
-        shard_threads.each(&:join)
-        if shardOptions then puts "Disenchanted #{count_loot_items(loot_shards)} champion shards for a total of #{total_be_value} BE!" end
-    else
-        if options[:eventtokens]
-            event_token_recipes.each do |recipe|
-                recipe["could_craft"] = (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor
-                loot_event_tokens[0]["count"] -= (loot_event_tokens[0]["count"] / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]
-                if (recipe["could_craft"] > 0 || options[:verbose]) then puts "Dry Run: would craft #{recipe["could_craft"]}x #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Tokens each" end
-                if recipe["could_craft"] > 0 && recipe["outputs"][0]["lootName"] == "CHEST_241" && shardOptions
-                    puts "Note: when running this command, you will get random champion shards that might be immediately disenchanted."
-                    puts "If you want to review the shards first, run ruby disenchanter.rb -e [essence|emotes] separately before using a shard disenchanting option."
-                end
-            end
-        end
-        if options[:keyfragments] then puts "Dry Run: would forge #{(count_loot_items(loot_keys) / 3).floor} keys." end
-        if options[:capsules] then puts "Dry Run: would open #{count_loot_items(loot_chests)} capsules." end
-        if options[:emotes] then puts "Dry Run: would disenchant #{count_loot_items(loot_emotes)} emotes for #{total_oe_value} OE!" end
-        if shardOptions then puts "Dry Run: would disenchant #{count_loot_items(loot_shards)} champion shards for a total of #{total_be_value} BE." end
-    end
+def set_globals
+  begin
+    $port, $token = read_lockfile
+  rescue StandardError
+    puts "Could not grab session. Make sure your League Client is running."
+    exit 1
+  end
+  $host = "https://127.0.0.1:#{$port}"
+  $actions = 0
+  $ans_yesno = %w[y yes n no true false]
+  $ans_yes = %w[y yes true]
+  $ans_no = %w[n no false]
+  $ans_yesno_disp = "[y|n]"
 end
 
 def read_lockfile
-    contents = File.read("lockfile")
-    _leagueclient,_unkPort,port,password = contents.split(":")
-    token = Base64.encode64("riot:#{password.chomp}")
-    
-    [port, token]
+  contents = File.read("lockfile")
+  _leagueclient, _unk_port, port, password = contents.split(":")
+  token = Base64.encode64("riot:#{password.chomp}")
+
+  [port, token]
 end
 
-def create_client(port)
-    Net::HTTP.start("127.0.0.1", port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
-        yield(http)
-    end
+def create_client
+  Net::HTTP.start(
+    "127.0.0.1",
+    $port,
+    use_ssl: true,
+    verify_mode: OpenSSL::SSL::VERIFY_NONE
+  ) { |http| yield(http) }
 end
 
-def set_headers(req, token)
-    req['Content-Type'] = "application/json"
-    req["Authorization"] = "Basic #{token.chomp}"
+def req_set_headers(req)
+  req["Content-Type"] = "application/json"
+  req["Authorization"] = "Basic #{$token.chomp}"
 end
 
-def get_loot(host, http)
-    uri = URI("#{host}/lol-loot/v1/player-loot")
-    Net::HTTP::Get.new(uri)
+def request_get(path)
+  create_client do |http|
+    uri = URI("#{$host}/#{path}")
+    req = Net::HTTP::Get.new(uri)
+    req_set_headers(req)
+    res = http.request req
+    JSON.parse(res.body)
+  end
 end
 
-def get_recipes(host, http, loot_id)
-    uri = URI("#{host}/lol-loot/v1/recipes/initial-item/#{loot_id}")
-    Net::HTTP::Get.new(uri)
+def request_post(path, body)
+  create_client do |http|
+    uri = URI("#{$host}/#{path}")
+    req = Net::HTTP::Post.new(uri, "Content-Type": "application/json")
+    req.body = body
+    req_set_headers(req)
+    http.request req
+  end
 end
 
-def get_mastery(host, http, summoner_id)
-    uri = URI("#{host}/lol-collections/v1/inventories/#{summoner_id}/champion-mastery")
-    Net::HTTP::Get.new(uri)
+def get_current_summoner()
+  request_get("lol-summoner/v1/current-summoner")
 end
 
-def get_current_summoner(host, http)
-    uri = URI("#{host}/lol-summoner/v1/current-summoner")
-    Net::HTTP::Get.new(uri)
+def get_player_loot()
+  request_get("lol-loot/v1/player-loot")
 end
 
-def craft_recipe(host, http, loot_name, recipe, repeat)
-    uri = URI("#{host}/lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}")
-    req = Net::HTTP::Post.new(uri, 'Content-Type': "application/json")
-    req.body = "[\"#{loot_name}\"]"
-    req
+def get_champion_mastery(summoner_id)
+  request_get("lol-collections/v1/inventories/#{summoner_id}/champion-mastery")
+end
+
+def get_recipes_for_item(loot_id)
+  request_get("lol-loot/v1/recipes/initial-item/#{loot_id}")
+end
+
+def post_recipe(recipe, loot_id, repeat)
+  $actions += repeat
+  request_post(
+    "lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}",
+    "[\"#{loot_id}\"]"
+  )
+end
+
+def user_input_check(question, answers, answerdisplay)
+  input = ""
+
+  until (answers).include? input
+    input = ask "#{question} #{answerdisplay}: "
+    puts "Invalid answer: #{answerdisplay}" unless (answers).include? input
+  end
+
+  input
 end
 
 def count_loot_items(loot_items)
-    count = 0
-    loot_items.each do |loot|
-        count += loot["count"]
-    end
-    count
+  count = 0
+  loot_items.each { |loot| count += loot["count"] }
+  count
 end
 
-class OptParser
-    def self.parse(args)
-        options = {}
-        opts = OptionParser.new do |opts|
-            opts.banner = "Usage: disenchanter.rb [options]"
+def handle_event_tokens
+  player_loot = get_player_loot
 
-            opts.on('-d', '--dry', TrueClass, 'Show results without disenchanting (applies -v)') do |d|
-                options[:dry] = d.nil? ? false : d
-                options[:verbose] = true
-            end
-
-            opts.on('-v', '--verbose', TrueClass, 'Run verbosely') do |v|
-                options[:verbose] = v.nil? ? false : v
-            end
-
-            opts.on('-t', '--tokens [essence|emotes]', 'Craft event tokens to Shards/BE or Random Emotes') do |t|
-                options[:eventtokens] = t
-            end
-
-            opts.on('-c', '--capsules', TrueClass, 'Open all (keyless) capsules') do |c|
-                options[:capsules] = c.nil? ? false : c
-            end
-
-            opts.on('-e', '--emotes', TrueClass, 'Disenchant owned emotes') do |e|
-                options[:emotes] = e.nil? ? false : e
-            end
-
-            opts.on('-k', '--keyfragments', TrueClass, 'Forge keys from key fragments') do |k|
-                options[:keyfragments] = k.nil? ? false : k
-            end
-
-            opts.on('-a', '--all', TrueClass, 'Disenchant all champion shards') do |a|
-                options[:all] = a.nil? ? false : a
-            end
-
-            opts.on('-o', '--owned', TrueClass, 'Keep shards for unowned champions') do |o|
-                options[:owned] = o.nil? ? false : o
-            end
-
-            opts.on('-m', '--masterytokens', TrueClass, 'Keep shards for champions with owned mastery tokens') do |m|
-                options[:tokens] = m.nil? ? false : m
-            end
-
-            opts.on('-l', '--level LEVEL', OptionParser::OctalInteger, 'Keep shards for champions at mastery level x or above') do |l|
-                options[:mastery] = l
-            end
-
-            opts.on('-f', '--fullmastery', TrueClass, 'Keep shards for champions not at mastery level 7') do |f|
-                options[:fullmastery] = f.nil? ? false : f
-            end
-
-            opts.on('-x', '--exclude X,Y,Z', Array, "Manually exclude champions's shards") do |x|
-                options[:exclude] = x
-            end
-
-            opts.on('-h', '--help', "Show this message") do
-                puts opts
-                exit!
-            end
-
-        end
-
-        begin
-            opts.parse(args)
-        rescue Exception => e
-            puts "Exception encountered: #{e}"
-            exit 1
-        end
-
-        options
+  loot_event_token =
+    player_loot.select do |l|
+      l["type"] == "MATERIAL" && l["displayCategories"] == "CHEST" &&
+        l["lootId"].start_with?("MATERIAL_") &&
+        !l["lootId"].start_with?("MATERIAL_key")
     end
+  loot_event_token = loot_event_token[0]
+
+  if !loot_event_token.nil? && loot_event_token["count"] > 0
+    puts "Found Event Tokens: #{loot_event_token["count"]}x #{loot_event_token["localizedName"]}"
+    token_recipes = get_recipes_for_item(loot_event_token["lootId"])
+
+    if ($ans_yes).include? user_input_check(
+                    "Craft #{loot_event_token["localizedName"]}s to Blue Essence or Emotes?",
+                    $ans_yesno,
+                    $ans_yesno_disp
+                  )
+      craft_tokens_type =
+        user_input_check(
+          "Okay, would you like to craft to Blue Essence [1] or Emotes [2]?",
+          %w[1 essence 2 emotes],
+          "[1|2]"
+        )
+
+      # CHEST_187 = Random Emote
+      # CHEST_241 = Random Champion Shard
+      # CURRENCY_champion = Blue Essence
+      if %w[1 essence].include? craft_tokens_type
+        recipe_targets = %w[CHEST_241 CURRENCY_champion]
+      elsif %w[2 emotes].include? craft_tokens_type
+        recipe_targets = %w[CHEST_187]
+      end
+
+      token_recipes =
+        token_recipes.select do |r|
+          recipe_targets.include? r["outputs"][0]["lootName"]
+        end
+      token_recipes.sort_by { |r| r["slots"][0]["quantity"] }.reverse!
+
+      token_recipes.each do |r|
+        puts "Recipe found: #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens"
+      end
+
+      total_could_craft = 0
+
+      token_recipes.each do |r|
+        r["could_craft"] = (
+          loot_event_token["count"] / r["slots"][0]["quantity"]
+        ).floor
+        total_could_craft += r["could_craft"]
+        loot_event_token["count"] -= (
+          loot_event_token["count"] / r["slots"][0]["quantity"]
+        ).floor * r["slots"][0]["quantity"]
+        if r["could_craft"] > 0
+          puts "We could craft #{r["could_craft"]}x #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens each."
+        end
+      end
+
+      if total_could_craft > 0
+        if ($ans_yes).include? user_input_check(
+                        "CONFIRM: Commit to forging?",
+                        $ans_yesno,
+                        $ans_yesno_disp
+                      )
+          threads =
+            token_recipes.map do |r|
+              if r["could_craft"] > 0
+                Thread.new do
+                  post_recipe(
+                    r["recipeName"],
+                    loot_event_token["lootId"],
+                    r["could_craft"]
+                  )
+                end
+              end
+            end
+          threads.each(&:join)
+          puts "Done!"
+        end
+      else
+        puts "Can't afford any recipe, skipping."
+      end
+    end
+  else
+    puts "Found no Event Tokens."
+  end
 end
 
+def handle_key_fragments
+  player_loot = get_player_loot
 
-run()
+  loot_keys = player_loot.select { |l| l["lootId"] == "MATERIAL_key_fragment" }
+  if count_loot_items(loot_keys) >= 3
+    puts "Found #{count_loot_items(loot_keys)} key fragments."
+    if ($ans_yes).include? user_input_check(
+                    "CONFIRM: Craft #{(count_loot_items(loot_keys) / 3).floor} keys from #{count_loot_items(loot_keys)} key fragments?",
+                    $ans_yesno,
+                    $ans_yesno_disp
+                  )
+      post_recipe(
+        "MATERIAL_key_fragment_forge",
+        "MATERIAL_key_fragment",
+        (count_loot_items(loot_keys) / 3).floor
+      )
+      puts "Done!"
+    end
+  else
+    puts "Found less than 3 key fragments."
+  end
+end
+
+def handle_capsules
+  player_loot = get_player_loot
+
+  chest_names = {}
+  chest_names["CHEST_128"] = "Champion Capsule"
+  chest_names["CHEST_187"] = "Hextech Mystery Emote"
+  chest_names["CHEST_241"] = "Random Champion Shard"
+
+  capsule_ids = %w[CHEST_128 CHEST_187 CHEST_241]
+  loot_capsules = player_loot.select { |l| capsule_ids.include? l["lootId"] }
+  if count_loot_items(loot_capsules) > 0
+    puts "Found #{count_loot_items(loot_capsules)} capsules:"
+    loot_capsules.each { |c| puts "#{c["count"]}x #{chest_names[c["lootId"]]}" }
+
+    if ($ans_yes).include? user_input_check(
+                    "CONFIRM: Open #{count_loot_items(loot_capsules)} (keyless) capsules?",
+                    $ans_yesno,
+                    $ans_yesno_disp
+                  )
+      threads =
+        loot_capsules.map do |c|
+          Thread.new do
+            post_recipe(c["lootId"] + "_OPEN", c["lootId"], c["count"])
+          end
+        end
+      threads.each(&:join)
+      puts "Done!"
+    end
+  else
+    puts "Found no keyless capsules to open."
+  end
+end
+
+def handle_emotes
+  player_loot = get_player_loot
+
+  loot_emotes =
+    player_loot.select do |l|
+      l["type"] == "EMOTE" && l["redeemableStatus"] == "ALREADY_OWNED"
+    end
+  if count_loot_items(loot_emotes) > 0
+    total_oe_value = 0
+    loot_emotes.each { |e| total_oe_value += e["disenchantValue"] }
+    if ($ans_yes).include? user_input_check(
+                    "CONFIRM: Disenchant #{count_loot_items(loot_emotes)} (already owned) emotes for #{total_oe_value} Orange Essence?",
+                    $ans_yesno,
+                    $ans_yesno_disp
+                  )
+      threads =
+        loot_emotes.map do |e|
+          Thread.new do
+            post_recipe("EMOTE_disenchant", e["lootId"], e["count"])
+          end
+        end
+      threads.each(&:join)
+      puts "Done!"
+    end
+  else
+    puts "Found no owned emotes to disenchant."
+  end
+end
+
+def handle_champion_shards
+  player_loot = get_player_loot
+
+  loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
+  if count_loot_items(loot_shards) > 0
+    if ($ans_yes).include? user_input_check(
+                    "Disenchant unneeded champion shards?",
+                    $ans_yesno,
+                    $ans_yesno_disp
+                  )
+      disenchant_shards_mode =
+        user_input_check(
+          "Okay, which mode would you like to go by?\n" +
+            "[1] Disenchant all champion shards\n" +
+            "[2] Keep shards for champions you don't own\n" +
+            "[3] Keep shards for champions you currently own mastery 6/7 tokens for\n" +
+            "[4] Keep shards for champions above a specified mastery level\n",
+          %w[1 all 2 owned 3 tokens 4 mastery],
+          "[1|2|3|4]"
+        )
+      puts "Found #{count_loot_items(loot_shards)} champion shards."
+
+      case disenchant_shards_mode
+      when "1"
+        # done
+      when "2"
+        loot_shards = handle_champion_shards_owned(loot_shards)
+      when "3"
+        loot_shards = handle_champion_shards_tokens(player_loot, loot_shards)
+      when "4"
+        loot_shards = handle_champion_shards_mastery(loot_shards)
+      end
+
+      loot_shards = loot_shards.select { |l| l["count"] > 0 }
+
+      if count_loot_items(loot_shards) > 0
+        puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the mode you chose:"
+        loot_shards.each do |l|
+          loot_value = l["disenchantValue"] * l["count"]
+          puts "#{l["count"]}x #{l["itemDesc"]} @ #{loot_value} BE"
+        end
+
+        loot_shards = handle_champion_shards_exceptions(loot_shards)
+
+        total_be_value = 0
+        loot_shards.each do |l|
+          total_be_value += l["disenchantValue"] * l["count"]
+        end
+
+        if $ans_yes.include? user_input_check(
+                               "CONFIRM: Disenchant #{count_loot_items(loot_shards)} champion shards for #{total_be_value} Blue Essence?",
+                               $ans_yesno,
+                               $ans_yesno_disp
+                             )
+          threads =
+            loot_shards.map do |s|
+              Thread.new do
+                post_recipe(
+                  "CHAMPION_RENTAL_disenchant",
+                  s["lootId"],
+                  s["count"]
+                )
+              end
+            end
+          threads.each(&:join)
+          puts "Done!"
+        end
+      else
+        puts "No champion shards left matching your selection."
+      end
+    end
+  else
+    puts "Found no champion shards to disenchant."
+  end
+end
+
+def handle_champion_shards_owned(loot_shards)
+  loot_shards.select { |l| l["redeemableStatus"] == "ALREADY_OWNED" }
+end
+
+def handle_champion_shards_tokens(player_loot, loot_shards)
+  token6_champion_ids = []
+  token7_champion_ids = []
+
+  loot_mastery_tokens = player_loot.select { |l| l["type"] == "CHAMPION_TOKEN" }
+
+  loot_mastery_tokens.each do |token|
+    if token["lootName"] = "CHAMPION_TOKEN_6"
+      token6_champion_ids << token["refId"].to_i
+    elsif token["lootName"] = "CHAMPION_TOKEN_7"
+      token7_champion_ids << token["refId"].to_i
+    end
+  end
+
+  puts "Found #{token6_champion_ids.length + token7_champion_ids.length} champions with owned mastery tokens"
+
+  loot_shards =
+    loot_shards.each do |l|
+      if token6_champion_ids.include? l["storeItemId"]
+        l["count"] -= 2
+      elsif token7_champion_ids.include? l["storeItemId"]
+        l["count"] -= 1
+      end
+    end
+  loot_shards
+end
+
+def handle_champion_shards_mastery(loot_shards)
+  summoner = get_current_summoner
+  player_mastery = get_champion_mastery(summoner["summonerId"])
+  mastery5_champion_ids = []
+  mastery6_champion_ids = []
+
+  level_threshold =
+    user_input_check(
+      "Which mastery level should champions at least be for their shards to be kept?",
+      %w[1 2 3 4 5 6],
+      "[1..6]"
+    )
+
+  player_mastery.each do |m|
+    if m["championLevel"] >= level_threshold.to_i && m["championLevel"] <= 5
+      mastery5_champion_ids << m["championId"]
+    elsif m["championLevel"] == 6
+      mastery6_champion_ids << m["championId"]
+    end
+  end
+
+  puts "Found #{mastery5_champion_ids.length + mastery6_champion_ids.length} relevant champions with threshold at level #{level_threshold}"
+
+  loot_shards.each do |l|
+    if mastery5_champion_ids.include? l["storeItemId"]
+      l["count"] -= 2
+    elsif mastery6_champion_ids.include? l["storeItemId"]
+      l["count"] -= 1
+    end
+  end
+end
+
+def handle_champion_shards_exceptions(loot_shards)
+  exclusions_str = ""
+  exclusions_done = false
+  exclusions_done_more = ""
+  exclusions_arr = []
+  until exclusions_done
+    if ($ans_yes).include? user_input_check(
+                    "Would you like to add #{exclusions_done_more}exclusions?",
+                    $ans_yesno,
+                    $ans_yesno_disp
+                  )
+      exclusions_str +=
+        "," + ask("Okay, which champions? (case-sensitive, comma-separated): ")
+
+      exclusions_done_more = "more "
+
+      exclusions_arr = exclusions_str.split(/\s*,\s*/)
+      exclusions_matched =
+        loot_shards.select { |l| exclusions_arr.include? l["itemDesc"] }
+      print "Exclusions recognized: "
+      exclusions_matched.each { |e| print e["itemDesc"] + " " }
+      puts
+    else
+      exclusions_done = true
+    end
+  end
+  loot_shards =
+    loot_shards.select { |l| !exclusions_arr.include? l["itemDesc"] }
+end
+
+run
