@@ -342,11 +342,10 @@ def handle_champion_shards
         user_input_check(
           "Okay, which mode would you like to go by?\n" +
             "[1] Disenchant all champion shards\n" +
-            "[2] Keep shards for champions you don't own\n" +
-            "[3] Keep shards for champions you own mastery 6/7 tokens for\n" +
-            "[4] Keep shards for champions above a specified mastery level\n",
-          %w[1 all 2 owned 3 tokens 4 mastery],
-          "[1|2|3|4]"
+            "[2] Keep shards for champions you own mastery 6/7 tokens for\n" +
+            "[3] Keep shards for champions above a specified mastery level\n",
+          %w[1 all 2 tokens 3 mastery],
+          "[1|2|3]"
         )
       puts "Found #{count_loot_items(loot_shards)} champion shards."
 
@@ -354,11 +353,20 @@ def handle_champion_shards
       when "1"
         # done
       when "2"
-        loot_shards = handle_champion_shards_owned(loot_shards)
-      when "3"
         loot_shards = handle_champion_shards_tokens(player_loot, loot_shards)
-      when "4"
+      when "3"
         loot_shards = handle_champion_shards_mastery(loot_shards)
+      end
+
+      loot_shards_not_owned =
+        loot_shards.select { |s| !s["redeemableStatus"] == "ALREADY_OWNED" }
+
+      if loot_shards_not_owned.length > 0
+        if ($ans_yes).include? user_input_check(
+                        "Keep shards for champions you don't own yet?"
+                      )
+          loot_shards = handle_champion_shards_owned(loot_shards)
+        end
       end
 
       loot_shards = loot_shards.select { |l| l["count"] > 0 }
@@ -396,7 +404,7 @@ def handle_champion_shards
           puts "Done!"
         end
       else
-        puts "No champion shards left matching your selection."
+        puts "Job's already done: no champion shards left matching your selection."
       end
     end
   else
