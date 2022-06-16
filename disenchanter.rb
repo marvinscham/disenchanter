@@ -343,7 +343,7 @@ def handle_champion_shards
           "Okay, which mode would you like to go by?\n" +
             "[1] Disenchant all champion shards\n" +
             "[2] Keep shards for champions you don't own\n" +
-            "[3] Keep shards for champions you currently own mastery 6/7 tokens for\n" +
+            "[3] Keep shards for champions you own mastery 6/7 tokens for\n" +
             "[4] Keep shards for champions above a specified mastery level\n",
           %w[1 all 2 owned 3 tokens 4 mastery],
           "[1|2|3|4]"

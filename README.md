@@ -12,90 +12,36 @@ You'll need to have [Ruby](https://www.ruby-lang.org/) installed to use the scri
 
 No, the script only uses [official Riot APIs](https://developer.riotgames.com/docs/lol#league-client).
 
-The script triggers the same server requests as you would in your League Client – just without the animations.
+The script triggers the same server requests as you would in your League Client. It won't make you sit through the animations, though.
 
 ## Usage
 
 Put the `disenchanter.rb` file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends`.
 
-You need to be logged into your League Client for this to work properly.
+You need to be logged into your League Client for this to work.
 
-Running the script (`ruby disenchanter.rb`) without any options will present you with a help message.
+The script is interactive and will guide you through the process with simple yes/no questions and mode choices.
 
-### Options
+### Features
 
-_Supporting_:
+- Disenchant champion shards by a set of rules
 
-- `-h` | Display a help message
-- `-d` | Dry run: show what the chosen option would result in without actually disenchanting
-- `-v` | Verbose: Shows more details
+  - Disenchant all champion shards
 
-_Operational_:
+  - Keep shards for champions you don't own yet
 
-Ordered by aggressiveness top to bottom, choose one
+  - Keep shards for champions you own mastery 6/7 tokens for
 
-- `-a` | Disenchants ALL champion shards
-- `-o` | Keeps shards for champions you don't own
-- `-m` | Keeps shards for champions you own mastery tokens for
-- `-l LEVEL` | Keeps shards for champions you have at mastery level LEVEL or above
-- `-f` | Keeps shards for all champions you don't have at mastery level 7 yet
-- `-x X,Y,Z` | Excludes champions' shards by name. You need to enter the **exact** spelling; e.g. `Rek'Sai`, champions with whitespace need to be wrapped in quotation marks like `"Renata Glasc"`.
+  - Keep shards for champions above a specified mastery level
 
-_Extra_:
+  - Manually add exceptions
 
-- `-k` | Combines key fragments to keys
-- `-c` | Opens all capsules (keyless chests) before disenchanting champion shards
-- `-t [essence|emotes]` | Will forge all event tokens into Random Champion Shards, 100 BE and 10 BE or Random Emote
-  - Note: If you'd like to keep certain shards you might want to run this separately from operational options to not accidentally craft, open and instantly disenchant them
-- `-e` | Disenchants all owned emotes to Orange Essence
+- Combine Key Fragments
 
-## Examples
+- Craft Event Tokens to Blue Essence or Emotes
 
-### TURN IT ALL TO BLUE ESSENCE
+- Open keyless chests and capsules
 
-Turns tokens into random champion shards, open all keyless capsules and then disenchants all of your champion shards (dry run).
+### Feature Suggestions
 
-```
-ruby disenchanter.rb -dcka -e essence
-```
-
-### Tokens, Capsules and Key Fragments
-
-This will turn tokens to champion shards, open those and other keyless capsules and also combine key fragments to keys (dry run).
-
-```
-ruby disenchanter.rb -dck -e essence
-```
-
-### Champion Shards by Mastery Threshold
-
-I want to see what the script would disenchant if I wanted to keep shards for champions at mastery level 4 or higher:
-
-```
-ruby disenchanter.rb -d -m 4
-```
-
-Example output:
-
-```
-Logged in as Summoner
-Found a total of 128 unique loot items
-____________________________________________________________
-Found 112 champion shards
-Found 74 champions at or above specified level threshold of 4
-Filtered down to 7 shards that aren't needed for champions above level 4
-____________________________________________________________
-Found 1 Irelia shards, total value: 960 BE
-Found 2 Olaf shards, total value: 1260 BE
-Found 2 Qiyana shards, total value: 2520 BE
-Found 1 Rell shards, total value: 1260 BE
-Found 1 Renata Glasc shards, total value: 1260 BE
-____________________________________________________________
-Dry Run: would disenchant 7 champion shards for a total of 7260 BE.
-```
-
-Now, I'd like to keep my champion shards for Rell and Renata Glasc despite them not meeting the mastery level cutoff, so I manually exclude them when running the script again.
-
-```
-ruby disenchanter.rb -m 4 -x "Renata Glasc",Rell
-```
+You'd like to see a feature that isn't yet supported? [Create an issue](https://github.com/marvinscham/disenchanter/issues/new), send a pull request or just hit me up at dev[at]marvinscham.de.
