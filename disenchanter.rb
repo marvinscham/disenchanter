@@ -213,6 +213,8 @@ def handle_event_tokens
         end
       end
 
+      token_recipes = token_recipes.select { |r| r["could_craft"] > 0 }
+
       if total_could_craft > 0
         if ($ans_yes).include? user_input_check(
                         "CONFIRM: Commit to forging?",
@@ -221,14 +223,12 @@ def handle_event_tokens
                       )
           threads =
             token_recipes.map do |r|
-              if r["could_craft"] > 0
-                Thread.new do
-                  post_recipe(
-                    r["recipeName"],
-                    loot_event_token["lootId"],
-                    r["could_craft"]
-                  )
-                end
+              Thread.new do
+                post_recipe(
+                  r["recipeName"],
+                  loot_event_token["lootId"],
+                  r["could_craft"]
+                )
               end
             end
           threads.each(&:join)
