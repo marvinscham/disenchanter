@@ -53,7 +53,7 @@ _Extra_:
 
 ### TURN IT ALL TO BLUE ESSENCE
 
-Turns tokens into random champion shards, open all keyless capsules and then disenchant all of your champion shards (dry run).
+Turns tokens into random champion shards, open all keyless capsules and then disenchants all of your champion shards (dry run).
 
 ```
 ruby disenchanter.rb -dcka -e essence
