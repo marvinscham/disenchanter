@@ -6,7 +6,9 @@ Essence emporium is coming up and you can't be bothered to manually disenchant h
 
 This script is intended for usage on Windows.
 
-You'll need to have [Ruby](https://www.ruby-lang.org/) installed to use the script.
+To use it, download the pre-built `disenchanter.exe` from the [Latest Release](https://github.com/marvinscham/disenchanter/releases). Note that downloading as well as running this file can cause a false positive alert from your anti-virus.
+
+If you'd like to run the Ruby script instead of the pre-built executable you'll need to have [Ruby](https://www.ruby-lang.org/) installed.
 
 ## Is this going to get me banned?
 
@@ -16,11 +18,11 @@ The script triggers the same server requests as you would in your League Client.
 
 ## Usage
 
-Put the `disenchanter.rb` file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends`.
+Put the `disenchanter.exe` (or `.rb`) file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends` and run it.
+
+The script is interactive and will guide you through the process with simple `[y|n]` questions and mode choices.
 
 You need to be logged into your League Client for this to work.
-
-The script is interactive and will guide you through the process with simple yes/no questions and mode choices.
 
 ### Features
 
@@ -71,3 +73,9 @@ _What info is collected?_
 - Timestamp
 
 This information is generated per script run and saved as a tuple in a database on my server.
+
+### Build Executable
+
+If you trust the code but not the pre-built executable, feel free to build it yourself.
+
+I used [Ocra](https://github.com/larsch/ocra) with the config provided in [`build.cmd`](https://github.com/marvinscham/disenchanter/blob/main/build.cmd).
