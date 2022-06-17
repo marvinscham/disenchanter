@@ -6,7 +6,7 @@ require "base64"
 require "json"
 
 def run
-  current_version = "v1.1.0"
+  current_version = "v1.1.1"
 
   sep = "____________________________________________________________"
   $ans_yesno = %w[y yes n no true false]
@@ -575,6 +575,7 @@ def submit_stats(a, d, o, c, r, be, oe)
   uri = URI("https://checksch.de/hook/disenchanter.php")
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
   req = Net::HTTP::Post.new(uri, "Content-Type": "application/json")
 
   req.body = { a: a, d: d, o: o, c: c, r: r, be: be, oe: oe }.to_json
