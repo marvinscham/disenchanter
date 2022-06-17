@@ -21,6 +21,7 @@ def run
   summoner = get_current_summoner
   if summoner["displayName"].nil? || summoner["displayName"].empty?
     puts "Could not grab summoner info. Try restarting your League Client."
+    ask "Press Enter to exit."
     exit 1
   end
   puts "You're logged in as #{summoner["displayName"]}."
@@ -66,6 +67,7 @@ def run
     end
   end
   puts "See you next time :)"
+  ask "Press Enter to exit."
 end
 
 def ask(q)
@@ -79,6 +81,7 @@ def set_globals
     $port, $token = read_lockfile
   rescue StandardError
     puts "Could not grab session. Make sure your League Client is running."
+    ask "Press Enter to exit."
     exit 1
   end
   $host = "https://127.0.0.1:#{$port}"
