@@ -6,6 +6,8 @@ require "base64"
 require "json"
 
 def run
+  current_version = "v1.1.0"
+
   sep = "____________________________________________________________"
   $ans_yesno = %w[y yes n no true false]
   $ans_yes = %w[y yes true]
@@ -13,6 +15,8 @@ def run
   $ans_yesno_disp = "[y|n]"
 
   puts "Hi! :)"
+  puts "Running Disenchanter #{current_version}"
+  check_update(current_version)
   puts "You can exit this script at any point by pressing CTRL + C."
   puts sep
 
@@ -120,6 +124,23 @@ end
 def req_set_headers(req)
   req["Content-Type"] = "application/json"
   req["Authorization"] = "Basic #{$token.chomp}"
+end
+
+def check_update(version)
+  uri =
+    URI("https://api.github.com/repos/marvinscham/disenchanter/releases/latest")
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  req = Net::HTTP::Get.new(uri, "Content-Type": "application/json")
+  res = http.request req
+  ans = JSON.parse(res.body)
+
+  if (ans["tag_name"] != version)
+    puts "New version #{ans["tag_name"]} available at https://github.com/marvinscham/disenchanter/releases/latest"
+  else
+    puts "You're up to date!"
+  end
 end
 
 def request_get(path)
