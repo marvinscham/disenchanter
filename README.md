@@ -45,3 +45,29 @@ The script is interactive and will guide you through the process with simple yes
 ### Feature Suggestions
 
 You'd like to see a feature that isn't yet supported? [Create an issue](https://github.com/marvinscham/disenchanter/issues/new), send a pull request or just hit me up at dev[at]marvinscham.de.
+
+### Stat Collection
+
+At the end of the script you're asked to contribute your (anonymous) stats to the [Global Stats](https://checksch.de/hook/disenchanter.php).
+
+This step is **completely optional** and easy to decline but I'd like to encourage you to contribute as it helps me as a dev.
+
+_What info is collected?_
+
+- Number of disenchanted items
+
+- Number of opened chests
+
+- Number of items crafted
+
+- Number of items redeemed
+
+- Number of actions (sum of the above)
+
+- Blue Essence gained
+
+- Orange Essence gained
+
+- Timestamp
+
+This information is generated per script run and saved as a tuple in a database on my server.
