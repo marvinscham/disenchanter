@@ -2,6 +2,8 @@
 
 Essence emporium is coming up and you can't be bothered to manually disenchant hundreds of champion shards? Let Disenchanter help you out!
 
+This project is based on a [project by Anujan](https://github.com/Anujan/disenchant-champ-shards).
+
 ## Prerequisites
 
 This script is intended for usage on Windows.
