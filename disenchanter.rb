@@ -44,6 +44,26 @@ def run
   puts "That's it!"
   if $actions > 0
     puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish."
+    puts sep
+
+    if ($ans_yes).include? user_input_check(
+                    "Would you like to anonymously contribute your results to the global stats?\n" +
+                      "Your results are things like number of disenchanted shards, blue essence generated, ...\n" +
+                      "Find the global stats at: https://checksch.de/hook/disenchanter.php",
+                    $ans_yesno,
+                    $ans_yesno_disp
+                  )
+      submit_stats(
+        $actions,
+        $s_disenchanted,
+        $s_opened,
+        $s_crafted,
+        $s_redeemed,
+        $s_blue_essence,
+        $s_orange_essence
+      )
+      puts "Thank you very much!"
+    end
   end
   puts "See you next time :)"
 end
@@ -62,7 +82,15 @@ def set_globals
     exit 1
   end
   $host = "https://127.0.0.1:#{$port}"
+
   $actions = 0
+  $s_disenchanted = 0
+  $s_opened = 0
+  $s_crafted = 0
+  $s_redeemed = 0
+  $s_blue_essence = 0
+  $s_orange_essence = 0
+
   $ans_yesno = %w[y yes n no true false]
   $ans_yes = %w[y yes true]
   $ans_no = %w[n no false]
@@ -221,6 +249,13 @@ def handle_event_tokens
                         $ans_yesno,
                         $ans_yesno_disp
                       )
+          token_recipes.each do |r|
+            if r["outputs"][0]["lootName"] == "CURRENCY_champion"
+              $s_blue_essence += r["outputs"][0]["quantity"] * r["could_craft"]
+            end
+            $s_crafted += r["could_craft"]
+          end
+
           threads =
             token_recipes.map do |r|
               Thread.new do
@@ -254,6 +289,7 @@ def handle_key_fragments
                     $ans_yesno,
                     $ans_yesno_disp
                   )
+      $s_crafted += (count_loot_items(loot_keys) / 3).floor
       post_recipe(
         "MATERIAL_key_fragment_forge",
         "MATERIAL_key_fragment",
@@ -286,6 +322,7 @@ def handle_capsules
                     $ans_yesno,
                     $ans_yesno_disp
                   )
+      $s_opened += count_loot_items(loot_capsules)
       threads =
         loot_capsules.map do |c|
           Thread.new do
@@ -315,6 +352,8 @@ def handle_emotes
                     $ans_yesno,
                     $ans_yesno_disp
                   )
+      $s_disenchanted += count_loot_items(loot_emotes)
+      $s_orange_essence += total_oe_value
       threads =
         loot_emotes.map do |e|
           Thread.new do
@@ -391,6 +430,8 @@ def handle_champion_shards
                                $ans_yesno,
                                $ans_yesno_disp
                              )
+          $s_blue_essence += total_be_value
+          $s_disenchanted += count_loot_items(loot_shards)
           threads =
             loot_shards.map do |s|
               Thread.new do
@@ -504,6 +545,16 @@ def handle_champion_shards_exceptions(loot_shards)
   end
   loot_shards =
     loot_shards.select { |l| !exclusions_arr.include? l["itemDesc"] }
+end
+
+def submit_stats(a, d, o, c, r, be, oe)
+  uri = URI("https://checksch.de/hook/disenchanter.php")
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  req = Net::HTTP::Post.new(uri, "Content-Type": "application/json")
+
+  req.body = { a: a, d: d, o: o, c: c, r: r, be: be, oe: oe }.to_json
+  http.request(req)
 end
 
 run
