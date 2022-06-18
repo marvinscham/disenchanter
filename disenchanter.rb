@@ -333,9 +333,10 @@ def handle_capsules
   chest_names["CHEST_128"] = "Champion Capsule"
   chest_names["CHEST_129"] = "Glorious Champion Capsule"
   chest_names["CHEST_187"] = "Hextech Mystery Emote"
+  chest_names["CHEST_210"] = "Honor Level 4 Orb"
   chest_names["CHEST_241"] = "Random Champion Shard"
 
-  capsule_ids = %w[CHEST_128 CHEST_129 CHEST_187 CHEST_241]
+  capsule_ids = %w[CHEST_128 CHEST_129 CHEST_187 CHEST_210 CHEST_241]
   loot_capsules = player_loot.select { |l| capsule_ids.include? l["lootId"] }
   if count_loot_items(loot_capsules) > 0
     puts "Found #{count_loot_items(loot_capsules)} capsules:"
