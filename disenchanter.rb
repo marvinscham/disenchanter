@@ -175,6 +175,10 @@ def get_champion_mastery(summoner_id)
   request_get("lol-collections/v1/inventories/#{summoner_id}/champion-mastery")
 end
 
+def get_loot_info(loot_id)
+  request_get("lol-loot/v1/player-loot/#{loot_id}")
+end
+
 def get_recipes_for_item(loot_id)
   request_get("lol-loot/v1/recipes/initial-item/#{loot_id}")
 end
@@ -202,6 +206,21 @@ def count_loot_items(loot_items)
   count = 0
   loot_items.each { |loot| count += loot["count"] }
   count
+end
+
+def get_chest_name(loot_id)
+  chest_info = get_loot_info(loot_id)
+  return chest_info["localizedName"] if !chest_info["localizedName"].empty?
+
+  catalogue = {
+    "CHEST_128" => "Champion Capsule",
+    "CHEST_129" => "Glorious Champion Capsule",
+    "CHEST_210" => "Honor Level 4 Orb"
+  }
+
+  return catalogue[loot_id] if catalogue.key?(loot_id)
+
+  return loot_id
 end
 
 def handle_event_tokens
@@ -329,18 +348,22 @@ end
 def handle_capsules
   player_loot = get_player_loot
 
-  chest_names = {}
-  chest_names["CHEST_128"] = "Champion Capsule"
-  chest_names["CHEST_129"] = "Glorious Champion Capsule"
-  chest_names["CHEST_187"] = "Hextech Mystery Emote"
-  chest_names["CHEST_210"] = "Honor Level 4 Orb"
-  chest_names["CHEST_241"] = "Random Champion Shard"
+  loot_capsules = player_loot.select { |l| l["lootName"].start_with?("CHEST_") }
+  loot_capsules.each do |c|
+    recipe = get_recipes_for_item(c["lootId"])
+    if recipe["slots"].length > 1 || !recipe["type"] == "OPEN"
+      c["needs_key"] = true
+    else
+      c["needs_key"] = false
+    end
+  end
+  loot_capsules = loot_capsules.select { |c| c["needs_key"] == false }
 
-  capsule_ids = %w[CHEST_128 CHEST_129 CHEST_187 CHEST_210 CHEST_241]
-  loot_capsules = player_loot.select { |l| capsule_ids.include? l["lootId"] }
   if count_loot_items(loot_capsules) > 0
     puts "Found #{count_loot_items(loot_capsules)} capsules:"
-    loot_capsules.each { |c| puts "#{c["count"]}x #{chest_names[c["lootId"]]}" }
+    loot_capsules.each do |c|
+      puts "#{c["count"]}x #{get_chest_name(c["lootId"])}"
+    end
 
     if ($ans_yes).include? user_input_check(
                     "CONFIRM: Open #{count_loot_items(loot_capsules)} (keyless) capsules?",
