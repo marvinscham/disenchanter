@@ -220,7 +220,7 @@ def get_chest_name(loot_id)
 
   return catalogue[loot_id] if catalogue.key?(loot_id)
 
-  return loot_id
+  return "[No name found, ID " + loot_id + "]"
 end
 
 def handle_event_tokens
