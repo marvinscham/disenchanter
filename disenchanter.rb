@@ -496,8 +496,8 @@ def handle_capsules
 
   loot_capsules = player_loot.select { |l| l["lootName"].start_with?("CHEST_") }
   loot_capsules.each do |c|
-    recipe = get_recipes_for_item(c["lootId"])
-    if recipe["slots"].length > 1 || !recipe["type"] == "OPEN"
+    recipes = get_recipes_for_item(c["lootId"])
+    if recipes[0]["slots"].length > 1 || !recipes[0]["type"] == "OPEN"
       c["needs_key"] = true
     else
       c["needs_key"] = false
