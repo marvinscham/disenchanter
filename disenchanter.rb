@@ -7,7 +7,7 @@ require "json"
 require "colorize"
 
 def run
-  current_version = "v1.1.1"
+  current_version = "v1.2.0"
 
   sep =
     "____________________________________________________________".light_black

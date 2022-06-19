@@ -2,7 +2,7 @@
 
 Essence emporium is coming up and you can't be bothered to manually disenchant hundreds of champion shards? Let Disenchanter help you out!
 
-This project is based on a [project by Anujan](https://github.com/Anujan/disenchant-champ-shards).
+This script is based on a [project by Anujan](https://github.com/Anujan/disenchant-champ-shards).
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ The script triggers the same server requests as you would in your League Client.
 
 Put the `disenchanter.exe` (or `.rb`) file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends` and run it.
 
-The script is interactive and will guide you through the process with simple `[y|n]` questions and mode choices.
+The script is interactive and will guide you through the process with simple `[y|n]` questions and mode choices. Before you disenchant or craft anything, you will be asked to confirm your action in a separate color and a `CONFIRM:` banner to prevent accidents.
 
 You need to be logged into your League Client for this to work.
 
@@ -45,6 +45,8 @@ You need to be logged into your League Client for this to work.
 - Craft Event Tokens to Blue Essence or Emotes
 
 - Open keyless chests and capsules
+
+- Craft Mythic Essence to Random Skin Shards, Blue Essence or Orange Essence
 
 ### Feature Suggestions
 
