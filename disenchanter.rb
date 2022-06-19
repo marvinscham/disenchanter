@@ -84,7 +84,8 @@ def set_globals
   begin
     $port, $token = read_lockfile
   rescue StandardError
-    puts "Could not grab session. Make sure your League Client is running.".light_red
+    puts "Could not grab session!".light_red
+    puts "Make sure the script is in your League Client folder and that your Client is running.".light_red
     ask "Press Enter to exit.".cyan
     exit 1
   end
