@@ -4,31 +4,29 @@
 require "net/https"
 require "base64"
 require "json"
+require "colorize"
 
 def run
   current_version = "v1.1.1"
 
-  sep = "____________________________________________________________"
-  $ans_yesno = %w[y yes n no true false]
-  $ans_yes = %w[y yes true]
-  ans_false = %w[n no false]
-  $ans_yesno_disp = "[y|n]"
+  sep =
+    "____________________________________________________________".light_black
 
-  puts "Hi! :)"
-  puts "Running Disenchanter #{current_version}"
+  puts "Hi! :)".light_green
+  puts "Running Disenchanter #{current_version}".light_white
   check_update(current_version)
-  puts "You can exit this script at any point by pressing CTRL + C."
+  puts "You can exit this script at any point by pressing CTRL + C.".light_blue
   puts sep
 
   set_globals
 
   summoner = get_current_summoner
   if summoner["displayName"].nil? || summoner["displayName"].empty?
-    puts "Could not grab summoner info. Try restarting your League Client."
-    ask "Press Enter to exit."
+    puts "Could not grab summoner info. Try restarting your League Client.".light_red
+    ask "Press Enter to exit.".cyan
     exit 1
   end
-  puts "You're logged in as #{summoner["displayName"]}."
+  puts "You're logged in as #{summoner["displayName"]}.".light_blue
   puts sep
 
   handle_event_tokens
@@ -49,15 +47,14 @@ def run
   handle_champion_shards
   puts sep
 
-  puts "That's it!"
+  puts "That's it!".light_green
+  puts "You can find the global usage stats of Disenchanter at https://checksch.de/hook/disenchanter.php".light_blue
   if $actions > 0
-    puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish."
+    puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
     puts sep
 
     if ($ans_yes).include? user_input_check(
-                    "Would you like to anonymously contribute your results to the global stats?\n" +
-                      "Your results are things like number of disenchanted shards, blue essence generated, ...\n" +
-                      "Find the global stats at: https://checksch.de/hook/disenchanter.php",
+                    "Would you like to anonymously contribute your results to the global stats?\n",
                     $ans_yesno,
                     $ans_yesno_disp
                   )
@@ -70,11 +67,11 @@ def run
         $s_blue_essence,
         $s_orange_essence
       )
-      puts "Thank you very much!"
+      puts "Thank you very much!".light_green
     end
   end
-  puts "See you next time :)"
-  ask "Press Enter to exit."
+  puts "See you next time :)".light_green
+  ask "Press Enter to exit.".cyan
 end
 
 def ask(q)
@@ -87,8 +84,8 @@ def set_globals
   begin
     $port, $token = read_lockfile
   rescue StandardError
-    puts "Could not grab session. Make sure your League Client is running."
-    ask "Press Enter to exit."
+    puts "Could not grab session. Make sure your League Client is running.".light_red
+    ask "Press Enter to exit.".cyan
     exit 1
   end
   $host = "https://127.0.0.1:#{$port}"
@@ -140,9 +137,9 @@ def check_update(version)
   ans = JSON.parse(res.body)
 
   if (ans["tag_name"] != version)
-    puts "New version #{ans["tag_name"]} available at https://github.com/marvinscham/disenchanter/releases/latest"
+    puts "New version #{ans["tag_name"]} available at https://github.com/marvinscham/disenchanter/releases/latest".light_red
   else
-    puts "You're up to date!"
+    puts "You're up to date!".green
   end
 end
 
@@ -194,12 +191,25 @@ def post_recipe(recipe, loot_id, repeat)
   )
 end
 
-def user_input_check(question, answers, answerdisplay)
+def user_input_check(question, answers, answerdisplay, confirm = false)
   input = ""
 
   until (answers).include? input
-    input = ask "#{question} #{answerdisplay}: "
-    puts "Invalid answer: #{answerdisplay}" unless (answers).include? input
+    if confirm
+      question =
+        "CONFIRM: #{question} ".light_magenta + "#{answerdisplay}".light_white +
+          ": ".light_magenta
+    else
+      question =
+        "#{question} ".light_cyan + "#{answerdisplay}".light_white +
+          ": ".light_cyan
+    end
+
+    input = ask question
+    unless (answers).include? input
+      puts "Invalid answer, options: ".light_red +
+             "#{answerdisplay}".light_white
+    end
   end
 
   input
@@ -238,7 +248,7 @@ def handle_event_tokens
   loot_event_token = loot_event_token[0]
 
   if !loot_event_token.nil? && loot_event_token["count"] > 0
-    puts "Found Event Tokens: #{loot_event_token["count"]}x #{loot_event_token["localizedName"]}"
+    puts "Found Event Tokens: #{loot_event_token["count"]}x #{loot_event_token["localizedName"]}".light_blue
     token_recipes = get_recipes_for_item(loot_event_token["lootId"])
 
     craft_tokens_type_names = ["Blue Essence", "Random Emotes"]
@@ -274,7 +284,7 @@ def handle_event_tokens
         token_recipes.sort_by { |r| r["slots"][0]["quantity"] }.reverse!
 
         token_recipes.each do |r|
-          puts "Recipe found: #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens"
+          puts "Recipe found: #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens".light_black
         end
 
         craft_tokens_amount =
@@ -303,7 +313,7 @@ def handle_event_tokens
             (craft_tokens_amount / r["slots"][0]["quantity"]).floor *
               r["slots"][0]["quantity"]
           if r["could_craft"] > 0
-            puts "We could craft #{r["could_craft"]}x #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens each."
+            puts "We could craft #{r["could_craft"]}x #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens each.".light_green
           end
         end
 
@@ -311,9 +321,10 @@ def handle_event_tokens
 
         if total_could_craft > 0
           if ($ans_yes).include? user_input_check(
-                          "CONFIRM: Commit to forging?",
+                          "Commit to forging?",
                           $ans_yesno,
-                          $ans_yesno_disp
+                          $ans_yesno_disp,
+                          true
                         )
             token_recipes.each do |r|
               if craft_tokens_type == "1"
@@ -334,17 +345,17 @@ def handle_event_tokens
                 end
               end
             threads.each(&:join)
-            puts "Done!"
+            puts "Done!".green
           end
         else
-          puts "Can't afford any recipe, skipping."
+          puts "Can't afford any recipe, skipping.".yellow
         end
       else
-        puts "Token crafting canceled."
+        puts "Token crafting canceled.".yellow
       end
     end
   else
-    puts "Found no Event Tokens."
+    puts "Found no Event Tokens.".light_black
   end
 end
 
@@ -355,7 +366,7 @@ def handle_mythic_essence
   loot_essence = player_loot.select { |l| l["lootId"] == mythic_loot_id }
   loot_essence = loot_essence[0]
   if loot_essence["count"] > 0
-    puts "Found #{loot_essence["count"]} Mythic Essence."
+    puts "Found #{loot_essence["count"]} Mythic Essence.".light_blue
     if ($ans_yes).include? user_input_check(
                     "Craft Mythic Essence to Skin Shards, Blue Essence or Orange Essence?",
                     $ans_yesno,
@@ -394,7 +405,7 @@ def handle_mythic_essence
         unless recipes.length == 0
           recipe = recipes[0]
 
-          puts "Recipe found: #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Mythic Essence"
+          puts "Recipe found: #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Mythic Essence".light_blue
 
           craft_mythic_amount =
             user_input_check(
@@ -415,11 +426,12 @@ def handle_mythic_essence
             (craft_mythic_amount / recipe["slots"][0]["quantity"]).floor
           unless could_craft < 1
             if ($ans_yes).include? user_input_check(
-                            "CONFIRM: Craft #{could_craft * recipe["outputs"][0]["quantity"]} " +
+                            "Craft #{could_craft * recipe["outputs"][0]["quantity"]} " +
                               "#{craft_mythic_type_names[craft_mythic_type.to_i - 1]} from " +
                               "#{(craft_mythic_amount / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]} Mythic Essence?",
                             $ans_yesno,
-                            $ans_yesno_disp
+                            $ans_yesno_disp,
+                            true
                           )
               case craft_mythic_type
               when "1"
@@ -436,20 +448,20 @@ def handle_mythic_essence
                 mythic_loot_id,
                 (craft_mythic_amount / recipe["slots"][0]["quantity"]).floor
               )
-              puts "Done!"
+              puts "Done!".green
             end
           else
-            puts "Not enough Mythic Essence for that recipe."
+            puts "Not enough Mythic Essence for that recipe.".yellow
           end
         else
-          puts "Recipes for #{craft_mythic_type_names[craft_mythic_type.to_i - 1]} seem to be unavailable."
+          puts "Recipes for #{craft_mythic_type_names[craft_mythic_type.to_i - 1]} seem to be unavailable.".yellow
         end
       else
-        puts "Mythic crafting canceled."
+        puts "Mythic crafting canceled.".yellow
       end
     end
   else
-    puts "Found no Mythic Essence to use."
+    puts "Found no Mythic Essence to use.".light_black
   end
 end
 
@@ -458,11 +470,12 @@ def handle_key_fragments
 
   loot_keys = player_loot.select { |l| l["lootId"] == "MATERIAL_key_fragment" }
   if count_loot_items(loot_keys) >= 3
-    puts "Found #{count_loot_items(loot_keys)} key fragments."
+    puts "Found #{count_loot_items(loot_keys)} key fragments.".light_blue
     if ($ans_yes).include? user_input_check(
-                    "CONFIRM: Craft #{(count_loot_items(loot_keys) / 3).floor} keys from #{count_loot_items(loot_keys)} key fragments?",
+                    "Craft #{(count_loot_items(loot_keys) / 3).floor} keys from #{count_loot_items(loot_keys)} key fragments?",
                     $ans_yesno,
-                    $ans_yesno_disp
+                    $ans_yesno_disp,
+                    true
                   )
       $s_crafted += (count_loot_items(loot_keys) / 3).floor
       post_recipe(
@@ -470,10 +483,10 @@ def handle_key_fragments
         "MATERIAL_key_fragment",
         (count_loot_items(loot_keys) / 3).floor
       )
-      puts "Done!"
+      puts "Done!".green
     end
   else
-    puts "Found less than 3 key fragments."
+    puts "Found less than 3 key fragments.".light_black
   end
 end
 
@@ -492,15 +505,17 @@ def handle_capsules
   loot_capsules = loot_capsules.select { |c| c["needs_key"] == false }
 
   if count_loot_items(loot_capsules) > 0
-    puts "Found #{count_loot_items(loot_capsules)} capsules:"
+    puts "Found #{count_loot_items(loot_capsules)} capsules:".light_blue
     loot_capsules.each do |c|
-      puts "#{c["count"]}x #{get_chest_name(c["lootId"])}"
+      puts "#{c["count"]}x ".light_black +
+             "#{get_chest_name(c["lootId"])}".light_white
     end
 
     if ($ans_yes).include? user_input_check(
-                    "CONFIRM: Open #{count_loot_items(loot_capsules)} (keyless) capsules?",
+                    "Open #{count_loot_items(loot_capsules)} (keyless) capsules?",
                     $ans_yesno,
-                    $ans_yesno_disp
+                    $ans_yesno_disp,
+                    true
                   )
       $s_opened += count_loot_items(loot_capsules)
       threads =
@@ -510,10 +525,10 @@ def handle_capsules
           end
         end
       threads.each(&:join)
-      puts "Done!"
+      puts "Done!".green
     end
   else
-    puts "Found no keyless capsules to open."
+    puts "Found no keyless capsules to open.".light_black
   end
 end
 
@@ -528,9 +543,10 @@ def handle_emotes
     total_oe_value = 0
     loot_emotes.each { |e| total_oe_value += e["disenchantValue"] }
     if ($ans_yes).include? user_input_check(
-                    "CONFIRM: Disenchant #{count_loot_items(loot_emotes)} (already owned) emotes for #{total_oe_value} Orange Essence?",
+                    "Disenchant #{count_loot_items(loot_emotes)} (already owned) emotes for #{total_oe_value} Orange Essence?",
                     $ans_yesno,
-                    $ans_yesno_disp
+                    $ans_yesno_disp,
+                    true
                   )
       $s_disenchanted += count_loot_items(loot_emotes)
       $s_orange_essence += total_oe_value
@@ -541,10 +557,10 @@ def handle_emotes
           end
         end
       threads.each(&:join)
-      puts "Done!"
+      puts "Done!".green
     end
   else
-    puts "Found no owned emotes to disenchant."
+    puts "Found no owned emotes to disenchant.".light_black
   end
 end
 
@@ -553,6 +569,8 @@ def handle_champion_shards
 
   loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
   if count_loot_items(loot_shards) > 0
+    puts "Found #{count_loot_items(loot_shards)} champion shards.".light_blue
+
     if ($ans_yes).include? user_input_check(
                     "Disenchant unneeded champion shards?",
                     $ans_yesno,
@@ -569,8 +587,6 @@ def handle_champion_shards
           "[1|2|3|4]"
         )
       unless disenchant_shards_mode == "4"
-        puts "Found #{count_loot_items(loot_shards)} champion shards."
-
         case disenchant_shards_mode
         when "1"
           # done
@@ -585,7 +601,9 @@ def handle_champion_shards
 
         if loot_shards_not_owned.length > 0
           if ($ans_yes).include? user_input_check(
-                          "Keep shards for champions you don't own yet?"
+                          "Keep shards for champions you don't own yet?",
+                          $ans_yesno,
+                          $ans_yesno_disp
                         )
             loot_shards = handle_champion_shards_owned(loot_shards)
           end
@@ -594,10 +612,12 @@ def handle_champion_shards
         loot_shards = loot_shards.select { |l| l["count"] > 0 }
 
         if count_loot_items(loot_shards) > 0
-          puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the mode you chose:"
+          puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the mode you chose:".light_blue
           loot_shards.each do |l|
             loot_value = l["disenchantValue"] * l["count"]
-            puts "#{l["count"]}x #{l["itemDesc"]} @ #{loot_value} BE"
+            puts "#{l["count"]}x ".light_black +
+                   "#{l["itemDesc"]}".light_white +
+                   " @ #{loot_value} BE".light_black
           end
 
           loot_shards = handle_champion_shards_exceptions(loot_shards)
@@ -607,35 +627,40 @@ def handle_champion_shards
             total_be_value += l["disenchantValue"] * l["count"]
           end
 
-          if $ans_yes.include? user_input_check(
-                                 "CONFIRM: Disenchant #{count_loot_items(loot_shards)} champion shards for #{total_be_value} Blue Essence?",
-                                 $ans_yesno,
-                                 $ans_yesno_disp
-                               )
-            $s_blue_essence += total_be_value
-            $s_disenchanted += count_loot_items(loot_shards)
-            threads =
-              loot_shards.map do |s|
-                Thread.new do
-                  post_recipe(
-                    "CHAMPION_RENTAL_disenchant",
-                    s["lootId"],
-                    s["count"]
-                  )
+          if count_loot_items(loot_shards) > 0
+            if $ans_yes.include? user_input_check(
+                                   "Disenchant #{count_loot_items(loot_shards)} champion shards for #{total_be_value} Blue Essence?",
+                                   $ans_yesno,
+                                   $ans_yesno_disp,
+                                   true
+                                 )
+              $s_blue_essence += total_be_value
+              $s_disenchanted += count_loot_items(loot_shards)
+              threads =
+                loot_shards.map do |s|
+                  Thread.new do
+                    post_recipe(
+                      "CHAMPION_RENTAL_disenchant",
+                      s["lootId"],
+                      s["count"]
+                    )
+                  end
                 end
-              end
-            threads.each(&:join)
-            puts "Done!"
+              threads.each(&:join)
+              puts "Done!".green
+            end
+          else
+            puts "All remaining champions have been excluded, skipping...".yellow
           end
         else
-          puts "Job's already done: no champion shards left matching your selection."
+          puts "Job's already done: no champion shards left matching your selection.".green
         end
       else
-        puts "Champion shard disenchanting canceled."
+        puts "Champion shard disenchanting canceled.".yellow
       end
     end
   else
-    puts "Found no champion shards to disenchant."
+    puts "Found no champion shards to disenchant.".light_black
   end
 end
 
@@ -657,7 +682,7 @@ def handle_champion_shards_tokens(player_loot, loot_shards)
     end
   end
 
-  puts "Found #{token6_champion_ids.length + token7_champion_ids.length} champions with owned mastery tokens"
+  puts "Found #{token6_champion_ids.length + token7_champion_ids.length} champions with owned mastery tokens".light_black
 
   loot_shards =
     loot_shards.each do |l|
@@ -691,7 +716,7 @@ def handle_champion_shards_mastery(loot_shards)
     end
   end
 
-  puts "Found #{mastery5_champion_ids.length + mastery6_champion_ids.length} relevant champions with threshold at level #{level_threshold}"
+  puts "Found #{mastery5_champion_ids.length + mastery6_champion_ids.length} relevant champions with threshold at level #{level_threshold}".light_black
 
   loot_shards.each do |l|
     if mastery5_champion_ids.include? l["storeItemId"]
@@ -714,15 +739,19 @@ def handle_champion_shards_exceptions(loot_shards)
                     $ans_yesno_disp
                   )
       exclusions_str +=
-        "," + ask("Okay, which champions? (case-sensitive, comma-separated): ")
+        "," +
+          ask(
+            "Okay, which champions? ".light_cyan +
+              "(case-sensitive, comma-separated)".light_white + ": ".light_cyan
+          )
 
       exclusions_done_more = "more "
 
       exclusions_arr = exclusions_str.split(/\s*,\s*/)
       exclusions_matched =
         loot_shards.select { |l| exclusions_arr.include? l["itemDesc"] }
-      print "Exclusions recognized: "
-      exclusions_matched.each { |e| print e["itemDesc"] + " " }
+      print "Exclusions recognized: ".green
+      exclusions_matched.each { |e| print e["itemDesc"].light_white + " " }
       puts
     else
       exclusions_done = true
