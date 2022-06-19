@@ -8,7 +8,11 @@ This script is based on a [project by Anujan](https://github.com/Anujan/disencha
 
 This script is intended for usage on Windows.
 
-To use it, download the pre-built `disenchanter.exe` from the [Latest Release](https://github.com/marvinscham/disenchanter/releases). Note that downloading as well as running this file can cause a false positive alert from your anti-virus.
+To use it, download the pre-built `disenchanter.exe` from the [Latest Release](https://github.com/marvinscham/disenchanter/releases). Note that downloading as well as running this file can cause a false positive alert from your anti-virus. That's because the executable creates a temporary Ruby environment, which can be detected as trojan-like behavior.
+
+Known false positives:
+
+- Trojan:Win32/Wacatac.B!ml
 
 If you'd like to run the Ruby script instead of the pre-built executable you'll need to have [Ruby](https://www.ruby-lang.org/) installed.
 
