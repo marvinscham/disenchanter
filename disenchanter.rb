@@ -241,14 +241,18 @@ def handle_event_tokens
     puts "Found Event Tokens: #{loot_event_token["count"]}x #{loot_event_token["localizedName"]}"
     token_recipes = get_recipes_for_item(loot_event_token["lootId"])
 
+    craft_tokens_type_names = ["Blue Essence", "Random Emotes"]
+
     if ($ans_yes).include? user_input_check(
-                    "Craft #{loot_event_token["localizedName"]}s to Blue Essence or Emotes?",
+                    "Craft #{loot_event_token["localizedName"]}s to #{craft_tokens_type_names[0]} or #{craft_tokens_type_names[1]}?",
                     $ans_yesno,
                     $ans_yesno_disp
                   )
       craft_tokens_type =
         user_input_check(
-          "Okay, what would you like to craft?\n[1] Blue Essence\n[2] Emotes\n[3] Cancel\n",
+          "Okay, what would you like to craft?\n" +
+            "[1] #{craft_tokens_type_names[0]}\n" +
+            "[2] #{craft_tokens_type_names[1]}\n" + "[3] Cancel\n",
           %w[1 2 3],
           "[1|2|3]"
         )
@@ -273,16 +277,31 @@ def handle_event_tokens
           puts "Recipe found: #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens"
         end
 
+        craft_tokens_amount =
+          user_input_check(
+            "Alright, how many Event Tokens should we use to craft #{craft_tokens_type_names[craft_tokens_type.to_i - 1]}?",
+            (1..loot_event_token["count"].to_i)
+              .to_a
+              .append("all")
+              .map! { |n| n.to_s },
+            "[1..#{loot_event_token["count"]}|all]"
+          )
+
+        if craft_tokens_amount == "all"
+          craft_tokens_amount = loot_event_token["count"]
+        end
+        craft_tokens_amount = craft_tokens_amount.to_i
+
         total_could_craft = 0
 
         token_recipes.each do |r|
           r["could_craft"] = (
-            loot_event_token["count"] / r["slots"][0]["quantity"]
+            craft_tokens_amount / r["slots"][0]["quantity"]
           ).floor
           total_could_craft += r["could_craft"]
-          loot_event_token["count"] -= (
-            loot_event_token["count"] / r["slots"][0]["quantity"]
-          ).floor * r["slots"][0]["quantity"]
+          craft_tokens_amount -=
+            (craft_tokens_amount / r["slots"][0]["quantity"]).floor *
+              r["slots"][0]["quantity"]
           if r["could_craft"] > 0
             puts "We could craft #{r["could_craft"]}x #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens each."
           end
@@ -297,7 +316,7 @@ def handle_event_tokens
                           $ans_yesno_disp
                         )
             token_recipes.each do |r|
-              if r["outputs"][0]["lootName"] == "CURRENCY_champion"
+              if craft_tokens_type == "1"
                 $s_blue_essence +=
                   r["outputs"][0]["quantity"] * r["could_craft"]
               end
@@ -372,45 +391,58 @@ def handle_mythic_essence
         recipes = get_recipes_for_item(mythic_loot_id)
         recipes =
           recipes.select { |r| r["outputs"][0]["lootName"] == recipe_target }
-        recipe = recipes[0]
+        unless recipes.length == 0
+          recipe = recipes[0]
 
-        puts "Recipe found: #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Mythic Essence"
+          puts "Recipe found: #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Mythic Essence"
 
-        craft_mythic_amount =
-          user_input_check(
-            "Alright, how many tokens should we use to craft #{craft_mythic_type_names[craft_mythic_type.to_i - 1]}?",
-            (1..185).to_a.map! { |n| n.to_s },
-            "[1..#{loot_essence["count"]}]"
-          )
-
-        could_craft =
-          (craft_mythic_amount.to_i / recipe["slots"][0]["quantity"]).floor
-        unless could_craft < 1
-          if ($ans_yes).include? user_input_check(
-                          "CONFIRM: Craft #{could_craft * recipe["outputs"][0]["quantity"]} " +
-                            "#{craft_mythic_type_names[craft_mythic_type.to_i - 1]} from " +
-                            "#{(craft_mythic_amount.to_i / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]} Mythic Essence?",
-                          $ans_yesno,
-                          $ans_yesno_disp
-                        )
-            case craft_mythic_type
-            when "1"
-              $s_blue_essence += could_craft * recipe["outputs"][0]["quantity"]
-            when "2"
-              $s_orange_essence +=
-                could_craft * recipe["outputs"][0]["quantity"]
-            end
-            $s_crafted += could_craft
-
-            post_recipe(
-              recipe["recipeName"],
-              mythic_loot_id,
-              (craft_mythic_amount.to_i / recipe["slots"][0]["quantity"]).floor
+          craft_mythic_amount =
+            user_input_check(
+              "Alright, how much Mythic Essence should we use to craft #{craft_mythic_type_names[craft_mythic_type.to_i - 1]}?",
+              (1..loot_essence["count"].to_i)
+                .to_a
+                .append("all")
+                .map! { |n| n.to_s },
+              "[1..#{loot_essence["count"]}|all]"
             )
-            puts "Done!"
+
+          if craft_mythic_amount == "all"
+            craft_mythic_amount = loot_essence["count"]
+          end
+          craft_mythic_amount = craft_mythic_amount.to_i
+
+          could_craft =
+            (craft_mythic_amount / recipe["slots"][0]["quantity"]).floor
+          unless could_craft < 1
+            if ($ans_yes).include? user_input_check(
+                            "CONFIRM: Craft #{could_craft * recipe["outputs"][0]["quantity"]} " +
+                              "#{craft_mythic_type_names[craft_mythic_type.to_i - 1]} from " +
+                              "#{(craft_mythic_amount / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]} Mythic Essence?",
+                            $ans_yesno,
+                            $ans_yesno_disp
+                          )
+              case craft_mythic_type
+              when "1"
+                $s_blue_essence +=
+                  could_craft * recipe["outputs"][0]["quantity"]
+              when "2"
+                $s_orange_essence +=
+                  could_craft * recipe["outputs"][0]["quantity"]
+              end
+              $s_crafted += could_craft
+
+              post_recipe(
+                recipe["recipeName"],
+                mythic_loot_id,
+                (craft_mythic_amount / recipe["slots"][0]["quantity"]).floor
+              )
+              puts "Done!"
+            end
+          else
+            puts "Not enough Mythic Essence for that recipe."
           end
         else
-          puts "Not enough Mythic Essence for that recipe."
+          puts "Recipes for #{craft_mythic_type_names[craft_mythic_type.to_i - 1]} seem to be unavailable."
         end
       else
         puts "Mythic crafting canceled."
