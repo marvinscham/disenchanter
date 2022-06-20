@@ -1,5 +1,9 @@
-# Disenchanter
-
+<p align="center" style="margin-bottom: 0px !important;">
+  <img src="https://raw.githubusercontent.com/marvinscham/disenchanter/main/BE_icon.ico" width="120" align="center">
+</p>
+<h1 align="center">Disenchanter</h1>
+<div align="center">
+  
 ![License](https://img.shields.io/github/license/marvinscham/disenchanter)
 ![Release](https://img.shields.io/github/v/release/marvinscham/disenchanter)
 ![Downloads](https://img.shields.io/github/downloads/marvinscham/disenchanter/total)
@@ -10,10 +14,12 @@
 ![Shards Disenchanted](https://img.shields.io/badge/dynamic/json?color=blue&label=shards%20disenchanted&query=%24%5B%3A1%5D.disenchanted_thousands&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=K)
 ![Blue Essence Gained](https://img.shields.io/badge/dynamic/json?color=blue&label=blue%20essence%20gained&query=%24%5B%3A1%5D.blue_essence_millions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=M)
 ![Time Saved](https://img.shields.io/badge/dynamic/json?color=blue&label=time%20saved&query=%24%5B%3A1%5D.hours_saved&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=%20hours)
-
-Essence emporium is coming up and you can't be bothered to manually disenchant hundreds of champion shards? Let Disenchanter help you out!
+  
+Mass disenchant LoL loot like champion shards, event tokens, mythic essence and more
 
 This script is based on a [project by Anujan](https://github.com/Anujan/disenchant-champ-shards).
+  
+</div>
 
 ## Prerequisites
 
