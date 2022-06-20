@@ -1,5 +1,6 @@
 # Disenchanter
 
+![License](https://img.shields.io/github/license/marvinscham/disenchanter)
 ![Release](https://img.shields.io/github/v/release/marvinscham/disenchanter)
 ![Downloads](https://img.shields.io/github/downloads/marvinscham/disenchanter/total)
 ![Last Commit](https://img.shields.io/github/last-commit/marvinscham/disenchanter)
