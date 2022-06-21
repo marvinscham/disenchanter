@@ -56,9 +56,9 @@ You need to be logged into your League Client for this to work.
 
   - Keep shards for champions you don't own yet
 
-  - Keep shards for champions you own mastery 6/7 tokens for
+  - Keep enough (1/2) shards for champions you own mastery 6/7 tokens for
 
-  - Keep shards for champions above a specified mastery level
+  - Keep enough (1/2) shards for champions above a specified mastery level
 
   - Manually add exceptions
 

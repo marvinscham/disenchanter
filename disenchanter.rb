@@ -240,7 +240,7 @@ end
 def handle_exception(exception, name)
   puts "An error occurred while handling #{name}.".light_red
   puts "Please take a screenshot and create an issue at https://github.com/marvinscham/disenchanter/issues/new".light_red
-  puts "If you don't have a GitHub account, send it to dev[at]marvinscham.de"
+  puts "If you don't have a GitHub account, send it to dev@marvinscham.de"
   puts exception
   puts "Skipping this step...".light_black
 end
@@ -612,8 +612,8 @@ def handle_champion_shards
           user_input_check(
             "Okay, which mode would you like to go by?\n" +
               "[1] Disenchant all champion shards\n" +
-              "[2] Keep shards for champions you own mastery 6/7 tokens for\n" +
-              "[3] Keep shards for champions above a specified mastery level\n" +
+              "[2] Keep enough (1/2) shards for champions you own mastery 6/7 tokens for\n" +
+              "[3] Keep enough (1/2) shards for champions above a specified mastery level\n" +
               "[4] Cancel\n",
             %w[1 2 3 4],
             "[1|2|3|4]"
@@ -648,9 +648,20 @@ def handle_champion_shards
             puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the mode you chose:".light_blue
             loot_shards.each do |l|
               loot_value = l["disenchantValue"] * l["count"]
-              puts "#{l["count"]}x ".light_black +
-                     "#{l["itemDesc"]}".light_white +
-                     " @ #{loot_value} BE".light_black
+              print "#{l["count"]}x ".light_black +
+                      "#{l["itemDesc"]}".light_white +
+                      " @ #{loot_value} BE".light_black
+              if l.key?("count_keep")
+                print " (keeping #{l["count_keep"]} for ".green
+                case disenchant_shards_mode
+                when "2"
+                  puts "tokens)".green
+                when "3"
+                  puts "mastery)".green
+                end
+              else
+                puts
+              end
             end
 
             loot_shards = handle_champion_shards_exceptions(loot_shards)
@@ -730,8 +741,10 @@ def handle_champion_shards_tokens(player_loot, loot_shards)
       loot_shards.each do |l|
         if token6_champion_ids.include? l["storeItemId"]
           l["count"] -= 2
+          l["count_keep"] = 2
         elsif token7_champion_ids.include? l["storeItemId"]
           l["count"] -= 1
+          l["count_keep"] = 1
         end
       end
     return loot_shards
@@ -767,8 +780,10 @@ def handle_champion_shards_mastery(loot_shards)
     loot_shards.each do |l|
       if mastery5_champion_ids.include? l["storeItemId"]
         l["count"] -= 2
+        l["count_keep"] = 2
       elsif mastery6_champion_ids.include? l["storeItemId"]
         l["count"] -= 1
+        l["count_keep"] = 1
       end
     end
     return loot_shards
