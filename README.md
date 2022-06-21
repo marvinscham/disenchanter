@@ -9,16 +9,15 @@
 ![Downloads](https://img.shields.io/github/downloads/marvinscham/disenchanter/total)
 ![Last Commit](https://img.shields.io/github/last-commit/marvinscham/disenchanter)
 
-
 ![Stat Submissions](https://img.shields.io/badge/dynamic/json?color=blue&label=stat%20submissions&query=%24%5B%3A1%5D.submissions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php)
 ![Shards Disenchanted](https://img.shields.io/badge/dynamic/json?color=blue&label=shards%20disenchanted&query=%24%5B%3A1%5D.disenchanted_thousands&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=K)
 ![Blue Essence Gained](https://img.shields.io/badge/dynamic/json?color=blue&label=blue%20essence%20gained&query=%24%5B%3A1%5D.blue_essence_millions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=M)
 ![Time Saved](https://img.shields.io/badge/dynamic/json?color=blue&label=time%20saved&query=%24%5B%3A1%5D.hours_saved&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=%20hours)
-  
+
 Mass disenchant LoL loot like champion shards, event tokens, mythic essence and more
 
-This script is based on a [project by Anujan](https://github.com/Anujan/disenchant-champ-shards).
-  
+This script is based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-champ-shards).
+
 </div>
 
 ## Prerequisites
@@ -47,9 +46,9 @@ The script is interactive and will guide you through the process with simple `[y
 
 You need to be logged into your League Client for this to work.
 
-### Features
+## Features
 
-- Disenchant champion shards by a set of rules
+- Disenchant champion shards by a set of rules:
 
   - Disenchant all champion shards
 
@@ -65,15 +64,17 @@ You need to be logged into your League Client for this to work.
 
 - Craft Event Tokens to Blue Essence or Emotes
 
+- Disenchant duplicate Emotes
+
 - Open keyless chests and capsules
 
 - Craft Mythic Essence to Random Skin Shards, Blue Essence or Orange Essence
 
-### Feature Suggestions
+## Feature Suggestions
 
 You'd like to see a feature that isn't yet supported? [Create an issue](https://github.com/marvinscham/disenchanter/issues/new), send a pull request or just hit me up at dev[at]marvinscham.de.
 
-### Stat Collection
+## Stat Collection
 
 At the end of the script you're asked to contribute your (anonymous) stats to the [Global Stats](https://checksch.de/hook/disenchanter.php).
 
@@ -99,7 +100,7 @@ _What info is collected?_
 
 This information is generated per script run and saved as a tuple in a database on my server.
 
-### Build Executable
+## Build Executable
 
 If you trust the code but not the pre-built executable, feel free to build it yourself.
 
