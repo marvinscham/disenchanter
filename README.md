@@ -30,6 +30,8 @@ Known false positives:
 
 - Trojan:Win32/Wacatac.B!ml
 
+- Trojan:Win32/Sabsik.FL.B!ml
+
 If you'd like to run the Ruby script instead of the pre-built executable you'll need to have [Ruby](https://www.ruby-lang.org/) installed.
 
 ## Is this going to get me banned?
