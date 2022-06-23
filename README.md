@@ -78,7 +78,7 @@ You need to be logged into your League Client for this to work.
 
 Something isn't working properly or you'd like to see a feature that isn't yet supported?
 
-- [Create an issue](https://github.com/marvinscham/disenchanter/issues/new)
+- [Create an issue](https://github.com/marvinscham/disenchanter/issues/new/choose)
 - (**If you have no GitHub account**) hit me up at dev[at]marvinscham.de
 
 - Do it yourself and open a pull request.
