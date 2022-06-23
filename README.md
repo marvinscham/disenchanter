@@ -54,13 +54,15 @@ You need to be logged into your League Client for this to work.
 
   - Disenchant all champion shards
 
-  - Keep shards for champions you don't own yet
+  - Keep a shard for champions you don't own yet
 
   - Keep enough (1/2) shards for champions you own mastery 6/7 tokens for
 
-  - Keep enough (1/2) shards for champions above a specified mastery level
+  - Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)
 
-  - Manually add exceptions
+  - Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)
+
+  - Manual exceptions
 
 - Combine Key Fragments
 
@@ -72,35 +74,32 @@ You need to be logged into your League Client for this to work.
 
 - Craft Mythic Essence to Random Skin Shards, Blue Essence or Orange Essence
 
-## Feature Suggestions
+## Problems, Bugs and Feature Suggestions
 
-You'd like to see a feature that isn't yet supported? [Create an issue](https://github.com/marvinscham/disenchanter/issues/new), send a pull request or just hit me up at dev[at]marvinscham.de.
+Something isn't working properly or you'd like to see a feature that isn't yet supported?
+
+- [Create an issue](https://github.com/marvinscham/disenchanter/issues/new)
+- (**If you have no GitHub account**) hit me up at dev[at]marvinscham.de
+
+- Do it yourself and open a pull request.
 
 ## Stat Collection
 
-At the end of the script you're asked to contribute your (anonymous) stats to the [Global Stats](https://checksch.de/hook/disenchanter.php).
+At the end of the script you're asked to contribute your (anonymous) stats to the [Global Stats](https://github.com/marvinscham/disenchanter/wiki/Stats).
 
 This step is **completely optional** and easy to decline but I'd like to encourage you to contribute as it helps me as a dev.
 
 _What info is collected?_
 
-- Number of disenchanted items
+- Number of disenchanted, opened, crafted and redeemed items
 
-- Number of opened chests
+- Total actions taken (sum of the above)
 
-- Number of items crafted
-
-- Number of items redeemed
-
-- Number of actions (sum of the above)
-
-- Blue Essence gained
-
-- Orange Essence gained
+- Blue/Orange Essence gained
 
 - Timestamp
 
-This information is generated per script run and saved as a tuple in a database on my server.
+This information is generated per script run and saved as a tuple in a database on [my server](https://checksch.de/hook/disenchanter.php).
 
 ## Build Executable
 

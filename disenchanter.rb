@@ -48,13 +48,13 @@ def run
   puts sep
 
   puts "That's it!".light_green
-  puts "You can find the global usage stats of Disenchanter at https://checksch.de/hook/disenchanter.php".light_blue
+  puts "You can find the global usage stats of Disenchanter at https://github.com/marvinscham/disenchanter/wiki/Stats".light_blue
   if $actions > 0
     puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
     puts sep
 
     if ($ans_yes).include? user_input_check(
-                    "Would you like to anonymously contribute your results to the global stats?\n",
+                    "Would you like to contribute your anonymous results (number of shards disenchanted etc.) to the global stats?\n",
                     $ans_yesno,
                     $ans_yesno_disp
                   )
@@ -78,6 +78,10 @@ def ask(q)
   print(q)
   q = gets
   q.chomp
+end
+
+def pad(str, len, right = true)
+  "%#{right ? "-" : ""}#{len}s" % str
 end
 
 def set_globals
@@ -240,7 +244,7 @@ end
 def handle_exception(exception, name)
   puts "An error occurred while handling #{name}.".light_red
   puts "Please take a screenshot and create an issue at https://github.com/marvinscham/disenchanter/issues/new".light_red
-  puts "If you don't have a GitHub account, send it to dev@marvinscham.de"
+  puts "If you don't have a GitHub account, send it to dev@marvinscham.de".light_red
   puts exception
   puts "Skipping this step...".light_black
 end
@@ -272,12 +276,12 @@ def handle_event_tokens
           user_input_check(
             "Okay, what would you like to craft?\n" +
               "[1] #{craft_tokens_type_names[0]}\n" +
-              "[2] #{craft_tokens_type_names[1]}\n" + "[3] Cancel\n",
-            %w[1 2 3],
-            "[1|2|3]"
+              "[2] #{craft_tokens_type_names[1]}\n" + "[x] Cancel\n",
+            %w[1 2 x],
+            "[1|2|x]"
           )
 
-        unless craft_tokens_type == "3"
+        unless craft_tokens_type == "x"
           # CHEST_187 = Random Emote
           # CHEST_241 = Random Champion Shard
           # CURRENCY_champion = Blue Essence
@@ -397,12 +401,12 @@ def handle_mythic_essence
             "Okay, what would you like to craft?\n" +
               "[1] #{craft_mythic_type_names[0]}\n" +
               "[2] #{craft_mythic_type_names[1]}\n" +
-              "[3] #{craft_mythic_type_names[2]}\n" + "[4] Cancel\n",
-            %w[1 2 3 4],
-            "[1|2|3|4]"
+              "[3] #{craft_mythic_type_names[2]}\n" + "[x] Cancel\n",
+            %w[1 2 3 x],
+            "[1|2|3|x]"
           )
 
-        unless craft_mythic_type == "4"
+        unless craft_mythic_type == "x"
           case craft_mythic_type
           # Blue Essence, Orange Essence, Random Skin Shard
           when "1"
@@ -608,17 +612,35 @@ def handle_champion_shards
                       $ans_yesno,
                       $ans_yesno_disp
                     )
+        loot_shards.each do |s|
+          s["count_keep"] = 0
+          s["disenchant_note"] = ""
+        end
+        loot_shards_not_owned =
+          loot_shards.select { |s| !s["redeemableStatus"] == "ALREADY_OWNED" }
+
+        if loot_shards_not_owned.length > 0
+          if ($ans_yes).include? user_input_check(
+                          "Keep a shard for champions you don't own yet?",
+                          $ans_yesno,
+                          $ans_yesno_disp
+                        )
+            loot_shards = handle_champion_shards_owned(loot_shards)
+          end
+        end
+
         disenchant_shards_mode =
           user_input_check(
             "Okay, which mode would you like to go by?\n" +
               "[1] Disenchant all champion shards\n" +
               "[2] Keep enough (1/2) shards for champions you own mastery 6/7 tokens for\n" +
-              "[3] Keep enough (1/2) shards for champions above a specified mastery level\n" +
-              "[4] Cancel\n",
-            %w[1 2 3 4],
-            "[1|2|3|4]"
+              "[3] Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)\n" +
+              "[4] Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)\n" +
+              "[x] Cancel\n",
+            %w[1 2 3 4 x],
+            "[1|2|3|4|x]"
           )
-        unless disenchant_shards_mode == "4"
+        unless disenchant_shards_mode == "x"
           case disenchant_shards_mode
           when "1"
             # done
@@ -627,19 +649,8 @@ def handle_champion_shards
               handle_champion_shards_tokens(player_loot, loot_shards)
           when "3"
             loot_shards = handle_champion_shards_mastery(loot_shards)
-          end
-
-          loot_shards_not_owned =
-            loot_shards.select { |s| !s["redeemableStatus"] == "ALREADY_OWNED" }
-
-          if loot_shards_not_owned.length > 0
-            if ($ans_yes).include? user_input_check(
-                            "Keep shards for champions you don't own yet?",
-                            $ans_yesno,
-                            $ans_yesno_disp
-                          )
-              loot_shards = handle_champion_shards_owned(loot_shards)
-            end
+          when "4"
+            loot_shards = handle_champion_shards_mastery(loot_shards, true)
           end
 
           loot_shards = loot_shards.select { |l| l["count"] > 0 }
@@ -648,17 +659,14 @@ def handle_champion_shards
             puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the mode you chose:".light_blue
             loot_shards.each do |l|
               loot_value = l["disenchantValue"] * l["count"]
-              print "#{l["count"]}x ".light_black +
-                      "#{l["itemDesc"]}".light_white +
-                      " @ #{loot_value} BE".light_black
-              if l.key?("count_keep")
-                print " (keeping #{l["count_keep"]} for ".green
-                case disenchant_shards_mode
-                when "2"
-                  puts "tokens)".green
-                when "3"
-                  puts "mastery)".green
-                end
+              print pad("#{l["count"]}x ", 5, false).light_black
+              print pad("#{l["itemDesc"]}", 15).light_white
+              print " @ ".light_black
+              print pad("#{loot_value} BE", 8, false).light_black
+              if l["count_keep"] > 0
+                puts " keeping #{l["count_keep"]}".green
+              elsif l["disenchant_note"].length > 0
+                puts " #{l["disenchant_note"]}"
               else
                 puts
               end
@@ -713,7 +721,13 @@ end
 
 def handle_champion_shards_owned(loot_shards)
   begin
-    return loot_shards.select { |l| l["redeemableStatus"] == "ALREADY_OWNED" }
+    loot_shards.each do |l|
+      unless l["redeemableStatus"] == "ALREADY_OWNED"
+        l["count"] -= 1
+        l["count_keep"] += 1
+      end
+    end
+    return loot_shards.select { |l| l["count"] > 0 }
   rescue => exception
     handle_capsules(exception, "Owned Champion Shards")
   end
@@ -741,10 +755,10 @@ def handle_champion_shards_tokens(player_loot, loot_shards)
       loot_shards.each do |l|
         if token6_champion_ids.include? l["storeItemId"]
           l["count"] -= 2
-          l["count_keep"] = 2
+          l["count_keep"] += 2
         elsif token7_champion_ids.include? l["storeItemId"]
           l["count"] -= 1
-          l["count_keep"] = 1
+          l["count_keep"] += 1
         end
       end
     return loot_shards
@@ -753,39 +767,52 @@ def handle_champion_shards_tokens(player_loot, loot_shards)
   end
 end
 
-def handle_champion_shards_mastery(loot_shards)
+def handle_champion_shards_mastery(loot_shards, keep_all = false)
   begin
     summoner = get_current_summoner
     player_mastery = get_champion_mastery(summoner["summonerId"])
-    mastery5_champion_ids = []
+    threshold_champion_ids = []
     mastery6_champion_ids = []
+    mastery7_champion_ids = []
 
-    level_threshold =
-      user_input_check(
-        "Which mastery level should champions at least be for their shards to be kept?",
-        %w[1 2 3 4 5 6],
-        "[1..6]"
-      )
+    unless keep_all
+      level_threshold =
+        user_input_check(
+          "Which mastery level should champions at least be for their shards to be kept?",
+          %w[1 2 3 4 5 6],
+          "[1..6]"
+        )
+    else
+      level_threshold = "0"
+    end
+    level_threshold = level_threshold.to_i
 
     player_mastery.each do |m|
-      if m["championLevel"] >= level_threshold.to_i && m["championLevel"] <= 5
-        mastery5_champion_ids << m["championId"]
+      if m["championLevel"] == 7
+        mastery7_champion_ids << m["championId"]
       elsif m["championLevel"] == 6
         mastery6_champion_ids << m["championId"]
+      elsif (level_threshold..5).include? m["championLevel"]
+        threshold_champion_ids << m["championId"]
+      elsif keep_all
+        threshold_champion_ids << m["championId"]
       end
     end
-
-    puts "Found #{mastery5_champion_ids.length + mastery6_champion_ids.length} relevant champions with threshold at level #{level_threshold}".light_black
 
     loot_shards.each do |l|
-      if mastery5_champion_ids.include? l["storeItemId"]
-        l["count"] -= 2
-        l["count_keep"] = 2
+      if mastery7_champion_ids.include? l["storeItemId"]
+        l["disenchant_note"] = "at mastery 7".light_black
       elsif mastery6_champion_ids.include? l["storeItemId"]
         l["count"] -= 1
-        l["count_keep"] = 1
+        l["count_keep"] += 1
+      elsif threshold_champion_ids.include? l["storeItemId"]
+        l["count"] -= 2
+        l["count_keep"] += 2
+      else
+        l["disenchant_note"] = "below threshold".yellow
       end
     end
+
     return loot_shards
   rescue => exception
     handle_exception(exception, "Champion Shards by Mastery")
