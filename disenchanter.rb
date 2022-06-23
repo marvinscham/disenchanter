@@ -48,11 +48,12 @@ def run
   puts sep
 
   puts "That's it!".light_green
-  puts "You can find the global usage stats of Disenchanter at https://github.com/marvinscham/disenchanter/wiki/Stats".light_blue
   if $actions > 0
     puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
     puts sep
-
+  end
+  puts "You can find the global usage stats of Disenchanter at https://github.com/marvinscham/disenchanter/wiki/Stats".light_blue
+  if $actions > 0
     if ($ans_yes).include? user_input_check(
                     "Would you like to contribute your anonymous results (number of shards disenchanted etc.) to the global stats?\n",
                     $ans_yesno,
