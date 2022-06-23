@@ -44,6 +44,9 @@ def run
   handle_emotes
   puts sep
 
+  handle_wards
+  puts sep
+
   handle_champion_shards
   puts sep
 
@@ -597,6 +600,65 @@ def handle_emotes
     end
   rescue => exception
     handle_exception(exception, "Emotes")
+  end
+end
+
+def handle_wards
+  begin
+    player_loot = get_player_loot
+
+    loot_wards = player_loot.select { |l| l["type"] == "WARDSKIN_RENTAL" }
+    if count_loot_items(loot_wards) > 0
+      puts "Found #{count_loot_items(loot_wards)} Ward Skin Shards.".light_blue
+
+      if ($ans_yes).include? user_input_check(
+                      "Disenchant unneeded Ward Skin Shards?",
+                      $ans_yesno,
+                      $ans_yesno_disp
+                    )
+        if ($ans_yes).include? user_input_check(
+                        "Only disenchant shards of Ward Skins you already own?",
+                        $ans_yesno,
+                        $ans_yesno_disp
+                      )
+          loot_wards =
+            loot_wards.select { |w| w["redeemableStatus"] == "ALREADY_OWNED" }
+        end
+
+        if count_loot_items(loot_wards) > 0
+          total_oe_value = 0
+          loot_wards.each { |w| total_oe_value += w["disenchantValue"] }
+
+          if ($ans_yes).include? user_input_check(
+                          "Disenchant #{count_loot_items(loot_wards)} Ward Skin Shards for #{total_oe_value} Orange Essence?",
+                          $ans_yesno,
+                          $ans_yesno_disp,
+                          true
+                        )
+            $s_disenchanted += count_loot_items(loot_wards)
+            $s_orange_essence += total_oe_value
+            threads =
+              loot_wards.map do |w|
+                Thread.new do
+                  post_recipe(
+                    "WARDSKIN_RENTAL_disenchant",
+                    w["lootId"],
+                    w["count"]
+                  )
+                end
+              end
+            threads.each(&:join)
+            puts "Done!".green
+          end
+        else
+          puts "Found no owned Ward Skin Shards to disenchant.".yellow
+        end
+      end
+    else
+      puts "Found no Ward Skin Shards to disenchant.".light_black
+    end
+  rescue => exception
+    handle_exception(exception, "Ward Skin Shards")
   end
 end
 
