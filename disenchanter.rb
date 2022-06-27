@@ -10,7 +10,7 @@ require "open-uri"
 
 def run
   set_globals
-  current_version = "v1.2.3-dev"
+  current_version = "v1.2.3"
 
   sep =
     "____________________________________________________________".light_black
@@ -189,33 +189,36 @@ def req_set_headers(req)
 end
 
 def check_update(version)
-  uri =
-    URI("https://api.github.com/repos/marvinscham/disenchanter/releases/latest")
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  req = Net::HTTP::Get.new(uri, "Content-Type": "application/json")
-  res = http.request req
-  ans = JSON.parse(res.body)
+  begin
+    uri =
+      URI(
+        "https://api.github.com/repos/marvinscham/disenchanter/releases/latest"
+      )
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    req = Net::HTTP::Get.new(uri, "Content-Type": "application/json")
+    res = http.request req
+    ans = JSON.parse(res.body)
 
-  if (ans["tag_name"] != version || true)
-    puts "New version #{ans["tag_name"]} available at https://github.com/marvinscham/disenchanter/releases/latest".light_red
-    if ($ans_y).include? user_input_check(
-                    "Would you like to download the new version now?",
-                    $ans_yn,
-                    $ans_yn_d
-                  )
-      File.open("./disenchanter-#{ans["tag_name"]}.exe", "wb") do |saved_file|
-        URI.open(
-          "https://github.com/marvinscham/disenchanter/releases/download/#{ans["tag_name"]}/disenchanter.exe",
-          "rb"
-        ) { |read_file| saved_file.write(read_file.read) }
+    if (ans["tag_name"] != version)
+      puts "New version #{ans["tag_name"]} available!".light_yellow
+      if ($ans_y).include? user_input_check(
+                      "Would you like to download the new version now?",
+                      $ans_yn,
+                      $ans_yn_d
+                    )
+        `curl https://github.com/marvinscham/disenchanter/releases/download/#{ans["tag_name"]}/disenchanter_up.exe -L -o disenchanter_up.exe`
+        puts sep
+
+        exec("disenchanter_up.exe")
+        exit
       end
-      exec("disenchanter-#{ans["tag_name"]}.exe")
-      exit
+    else
+      puts "You're up to date!".green
     end
-  else
-    puts "You're up to date!".green
+  rescue => exception
+    handle_exception(exception, "self update")
   end
 end
 
@@ -634,14 +637,25 @@ def handle_generic(name, type, recipe)
     if count_loot_items(loot_generic) > 0
       puts "Found #{count_loot_items(loot_generic)} #{name}.".light_blue
 
-      if ($ans_y).include? user_input_check(
-                      "Keep #{name} you don't own yet?",
-                      $ans_yn,
-                      $ans_yn_d
-                    )
+      user_option =
+        user_input_check(
+          "Keep #{name} you don't own yet?\n".light_cyan + "[y] ".light_white +
+            "Yes\n".light_cyan + "[n] ".light_white + "No\n".light_cyan +
+            "[x] ".light_white + "Exit to main menu\n".light_cyan + "Option: ",
+          %w[y n x],
+          "[y|n|x]",
+          ""
+        )
+
+      case user_option
+      when "x"
+        puts "Action cancelled".yellow
+        return
+      when "y"
         disenchant_all = false
         loot_generic =
           loot_generic.select { |g| g["redeemableStatus"] == "ALREADY_OWNED" }
+        puts "Filtered to #{count_loot_items(loot_generic)} items.".light_blue
       end
 
       if count_loot_items(loot_generic) > 0
