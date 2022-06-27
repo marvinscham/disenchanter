@@ -44,7 +44,7 @@ The script triggers the same server requests as you would in your League Client.
 
 Put the `disenchanter.exe` (or `.rb`) file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends` and run it.
 
-The script is interactive and will guide you through the process with simple `[y|n]` questions and mode choices. Before you disenchant or craft anything, you will be asked to confirm your action in a separate color and a `CONFIRM:` banner to prevent accidents.
+The script is interactive and will guide you through the process with simple `[y|n]` questions and mode options. Before you disenchant or craft anything, you will be asked to confirm the action in a magenta colored message with a big `CONFIRM:` banner so don't be scared to explore the different options!
 
 You need to be logged into your League Client for this to work.
 
