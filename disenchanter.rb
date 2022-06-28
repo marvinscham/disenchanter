@@ -9,126 +9,130 @@ require "launchy"
 require "open-uri"
 
 def run
-  set_globals
-  current_version = "v1.3.0"
+  unless File.exist?("build.cmd")
+    set_globals
+    current_version = "v1.3.0"
 
-  sep =
-    "____________________________________________________________".light_black
+    sep =
+      "____________________________________________________________".light_black
 
-  puts "Hi! :)".light_green
-  puts "Running Disenchanter #{current_version}".light_blue
-  puts "You can exit this script at any point by pressing ".light_blue +
-         "[CTRL + C]".light_white + ".".light_blue
-  check_update(current_version)
-  puts sep
+    puts "Hi! :)".light_green
+    puts "Running Disenchanter #{current_version}".light_blue
+    puts "You can exit this script at any point by pressing ".light_blue +
+           "[CTRL + C]".light_white + ".".light_blue
+    check_update(current_version)
+    puts sep
 
-  summoner = get_current_summoner
-  if summoner["displayName"].nil? || summoner["displayName"].empty?
-    puts "Could not grab summoner info. Try restarting your League Client.".light_red
-    ask "Press Enter to exit.".cyan
-    exit 1
-  end
-  puts "\nYou're logged in as #{summoner["displayName"]}.".light_blue
-  puts sep
-  puts "\nFeel free to try the options, no actions will be taken until you confirm a banner like this:".light_blue
-  puts "CONFIRM: Perform this action? [y|n]".light_magenta
-  puts sep
+    summoner = get_current_summoner
+    if summoner["displayName"].nil? || summoner["displayName"].empty?
+      puts "Could not grab summoner info. Try restarting your League Client.".light_red
+      ask "Press Enter to exit.".cyan
+      exit 1
+    end
+    puts "\nYou're logged in as #{summoner["displayName"]}.".light_blue
+    puts sep
+    puts "\nFeel free to try the options, no actions will be taken until you confirm a banner like this:".light_blue
+    puts "CONFIRM: Perform this action? [y|n]".light_magenta
+    puts sep
 
-  done = false
-  things_todo = {
-    "1" => "Event Tokens",
-    "2" => "Mythic Essence",
-    "3" => "Key Fragments",
-    "4" => "Capsules",
-    "5" => "Emotes",
-    "6" => "Ward Skin Shards",
-    "7" => "Skin Shards",
-    "8" => "Eternals",
-    "9" => "Champion Shards",
-    "s" => "Show Global Stats",
-    "x" => "Exit"
-  }
-  things_done = []
+    done = false
+    things_todo = {
+      "1" => "Event Tokens",
+      "2" => "Mythic Essence",
+      "3" => "Key Fragments",
+      "4" => "Capsules",
+      "5" => "Emotes",
+      "6" => "Ward Skin Shards",
+      "7" => "Skin Shards",
+      "8" => "Eternals",
+      "9" => "Champion Shards",
+      "s" => "Show Global Stats",
+      "x" => "Exit"
+    }
+    things_done = []
 
-  until done
-    todo_string = ""
-    things_todo.each do |k, v|
-      todo_string += "[#{k}] ".light_white
-      unless things_done.include? k
-        todo_string += "#{v}\n".light_cyan
-      else
-        todo_string += "#{v} (done)\n".light_green
+    until done
+      todo_string = ""
+      things_todo.each do |k, v|
+        todo_string += "[#{k}] ".light_white
+        unless things_done.include? k
+          todo_string += "#{v}\n".light_cyan
+        else
+          todo_string += "#{v} (done)\n".light_green
+        end
+      end
+
+      todo =
+        user_input_check(
+          "\nWhat would you like to do? (Hint: do 1-4 first so you don't miss anything)\n\n".light_cyan +
+            todo_string + "Option: ",
+          %w[1 2 3 4 5 6 7 8 9 s x],
+          "",
+          ""
+        )
+      things_done << todo
+
+      puts sep
+      puts
+
+      puts "Option chosen: #{things_todo[todo]}".light_white
+
+      case todo
+      when "1"
+        handle_event_tokens
+      when "2"
+        handle_mythic_essence
+      when "3"
+        handle_key_fragments
+      when "4"
+        handle_capsules
+      when "5"
+        handle_emotes
+      when "6"
+        handle_ward_skin_shards
+      when "7"
+        handle_skin_shards
+      when "8"
+        handle_eternals
+      when "9"
+        handle_champion_shards
+      when "s"
+        puts "Opening Global Stats at https://github.com/marvinscham/disenchanter/wiki/Stats in your browser...".light_blue
+        Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
+      when "x"
+        done = true
+      end
+      puts sep
+    end
+
+    puts "That's it!".light_green
+    if $actions > 0
+      puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
+      puts sep
+    end
+    if $actions > 0
+      if ($ans_y).include? user_input_check(
+                      "Would you like to contribute your anonymous results (number of shards disenchanted etc.) to the global stats?\n",
+                      $ans_yn,
+                      $ans_yn_d
+                    )
+        submit_stats(
+          $actions,
+          $s_disenchanted,
+          $s_opened,
+          $s_crafted,
+          $s_redeemed,
+          $s_blue_essence,
+          $s_orange_essence
+        )
+        puts "Thank you very much!".light_green
       end
     end
-
-    todo =
-      user_input_check(
-        "\nWhat would you like to do? (Hint: do 1-4 first so you don't miss anything)\n\n".light_cyan +
-          todo_string + "Option: ",
-        %w[1 2 3 4 5 6 7 8 9 s x],
-        "",
-        ""
-      )
-    things_done << todo
-
-    puts sep
-    puts
-
-    puts "Option chosen: #{things_todo[todo]}".light_white
-
-    case todo
-    when "1"
-      handle_event_tokens
-    when "2"
-      handle_mythic_essence
-    when "3"
-      handle_key_fragments
-    when "4"
-      handle_capsules
-    when "5"
-      handle_emotes
-    when "6"
-      handle_ward_skin_shards
-    when "7"
-      handle_skin_shards
-    when "8"
-      handle_eternals
-    when "9"
-      handle_champion_shards
-    when "s"
-      puts "Opening Global Stats at https://github.com/marvinscham/disenchanter/wiki/Stats in your browser...".light_blue
-      Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
-    when "x"
-      done = true
-    end
-    puts sep
+    puts "See you next time :)".light_green
+    ask "Press Enter to exit.".cyan
+  else
+    puts "Recognize build environment, skipping execution...".light_yellow
   end
-
-  puts "That's it!".light_green
-  if $actions > 0
-    puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
-    puts sep
-  end
-  if $actions > 0
-    if ($ans_y).include? user_input_check(
-                    "Would you like to contribute your anonymous results (number of shards disenchanted etc.) to the global stats?\n",
-                    $ans_yn,
-                    $ans_yn_d
-                  )
-      submit_stats(
-        $actions,
-        $s_disenchanted,
-        $s_opened,
-        $s_crafted,
-        $s_redeemed,
-        $s_blue_essence,
-        $s_orange_essence
-      )
-      puts "Thank you very much!".light_green
-    end
-  end
-  puts "See you next time :)".light_green
-  ask "Press Enter to exit.".cyan
 end
 
 def ask(q)
