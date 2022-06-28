@@ -209,7 +209,7 @@ def check_update(version)
                       $ans_yn_d
                     )
         `curl https://github.com/marvinscham/disenchanter/releases/download/#{ans["tag_name"]}/disenchanter_up.exe -L -o disenchanter_up.exe`
-        puts sep
+        puts "...".light_black
 
         exec("disenchanter_up.exe")
         exit
