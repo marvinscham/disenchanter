@@ -720,7 +720,7 @@ def handle_skin_shards
 end
 
 def handle_eternals
-  puts "Not yet implemented, check in a future version!".yellow
+  handle_generic("Eternals", "STATSTONE_SHARD", "STATSTONE_SHARD_DISENCHANT")
 end
 
 def handle_champion_shards
