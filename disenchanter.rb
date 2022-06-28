@@ -63,7 +63,7 @@ def run
 
     todo =
       user_input_check(
-        "What would you like to do? (Hint: do 1-4 first so you don't miss anything)\n".light_cyan +
+        "\nWhat would you like to do? (Hint: do 1-4 first so you don't miss anything)\n\n".light_cyan +
           todo_string + "Option: ",
         %w[1 2 3 4 5 6 7 8 9 s x],
         "",
