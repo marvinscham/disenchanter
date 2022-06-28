@@ -10,7 +10,7 @@ require "open-uri"
 
 def run
   set_globals
-  current_version = "v1.2.3"
+  current_version = "v1.3.0-beta"
 
   sep =
     "____________________________________________________________".light_black
