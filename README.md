@@ -24,9 +24,11 @@ This script is based on [Anujan/disenchant-champ-shards](https://github.com/Anuj
 
 This script is intended for usage on Windows.
 
-To use it, download the pre-built `disenchanter.exe` from the [Latest Release](https://github.com/marvinscham/disenchanter/releases). Note that downloading as well as running this file can cause a false positive alert from your anti-virus. That's because the executable creates a temporary Ruby environment, which can be detected as trojan-like behavior.
+To use it, download the pre-built `disenchanter.exe` from the [Latest Release](https://github.com/marvinscham/disenchanter/releases).
 
-Known false positives:
+Note that downloading as well as running this file probably causes a false positive alert from your antivirus. That's because the executable creates a temporary Ruby environment to run the script, which is detected as trojan-like behavior.
+
+_Known false positives_:
 
 - Trojan:Win32/Wacatac.B!ml
 
@@ -66,13 +68,13 @@ From version 1.3.0 onward, the script can update itself by downloading the newes
 
   - Manual exceptions
 
+- Disenchant (duplicate) Emotes, Ward Skins, Skins and Eternals
+
 - Combine Key Fragments
 
-- Craft Event Tokens to Blue Essence or Emotes
-
-- Disenchant duplicate Emotes
-
 - Open keyless chests and capsules
+
+- Craft Event Tokens to Blue Essence or Emotes
 
 - Craft Mythic Essence to Random Skin Shards, Blue Essence or Orange Essence
 

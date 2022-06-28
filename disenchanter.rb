@@ -10,7 +10,7 @@ require "open-uri"
 
 def run
   set_globals
-  current_version = "v1.3.0-beta"
+  current_version = "v1.3.0"
 
   sep =
     "____________________________________________________________".light_black
@@ -664,11 +664,21 @@ def handle_generic(name, type, recipe)
           total_oe_value += g["disenchantValue"] * g["count"]
         end
 
+        if loot_generic[0]["itemDesc"] == ""
+          loot_name_index = "localizedName"
+        else
+          loot_name_index = "itemDesc"
+        end
+        loot_generic =
+          loot_generic.sort_by do |l|
+            [l["redeemableStatus"], l[loot_name_index]]
+          end
+
         puts "We'd disenchant #{count_loot_items(loot_generic)} #{name} using the option you chose:".light_blue
         loot_generic.each do |l|
           loot_value = l["disenchantValue"] * l["count"]
           print pad("#{l["count"]}x ", 5, false).light_black
-          print pad("#{l["itemDesc"]}", 30).light_white
+          print pad("#{l[loot_name_index]}", 30).light_white
           print " @ ".light_black
           print pad("#{loot_value} OE", 8, false).light_black
           if disenchant_all && l["redeemableStatus"] != "ALREADY_OWNED"
@@ -786,6 +796,8 @@ def handle_champion_shards
         end
 
         loot_shards = loot_shards.select { |l| l["count"] > 0 }
+        loot_shards =
+          loot_shards.sort_by { |l| [l["disenchant_note"], l["itemDesc"]] }
 
         if count_loot_items(loot_shards) > 0
           puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the option you chose:".light_blue
