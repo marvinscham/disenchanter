@@ -750,7 +750,7 @@ def handle_champion_shards
         s["disenchant_note"] = ""
       end
       loot_shards_not_owned =
-        loot_shards.select { |s| !s["redeemableStatus"] == "ALREADY_OWNED" }
+        loot_shards.select { |s| s["redeemableStatus"] != "ALREADY_OWNED" }
 
       if loot_shards_not_owned.length > 0
         if ($ans_y).include? user_input_check(
@@ -760,6 +760,8 @@ def handle_champion_shards
                       )
           loot_shards = handle_champion_shards_owned(loot_shards)
         end
+      else
+        puts "Found no shards of champions you don't own yet.".light_blue
       end
 
       disenchant_modes = {
