@@ -18,8 +18,7 @@ def run
     updater_processes = `tasklist | find /I /C "disenchanter_up.exe"`
     if(updater_processes.to_i > 2)
       puts "Backwards compatibility: killing Disenchanter..."
-      `taskkill /IM "disenchanter.exe" /F /T >nul 2>&1`
-      exit
+      `taskkill /IM "disenchanter.exe" /F /T >nul 2>&1 && exit`
     end
     `tasklist|findstr "disenchanter.exe" >nul 2>&1 && echo Backwards compatibility: popping out into separate process... && start cmd.exe @cmd /k "disenchanter_up.exe" && exit`
     sleep(1)
