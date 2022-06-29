@@ -4,6 +4,7 @@
 <h1 align="center">Disenchanter</h1>
 <div align="center">
   
+![Language](https://img.shields.io/badge/language-Ruby-%23701516)
 ![License](https://img.shields.io/github/license/marvinscham/disenchanter)
 ![Release](https://img.shields.io/github/v/release/marvinscham/disenchanter)
 ![Downloads](https://img.shields.io/github/downloads/marvinscham/disenchanter/total)
