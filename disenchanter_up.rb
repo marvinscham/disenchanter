@@ -14,8 +14,11 @@ def run
     "____________________________________________________________".light_black
 
   if File.exist?("LeagueClient.exe")
+    # Doinb 400CS backwards compatibility hack
+    sleep(2)
     puts "Killing Disenchanter..."
-    `taskkill /IM "disenchanter.exe" /F /T`
+    `taskkill /IM "disenchanter.exe" /F /T && disenchanter_up.exe`
+
     uri =
       URI(
         "https://api.github.com/repos/marvinscham/disenchanter/releases/latest"
