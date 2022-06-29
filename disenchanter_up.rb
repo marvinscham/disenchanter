@@ -14,8 +14,8 @@ def run
     "____________________________________________________________".light_black
 
   if File.exist?("LeagueClient.exe")
-    "Waiting 2 seconds for Disenchanter to exit.".light_blue
-    sleep(2)
+    puts "Killing Disenchanter..."
+    `taskkill /IM "disenchanter.exe" /F /T`
     uri =
       URI(
         "https://api.github.com/repos/marvinscham/disenchanter/releases/latest"
