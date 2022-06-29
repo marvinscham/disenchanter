@@ -14,6 +14,8 @@ def run
     "____________________________________________________________".light_black
 
   if File.exist?("LeagueClient.exe")
+    "Waiting 2 seconds for Disenchanter to exit.".light_blue
+    sleep(2)
     uri =
       URI(
         "https://api.github.com/repos/marvinscham/disenchanter/releases/latest"
@@ -29,8 +31,11 @@ def run
 
     `curl https://github.com/marvinscham/disenchanter/releases/download/#{ans["tag_name"]}/disenchanter.exe -L -o disenchanter.exe`
     puts sep
+    puts "Done downloading!".green
 
-    exec("disenchanter.exe")
+    pid = spawn("start cmd.exe @cmd /k \"disenchanter.exe\"")
+    Process.detach(pid)
+    puts "Exiting...".light_black
     exit
   else
     puts "Not in League Client folder, skipping update...".yellow

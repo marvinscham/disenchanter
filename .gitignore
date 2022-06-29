@@ -1,5 +1,7 @@
 disenchanter.exe
 disenchanter_up.exe
+tmpin
+tmpout
 
 *.gem
 *.rbc

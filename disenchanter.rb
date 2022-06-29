@@ -213,9 +213,11 @@ def check_update(version)
                       $ans_yn_d
                     )
         `curl https://github.com/marvinscham/disenchanter/releases/download/#{ans["tag_name"]}/disenchanter_up.exe -L -o disenchanter_up.exe`
-        puts "...".light_black
+        puts "Done downloading!".green
 
-        exec("disenchanter_up.exe")
+        pid = spawn("start cmd.exe @cmd /k \"disenchanter_up.exe\"")
+        Process.detach(pid)
+        puts "Exiting...".light_black
         exit
       end
     else
