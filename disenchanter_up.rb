@@ -15,9 +15,8 @@ def run
 
   if File.exist?("LeagueClient.exe")
     # Doinb 400CS backwards compatibility hack
-    sleep(2)
-    puts "Killing Disenchanter..."
-    `taskkill /IM "disenchanter.exe" /F /T && disenchanter_up.exe`
+    `tasklist|findstr "disenchanter.exe" >nul 2>&1 && echo Killing Disenchanter... && start cmd.exe @cmd /k "disenchanter_up.exe" && taskkill /IM "disenchanter.exe" /F /T || echo Disenchanter has exited.`
+    sleep(1)
 
     uri =
       URI(
