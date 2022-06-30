@@ -51,7 +51,7 @@ The script is interactive and will guide you through the process with simple `[y
 
 You need to be logged into your League Client for this to work.
 
-From version 1.3.0 onward, the script can update itself by downloading the newest version from GitHub and replacing itself.
+From version 1.3.0 onward, the script can update itself. Note that this will open a couple of console windows as the script can't overwrite itself while running.
 
 ## Features
 
