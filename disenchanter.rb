@@ -774,6 +774,7 @@ def handle_champion_shards
           "Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)",
         "4" =>
           "Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)",
+        "5" => "Keep one shard of each champion regardless of mastery",
         "x" => "Cancel"
       }
 
@@ -787,8 +788,8 @@ def handle_champion_shards
         user_input_check(
           "Okay, which option would you like to go by?\n" + modes_string +
             "Option: ",
-          %w[1 2 3 4 x],
-          "[1|2|3|4|x]",
+          %w[1 2 3 4 5 x],
+          "[1|2|3|4|5|x]",
           ""
         )
       unless disenchant_shards_mode == "x"
@@ -801,6 +802,8 @@ def handle_champion_shards
           loot_shards = handle_champion_shards_mastery(loot_shards)
         when "4"
           loot_shards = handle_champion_shards_mastery(loot_shards, true)
+        when "5"
+          loot_shards = handle_champion_shards_collection(loot_shards)
         end
 
         loot_shards = loot_shards.select { |l| l["count"] > 0 }
@@ -967,6 +970,19 @@ def handle_champion_shards_mastery(loot_shards, keep_all = false)
     return loot_shards
   rescue => exception
     handle_exception(exception, "Champion Shards by Mastery")
+  end
+end
+
+def handle_champion_shards_collection(loot_shards)
+  begin
+    loot_shards.each do |l|
+      l["count"] -= 1
+      l["count_keep"] += 1
+    end
+
+    return loot_shards
+  rescue => exception
+    handle_exception(exception, "Champion Shards for Collection")
   end
 end
 

@@ -67,6 +67,8 @@ From version 1.3.0 onward, the script can update itself by downloading the newes
 
   - Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)
 
+  - Keep one shard of each champion regardless of mastery
+
   - Manual exceptions
 
 - Disenchant (duplicate) Emotes, Ward Skins, Skins and Eternals
