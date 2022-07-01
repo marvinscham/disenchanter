@@ -113,3 +113,7 @@ This information is generated per script run and saved as a tuple in a database 
 If you trust the code but not the pre-built executable, feel free to build it yourself.
 
 I used [Ocra](https://github.com/larsch/ocra) with the config provided in [`build.cmd`](https://github.com/marvinscham/disenchanter/blob/main/build.cmd).
+
+## ❤ Sponsors ❤
+
+- Ze Interrupter
