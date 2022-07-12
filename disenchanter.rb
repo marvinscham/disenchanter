@@ -1056,7 +1056,7 @@ def handle_mastery_tokens
           (l["lootName"] == "CHAMPION_TOKEN_7" && l["count"] == 3)
       end
 
-    if (loot_mastery_tokens.count) > 0
+    if loot_mastery_tokens.count > 0
       loot_mastery_tokens =
         loot_mastery_tokens.sort_by { |l| [l["lootName"], l["itemDesc"]] }
       puts "We'd upgrade the following champions:\n".light_blue
