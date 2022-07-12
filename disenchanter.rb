@@ -46,6 +46,7 @@ def run
       "7" => "Skin Shards",
       "8" => "Eternals",
       "9" => "Champion Shards",
+      "10" => "Upgrade Mastery Tokens",
       "s" => "Show Global Stats",
       "x" => "Exit"
     }
@@ -66,7 +67,7 @@ def run
         user_input_check(
           "\nWhat would you like to do? (Hint: do 1-4 first so you don't miss anything)\n\n".light_cyan +
             todo_string + "Option: ",
-          %w[1 2 3 4 5 6 7 8 9 s x],
+          %w[1 2 3 4 5 6 7 8 9 10 s x],
           "",
           ""
         )
@@ -96,6 +97,8 @@ def run
         handle_eternals
       when "9"
         handle_champion_shards
+      when "10"
+        handle_mastery_tokens
       when "s"
         puts "Opening Global Stats at https://github.com/marvinscham/disenchanter/wiki/Stats in your browser...".light_blue
         Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
@@ -268,11 +271,14 @@ def get_recipes_for_item(loot_id)
   request_get("lol-loot/v1/recipes/initial-item/#{loot_id}")
 end
 
-def post_recipe(recipe, loot_id, repeat)
+def post_recipe(recipe, loot_ids, repeat)
   $actions += repeat
+
+  loot_id_string = "[\"" + Array(loot_ids).join("\", \"") + "\"]"
+
   request_post(
     "lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}",
-    "[\"#{loot_id}\"]"
+    loot_id_string
   )
 end
 
@@ -1023,6 +1029,99 @@ def handle_champion_shards_exceptions(loot_shards)
     return loot_shards
   rescue => exception
     handle_exception(exception, "Champion Shard Exceptions")
+  end
+end
+
+def handle_mastery_tokens
+  begin
+    player_loot = get_player_loot
+    loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
+
+    recipes6 = get_recipes_for_item("CHAMPION_TOKEN_6-1")
+    recipes7 = get_recipes_for_item("CHAMPION_TOKEN_7-1")
+    recipe6_cost =
+      recipes6.select do |r|
+        r["recipeName"] == "CHAMPION_TOKEN_6_redeem_withessence"
+      end
+    recipe6_cost = recipe6_cost[0]["slots"][1]["quantity"]
+    recipe7_cost =
+      recipes7.select do |r|
+        r["recipeName"] == "CHAMPION_TOKEN_7_redeem_withessence"
+      end
+    recipe7_cost = recipe7_cost[0]["slots"][1]["quantity"]
+
+    loot_mastery_tokens =
+      player_loot.select do |l|
+        (l["lootName"] == "CHAMPION_TOKEN_6" && l["count"] == 2) ||
+          (l["lootName"] == "CHAMPION_TOKEN_7" && l["count"] == 3)
+      end
+
+    if (loot_mastery_tokens.count) > 0
+      loot_mastery_tokens =
+        loot_mastery_tokens.sort_by { |l| [l["lootName"], l["itemDesc"]] }
+      puts "We'd upgrade the following champions:\n".light_blue
+      needed_shards = 0
+      needed_essence = 0
+
+      loot_mastery_tokens.each do |t|
+        ref_shard =
+          loot_shards.select { |l| t["refId"] == l["storeItemId"].to_s }
+
+        print pad(t["itemDesc"], 15, false).light_white
+        print " to Mastery Level ".light_black
+        print "#{(t["lootName"])[-1]}".light_white
+        print " using ".light_black
+        if !ref_shard.empty? && ref_shard[0]["count"] > 0
+          print "a champion shard.".green
+          needed_shards += 1
+          t["upgrade_type"] = "shard"
+        else
+          recipe_cost = (t["lootName"])[-1] == "6" ? recipe6_cost : recipe7_cost
+          print "#{recipe_cost} Blue Essence.".yellow
+          needed_essence += recipe_cost
+          t["upgrade_type"] = "essence"
+        end
+        puts
+      end
+      puts
+
+      owned_essence =
+        player_loot.select { |l| l["lootId"] == "CURRENCY_champion" }
+      owned_essence = owned_essence[0]["count"]
+      if (owned_essence > needed_essence)
+        if $ans_y.include? user_input_check(
+                             "Upgrade #{loot_mastery_tokens.count} champions using #{needed_shards} Shards and #{needed_essence} Blue Essence?",
+                             $ans_yn,
+                             $ans_yn_d,
+                             "confirm"
+                           )
+          loot_mastery_tokens.each do |t|
+            $s_redeemed += 1
+            target_level = (t["lootName"])[-1]
+            case t["upgrade_type"]
+            when "shard"
+              post_recipe(
+                "CHAMPION_TOKEN_#{target_level}_redeem_withshard",
+                [t["lootId"], "CHAMPION_RENTAL_#{t["refId"]}"],
+                1
+              )
+            when "essence"
+              post_recipe(
+                "CHAMPION_TOKEN_#{target_level}_redeem_withessence",
+                [t["lootId"], "CURRENCY_champion"],
+                1
+              )
+            end
+          end
+        end
+      else
+        puts "You're missing #{needed_essence - owned_essence} Blue Essence needed to proceed. Skipping...".yellow
+      end
+    else
+      puts "Found no upgradable Mastery Tokens.".yellow
+    end
+  rescue => exception
+    handle_exception(exception, "token upgrades")
   end
 end
 
