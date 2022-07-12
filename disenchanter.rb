@@ -11,7 +11,7 @@ require "open-uri"
 def run
   unless File.exist?("build.cmd")
     set_globals
-    current_version = "v1.3.2"
+    current_version = "v1.4.0"
 
     sep =
       "____________________________________________________________".light_black
