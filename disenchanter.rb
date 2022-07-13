@@ -48,6 +48,7 @@ def run
       "9" => "Champion Shards",
       "10" => "Upgrade Mastery Tokens",
       "s" => "Show Global Stats",
+      "r" => "Open GitHub repository",
       "x" => "Exit"
     }
     things_done = []
@@ -67,7 +68,7 @@ def run
         user_input_check(
           "\nWhat would you like to do? (Hint: do 1-4 first so you don't miss anything)\n\n".light_cyan +
             todo_string + "Option: ",
-          %w[1 2 3 4 5 6 7 8 9 10 s x],
+          %w[1 2 3 4 5 6 7 8 9 10 s r x],
           "",
           ""
         )
@@ -100,8 +101,9 @@ def run
       when "10"
         handle_mastery_tokens
       when "s"
-        puts "Opening Global Stats at https://github.com/marvinscham/disenchanter/wiki/Stats in your browser...".light_blue
-        Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
+        handle_open_stats
+      when "r"
+        handle_open_github
       when "x"
         done = true
       end
@@ -113,28 +115,11 @@ def run
       puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
       puts sep
     end
-    if $actions > 0
-      if ($ans_y).include? user_input_check(
-                      "Would you like to contribute your anonymous results (number of shards disenchanted etc.) to the global stats?\n",
-                      $ans_yn,
-                      $ans_yn_d
-                    )
-        submit_stats(
-          $actions,
-          $s_disenchanted,
-          $s_opened,
-          $s_crafted,
-          $s_redeemed,
-          $s_blue_essence,
-          $s_orange_essence
-        )
-        puts "Thank you very much!".light_green
-      end
-    end
+    handle_stat_submission
     puts "See you next time :)".light_green
     ask "Press Enter to exit.".cyan
   else
-    puts "Recognize build environment, skipping execution...".light_yellow
+    puts "Assuming build environment, skipping execution...".light_yellow
   end
 end
 
@@ -195,7 +180,7 @@ def req_set_headers(req)
   req["Authorization"] = "Basic #{$token.chomp}"
 end
 
-def check_update(version)
+def check_update(version_local)
   begin
     uri =
       URI(
@@ -208,7 +193,14 @@ def check_update(version)
     res = http.request req
     ans = JSON.parse(res.body)
 
-    if (ans["tag_name"] != version)
+    version_local =
+      Gem::Version.new(version_local.delete_prefix("v").delete_suffix("-beta"))
+    version_remote =
+      Gem::Version.new(
+        ans["tag_name"].delete_prefix("v").delete_suffix("-beta")
+      )
+
+    if version_remote > version_local
       puts "New version #{ans["tag_name"]} available!".light_yellow
       if ($ans_y).include? user_input_check(
                       "Would you like to download the new version now?",
@@ -223,6 +215,9 @@ def check_update(version)
         puts "Exiting...".light_black
         exit
       end
+    elsif version_local > version_remote
+      puts "Welcome to the future!".light_magenta
+      puts "Latest remote version: v#{version_remote}".light_blue
     else
       puts "You're up to date!".green
     end
@@ -1122,6 +1117,64 @@ def handle_mastery_tokens
     end
   rescue => exception
     handle_exception(exception, "token upgrades")
+  end
+end
+
+def handle_open_github
+  puts "Opening GitHub repository at https://github.com/marvinscham/disenchanter/ in your browser...".light_blue
+  Launchy.open("https://github.com/marvinscham/disenchanter/")
+end
+
+def handle_open_stats
+  puts "Opening Global Stats at https://github.com/marvinscham/disenchanter/wiki/Stats in your browser...".light_blue
+  Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
+end
+
+def handle_stat_submission
+  if $actions > 0
+    strlen = 15
+    numlen = 7
+    stats_string = "Your stats:\n".light_blue
+    stats_string +=
+      pad("Actions", strlen) + pad($actions.to_s, numlen, false).light_white +
+        "\n"
+    stats_string +=
+      pad("Disenchanted", strlen) +
+        pad($s_disenchanted.to_s, numlen, false).light_white + "\n"
+    stats_string +=
+      pad("Opened", strlen) + pad($s_opened.to_s, numlen, false).light_white +
+        "\n"
+    stats_string +=
+      pad("Crafted", strlen) + pad($s_crafted.to_s, numlen, false).light_white +
+        "\n"
+    stats_string +=
+      pad("Redeemed", strlen) +
+        pad($s_redeemed.to_s, numlen, false).light_white + "\n"
+    stats_string +=
+      pad("Blue Essence", strlen) +
+        pad($s_blue_essence.to_s, numlen, false).light_white + "\n"
+    stats_string +=
+      pad("Orange Essence", strlen) +
+        pad($s_orange_essence.to_s, numlen, false).light_white + "\n"
+
+    if ($ans_y).include? user_input_check(
+                    "Would you like to contribute your (anonymous) stats to the global stats?\n".light_cyan +
+                      stats_string + "[y|n]: ",
+                    $ans_yn,
+                    $ans_yn_d,
+                    ""
+                  )
+      submit_stats(
+        $actions,
+        $s_disenchanted,
+        $s_opened,
+        $s_crafted,
+        $s_redeemed,
+        $s_blue_essence,
+        $s_orange_essence
+      )
+      puts "Thank you very much!".light_green
+    end
   end
 end
 
