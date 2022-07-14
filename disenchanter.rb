@@ -524,11 +524,14 @@ def handle_event_tokens
           recipe_targets = %w[CHEST_187]
         end
 
+        token_recipes = token_recipes.select { |r| !r["outputs"][0].nil? }
+
         token_recipes =
           token_recipes.select do |r|
             recipe_targets.include? r["outputs"][0]["lootName"]
           end
-        token_recipes.sort_by { |r| r["slots"][0]["quantity"] }.reverse!
+        token_recipes =
+          token_recipes.sort_by { |r| r["slots"][0]["quantity"] }.reverse!
 
         token_recipes.each do |r|
           puts "Recipe found: #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens".light_black
