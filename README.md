@@ -45,9 +45,21 @@ The script triggers the same server requests as you would in your League Client.
 
 ## Features
 
-- Disenchant champion shards – Options:
+- Materials
 
-  - All
+  - Craft Mythic Essence to Skins or Blue/Orange Essence
+
+  - Craft Event Tokens to Blue Essence or Emotes
+
+  - Combine Key Fragments
+
+  - Open keyless capsules
+
+  - Upgrade Mastery Tokens
+
+- Champion Shards
+
+  - Disenchant all
 
   - Keep one for champions you don't own yet
 
@@ -61,15 +73,15 @@ The script triggers the same server requests as you would in your League Client.
 
   - Manual exceptions
 
-- Disenchant (duplicate) Emotes, Ward Skins, Skins and Eternals
+- Disenchant various items
 
-- Combine Key Fragments
+  - Eternals
 
-- Open keyless chests and capsules
+  - Emotes
 
-- Craft Event Tokens to Blue Essence or Emotes
+  - Ward Skins
 
-- Craft Mythic Essence to Random Skin Shards, Blue Essence or Orange Essence
+  - Summoner Icons
 
 ## Problems, Bugs and Feature Suggestions
 
