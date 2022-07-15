@@ -33,6 +33,8 @@ The script is interactive and will guide you through the process with simple `[y
 
 Once you're finished, you can _optionally_ contribute your (anonymous) stats to the [Global Stats](https://github.com/marvinscham/disenchanter/wiki/Stats). ([Details](https://github.com/marvinscham/disenchanter/wiki/Stat-Collection))
 
+![Demo](https://raw.githubusercontent.com/marvinscham/disenchanter/main/disenchanter.png)
+
 ## Is this a virus?
 
 TL;DR: No, but you will probably get a trojan alert. ([Details](https://github.com/marvinscham/disenchanter/wiki/Is-this-a-virus%3F))
