@@ -790,25 +790,35 @@ def handle_generic(name, type, recipe)
     if count_loot_items(loot_generic) > 0
       puts "Found #{count_loot_items(loot_generic)} #{name}.".light_blue
 
-      user_option =
-        user_input_check(
-          "Keep #{name} you don't own yet?\n".light_cyan + "[y] ".light_white +
-            "Yes\n".light_cyan + "[n] ".light_white + "No\n".light_cyan +
-            "[x] ".light_white + "Exit to main menu\n".light_cyan + "Option: ",
-          %w[y n x],
-          "[y|n|x]",
-          ""
-        )
+      contains_unowned_items = false
+      loot_generic.each do |l|
+        if l["redeemableStatus"] != "ALREADY_OWNED"
+          contains_unowned_items = true
+        end
+      end
 
-      case user_option
-      when "x"
-        puts "Action cancelled".yellow
-        return
-      when "y"
-        disenchant_all = false
-        loot_generic =
-          loot_generic.select { |g| g["redeemableStatus"] == "ALREADY_OWNED" }
-        puts "Filtered to #{count_loot_items(loot_generic)} items.".light_blue
+      if contains_unowned_items
+        user_option =
+          user_input_check(
+            "Keep #{name} you don't own yet?\n".light_cyan +
+              "[y] ".light_white + "Yes\n".light_cyan + "[n] ".light_white +
+              "No\n".light_cyan + "[x] ".light_white +
+              "Exit to main menu\n".light_cyan + "Option: ",
+            %w[y n x],
+            "[y|n|x]",
+            ""
+          )
+
+        case user_option
+        when "x"
+          puts "Action cancelled".yellow
+          return
+        when "y"
+          disenchant_all = false
+          loot_generic =
+            loot_generic.select { |g| g["redeemableStatus"] == "ALREADY_OWNED" }
+          puts "Filtered to #{count_loot_items(loot_generic)} items.".light_blue
+        end
       end
 
       if count_loot_items(loot_generic) > 0
