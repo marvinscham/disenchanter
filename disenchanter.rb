@@ -1163,7 +1163,7 @@ def handle_champions_exceptions(loot_shards)
           "," +
             ask(
               "Okay, which champions? ".light_cyan +
-                "(case-sensitive, comma-$separated)".light_white +
+                "(case-sensitive, comma-separated)".light_white +
                 ": ".light_cyan
             )
 
