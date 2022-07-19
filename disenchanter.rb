@@ -44,6 +44,7 @@ def run
       "8" => "Icons",
       "s" => "Open Disenchanter Global Stats",
       "r" => "Open GitHub repository",
+      "d" => "[DEBUG] Write loot to file",
       "x" => "Exit"
     }
     things_done = []
@@ -95,6 +96,8 @@ def run
         open_stats
       when "r"
         open_github
+      when "d"
+        write_loot_json
       when "x"
         done = true
       end
@@ -1195,6 +1198,12 @@ end
 def open_stats
   puts "Opening Global Stats at https://github.com/marvinscham/disenchanter/wiki/Stats in your browser...".light_blue
   Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
+end
+
+def write_loot_json
+  player_loot = get_player_loot
+
+  File.open("disenchanter_loot.json", "w") { |f| f.write(player_loot.to_json) }
 end
 
 def handle_stat_submission
