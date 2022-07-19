@@ -137,6 +137,7 @@ def set_globals
     exit 1
   end
   $host = "https://127.0.0.1:#{$port}"
+  $debug = false
 
   $sep =
     "____________________________________________________________".light_black
@@ -239,7 +240,8 @@ def request_post(path, body)
     req = Net::HTTP::Post.new(uri, "Content-Type": "application/json")
     req.body = body
     req_set_headers(req)
-    http.request req
+    res = http.request req
+    JSON.parse(res.body)
   end
 end
 
@@ -268,10 +270,16 @@ def post_recipe(recipe, loot_ids, repeat)
 
   loot_id_string = "[\"" + Array(loot_ids).join("\", \"") + "\"]"
 
-  request_post(
-    "lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}",
-    loot_id_string
-  )
+  op =
+    request_post(
+      "lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}",
+      loot_id_string
+    )
+
+  if $debug
+    File.open("disenchanter_post.json", "w") { |f| f.write(op.to_json) }
+    puts("Okay, written to disenchanter_post.json.")
+  end
 end
 
 def user_input_check(question, answers, answerdisplay, color_preset = "default")
@@ -301,7 +309,9 @@ end
 
 def count_loot_items(loot_items)
   count = 0
-  loot_items.each { |loot| count += loot["count"] }
+  unless loot_items.nil? || loot_items.empty?
+    loot_items.each { |loot| count += loot["count"] }
+  end
   count
 end
 
@@ -927,6 +937,7 @@ end
 def handle_champions
   begin
     player_loot = get_player_loot
+    loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
 
     loot_perms = player_loot.select { |l| l["type"] == "CHAMPION" }
     if count_loot_items(loot_perms) > 0
@@ -939,8 +950,6 @@ def handle_champions
           player_loot.select do |l|
             l["type"] == "CHAMPION_RENTAL" || l["type"] == "CHAMPION"
           end
-      else
-        loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
       end
     end
 
@@ -1242,6 +1251,7 @@ def handle_debug
     "1" => "Write player_loot to file",
     "2" => "Write recipes of lootId to file",
     "3" => "Write loot info of lootId to file",
+    "m" => "Enable debug mode",
     "x" => "Back to main menu"
   }
   things_done = []
@@ -1301,6 +1311,8 @@ def handle_debug
       end
 
       puts("Okay, written to disenchanter_lootinfo.json.")
+    when "m"
+      $debug = true
     when "x"
       done = true
     end
