@@ -884,7 +884,12 @@ def handle_skins
 end
 
 def handle_eternals
-  handle_generic("Eternals", "STATSTONE_SHARD", "STATSTONE_SHARD_DISENCHANT")
+  handle_generic(
+    "Eternal Shards",
+    "STATSTONE_SHARD",
+    "STATSTONE_SHARD_DISENCHANT"
+  )
+  handle_generic("Eternals", "STATSTONE", "STATSTONE_DISENCHANT")
 end
 
 def handle_emotes
