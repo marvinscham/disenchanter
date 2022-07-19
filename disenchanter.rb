@@ -725,6 +725,14 @@ def handle_mastery_tokens
       end
     recipe7_cost = recipe7_cost[0]["slots"][1]["quantity"]
 
+    loot_overall_tokens =
+      player_loot.select do |l|
+        (l["lootName"] == "CHAMPION_TOKEN_6") ||
+          (l["lootName"] == "CHAMPION_TOKEN_7")
+      end
+
+    puts "Found #{count_loot_items(loot_overall_tokens)} Mastery Tokens.".light_blue
+
     loot_mastery_tokens =
       player_loot.select do |l|
         (l["lootName"] == "CHAMPION_TOKEN_6" && l["count"] == 2) ||
@@ -734,7 +742,7 @@ def handle_mastery_tokens
     if loot_mastery_tokens.count > 0
       loot_mastery_tokens =
         loot_mastery_tokens.sort_by { |l| [l["lootName"], l["itemDesc"]] }
-      puts "We'd upgrade the following champions:\n".light_blue
+      puts "We could upgrade the following champions:\n".light_blue
       needed_shards = 0
       needed_perms = 0
       needed_essence = 0
@@ -771,8 +779,17 @@ def handle_mastery_tokens
         player_loot.select { |l| l["lootId"] == "CURRENCY_champion" }
       owned_essence = owned_essence[0]["count"]
       if (owned_essence > needed_essence)
+        question_string =
+          "Upgrade #{loot_mastery_tokens.count} champions using "
+        question_string += "#{needed_shards} Shards, " if needed_shards > 0
+        question_string += "#{needed_perms} Permanents, " if needed_perms > 0
+        question_string +=
+          "#{needed_essence} Blue Essence, " if needed_essence > 0
+        question_string = question_string.delete_suffix(", ")
+        question_string += "?"
+
         if $ans_y.include? user_input_check(
-                             "Upgrade #{loot_mastery_tokens.count} champions using #{needed_shards} Shards and #{needed_essence} Blue Essence?",
+                             question_string,
                              $ans_yn,
                              $ans_yn_d,
                              "confirm"
@@ -806,7 +823,7 @@ def handle_mastery_tokens
         puts "You're missing #{needed_essence - owned_essence} Blue Essence needed to proceed. Skipping...".yellow
       end
     else
-      puts "Found no upgradable Mastery Tokens.".yellow
+      puts "Found no upgradable set of Mastery Tokens.".yellow
     end
   rescue => exception
     handle_exception(exception, "token upgrades")
