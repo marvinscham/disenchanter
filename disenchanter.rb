@@ -880,7 +880,7 @@ def handle_generic(name, type, recipe)
 end
 
 def handle_skins
-  handle_generic("Skin Shards", "SKIN_RENTAL", "SKIN_RENTAL_DISENCHANT")
+  handle_generic("Skin Shards", "SKIN_RENTAL", "SKIN_RENTAL_disenchant")
 end
 
 def handle_eternals
