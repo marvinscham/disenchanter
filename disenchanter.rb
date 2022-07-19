@@ -1224,6 +1224,7 @@ def handle_debug
   things_todo = {
     "1" => "Write player_loot to file",
     "2" => "Write recipes of lootId to file",
+    "3" => "Write loot info of lootId to file",
     "x" => "Back to main menu"
   }
   things_done = []
@@ -1261,6 +1262,8 @@ def handle_debug
       File.open("disenchanter_loot.json", "w") do |f|
         f.write(player_loot.to_json)
       end
+
+      puts("Okay, written to disenchanter_loot.json.")
     when "2"
       loot_id = ask("Which lootId would you like the recipes for?\n".light_cyan)
 
@@ -1269,6 +1272,18 @@ def handle_debug
       File.open("disenchanter_recipes.json", "w") do |f|
         f.write(recipes.to_json)
       end
+
+      puts("Okay, written to disenchanter_recipes.json.")
+    when "3"
+      loot_id = ask("Which lootId would you like the info for?\n".light_cyan)
+
+      loot_info = get_loot_info loot_id
+
+      File.open("disenchanter_lootinfo.json", "w") do |f|
+        f.write(loot_info.to_json)
+      end
+
+      puts("Okay, written to disenchanter_lootinfo.json.")
     when "x"
       done = true
     end
