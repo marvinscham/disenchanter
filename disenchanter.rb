@@ -44,7 +44,7 @@ def run
       "8" => "Icons",
       "s" => "Open Disenchanter Global Stats",
       "r" => "Open GitHub repository",
-      "d" => "[DEBUG] Write loot to file",
+      "d" => "Debug Tools",
       "x" => "Exit"
     }
     things_done = []
@@ -97,7 +97,7 @@ def run
       when "r"
         open_github
       when "d"
-        write_loot_json
+        handle_debug
       when "x"
         done = true
       end
@@ -1205,10 +1205,61 @@ def open_stats
   Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
 end
 
-def write_loot_json
-  player_loot = get_player_loot
+def handle_debug
+  done = false
+  things_todo = {
+    "1" => "Write player_loot to file",
+    "2" => "Write recipes of lootId to file",
+    "x" => "Back to main menu"
+  }
+  things_done = []
 
-  File.open("disenchanter_loot.json", "w") { |f| f.write(player_loot.to_json) }
+  until done
+    todo_string = ""
+    things_todo.each do |k, v|
+      todo_string += "[#{k}] ".light_white
+      unless things_done.include? k
+        todo_string += "#{v}\n".light_cyan
+      else
+        todo_string += "#{v} (done)\n".light_green
+      end
+    end
+
+    todo =
+      user_input_check(
+        "\nWhat would you like to do?\n\n".light_cyan + todo_string +
+          "Option: ",
+        things_todo.keys,
+        "",
+        ""
+      )
+    things_done << todo
+
+    puts $sep
+    puts
+
+    puts "Option chosen: #{things_todo[todo]}".light_white
+
+    case todo
+    when "1"
+      player_loot = get_player_loot
+
+      File.open("disenchanter_loot.json", "w") do |f|
+        f.write(player_loot.to_json)
+      end
+    when "2"
+      loot_id = ask("Which lootId would you like the recipes for?\n".light_cyan)
+
+      recipes = get_recipes_for_item loot_id
+
+      File.open("disenchanter_recipes.json", "w") do |f|
+        f.write(recipes.to_json)
+      end
+    when "x"
+      done = true
+    end
+    puts $sep
+  end
 end
 
 def handle_stat_submission
