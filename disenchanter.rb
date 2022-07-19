@@ -687,7 +687,12 @@ def handle_capsules
         threads =
           loot_capsules.map do |c|
             Thread.new do
-              post_recipe(c["lootId"] + "_OPEN", c["lootId"], c["count"])
+              res = post_recipe(c["lootId"] + "_OPEN", c["lootId"], c["count"])
+              res["added"].each do |r|
+                if r["playerLoot"]["lootId"] == "CURRENCY_champion"
+                  $s_blue_essence += r["deltaCount"]
+                end
+              end
             end
           end
         threads.each(&:join)
