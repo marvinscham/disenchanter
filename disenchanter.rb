@@ -101,6 +101,7 @@ def run
       when "x"
         done = true
       end
+      refresh_loot
       puts $sep
     end
 
@@ -243,6 +244,10 @@ def request_post(path, body)
     res = http.request req
     JSON.parse(res.body)
   end
+end
+
+def refresh_loot()
+  request_post("lol-loot/v1/refresh?force=true", "")
 end
 
 def get_current_summoner()
@@ -1335,6 +1340,7 @@ def handle_debug
       puts("Okay, written to disenchanter_lootinfo.json.")
     when "m"
       $debug = true
+      puts "Debug mode enabled."
     when "x"
       done = true
     end
