@@ -895,6 +895,7 @@ end
 
 def handle_skins
   handle_generic("Skin Shards", "SKIN_RENTAL", "SKIN_RENTAL_disenchant")
+  handle_generic("Skin Permanents", "SKIN", "SKIN_disenchant")
 end
 
 def handle_eternals
@@ -916,6 +917,7 @@ def handle_ward_skins
     "WARDSKIN_RENTAL",
     "WARDSKIN_RENTAL_disenchant"
   )
+  handle_generic("Ward Skin Permanents", "WARDSKIN", "WARDSKIN_disenchant")
 end
 
 def handle_icons
@@ -926,7 +928,22 @@ def handle_champions
   begin
     player_loot = get_player_loot
 
-    loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
+    loot_perms = player_loot.select { |l| l["type"] == "CHAMPION" }
+    if count_loot_items(loot_perms) > 0
+      if ($ans_y).include? user_input_check(
+                      "Should we include champion permanents in this process?",
+                      $ans_yn,
+                      $ans_yn_d
+                    )
+        loot_shards =
+          player_loot.select do |l|
+            l["type"] == "CHAMPION_RENTAL" || l["type"] == "CHAMPION"
+          end
+      else
+        loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
+      end
+    end
+
     if count_loot_items(loot_shards) > 0
       puts "Found #{count_loot_items(loot_shards)} champion shards.".light_blue
 
