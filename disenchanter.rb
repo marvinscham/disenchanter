@@ -695,6 +695,7 @@ def handle_mastery_tokens
   begin
     player_loot = get_player_loot
     loot_shards = player_loot.select { |l| l["type"] == "CHAMPION_RENTAL" }
+    loot_perms = player_loot.select { |l| l["type"] == "CHAMPION" }
 
     recipes6 = get_recipes_for_item("CHAMPION_TOKEN_6-1")
     recipes7 = get_recipes_for_item("CHAMPION_TOKEN_7-1")
@@ -720,10 +721,13 @@ def handle_mastery_tokens
         loot_mastery_tokens.sort_by { |l| [l["lootName"], l["itemDesc"]] }
       puts "We'd upgrade the following champions:\n".light_blue
       needed_shards = 0
+      needed_perms = 0
       needed_essence = 0
 
       loot_mastery_tokens.each do |t|
         ref_shard =
+          loot_shards.select { |l| t["refId"] == l["storeItemId"].to_s }
+        ref_perm =
           loot_shards.select { |l| t["refId"] == l["storeItemId"].to_s }
 
         print pad(t["itemDesc"], 15, false).light_white
@@ -734,6 +738,10 @@ def handle_mastery_tokens
           print "a champion shard.".green
           needed_shards += 1
           t["upgrade_type"] = "shard"
+        elsif !ref_perm.empty? && ref_shard[0]["count"] > 0
+          print "a champion permanent.".green
+          needed_perms += 1
+          t["upgrade_type"] = "permanent"
         else
           recipe_cost = (t["lootName"])[-1] == "6" ? recipe6_cost : recipe7_cost
           print "#{recipe_cost} Blue Essence.".yellow
@@ -762,6 +770,12 @@ def handle_mastery_tokens
               post_recipe(
                 "CHAMPION_TOKEN_#{target_level}_redeem_withshard",
                 [t["lootId"], "CHAMPION_RENTAL_#{t["refId"]}"],
+                1
+              )
+            when "permanent"
+              post_recipe(
+                "CHAMPION_TOKEN_#{target_level}_redeem_withpermanent",
+                [t["lootId"], "CHAMPION_#{t["refId"]}"],
                 1
               )
             when "essence"
