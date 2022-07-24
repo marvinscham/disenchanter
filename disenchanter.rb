@@ -285,6 +285,7 @@ def post_recipe(recipe, loot_ids, repeat)
     File.open("disenchanter_post.json", "w") { |f| f.write(op.to_json) }
     puts("Okay, written to disenchanter_post.json.")
   end
+  op
 end
 
 def user_input_check(question, answers, answerdisplay, color_preset = "default")
