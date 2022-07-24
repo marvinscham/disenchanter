@@ -327,7 +327,8 @@ def get_chest_name(loot_id)
   catalogue = {
     "CHEST_128" => "Champion Capsule",
     "CHEST_129" => "Glorious Champion Capsule",
-    "CHEST_210" => "Honor Level 4 Orb"
+    "CHEST_210" => "Honor Level 4 Orb",
+    "CHEST_211" => "Honor Level 5 Orb"
   }
 
   return catalogue[loot_id] if catalogue.key?(loot_id)
