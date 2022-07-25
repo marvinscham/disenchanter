@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ast (2.4.2)
     base64 (0.1.1)
     colorize (0.8.1)
     date (3.2.2)
@@ -14,13 +15,35 @@ GEM
       stringio
       time
       uri
+    parallel (1.22.1)
+    parser (3.1.2.0)
+      ast (~> 2.4.1)
     public_suffix (4.0.7)
+    rainbow (3.1.1)
+    regexp_parser (2.5.0)
+    rexml (3.2.5)
+    rubocop (1.32.0)
+      json (~> 2.3)
+      parallel (~> 1.10)
+      parser (>= 3.1.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.19.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.19.1)
+      parser (>= 3.1.1.0)
+    ruby-progressbar (1.11.0)
+    rufo (0.13.0)
     stringio (3.0.2)
     time (0.2.0)
       date
+    unicode-display_width (2.2.0)
     uri (0.11.0)
 
 PLATFORMS
+  x64-mingw-ucrt
   x64-unknown
   x86_64-linux
 
@@ -31,6 +54,8 @@ DEPENDENCIES
   launchy (~> 2.5)
   ocra (= 1.3.11)
   open-uri (~> 0.2.0)
+  rubocop (~> 1.32)
+  rufo (>= 0.13.0)
 
 RUBY VERSION
    ruby 3.1.2p20
