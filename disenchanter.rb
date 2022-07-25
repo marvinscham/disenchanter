@@ -11,7 +11,7 @@ require "open-uri"
 def run
   unless File.exist?("build.cmd")
     set_globals
-    current_version = "v1.5.0-beta"
+    current_version = "v1.5.0"
 
     puts "Hi! :)".light_green
     puts "Running Disenchanter #{current_version}".light_blue
