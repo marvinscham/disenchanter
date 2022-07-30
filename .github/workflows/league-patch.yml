@@ -25,6 +25,7 @@ jobs:
         run: rm meta/patch.html
         
       - name: Read patch info into variable
+        id: vars
         run: echo ::set-output name=version::$(cat meta/patch.txt)        
       - name: Test output
         run: echo ${{ steps.vars.outputs.version }}
