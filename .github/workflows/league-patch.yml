@@ -1,4 +1,4 @@
-name: Add PR for new League Patch
+name: Create PR for new League Patch
 
 on:
   schedule: [{cron: "0 4 * * *"}]
@@ -9,7 +9,7 @@ jobs:
     name: Create PR for new League Patch
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Check out current commit
         
       - name: Create `meta` folder
@@ -23,15 +23,22 @@ jobs:
         
       - name: Remove needless webpage file
         run: rm meta/patch.html
+        
+      - name: Read patch info into variable
+        run: echo ::set-output name=version::$(cat meta/patch.txt)        
+      - name: Test output
+        run: echo ${{ steps.vars.outputs.version }}
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.0.4
         with:
-          commit-message: Update League Patch
-          title: Update League Patch
+          commit-message: Bump League Patch to ${{ steps.vars.outputs.version }}
+          title: Bump League Patch to ${{ steps.vars.outputs.version }}
           body: |
             This is an automated PR.
             <sub>[workflow](https://github.com/marvinscham/disenchanter/blob/master/.github/workflows/league-patch.yml).</sub>
           branch: update-league-patch
           branch-suffix: "random"
-          labels: documentation, tests-needed
+          labels: documentation, tests needed
+          assignees: marvinscham
+          reviewers: marvinscham
