@@ -14,7 +14,7 @@ jobs:
         
       - id: patch
         name: Get patch info
-        uses: marvinscham/get-league-patch@v1
+        uses: marvinscham/get-league-patch@v1.0.0
         
       - name: Save patch info to file
         run: echo ${{ steps.patch.outputs.patch }} > .league-patch
