@@ -16,8 +16,9 @@ jobs:
         name: Get patch info
         uses: marvinscham/get-league-patch@v1.0.0
         
-      - name: Save patch info to file
-        run: echo ${{ steps.patch.outputs.patch }} > .league-patch
+      - name: Update patch in README shield
+        run: sed -i "s/league%20patch-.*-brightgreen/league%20patch-${{ steps.patch.outputs.patch }}-brightgreen/g" README.md
+        shell: bash
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.0.4
