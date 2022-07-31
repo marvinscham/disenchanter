@@ -12,34 +12,26 @@ jobs:
       - uses: actions/checkout@v3
         name: Check out current commit
         
-      - name: Create `meta` folder
-        run: mkdir -p meta
-          
-      - name: Get LoL Patch Notes web page
-        run: wget -O meta/patch.html https://www.leagueoflegends.com/en-us/news/tags/patch-notes/
-          
-      - name: Grab latest patch from web page
-        run: cat meta/patch.html | sed -n "s/\(Patch [0-9]*\.[0-9]* notes\).*$/\1/p" | sed -n "s/^.*\(Patch [0-9]*\.[0-9]*\).*$/\1/p" > meta/patch.txt
+      - id: patch
+        name: Get patch info
+        uses: marvinscham/get-league-patch@v1
         
-      - name: Remove needless webpage file
-        run: rm meta/patch.html
-        
-      - name: Read patch info into variable
-        id: vars
-        run: echo ::set-output name=version::$(cat meta/patch.txt)        
-      - name: Test output
-        run: echo ${{ steps.vars.outputs.version }}
+      - name: Save patch info to file
+        run: echo ${{ steps.patch.outputs.patch }} > .league-patch
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.0.4
         with:
-          commit-message: Bump League Patch to ${{ steps.vars.outputs.version }}
-          title: Bump League Patch to ${{ steps.vars.outputs.version }}
+          commit-message: Bump League Patch to ${{ steps.patch.outputs.patch }}
+          title: Bump League Patch to ${{ steps.patch.outputs.patch }}
           body: |
+            Review criteria:
+            
+            - [ ] Disenchanter can connect and issue actions
+            
             This is an automated PR.
             <sub>[workflow](https://github.com/marvinscham/disenchanter/blob/master/.github/workflows/league-patch.yml).</sub>
           branch: update-league-patch
-          branch-suffix: "random"
           labels: documentation, tests needed
           assignees: marvinscham
           reviewers: marvinscham
