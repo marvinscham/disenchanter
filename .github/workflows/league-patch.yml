@@ -14,7 +14,7 @@ jobs:
         
       - id: patch
         name: Get patch info
-        uses: marvinscham/get-league-patch@v1.1.0
+        uses: marvinscham/get-league-patch@v1.1.1
         
       - name: Update patch in README shield
         run: sed -i "s/league%20patch-.*-brightgreen/league%20patch-${{ steps.patch.outputs.patch }}-brightgreen/g" README.md
