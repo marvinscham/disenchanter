@@ -7,6 +7,16 @@ require "json"
 require "colorize"
 require "launchy"
 require "open-uri"
+require 'rbconfig'
+require 'Win32' if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
+
+if (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
+  module Win32::Registry::Constants
+    KEY_WOW64_64KEY = 0x0100
+    KEY_WOW64_32KEY = 0x0200
+  end
+end
+
 
 def run
   unless File.exist?("build.cmd")
@@ -158,7 +168,22 @@ def set_globals
 end
 
 def read_lockfile
-  contents = File.read("lockfile")
+  is_windows = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
+  if is_windows == 0
+    puts "Trying to automatically get the path of the League Client".green
+    begin
+      keeyname = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Riot Game league_of_legends.live"
+      reg = Win32::Registry::HKEY_CURRENT_USER.open(keyname,
+        Win32::Registry::KEY_READ | Win32::Registry::KEY_WOW64_32KEY)
+        lockfile = reg['InstallLocation'] + "/lockfile"
+    rescue => exception
+      handle_exception(exception, "automatic path detection")
+    end
+
+  else
+    lockfile = "lockfile"
+  end
+  contents = File.read(lockfile)
   _leagueclient, _unk_port, port, password = contents.split(":")
   token = Base64.encode64("riot:#{password.chomp}")
 
