@@ -172,7 +172,7 @@ def read_lockfile
   if is_windows == 0
     puts "Trying to automatically get the path of the League Client".green
     begin
-      keeyname = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Riot Game league_of_legends.live"
+      keyname = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Riot Game league_of_legends.live"
       reg = Win32::Registry::HKEY_CURRENT_USER.open(keyname,
         Win32::Registry::KEY_READ | Win32::Registry::KEY_WOW64_32KEY)
         lockfile = reg['InstallLocation'] + "/lockfile"
