@@ -195,9 +195,15 @@ def read_lockfile
     end
   end
   if lockfile == "lockfile"
-    puts "Failed to automatically get League path. Please place the script in your League Client folder.".light_red
+    begin
+      contents = File.read("C:\\Riot Games\\League of Legends\\" + lockfile)
+    rescue => exception
+      puts "Failed to automatically get League path. Please place the script in your League Client folder.".light_red
+      contents = File.read(lockfile) 
+    end
+  else
+    contents = File.read(lockfile) 
   end
-  contents = File.read(lockfile)
   _leagueclient, _unk_port, port, password = contents.split(":")
   token = Base64.encode64("riot:#{password.chomp}")
 
