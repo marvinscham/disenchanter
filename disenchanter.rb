@@ -8,7 +8,7 @@ require "colorize"
 require "launchy"
 require "open-uri"
 require 'rbconfig'
-require 'Win32' if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
+require 'win32/registry' if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
 
 if (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
   module Win32::Registry::Constants
