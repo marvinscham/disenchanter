@@ -8,7 +8,10 @@ require "colorize"
 require "launchy"
 require "open-uri"
 require 'rbconfig'
-require 'Win32' if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
+require 'win32/registry' if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
+require 'win32/shortcut' if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
+
+include Win32 if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
 
 if (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
   module Win32::Registry::Constants
@@ -170,6 +173,7 @@ end
 def read_lockfile
   is_windows = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
   if is_windows == 0
+    lockfile = "lockfile"
     puts "Trying to automatically get the path of the League Client".green
     begin
       keyname = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Riot Game league_of_legends.live"
@@ -177,11 +181,21 @@ def read_lockfile
         Win32::Registry::KEY_READ | Win32::Registry::KEY_WOW64_32KEY)
         lockfile = reg['InstallLocation'] + "/lockfile"
     rescue => exception
-      handle_exception(exception, "automatic path detection")
+      
     end
-
-  else
-    lockfile = "lockfile"
+    if lockfile == "lockfile"
+      begin
+        sc = Shortcut.open("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Riot Games\\League of Legends.lnk")
+        scpath = sc.path.split("\\")
+        path = scpath[0..-3].join("\\")
+        lockfile = path + "\\League of Legends\\lockfile"
+      rescue => exception
+        
+      end
+    end
+  end
+  if lockfile == "lockfile"
+    puts "Failed to automatically get League path. Please place the script in your League Client folder.".light_red
   end
   contents = File.read(lockfile)
   _leagueclient, _unk_port, port, password = contents.split(":")
