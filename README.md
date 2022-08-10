@@ -99,3 +99,7 @@ Something isn't working properly or you'd like to see a feature that isn't yet s
 - Ze Interrupter
 
 - tsunamihorseracing
+
+## Disclaimer
+
+Disenchanter was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
