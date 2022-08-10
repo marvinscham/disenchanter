@@ -7,7 +7,7 @@ on:
 jobs:
   push_to_branch_and_create_pr:
     name: Create PR for new League Patch
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         name: Check out current commit
