@@ -34,5 +34,3 @@ jobs:
             <sub>[workflow](https://github.com/marvinscham/disenchanter/blob/master/.github/workflows/league-patch.yml).</sub>
           branch: update-league-patch
           labels: documentation, tests needed
-          assignees: marvinscham
-          reviewers: marvinscham
