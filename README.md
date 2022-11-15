@@ -17,7 +17,7 @@
 ![Blue Essence Gained](https://img.shields.io/badge/dynamic/json?color=blue&label=blue%20essence%20gained&query=%24%5B%3A1%5D.blue_essence_millions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=M)
 ![Time Saved](https://img.shields.io/badge/dynamic/json?color=blue&label=time%20saved&query=%24%5B%3A1%5D.hours_saved&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=%20hours)
 
-Mass disenchant LoL loot like champion shards, event tokens, mythic essence and more
+Mass disenchant LoL loot like champion shards, eternals, mythic essence and more
 
 Based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-champ-shards).
 
@@ -47,11 +47,11 @@ The script triggers the same server requests as you would in your League Client.
 
 ## Features
 
+- _Note: no longer supports event tokens since Riot updated event passes_
+
 - Materials
 
   - Craft Mythic Essence to Skins or Blue/Orange Essence
-
-  - Craft Event Tokens to Blue Essence or Emotes
 
   - Combine Key Fragments
 
