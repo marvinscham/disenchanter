@@ -27,7 +27,7 @@ Based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-c
 
 Download the pre-built `disenchanter.exe` from the [Latest Release](https://github.com/marvinscham/disenchanter/releases).
 
-Put the `disenchanter.exe` file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends` and run it. Make sure your League Client is running and you're logged in before running Disenchanter.
+Put the `disenchanter.exe` file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends` and run it. Make sure your League Client is running without admin privileges and you're logged in before running Disenchanter.
 
 The script is interactive and will guide you through the process with simple `[y|n]` questions and mode options. Before you disenchant or craft anything, you will be asked to confirm the action in a magenta colored message with a big `CONFIRM:` banner so don't be scared to explore the different options!
 
