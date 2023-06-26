@@ -14,5 +14,5 @@ group :development do
   # Ruby formatter, config in .rufo
   gem 'rufo', '>= 0.13.0', require: false
   # Ruby linter, config in .rubocop
-  gem 'rubocop', '~> 1.50', require: false
+  gem 'rubocop', '~> 1.53', require: false
 end
