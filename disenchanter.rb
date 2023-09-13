@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
+# encoding: UTF-8
 # frozen_string_literal: true
+
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
 
 require "net/https"
 require "base64"
@@ -9,43 +13,45 @@ require "launchy"
 require "open-uri"
 
 def run
-  unless File.exist?("build.cmd")
+  unless !File.exist?("build.cmd")
+    puts "Assuming build environment, skipping execution...".light_yellow
+  else
     set_globals
     current_version = "v1.5.0"
 
-    puts "Hi! :)".light_green
-    puts "Running Disenchanter #{current_version}".light_blue
-    puts "You can exit this script at any point by pressing ".light_blue +
-           "[CTRL + C]".light_white + ".".light_blue
+    puts "嗨! :)".light_green
+    puts "執行分解者版本 #{current_version}".light_blue
+    puts "你可以在任何時刻按".light_blue +
+           "[CTRL + C]".light_white + "來離開本程式.".light_blue
     check_update(current_version)
     puts $sep
 
     summoner = get_current_summoner
     if summoner["displayName"].nil? || summoner["displayName"].empty?
-      puts "Could not grab summoner info. Try restarting your League Client.".light_red
-      ask "Press Enter to exit.".cyan
+      puts "無法獲取召喚師資訊. 請重新啟動英雄聯盟客戶端.".light_red
+      ask "按下 Enter鍵 離開.".cyan
       exit 1
     end
-    puts "\nYou're logged in as #{summoner["displayName"]}.".light_blue
+    puts "\n你當前的登入身分為 #{summoner["displayName"]}.".light_blue
     puts $sep
-    puts "\nFeel free to try the options, no actions will be taken until you confirm a banner like this:".light_blue
-    puts "CONFIRM: Perform this action? [y|n]".light_magenta
+    puts "\n請放心嘗試所有選項, 沒有任何動作會在以下這個警告出現前被執行:".light_blue
+    puts "最終確認: 執行這個動作嗎? [y|n]".light_magenta
     puts $sep
 
     done = false
     things_todo = {
-      "1" => "Materials",
-      "2" => "Champions",
-      "3" => "Skins",
-      #"4" => "Tacticians",
-      "5" => "Eternals",
-      "6" => "Emotes",
-      "7" => "Ward Skins",
-      "8" => "Icons",
-      "s" => "Open Disenchanter Global Stats",
-      "r" => "Open GitHub repository",
+      "1" => "海克斯材料",
+      "2" => "英雄碎片",
+      "3" => "造型碎片",
+      #"4" => "聯盟精靈",
+      "5" => "永恆精雕",
+      "6" => "表情",
+      "7" => "偵查守衛造型",
+      "8" => "頭像",
+      "s" => "前往網頁：分解者全球統計數據",
+      "r" => "前往網頁：GitHub專案頁面",
       "d" => "Debug Tools",
-      "x" => "Exit"
+      "x" => "離開"
     }
     things_done = []
 
@@ -56,14 +62,14 @@ def run
         unless things_done.include? k
           todo_string += "#{v}\n".light_cyan
         else
-          todo_string += "#{v} (done)\n".light_green
+          todo_string += "#{v} (完成)\n".light_green
         end
       end
 
       todo =
         user_input_check(
-          "\nWhat would you like to do? (Hint: do Materials first so you don't miss anything!)\n\n".light_cyan +
-            todo_string + "Option: ",
+          "\n你現在希望做些甚麼? (提示: 先從海克斯材料開始, 可以確保你接下來不會放過任何東西! 例如海克斯寶箱開出的造型碎片!)\n\n".light_cyan +
+            todo_string + "選項: ",
           things_todo.keys,
           "",
           ""
@@ -73,7 +79,7 @@ def run
       puts $sep
       puts
 
-      puts "Option chosen: #{things_todo[todo]}".light_white
+      puts "選項: #{things_todo[todo]}".light_white
 
       case todo
       when "1"
@@ -105,16 +111,14 @@ def run
       puts $sep
     end
 
-    puts "That's it!".light_green
+    puts "大功告成!".light_green
     if $actions > 0
-      puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
+      puts "我們節省了大約 #{$actions * 3} 秒鐘等待分解動畫放完的時間.".light_green
       puts $sep
     end
     handle_stat_submission
-    puts "See you next time :)".light_green
-    ask "Press Enter to exit.".cyan
-  else
-    puts "Assuming build environment, skipping execution...".light_yellow
+    puts "下次再見 :)".light_green
+    ask "按下 Enter鍵 離開.".cyan
   end
 end
 
@@ -124,17 +128,28 @@ def ask(q)
   q.chomp
 end
 
+def askutf8(q)
+  print(q)
+  q = STDIN.gets.encode("UTF-8").chomp
+end
+
+# def pad(str, len, right = true)
+#   "%#{right ? "-" : ""}#{len}s" % str
+# end
+
 def pad(str, len, right = true)
-  "%#{right ? "-" : ""}#{len}s" % str
+  fullWidthStrLen = str.scan(/[\p{Han}]/).size
+  fullWidthStrLen += str.scan(/[\p{Symbol}]/).size
+  "%#{right ? "-" : ""}#{len-fullWidthStrLen}s" % str
 end
 
 def set_globals
   begin
     $port, $token = read_lockfile
   rescue StandardError
-    puts "Could not grab session!".light_red
-    puts "Make sure the script is in your League Client folder and that your Client is running.".light_red
-    ask "Press Enter to exit.".cyan
+    puts "無法獲取會話!Could not grab session!".light_red
+    puts "請確保本腳本放在你的League of Legends資料夾中, 並在打開本腳本前, 預先啟動英雄聯盟客戶端並保持開啟".light_red
+    ask "按下 Enter鍵 離開.".cyan
     exit 1
   end
   $host = "https://127.0.0.1:#{$port}"
@@ -200,25 +215,25 @@ def check_update(version_local)
       )
 
     if version_remote > version_local
-      puts "New version #{ans["tag_name"]} available!".light_yellow
+      puts "新版本 #{ans["tag_name"]} 可下載!".light_yellow
       if ($ans_y).include? user_input_check(
-                      "Would you like to download the new version now?",
+                      "你希望現在下載新版本嗎?",
                       $ans_yn,
                       $ans_yn_d
                     )
         `curl https://github.com/marvinscham/disenchanter/releases/download/#{ans["tag_name"]}/disenchanter_up.exe -L -o disenchanter_up.exe`
-        puts "Done downloading!".green
+        puts "下載完成!".green
 
         pid = spawn("start cmd.exe @cmd /k \"disenchanter_up.exe\"")
         Process.detach(pid)
-        puts "Exiting...".light_black
+        puts "退出中...".light_black
         exit
       end
     elsif version_local > version_remote
-      puts "Welcome to the future!".light_magenta
-      puts "Latest remote version: v#{version_remote}".light_blue
+      puts "更新成功, 歡迎來到未來!".light_magenta
+      puts "最新的線上版本: v#{version_remote}".light_blue
     else
-      puts "You're up to date!".green
+      puts "目前使用的是最新版本, 沒問題!".green
     end
   rescue => exception
     handle_exception(exception, "self update")
@@ -294,7 +309,7 @@ def user_input_check(question, answers, answerdisplay, color_preset = "default")
   case color_preset
   when "confirm"
     question =
-      "CONFIRM: #{question} ".light_magenta + "#{answerdisplay}".light_white +
+      "最終確認: #{question} ".light_magenta + "#{answerdisplay}".light_white +
         ": ".light_magenta
   when "default"
     question =
@@ -305,7 +320,7 @@ def user_input_check(question, answers, answerdisplay, color_preset = "default")
   until (answers).include? input
     input = ask question
     unless (answers).include? input
-      puts "Invalid answer, options: ".light_red +
+      puts "錯誤答案, 選項: ".light_red +
              "#{answerdisplay}".light_white
     end
   end
@@ -326,10 +341,10 @@ def get_chest_name(loot_id)
   return chest_info["localizedName"] if !chest_info["localizedName"].empty?
 
   catalogue = {
-    "CHEST_128" => "Champion Capsule",
-    "CHEST_129" => "Glorious Champion Capsule",
-    "CHEST_210" => "Honor Level 4 Orb",
-    "CHEST_211" => "Honor Level 5 Orb"
+    "CHEST_128" => "英雄典藏罐",
+    "CHEST_129" => "榮耀英雄典藏罐",
+    "CHEST_210" => "榮譽等級 4 晶球",
+    "CHEST_211" => "榮譽等級 5 晶球"
   }
 
   return catalogue[loot_id] if catalogue.key?(loot_id)
@@ -338,22 +353,26 @@ def get_chest_name(loot_id)
 end
 
 def handle_exception(exception, name)
+  puts "在處理 #{name} 時發生了一個錯誤.".light_red
+  puts "請截圖並在 https://github.com/marvinscham/disenchanter/issues/new 發起一個新的問題討論串".light_red
+  puts "如果你沒有或不希望申請一個 GitHub 帳號, 請將本截圖及你遇到的問題用英文寄信至 dev@marvinscham.de".light_red
+  puts
   puts "An error occurred while handling #{name}.".light_red
   puts "Please take a screenshot and create an issue at https://github.com/marvinscham/disenchanter/issues/new".light_red
   puts "If you don't have a GitHub account, send it to dev@marvinscham.de".light_red
   puts exception
-  puts "Skipping this step...".yellow
+  puts "跳過這一步驟...".yellow
 end
 
 def handle_materials
   done = false
   things_todo = {
-    "1" => "Mythic Essence",
-    "2" => "Event Tokens",
-    "3" => "Key Fragments",
-    "4" => "Capsules",
-    "5" => "Mastery Tokens",
-    "x" => "Back to main menu"
+    "1" => "神話結晶粉末",
+    "2" => "活動代幣",
+    "3" => "鑰匙碎片",
+    "4" => "典藏罐/禮包/晶球",
+    "5" => "專精代幣",
+    "x" => "回到主選單"
   }
   things_done = []
 
@@ -364,14 +383,14 @@ def handle_materials
       unless things_done.include? k
         todo_string += "#{v}\n".light_cyan
       else
-        todo_string += "#{v} (done)\n".light_green
+        todo_string += "#{v} (完成)\n".light_green
       end
     end
 
     todo =
       user_input_check(
-        "\nWhat would you like to do?\n\n".light_cyan + todo_string +
-          "Option: ",
+        "\n你現在希望做些甚麼?\n\n".light_cyan + todo_string +
+          "選擇的操作: ",
         things_todo.keys,
         "",
         ""
@@ -381,7 +400,7 @@ def handle_materials
     puts $sep
     puts
 
-    puts "Option chosen: #{things_todo[todo]}".light_white
+    puts "選擇的操作: #{things_todo[todo]}".light_white
 
     case todo
     when "1"
@@ -409,19 +428,19 @@ def handle_mythic_essence
     loot_essence = player_loot.select { |l| l["lootId"] == mythic_loot_id }
     loot_essence = loot_essence[0]
     if !loot_essence.nil? && loot_essence["count"] > 0
-      puts "Found #{loot_essence["count"]} Mythic Essence.".light_blue
+      puts "找到 #{loot_essence["count"]} 神話結晶粉末.".light_blue
       craft_mythic_type_names = [
-        "Blue Essence",
-        "Orange Essence",
-        "Random Skin Shards"
+        "藍色結晶粉末",
+        "橘色結晶粉末",
+        "隨機造型碎片"
       ]
 
       craft_mythic_type =
         user_input_check(
-          "Okay, what would you like to craft?\n" +
+          "好的, 你想要製作甚麼\n" +
             "[1] #{craft_mythic_type_names[0]}\n" +
             "[2] #{craft_mythic_type_names[1]}\n" +
-            "[3] #{craft_mythic_type_names[2]}\n" + "[x] Cancel\n",
+            "[3] #{craft_mythic_type_names[2]}\n" + "[x] 取消\n",
           %w[1 2 3 x],
           "[1|2|3|x]"
         )
@@ -443,11 +462,11 @@ def handle_mythic_essence
         unless recipes.length == 0
           recipe = recipes[0]
 
-          puts "Recipe found: #{recipe["contextMenuText"]} for #{recipe["slots"][0]["quantity"]} Mythic Essence".light_blue
+          puts "找到製作項目: #{recipe["contextMenuText"]} 花費 #{recipe["slots"][0]["quantity"]} 神話結晶粉末".light_blue
 
           craft_mythic_amount =
             user_input_check(
-              "Alright, how much Mythic Essence should we use to craft #{craft_mythic_type_names[craft_mythic_type.to_i - 1]}?",
+              "好的, 要使用多少神話結晶粉末來製作 #{craft_mythic_type_names[craft_mythic_type.to_i - 1]}?",
               (1..loot_essence["count"].to_i)
                 .to_a
                 .append("all")
@@ -464,9 +483,9 @@ def handle_mythic_essence
             (craft_mythic_amount / recipe["slots"][0]["quantity"]).floor
           unless could_craft < 1
             if ($ans_y).include? user_input_check(
-                            "Craft #{could_craft * recipe["outputs"][0]["quantity"]} " +
-                              "#{craft_mythic_type_names[craft_mythic_type.to_i - 1]} from " +
-                              "#{(craft_mythic_amount / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]} Mythic Essence?",
+                            "製作 #{could_craft * recipe["outputs"][0]["quantity"]} " +
+                              "#{craft_mythic_type_names[craft_mythic_type.to_i - 1]} 花費 " +
+                              "#{(craft_mythic_amount / recipe["slots"][0]["quantity"]).floor * recipe["slots"][0]["quantity"]} 神話結晶粉末?",
                             $ans_yn,
                             $ans_yn_d,
                             "confirm"
@@ -489,16 +508,16 @@ def handle_mythic_essence
               puts "Done!".green
             end
           else
-            puts "Not enough Mythic Essence for that recipe.".yellow
+            puts "神話結晶粉末數量不足以製作.".yellow
           end
         else
-          puts "Recipes for #{craft_mythic_type_names[craft_mythic_type.to_i - 1]} seem to be unavailable.".yellow
+          puts "似乎不可能進行 #{craft_mythic_type_names[craft_mythic_type.to_i - 1]} 的製作.".yellow
         end
       else
-        puts "Mythic crafting canceled.".yellow
+        puts "已取消神話製作.".yellow
       end
     else
-      puts "Found no Mythic Essence to use.".yellow
+      puts "沒有找到可使用的神話結晶粉末.".yellow
     end
   rescue => exception
     handle_exception(exception, "Mythic Essence")
@@ -518,18 +537,18 @@ def handle_event_tokens
     loot_event_token = loot_event_token[0]
 
     if !loot_event_token.nil? && loot_event_token["count"] > 0
-      puts "Found Event Tokens: #{loot_event_token["count"]}x #{loot_event_token["localizedName"]}".light_blue
+      puts "找到活動代幣: #{loot_event_token["count"]}x #{loot_event_token["localizedName"]}".light_blue
       token_recipes = get_recipes_for_item(loot_event_token["lootId"])
 
       craft_tokens_type_names = [
-        "Champion Shards and Blue Essence",
-        "Random Emotes"
+        "英雄碎片和藍色結晶粉末",
+        "隨機表情"
       ]
       craft_tokens_type =
         user_input_check(
-          "Okay, what would you like to craft?\n" +
+          "好的, 你想要製作甚麼\n" +
             "[1] #{craft_tokens_type_names[0]}\n" +
-            "[2] #{craft_tokens_type_names[1]}\n" + "[x] Cancel\n",
+            "[2] #{craft_tokens_type_names[1]}\n" + "[x] 取消\n",
           %w[1 2 x],
           "[1|2|x]"
         )
@@ -559,7 +578,7 @@ def handle_event_tokens
 
         craft_tokens_amount =
           user_input_check(
-            "Alright, how many Event Tokens should we use to craft #{craft_tokens_type_names[craft_tokens_type.to_i - 1]}?",
+            "好的, 要使用多少活動代幣來製作 #{craft_tokens_type_names[craft_tokens_type.to_i - 1]}?",
             (1..loot_event_token["count"].to_i)
               .to_a
               .append("all")
@@ -583,7 +602,7 @@ def handle_event_tokens
             (craft_tokens_amount / r["slots"][0]["quantity"]).floor *
               r["slots"][0]["quantity"]
           if r["could_craft"] > 0
-            puts "We could craft #{r["could_craft"]}x #{r["contextMenuText"]} for #{r["slots"][0]["quantity"]} Tokens each.".light_green
+            puts "我們可以製作 #{r["could_craft"]}x #{r["contextMenuText"]} 花費 #{r["slots"][0]["quantity"]} 代幣每個.".light_green
           end
         end
 
@@ -591,7 +610,7 @@ def handle_event_tokens
 
         if total_could_craft > 0
           if ($ans_y).include? user_input_check(
-                          "Commit to forging?",
+                          "確定製作?",
                           $ans_yn,
                           $ans_yn_d,
                           "confirm"
@@ -618,13 +637,13 @@ def handle_event_tokens
             puts "Done!".green
           end
         else
-          puts "Can't afford any recipe, skipping.".yellow
+          puts "數量不足以任何的製作, 跳過這一步驟.".yellow
         end
       else
-        puts "Token crafting canceled.".yellow
+        puts "已取消代幣製作.".yellow
       end
     else
-      puts "Found no Event Tokens.".yellow
+      puts "沒有找到活動代幣.".yellow
     end
   rescue => exception
     handle_exception(exception, "Event Tokens")
@@ -638,9 +657,9 @@ def handle_key_fragments
     loot_keys =
       player_loot.select { |l| l["lootId"] == "MATERIAL_key_fragment" }
     if count_loot_items(loot_keys) >= 3
-      puts "Found #{count_loot_items(loot_keys)} key fragments.".light_blue
+      puts "找到 #{count_loot_items(loot_keys)} key fragments.".light_blue
       if ($ans_y).include? user_input_check(
-                      "Craft #{(count_loot_items(loot_keys) / 3).floor} keys from #{count_loot_items(loot_keys)} key fragments?",
+                      "製作 #{(count_loot_items(loot_keys) / 3).floor} 個鑰匙, 花費 #{count_loot_items(loot_keys)} 個鑰匙碎片?",
                       $ans_yn,
                       $ans_yn_d,
                       "confirm"
@@ -654,7 +673,7 @@ def handle_key_fragments
         puts "Done!".green
       end
     else
-      puts "Found less than 3 key fragments.".yellow
+      puts "持有的鑰匙碎片少於三個.".yellow
     end
   rescue => exception
     handle_exception(exception, "Key Fragments")
@@ -678,14 +697,14 @@ def handle_capsules
     loot_capsules = loot_capsules.select { |c| c["needs_key"] == false }
 
     if count_loot_items(loot_capsules) > 0
-      puts "Found #{count_loot_items(loot_capsules)} capsules:".light_blue
+      puts "找到 #{count_loot_items(loot_capsules)} 個典藏罐/禮包/晶球:".light_blue
       loot_capsules.each do |c|
         puts "#{c["count"]}x ".light_black +
                "#{get_chest_name(c["lootId"])}".light_white
       end
 
       if ($ans_y).include? user_input_check(
-                      "Open #{count_loot_items(loot_capsules)} (keyless) capsules?",
+                      "開啟 #{count_loot_items(loot_capsules)} (不需鑰匙的) 典藏罐/禮包/晶球?",
                       $ans_yn,
                       $ans_yn_d,
                       "confirm"
@@ -706,7 +725,7 @@ def handle_capsules
         puts "Done!".green
       end
     else
-      puts "Found no keyless capsules to open.".yellow
+      puts "沒有找到不需鑰匙即可開啟的典藏罐/禮包/晶球.".yellow
     end
   rescue => exception
     handle_exception(exception, "Capsules")
@@ -738,7 +757,7 @@ def handle_mastery_tokens
           (l["lootName"] == "CHAMPION_TOKEN_7")
       end
 
-    puts "Found #{count_loot_items(loot_overall_tokens)} Mastery Tokens.".light_blue
+    puts "找到 #{count_loot_items(loot_overall_tokens)} 個專精代幣.".light_blue
 
     loot_mastery_tokens =
       player_loot.select do |l|
@@ -749,7 +768,7 @@ def handle_mastery_tokens
     if loot_mastery_tokens.count > 0
       loot_mastery_tokens =
         loot_mastery_tokens.sort_by { |l| [l["lootName"], l["itemDesc"]] }
-      puts "We could upgrade the following champions:\n".light_blue
+      puts "我們可以升級下列的英雄:\n".light_blue
       needed_shards = 0
       needed_perms = 0
       needed_essence = 0
@@ -761,20 +780,20 @@ def handle_mastery_tokens
           loot_shards.select { |l| t["refId"] == l["storeItemId"].to_s }
 
         print pad(t["itemDesc"], 15, false).light_white
-        print " to Mastery Level ".light_black
+        print " 至專精等級 ".light_black
         print "#{(t["lootName"])[-1]}".light_white
-        print " using ".light_black
+        print " 花費 ".light_black
         if !ref_shard.empty? && ref_shard[0]["count"] > 0
-          print "a champion shard.".green
+          print "一個英雄碎片.".green
           needed_shards += 1
           t["upgrade_type"] = "shard"
         elsif !ref_perm.empty? && ref_shard[0]["count"] > 0
-          print "a champion permanent.".green
+          print "一個永久英雄.".green
           needed_perms += 1
           t["upgrade_type"] = "permanent"
         else
           recipe_cost = (t["lootName"])[-1] == "6" ? recipe6_cost : recipe7_cost
-          print "#{recipe_cost} Blue Essence.".yellow
+          print "#{recipe_cost} 藍色結晶粉末.".yellow
           needed_essence += recipe_cost
           t["upgrade_type"] = "essence"
         end
@@ -827,10 +846,10 @@ def handle_mastery_tokens
           end
         end
       else
-        puts "You're missing #{needed_essence - owned_essence} Blue Essence needed to proceed. Skipping...".yellow
+        puts "你缺少了 #{needed_essence - owned_essence} 藍色結晶粉末以進行. Skipping...".yellow
       end
     else
-      puts "Found no upgradable set of Mastery Tokens.".yellow
+      puts "沒有找到可解鎖專精等級的專精代幣.".yellow
     end
   rescue => exception
     handle_exception(exception, "token upgrades")
@@ -844,7 +863,7 @@ def handle_generic(name, type, recipe)
 
     loot_generic = player_loot.select { |l| l["type"] == type }
     if count_loot_items(loot_generic) > 0
-      puts "Found #{count_loot_items(loot_generic)} #{name}.".light_blue
+      puts "找到 #{count_loot_items(loot_generic)} #{name}.".light_blue
 
       contains_unowned_items = false
       loot_generic.each do |l|
@@ -856,10 +875,10 @@ def handle_generic(name, type, recipe)
       if contains_unowned_items
         user_option =
           user_input_check(
-            "Keep #{name} you don't own yet?\n".light_cyan +
-              "[y] ".light_white + "Yes\n".light_cyan + "[n] ".light_white +
-              "No\n".light_cyan + "[x] ".light_white +
-              "Exit to main menu\n".light_cyan + "Option: ",
+            "保留你未擁有的 #{name} 嗎?\n".light_cyan +
+              "[y] ".light_white + "是\n".light_cyan + "[n] ".light_white +
+              "否\n".light_cyan + "[x] ".light_white +
+              "回到主選單\n".light_cyan + "選項: ",
             %w[y n x],
             "[y|n|x]",
             ""
@@ -867,13 +886,13 @@ def handle_generic(name, type, recipe)
 
         case user_option
         when "x"
-          puts "Action cancelled".yellow
+          puts "操作取消".yellow
           return
         when "y"
           disenchant_all = false
           loot_generic =
             loot_generic.select { |g| g["redeemableStatus"] == "ALREADY_OWNED" }
-          puts "Filtered to #{count_loot_items(loot_generic)} items.".light_blue
+          puts "篩選至 #{count_loot_items(loot_generic)} 個物件.".light_blue
         end
       end
 
@@ -893,13 +912,13 @@ def handle_generic(name, type, recipe)
             [l["redeemableStatus"], l[loot_name_index]]
           end
 
-        puts "We'd disenchant #{count_loot_items(loot_generic)} #{name} using the option you chose:".light_blue
+        puts "我們將分解 #{count_loot_items(loot_generic)} 個 #{name} 基於你選擇的選項:".light_blue
         loot_generic.each do |l|
           loot_value = l["disenchantValue"] * l["count"]
           print pad("#{l["count"]}x ", 5, false).light_black
           print pad("#{l[loot_name_index]}", 30).light_white
           print " @ ".light_black
-          print pad("#{loot_value} OE", 8, false).light_black
+          print pad("#{loot_value} 橘粉", 8, false).light_black
           if disenchant_all && l["redeemableStatus"] != "ALREADY_OWNED"
             print " (not owned)".yellow
           end
@@ -907,7 +926,7 @@ def handle_generic(name, type, recipe)
         end
 
         if ($ans_y).include? user_input_check(
-                        "Disenchant #{count_loot_items(loot_generic)} #{name} for #{total_oe_value} Orange Essence?",
+                        "分解 #{count_loot_items(loot_generic)} 個 #{name} 換取 #{total_oe_value} 橘色結晶粉末?",
                         $ans_yn,
                         $ans_yn_d,
                         "confirm"
@@ -922,10 +941,10 @@ def handle_generic(name, type, recipe)
           puts "Done!".green
         end
       else
-        puts "Found no owned #{name} to disenchant.".yellow
+        puts "沒有找到持有可分解的 #{name} .".yellow
       end
     else
-      puts "Found no #{name} to disenchant.".yellow
+      puts "沒有找到可分解的 #{name} .".yellow
     end
   rescue => exception
     handle_exception(exception, name)
@@ -933,34 +952,34 @@ def handle_generic(name, type, recipe)
 end
 
 def handle_skins
-  handle_generic("Skin Shards", "SKIN_RENTAL", "SKIN_RENTAL_disenchant")
-  handle_generic("Skin Permanents", "SKIN", "SKIN_disenchant")
+  handle_generic("造型碎片", "SKIN_RENTAL", "SKIN_RENTAL_disenchant")
+  handle_generic("永久造型", "SKIN", "SKIN_disenchant")
 end
 
 def handle_eternals
   handle_generic(
-    "Eternal Shards",
+    "永恆精雕",
     "STATSTONE_SHARD",
     "STATSTONE_SHARD_DISENCHANT"
   )
-  handle_generic("Eternals", "STATSTONE", "STATSTONE_DISENCHANT")
+  handle_generic("永恆精雕", "STATSTONE", "STATSTONE_DISENCHANT")
 end
 
 def handle_emotes
-  handle_generic("Emotes", "EMOTE", "EMOTE_disenchant")
+  handle_generic("表情", "EMOTE", "EMOTE_disenchant")
 end
 
 def handle_ward_skins
   handle_generic(
-    "Ward Skin Shards",
+    "守衛造型碎片",
     "WARDSKIN_RENTAL",
     "WARDSKIN_RENTAL_disenchant"
   )
-  handle_generic("Ward Skin Permanents", "WARDSKIN", "WARDSKIN_disenchant")
+  handle_generic("永久守衛造型", "WARDSKIN", "WARDSKIN_disenchant")
 end
 
 def handle_icons
-  handle_generic("Icons", "SUMMONERICON", "SUMMONERICON_disenchant")
+  handle_generic("頭像", "SUMMONERICON", "SUMMONERICON_disenchant")
 end
 
 def handle_champions
@@ -983,7 +1002,7 @@ def handle_champions
     end
 
     if count_loot_items(loot_shards) > 0
-      puts "Found #{count_loot_items(loot_shards)} champion shards.".light_blue
+      puts "找到 #{count_loot_items(loot_shards)} 個英雄碎片.".light_blue
 
       loot_shards.each do |s|
         s["count_keep"] = 0
@@ -994,26 +1013,26 @@ def handle_champions
 
       if loot_shards_not_owned.length > 0
         if ($ans_y).include? user_input_check(
-                        "Keep a shard for champions you don't own yet?",
+                        "要幫你保留一個未擁有英雄的英雄碎片嗎?",
                         $ans_yn,
                         $ans_yn_d
                       )
           loot_shards = handle_champions_owned(loot_shards)
         end
       else
-        puts "Found no shards of champions you don't own yet.".light_blue
+        puts "沒找到未擁有英雄的英雄碎片.".light_blue
       end
 
       disenchant_modes = {
-        "1" => "Disenchant all champion shards",
+        "1" => "分解所有的英雄碎片",
         "2" =>
-          "Keep enough (1/2) shards for champions you own mastery 6/7 tokens for",
+          "保留足夠(1到2個)的碎片給當前持有專精6代幣到專精7代幣的英雄",
         "3" =>
-          "Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)",
+          "保留足夠(1到2個)的碎片給當前專精等級x到持有專精7代幣的英雄(可以選擇1到6)",
         "4" =>
-          "Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)",
-        "5" => "Keep one shard of each champion regardless of mastery",
-        "x" => "Cancel"
+          "保留足夠(1到2個)的碎片給所有還沒達到專精7的英雄(只會分解完全沒有用處的碎片)",
+        "5" => "完全不考慮專精，為每個英雄留一個碎片",
+        "x" => "取消"
       }
 
       modes_string = ""
@@ -1024,8 +1043,8 @@ def handle_champions
 
       disenchant_shards_mode =
         user_input_check(
-          "Okay, which option would you like to go by?\n" + modes_string +
-            "Option: ",
+          "好的, 你希望執行哪個選項?\n" + modes_string +
+            "選項: ",
           disenchant_modes.keys,
           "[1|2|3|4|5|x]",
           ""
@@ -1049,15 +1068,15 @@ def handle_champions
           loot_shards.sort_by { |l| [l["disenchant_note"], l["itemDesc"]] }
 
         if count_loot_items(loot_shards) > 0
-          puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the option you chose:".light_blue
+          puts "我們將分解 #{count_loot_items(loot_shards)} 個英雄碎片基於你選擇的選項:".light_blue
           loot_shards.each do |l|
             loot_value = l["disenchantValue"] * l["count"]
             print pad("#{l["count"]}x ", 5, false).light_black
-            print pad("#{l["itemDesc"]}", 15).light_white
+            print pad("［,#{l["itemDesc"]}］", 30).light_white
             print " @ ".light_black
-            print pad("#{loot_value} BE", 8, false).light_black
+            print pad("#{loot_value} 藍粉", 8, false).light_black
             if l["count_keep"] > 0
-              puts " keeping #{l["count_keep"]}".green
+              puts " 保留 #{l["count_keep"]}".green
             elsif l["disenchant_note"].length > 0
               puts " #{l["disenchant_note"]}"
             else
@@ -1074,7 +1093,7 @@ def handle_champions
 
           if count_loot_items(loot_shards) > 0
             if $ans_y.include? user_input_check(
-                                 "Disenchant #{count_loot_items(loot_shards)} champion shards for #{total_be_value} Blue Essence?",
+                                 "分解 #{count_loot_items(loot_shards)} 英雄碎片以換取 #{total_be_value} 藍色結晶粉末?",
                                  $ans_yn,
                                  $ans_yn_d,
                                  "confirm"
@@ -1095,16 +1114,16 @@ def handle_champions
               puts "Done!".green
             end
           else
-            puts "All remaining champions have been excluded, skipping...".yellow
+            puts "所有的英雄都已被過濾出, 跳過這一步驟...".yellow
           end
         else
-          puts "Job's already done: no champion shards left matching your selection.".green
+          puts "完工了: 符合你篩選條件的英雄碎片均已分解.".green
         end
       else
-        puts "Champion shard disenchanting canceled.".yellow
+        puts "已取消英雄碎片分解.".yellow
       end
     else
-      puts "Found no champion shards to disenchant.".yellow
+      puts "沒有找到可分解的英雄碎片.".yellow
     end
   rescue => exception
     handle_exception(exception, "Champion Shards")
@@ -1141,7 +1160,7 @@ def handle_champions_tokens(player_loot, loot_shards)
       end
     end
 
-    puts "Found #{token6_champion_ids.length + token7_champion_ids.length} champions with owned mastery tokens".light_black
+    puts "找到 #{token6_champion_ids.length + token7_champion_ids.length} 個持有專精代幣的英雄".light_black
 
     loot_shards =
       loot_shards.each do |l|
@@ -1170,7 +1189,7 @@ def handle_champions_mastery(loot_shards, keep_all = false)
     unless keep_all
       level_threshold =
         user_input_check(
-          "Which mastery level should champions at least be for their shards to be kept?",
+          "你希望留下英雄碎片的英雄, 專精等級至少要達到多少?",
           %w[1 2 3 4 5 6],
           "[1..6]"
         )
@@ -1193,7 +1212,7 @@ def handle_champions_mastery(loot_shards, keep_all = false)
 
     loot_shards.each do |l|
       if mastery7_champion_ids.include? l["storeItemId"]
-        l["disenchant_note"] = "at mastery 7".light_black
+        l["disenchant_note"] = "達到專精7".light_black
       elsif mastery6_champion_ids.include? l["storeItemId"]
         l["count"] -= 1
         l["count_keep"] += 1
@@ -1201,7 +1220,7 @@ def handle_champions_mastery(loot_shards, keep_all = false)
         l["count"] -= 2
         l["count_keep"] += 2
       else
-        l["disenchant_note"] = "below threshold".yellow
+        l["disenchant_note"] = "低於下限/高於上限".yellow
       end
     end
 
@@ -1232,24 +1251,24 @@ def handle_champions_exceptions(loot_shards)
     exclusions_arr = []
     until exclusions_done
       if ($ans_y).include? user_input_check(
-                      "Would you like to add #{exclusions_done_more}exclusions?",
+                      "你希望增加#{exclusions_done_more}例外嗎?",
                       $ans_yn,
                       $ans_yn_d
                     )
         exclusions_str +=
           "," +
-            ask(
-              "Okay, which champions? ".light_cyan +
-                "(case-sensitive, comma-separated)".light_white +
-                ": ".light_cyan
+            askutf8(
+              "好的, 該去除哪些英雄? ".light_cyan +
+                "(請務必完整複製［］內的文字並貼上)".light_white +
+                ":".light_cyan
             )
 
-        exclusions_done_more = "more "
+        exclusions_done_more = "更多"
 
         exclusions_arr = exclusions_str.split(/\s*,\s*/)
         exclusions_matched =
           loot_shards.select { |l| exclusions_arr.include? l["itemDesc"] }
-        print "Exclusions recognized: ".green
+        print "已正確讀取的例外: ".green
         exclusions_matched.each { |e| print e["itemDesc"].light_white + " " }
         puts
       else
@@ -1265,12 +1284,12 @@ def handle_champions_exceptions(loot_shards)
 end
 
 def open_github
-  puts "Opening GitHub repository at https://github.com/marvinscham/disenchanter/ in your browser...".light_blue
+  puts "正在使用你的瀏覽器開啟位於 https://github.com/marvinscham/disenchanter/ 的 Github 專案頁面...".light_blue
   Launchy.open("https://github.com/marvinscham/disenchanter/")
 end
 
 def open_stats
-  puts "Opening Global Stats at https://github.com/marvinscham/disenchanter/wiki/Stats in your browser...".light_blue
+  puts "正在使用你的瀏覽器開啟位於 https://github.com/marvinscham/disenchanter/wiki/Stats 的全球數據統計...".light_blue
   Launchy.open("https://github.com/marvinscham/disenchanter/wiki/Stats")
 end
 
@@ -1309,7 +1328,7 @@ def handle_debug
     puts $sep
     puts
 
-    puts "Option chosen: #{things_todo[todo]}".light_white
+    puts "Option: #{things_todo[todo]}".light_white
 
     case todo
     when "1"
@@ -1354,31 +1373,31 @@ def handle_stat_submission
   if $actions > 0
     strlen = 15
     numlen = 7
-    stats_string = "Your stats:\n".light_blue
+    stats_string = "你的數據:\n".light_blue
     stats_string +=
-      pad("Actions", strlen) + pad($actions.to_s, numlen, false).light_white +
+      pad("操作", strlen) + pad($actions.to_s, numlen, false).light_white +
         "\n"
     stats_string +=
-      pad("Disenchanted", strlen) +
+      pad("分解", strlen) +
         pad($s_disenchanted.to_s, numlen, false).light_white + "\n"
     stats_string +=
-      pad("Opened", strlen) + pad($s_opened.to_s, numlen, false).light_white +
+      pad("開啟", strlen) + pad($s_opened.to_s, numlen, false).light_white +
         "\n"
     stats_string +=
-      pad("Crafted", strlen) + pad($s_crafted.to_s, numlen, false).light_white +
+      pad("製作", strlen) + pad($s_crafted.to_s, numlen, false).light_white +
         "\n"
     stats_string +=
-      pad("Redeemed", strlen) +
+      pad("領取", strlen) +
         pad($s_redeemed.to_s, numlen, false).light_white + "\n"
     stats_string +=
-      pad("Blue Essence", strlen) +
+      pad("藍色結晶粉末", strlen) +
         pad($s_blue_essence.to_s, numlen, false).light_white + "\n"
     stats_string +=
-      pad("Orange Essence", strlen) +
+      pad("橘色結晶粉末", strlen) +
         pad($s_orange_essence.to_s, numlen, false).light_white + "\n"
 
     if ($ans_y).include? user_input_check(
-                    "Would you like to contribute your (anonymous) stats to the global stats?\n".light_cyan +
+                    "你願意(匿名的)上傳你的數據到全球統計數據嗎?\n".light_cyan +
                       stats_string + "[y|n]: ",
                     $ans_yn,
                     $ans_yn_d,
@@ -1393,7 +1412,7 @@ def handle_stat_submission
         $s_blue_essence,
         $s_orange_essence
       )
-      puts "Thank you very much!".light_green
+      puts "非常的感謝你!".light_green
     end
   end
 end
