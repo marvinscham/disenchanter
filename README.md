@@ -21,6 +21,8 @@ Mass disenchant LoL loot like champion shards, eternals, mythic essence and more
 
 Based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-champ-shards).
 
+可以在[這裡](https://github.com/nico12313/disenchanter/tree/Traditional-Chinese-Translation)找到繁體中文版本的應用程式.
+
 </div>
 
 ## Usage
