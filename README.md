@@ -17,7 +17,9 @@
 ![Blue Essence Gained](https://img.shields.io/badge/dynamic/json?color=blue&label=blue%20essence%20gained&query=%24%5B%3A1%5D.blue_essence_millions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=M)
 ![Time Saved](https://img.shields.io/badge/dynamic/json?color=blue&label=time%20saved&query=%24%5B%3A1%5D.hours_saved&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=%20hours)
 
-Mass disenchant LoL loot like champion shards, eternals, mythic essence and more
+Mass disenchant LoL loot like champion shards, eternals, mythic essence and more!
+
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200" align="center">](https://www.buymeacoffee.com/mscham)
 
 Based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-champ-shards).
 
