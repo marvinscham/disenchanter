@@ -1,0 +1,112 @@
+repo_name: marvinscham/disenchanter
+report_id: 77abef689a45d775d034168bffbe8c69
+repo_type: Public
+timestamp: '2023-11-11T06:43:51+00:00'
+requested_by: marvinscham
+provider: github
+branch: main
+detected_tools_count: 8
+tools:
+- name: Ruby
+  description: A dynamic, interpreted, open source programming language with a focus
+    on simplicity and productivity
+  website_url: https://www.ruby-lang.org
+  version: 3.1.2
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/989/ruby.png
+  detection_source_url: Gemfile.lock
+  detection_source: Gemfile.lock
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-24 23:09:25.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source: ".github/workflows/league-patch.yml"
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-31 09:16:33.000000000 Z
+- name: RuboCop
+  description: A Ruby static code analyzer, based on the community Ruby style guide
+  website_url: http://batsov.com/rubocop/
+  version: 1.50.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/2643/rubocop.png
+  detection_source_url: Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-24 23:09:25.000000000 Z
+- name: RubyGems
+  description: Easily download, install, and use ruby software packages on your system
+  website_url: https://rubygems.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/service/12795/5jL6-BA5_400x400.jpeg
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-25 02:26:36.000000000 Z
+- name: colorize
+  description: Extends String class or add a ColorizedString with methods to set text
+    color
+  package_url: https://rubygems.org/colorize
+  version: 0.8.1
+  license: GPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/18856/default_d343d9a7c573fa5dcbeb4d3c43d2ffe4afa82cc1.png
+  detection_source_url: Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-25 02:26:36.000000000 Z
+- name: json
+  description: This is a JSON implementation as a Ruby extension in C
+  package_url: https://rubygems.org/json
+  version: 2.6.3
+  license: Ruby
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/18822/default_19184669508c0f71aec9521d5f14d71b77203130.png
+  detection_source_url: Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-25 02:26:36.000000000 Z
+- name: launchy
+  description: Launchy is helper class for launching cross-platform applications in
+    a fire and forget manner
+  package_url: https://rubygems.org/launchy
+  version: 2.5.2
+  license: ISC
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/18893/default_421783d7f975d1b076f260bea1d42f0b2621ca39.png
+  detection_source_url: Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-25 02:26:36.000000000 Z
