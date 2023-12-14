@@ -1,11 +1,11 @@
 repo_name: marvinscham/disenchanter
-report_id: 77abef689a45d775d034168bffbe8c69
+report_id: 8921d1c5eb51d684b1db51294d39a726
 repo_type: Public
-timestamp: '2023-11-11T06:43:51+00:00'
+timestamp: '2023-12-14T10:24:05+00:00'
 requested_by: marvinscham
 provider: github
 branch: main
-detected_tools_count: 8
+detected_tools_count: 12
 tools:
 - name: Ruby
   description: A dynamic, interpreted, open source programming language with a focus
@@ -17,8 +17,20 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/989/ruby.png
-  detection_source_url: Gemfile.lock
-  detection_source: Gemfile.lock
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile.lock
+  detection_source: Repo Metadata
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-24 23:09:25.000000000 Z
+- name: Swift
+  description: 'An innovative new programming language for Cocoa and Cocoa Touch. '
+  website_url: https://developer.apple.com/swift/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1009/tuHsaI2U.png
+  detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-24 23:09:25.000000000 Z
 - name: Git
@@ -51,7 +63,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Code Review
   image_url: https://img.stackshare.io/service/2643/rubocop.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-24 23:09:25.000000000 Z
@@ -66,6 +78,17 @@ tools:
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-25 02:26:36.000000000 Z
+- name: CocoaPods
+  description: A dependency manager for Swift and Objective-C Cocoa projects
+  website_url: https://cocoapods.org/
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: CocoaPods Packages
+  image_url: https://img.stackshare.io/service/2426/e1cbdef9d4b11484049a033886578e54_400x400.png
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-24 23:09:25.000000000 Z
 - name: colorize
   description: Extends String class or add a ColorizedString with methods to set text
     color
@@ -77,7 +100,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18856/default_d343d9a7c573fa5dcbeb4d3c43d2ffe4afa82cc1.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-25 02:26:36.000000000 Z
@@ -91,7 +114,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18822/default_19184669508c0f71aec9521d5f14d71b77203130.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-25 02:26:36.000000000 Z
@@ -106,7 +129,35 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18893/default_421783d7f975d1b076f260bea1d42f0b2621ca39.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-25 02:26:36.000000000 Z
+- name: ocra
+  description: OCRA
+  package_url: https://rubygems.org/ocra
+  version: 1.3.11
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/rubygems/image.png
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Marvin Scham
+  last_updated_on: 2022-07-25 02:26:36.000000000 Z
+- name: rufo
+  description: Fast and unobtrusive Ruby code formatter
+  package_url: https://rubygems.org/rufo
+  version: 0.16.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/rubygems/image.png
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-25 02:26:36.000000000 Z
