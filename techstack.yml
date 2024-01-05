@@ -1,7 +1,8 @@
 repo_name: marvinscham/disenchanter
-report_id: 8921d1c5eb51d684b1db51294d39a726
+report_id: 77abef689a45d775d034168bffbe8c69
+version: 0.1
 repo_type: Public
-timestamp: '2023-12-14T10:24:05+00:00'
+timestamp: '2024-01-05T08:51:35+00:00'
 requested_by: marvinscham
 provider: github
 branch: main
@@ -30,6 +31,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1009/tuHsaI2U.png
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-24 23:09:25.000000000 Z
@@ -41,6 +43,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/marvinscham/disenchanter
   detection_source: Repo Metadata
 - name: GitHub Actions
   description: Automate your workflow from idea to production
@@ -50,6 +53,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/.github/workflows/league-patch.yml
   detection_source: ".github/workflows/league-patch.yml"
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-31 09:16:33.000000000 Z
@@ -75,6 +79,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Package Managers
   image_url: https://img.stackshare.io/service/12795/5jL6-BA5_400x400.jpeg
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-25 02:26:36.000000000 Z
@@ -86,6 +91,7 @@ tools:
   category: Libraries
   sub_category: CocoaPods Packages
   image_url: https://img.stackshare.io/service/2426/e1cbdef9d4b11484049a033886578e54_400x400.png
+  detection_source_url: https://github.com/marvinscham/disenchanter/blob/main/Gemfile
   detection_source: Gemfile
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-24 23:09:25.000000000 Z
