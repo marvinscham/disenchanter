@@ -28,7 +28,7 @@ def run
   end
 
   set_globals
-  current_version = 'v1.5.0'
+  current_version = 'v1.6.0'
 
   puts 'Hi! :)'.light_green
   puts "Running Disenchanter #{current_version} on port #{$port}".light_blue
