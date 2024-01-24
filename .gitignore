@@ -24,6 +24,7 @@ tmpout
 ## Specific to RubyMotion:
 .dat*
 .repl_history
+.build.lockfile
 build/
 *.bridgesupport
 build-iPhoneOS/
