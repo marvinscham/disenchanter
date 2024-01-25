@@ -1,2 +1,4 @@
-Style/EndOfLine:
+AllCops:
+  NewCops: enable
+Layout/EndOfLine:
   EnforcedStyle: lf

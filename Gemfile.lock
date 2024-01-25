@@ -41,9 +41,10 @@ GEM
       date
     unicode-display_width (2.4.2)
     uri (0.11.0)
+    win32-shortcut (0.3.0)
 
 PLATFORMS
-  x64-unknown
+  x64-mingw-ucrt
   x64-unknown
   x86_64-linux
 
@@ -56,6 +57,7 @@ DEPENDENCIES
   open-uri (~> 0.2.0)
   rubocop (~> 1.50)
   rufo (>= 0.13.0)
+  win32-shortcut (~> 0.3.0)
 
 RUBY VERSION
    ruby 3.1.2p20
