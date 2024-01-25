@@ -29,7 +29,6 @@ def run
     exit
   end
 
-  set_globals
   current_version = 'v1.6.0'
   stat_tracker = StatTracker.new
   client = Client.new(stat_tracker)
@@ -49,7 +48,7 @@ def run
   end
   puts "\nYou're logged in as #{summoner['gameName']} ##{summoner['tagLine']}.".light_blue
   puts separator
-  puts "\nFeel free to try the options, no actions will be taken until you confirm a banner like this:".light_blue
+  puts "\nYour loot is safe, no actions will be taken until you confirm a banner like this:".light_blue
   puts 'CONFIRM: Perform this action? [y|n]'.light_magenta
   puts separator
 
@@ -58,7 +57,7 @@ def run
     '1' => 'Materials',
     '2' => 'Champions',
     '3' => 'Skins',
-    #"4" => "Tacticians",
+    '4' => 'Tacticians',
     '5' => 'Eternals',
     '6' => 'Emotes',
     '7' => 'Ward Skins',
@@ -83,8 +82,8 @@ def run
 
     todo =
       user_input_check(
-        "\nWhat would you like to do? (Hint: do Materials first so you don't miss anything!)\n\n".light_cyan +
-          todo_string + 'Option: ',
+        "\nWhat would you like to do? (Hint: go top to bottom so you don't miss anything!)\n\n".light_cyan +
+          "#{todo_string}Option: ",
         things_todo.keys,
         '',
         ''
@@ -103,8 +102,8 @@ def run
       handle_champions
     when '3'
       handle_skins
-      # when "4"
-      #   handle_tacticians
+    when '4'
+      handle_tacticians
     when '5'
       handle_eternals
     when '6'
@@ -122,29 +121,23 @@ def run
     when 'x'
       done = true
     end
-    refresh_loot
+    client.refresh_loot
     puts separator
   end
 
   puts "That's it!".light_green
-  if $actions > 0
-    puts "We saved you about #{$actions * 3} seconds of waiting for animations to finish.".light_green
+  stat_tracker.add_actions(2)
+  if stat_tracker.actions.positive?
+    puts "We saved you about #{stat_tracker.actions * 3} seconds of waiting for animations to finish.".light_green
     puts separator
   end
-  handle_stat_submission
+  handle_stat_submission(stat_tracker)
   puts 'See you next time :)'.light_green
   ask exit_string
 end
 
 def pad(str, len, right = true)
   "%#{right ? '-' : ''}#{len}s" % str
-end
-
-def set_globals
-  $ans_yn = %w[y yes n no]
-  $ans_y = %w[y yes]
-  $ans_n = %w[n no]
-  $ans_yn_d = '[y|n]'
 end
 
 run

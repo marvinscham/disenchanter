@@ -12,6 +12,14 @@ class StatTracker
     @opened = 0
   end
 
+  attr_reader :actions
+  attr_reader :blue_essence
+  attr_reader :orange_essence
+  attr_reader :disenchanted
+  attr_reader :crafted
+  attr_reader :redeemed
+  attr_reader :opened
+
   def add_blue_essence(count)
     @blue_essence += count
   end
