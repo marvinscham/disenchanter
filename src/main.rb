@@ -9,7 +9,9 @@ require 'launchy'
 require 'open-uri'
 require 'rbconfig'
 
-require_relative 'modules/client_api'
+require_relative 'class/client'
+require_relative 'class/statTracker'
+
 require_relative 'modules/common_strings'
 require_relative 'modules/debug'
 require_relative 'modules/handlers'
@@ -19,7 +21,6 @@ require_relative 'modules/stat_submission'
 require_relative 'modules/user_input'
 
 require_relative 'modules/update/checker'
-require_relative 'modules/detect_client'
 
 def run
   if File.exist?('./build/.build.lockfile')
@@ -30,15 +31,17 @@ def run
 
   set_globals
   current_version = 'v1.6.0'
+  stat_tracker = StatTracker.new
+  client = Client.new(stat_tracker)
 
   puts 'Hi! :)'.light_green
-  puts "Running Disenchanter #{current_version} on port #{$port}".light_blue
-  puts 'You can exit this script at any point by pressing '.light_blue +
-         '[CTRL + C]'.light_white + '.'.light_blue
+  puts "Running Disenchanter #{current_version}".light_blue
   check_update(current_version)
+  print 'You can exit this script at any point by pressing '.light_blue
+  puts '[CTRL + C]'.light_white + '.'.light_blue
   puts separator
 
-  summoner = get_current_summoner
+  summoner = client.req_get_current_summoner
   if summoner['gameName'].nil? || summoner['gameName'].empty?
     puts 'Could not grab summoner info. Try restarting your League Client.'.light_red
     ask exit_string
@@ -63,7 +66,7 @@ def run
     's' => 'Open Disenchanter Global Stats',
     'r' => 'Open GitHub repository',
     'd' => 'Debug Tools',
-    'x' => 'Exit',
+    'x' => 'Exit'
   }
   things_done = []
 
@@ -138,25 +141,6 @@ def pad(str, len, right = true)
 end
 
 def set_globals
-  begin
-    $port, $token = grab_lockfile
-  rescue StandardError
-    puts 'Could not grab session!'.light_red
-    puts 'Make sure the script is in your League Client folder and that your Client is running.'.light_red
-    ask exit_string
-    exit 1
-  end
-  $host = "https://127.0.0.1:#{$port}"
-  $debug = false
-
-  $actions = 0
-  $s_disenchanted = 0
-  $s_opened = 0
-  $s_crafted = 0
-  $s_redeemed = 0
-  $s_blue_essence = 0
-  $s_orange_essence = 0
-
   $ans_yn = %w[y yes n no]
   $ans_y = %w[y yes]
   $ans_n = %w[n no]
