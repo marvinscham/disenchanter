@@ -3,6 +3,9 @@ disenchanter_up.exe
 tmpin
 tmpout
 
+settings.json
+rubocop-report.json
+
 *.gem
 *.rbc
 /.config

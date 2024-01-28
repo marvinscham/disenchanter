@@ -12,16 +12,35 @@ on:
 jobs:
   analyze:
     name: Analyze
+    if: github.event_name != 'pull_request' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions: read-all
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.0
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: RuboCop scan
+        run: bundle exec rubocop
+
+      - name: Upload RuboCop report
+        uses: actions/upload-artifact@v2
+        with:
+          name: rubocop-report
+          path: rubocop-report.json
+
       - name: SonarQube scan
-        if: github.event_name != 'pull_request' || github.event_name == 'workflow_dispatch'
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
