@@ -10,7 +10,7 @@ require 'open-uri'
 require 'rbconfig'
 
 require_relative 'class/client'
-require_relative 'class/statTracker'
+require_relative 'class/stat_tracker'
 
 require_relative 'modules/common_strings'
 require_relative 'modules/debug'
@@ -97,21 +97,21 @@ def run
 
     case todo
     when '1'
-      handle_materials
+      handle_materials(client, stat_tracker)
     when '2'
-      handle_champions
+      handle_champions(client)
     when '3'
-      handle_skins
+      handle_skins(client)
     when '4'
-      handle_tacticians
+      handle_tacticians(client)
     when '5'
-      handle_eternals
+      handle_eternals(client)
     when '6'
-      handle_emotes
+      handle_emotes(client)
     when '7'
-      handle_ward_skins
+      handle_ward_skins(client)
     when '8'
-      handle_icons
+      handle_icons(client)
     when 's'
       open_stats
     when 'r'
@@ -126,7 +126,6 @@ def run
   end
 
   puts "That's it!".light_green
-  stat_tracker.add_actions(2)
   if stat_tracker.actions.positive?
     puts "We saved you about #{stat_tracker.actions * 3} seconds of waiting for animations to finish.".light_green
     puts separator

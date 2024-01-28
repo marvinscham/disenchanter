@@ -50,14 +50,14 @@ class Client
   end
 
   def request_post(path, body)
-    create_client do |http|
-      uri = URI("#{host}/#{path}")
-      req = Net::HTTP::Post.new(uri, 'Content-Type': 'application/json')
-      req.body = body
-      req_set_headers(req)
-      res = http.request req
-      JSON.parse(res.body)
-    end
+    # create_client do |http|
+    #   uri = URI("#{host}/#{path}")
+    #   req = Net::HTTP::Post.new(uri, 'Content-Type': 'application/json')
+    #   req.body = body
+    #   req_set_headers(req)
+    #   res = http.request req
+    #   JSON.parse(res.body)
+    # end
   end
 
   def refresh_loot

@@ -5,14 +5,14 @@ require_relative 'materials/key_fragments'
 require_relative 'materials/mastery_tokens'
 require_relative 'materials/mythic_essence'
 
-def handle_materials
+def handle_materials(client, stat_tracker)
   done = false
   things_todo = {
     '1' => 'Mythic Essence',
     '2' => 'Key Fragments',
     '3' => 'Capsules',
     '4' => 'Mastery Tokens',
-    'x' => 'Back to main menu',
+    'x' => 'Back to main menu'
   }
   things_done = []
 
@@ -29,31 +29,31 @@ def handle_materials
 
     todo =
       user_input_check(
-        "\nWhat would you like to do?\n\n".light_cyan + todo_string +
-          'Option: ',
+        "\nWhat would you like to do?\n\n".light_cyan +
+          "#{todo_string} Option: ",
         things_todo.keys,
         '',
         ''
       )
     things_done << todo
 
-    puts $sep
+    puts separator
     puts
 
     puts "Option chosen: #{things_todo[todo]}".light_white
 
     case todo
     when '1'
-      handle_mythic_essence
+      handle_mythic_essence(client, stat_tracker)
     when '2'
-      handle_key_fragments
+      handle_key_fragments(client, stat_tracker)
     when '3'
-      handle_capsules
+      handle_capsules(client, stat_tracker)
     when '4'
-      handle_mastery_tokens
+      handle_mastery_tokens(client, stat_tracker)
     when 'x'
       done = true
     end
-    puts $sep
+    puts separator
   end
 end
