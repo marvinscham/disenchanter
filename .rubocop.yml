@@ -2,3 +2,10 @@ AllCops:
   NewCops: enable
 Layout/EndOfLine:
   EnforcedStyle: lf
+Metrics/MethodLength:
+  CountAsOne: ['array', 'method_call', 'hash']
+  Max: 30
+  Severity: refactor
+Metrics/CyclomaticComplexity:
+  Max: 12
+  Severity: refactor
