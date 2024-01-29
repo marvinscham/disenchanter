@@ -7,7 +7,7 @@ def handle_debug
     '2' => 'Write recipes of lootId to file',
     '3' => 'Write loot info of lootId to file',
     'm' => 'Enable debug mode',
-    'x' => 'Back to main menu',
+    'x' => 'Back to main menu'
   }
   things_done = []
 
@@ -15,11 +15,11 @@ def handle_debug
     todo_string = ''
     things_todo.each do |k, v|
       todo_string += "[#{k}] ".light_white
-      unless things_done.include? k
-        todo_string += "#{v}\n".light_cyan
-      else
-        todo_string += "#{v} (done)\n".light_green
-      end
+      todo_string += if things_done.include? k
+                       "#{v} (done)\n".light_green
+                     else
+                       "#{v}\n".light_cyan
+                     end
     end
 
     todo =
@@ -41,9 +41,7 @@ def handle_debug
     when '1'
       player_loot = get_player_loot
 
-      File.open('disenchanter_loot.json', 'w') do |f|
-        f.write(player_loot.to_json)
-      end
+      File.write('disenchanter_loot.json', player_loot.to_json)
 
       puts('Okay, written to disenchanter_loot.json.')
     when '2'
@@ -51,9 +49,7 @@ def handle_debug
 
       recipes = get_recipes_for_item loot_id
 
-      File.open('disenchanter_recipes.json', 'w') do |f|
-        f.write(recipes.to_json)
-      end
+      File.write('disenchanter_recipes.json', recipes.to_json)
 
       puts('Okay, written to disenchanter_recipes.json.')
     when '3'
@@ -61,9 +57,7 @@ def handle_debug
 
       loot_info = get_loot_info loot_id
 
-      File.open('disenchanter_lootinfo.json', 'w') do |f|
-        f.write(loot_info.to_json)
-      end
+      File.write('disenchanter_lootinfo.json', loot_info.to_json)
 
       puts('Okay, written to disenchanter_lootinfo.json.')
     when 'm'
@@ -72,6 +66,6 @@ def handle_debug
     when 'x'
       done = true
     end
-    puts $sep
+    puts separator
   end
 end

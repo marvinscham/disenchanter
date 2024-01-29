@@ -23,7 +23,7 @@ def grab_lockfile
                                                     Win32::Registry::KEY_READ | Win32::Registry::KEY_WOW64_32KEY)
       lockfile = "#{reg['InstallLocation']}/lockfile"
       puts 'Found client via registry'.light_black
-    rescue
+    rescue StandardError
       # do nothing
     end
 
@@ -36,7 +36,7 @@ def grab_lockfile
         path = scpath[0..-3].join('\\')
         lockfile = "#{path}\\League of Legends\\lockfile"
         puts 'Found client via start menu'.light_black
-      rescue
+      rescue StandardError
         # just keep going
       end
     end
@@ -45,10 +45,10 @@ def grab_lockfile
   begin
     contents = File.read("C:\\Riot Games\\League of Legends\\#{lockfile}")
     puts 'Found client at standard path'.light_black
-  rescue
+  rescue StandardError
     begin
       contents = File.read(lockfile)
-    rescue
+    rescue StandardError
       puts 'Failed to automatically find your League Client path.'.light_red
       puts 'Please place the script directly in your League Client folder.'.light_red
     end

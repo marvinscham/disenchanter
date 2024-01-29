@@ -106,6 +106,6 @@ def handle_mythic_essence(client, stat_tracker)
     )
     puts 'Done!'.green
   end
-rescue => e
+rescue StandardError => e
   handle_exception(e, 'Mythic Essence')
 end

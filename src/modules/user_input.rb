@@ -17,14 +17,14 @@ def user_input_check(question, answers, answerdisplay, color_preset = 'default')
   when 'default'
     question =
       "#{question} ".light_cyan + "#{answerdisplay}".light_white +
-        ': '.light_cyan
+      ': '.light_cyan
   end
 
-  until (answers).include? input
+  until answers.include? input
     input = ask question
-    unless (answers).include? input
+    unless answers.include? input
       puts 'Invalid answer, options: '.light_red +
-             "#{answerdisplay}".light_white
+           "#{answerdisplay}".light_white
     end
   end
 

@@ -20,11 +20,11 @@ def handle_materials(client, stat_tracker)
     todo_string = ''
     things_todo.each do |k, v|
       todo_string += "[#{k}] ".light_white
-      unless things_done.include? k
-        todo_string += "#{v}\n".light_cyan
-      else
-        todo_string += "#{v} (done)\n".light_green
-      end
+      todo_string += if things_done.include? k
+                       "#{v} (done)\n".light_green
+                     else
+                       "#{v}\n".light_cyan
+                     end
     end
 
     todo =

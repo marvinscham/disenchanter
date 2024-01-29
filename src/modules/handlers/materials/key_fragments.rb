@@ -28,6 +28,6 @@ def handle_key_fragments(client, stat_tracker)
     )
     puts 'Done!'.green
   end
-rescue => e
+rescue StandardError => e
   handle_exception(e, 'Key Fragments')
 end

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
+git_source(:github) { |_repo| 'https://github.com/#{repo}.git' }
 ruby '3.1.2'
 
 gem 'base64', '~> 0.1.1'

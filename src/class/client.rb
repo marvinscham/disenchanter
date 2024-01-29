@@ -25,13 +25,13 @@ class Client
     "Basic #{@token.chomp}"
   end
 
-  def create_client
+  def create_client(&)
     Net::HTTP.start(
       '127.0.0.1',
       @port,
       use_ssl: true,
-      verify_mode: OpenSSL::SSL::VERIFY_NONE
-    ) { |http| yield(http) }
+      verify_mode: OpenSSL::SSL::VERIFY_NONE, &
+    )
   end
 
   def req_set_headers(req)

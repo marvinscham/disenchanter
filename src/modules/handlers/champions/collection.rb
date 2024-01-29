@@ -7,6 +7,6 @@ def handle_champions_collection(loot_shards)
   end
 
   loot_shards
-rescue => e
+rescue StandardError => e
   handle_exception(e, 'Champion Shards for Collection')
 end
