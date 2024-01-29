@@ -135,8 +135,8 @@ def run
   ask exit_string
 end
 
-def pad(str, len, right = true)
-  "%#{right ? '-' : ''}#{len}s" % str
+def pad(str, len, right: true)
+  format("%#{right ? '-' : ''}#{len}s", str)
 end
 
 run
