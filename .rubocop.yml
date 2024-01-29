@@ -9,3 +9,9 @@ Metrics/MethodLength:
 Metrics/CyclomaticComplexity:
   Max: 12
   Severity: refactor
+Metrics/PerceivedComplexity:
+  Max: 12
+  Severity: refactor
+Metrics/AbcSize:
+  Max: 25
+  Severity: refactor
