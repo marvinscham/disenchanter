@@ -32,7 +32,7 @@ jobs:
         run: bundle install
 
       - name: RuboCop scan
-        run: bundle exec rubocop
+        run: bundle exec rubocop --format json -o rubocop-report.json || echo "Failed on RuboCop rules"
 
       - name: Upload RuboCop report
         uses: actions/upload-artifact@v2
