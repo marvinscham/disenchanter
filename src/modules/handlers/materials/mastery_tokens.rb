@@ -48,7 +48,7 @@ def handle_mastery_tokens(client, stat_tracker)
     ref_shard =
       loot_shards.select { |l| t['refId'] == l['storeItemId'].to_s }
     ref_perm =
-      loot_shards.select { |l| t['refId'] == l['storeItemId'].to_s }
+      loot_perms.select { |l| t['refId'] == l['storeItemId'].to_s }
 
     print pad(t['itemDesc'], 15, false).light_white
     print ' to Mastery Level '.light_black
@@ -99,28 +99,29 @@ def handle_mastery_tokens(client, stat_tracker)
     'confirm'
   )
     loot_mastery_tokens.each do |t|
-      stat_tracker.add_redeemed(1)
       target_level = (t['lootName'])[-1]
       case t['upgrade_type']
       when 'shard'
-        post_recipe(
+        client.req_post_recipe(
           "CHAMPION_TOKEN_#{target_level}_redeem_withshard",
           [t['lootId'], "CHAMPION_RENTAL_#{t['refId']}"],
           1
         )
       when 'permanent'
-        post_recipe(
+        client.req_post_recipe(
           "CHAMPION_TOKEN_#{target_level}_redeem_withpermanent",
           [t['lootId'], "CHAMPION_#{t['refId']}"],
           1
         )
       when 'essence'
-        post_recipe(
+        client.req_post_recipe(
           "CHAMPION_TOKEN_#{target_level}_redeem_withessence",
           [t['lootId'], 'CURRENCY_champion'],
           1
         )
       end
+
+      stat_tracker.add_redeemed(1)
     end
   end
 rescue StandardError => e
