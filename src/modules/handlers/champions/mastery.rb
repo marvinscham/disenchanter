@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-def handle_champions_mastery(loot_shards, keep_all = false)
-  summoner = get_current_summoner
-  player_mastery = get_champion_mastery(summoner['summonerId'])
+def handle_champions_mastery(client, loot_shards, keep_all: false)
+  summoner = client.req_get_current_summoner
+  player_mastery = client.req_get_champion_mastery(summoner['summonerId'])
   threshold_champion_ids = []
   mastery6_champion_ids = []
   mastery7_champion_ids = []
@@ -23,9 +23,7 @@ def handle_champions_mastery(loot_shards, keep_all = false)
       mastery7_champion_ids << m['championId']
     elsif m['championLevel'] == 6
       mastery6_champion_ids << m['championId']
-    elsif (level_threshold..5).include? m['championLevel']
-      threshold_champion_ids << m['championId']
-    elsif keep_all
+    elsif keep_all || ((level_threshold..5).include? m['championLevel'])
       threshold_champion_ids << m['championId']
     end
   end
