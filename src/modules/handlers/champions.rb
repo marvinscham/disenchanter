@@ -80,11 +80,14 @@ def handle_champions(client)
   when '2'
     loot_shards = handle_champions_tokens(player_loot, loot_shards)
   when '3'
-    loot_shards = handle_champions_mastery(loot_shards)
+    loot_shards = handle_champions_mastery(client, loot_shards)
   when '4'
-    loot_shards = handle_champions_mastery(loot_shards, true)
+    loot_shards = handle_champions_mastery(client, loot_shards, keep_all: true)
   when '5'
     loot_shards = handle_champions_collection(loot_shards)
+  else
+    puts 'Invalid state, exiting.'.yellow
+    return
   end
 
   loot_shards = loot_shards.select { |l| l['count'].positive? }
@@ -99,10 +102,10 @@ def handle_champions(client)
   puts "We'd disenchant #{count_loot_items(loot_shards)} champion shards using the option you chose:".light_blue
   loot_shards.each do |l|
     loot_value = l['disenchantValue'] * l['count']
-    print pad("#{l['count']}x ", 5, false).light_black
+    print pad("#{l['count']}x ", 5, right: false).light_black
     print pad(l['itemDesc'], 15).light_white
     print ' @ '.light_black
-    print pad("#{loot_value} BE", 8, false).light_black
+    print pad("#{loot_value} BE", 8, right: false).light_black
     if l['count_keep'].positive?
       puts " keeping #{l['count_keep']}".green
     elsif l['disenchant_note'].length.positive?
@@ -135,7 +138,7 @@ def handle_champions(client)
     threads =
       loot_shards.map do |s|
         Thread.new do
-          post_recipe(
+          client.req_post_recipe(
             'CHAMPION_RENTAL_disenchant',
             s['lootId'],
             s['count']

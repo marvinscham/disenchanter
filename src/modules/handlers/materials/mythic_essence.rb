@@ -41,6 +41,9 @@ def handle_mythic_essence(client)
   when 'x'
     puts 'Mythic crafting canceled.'.yellow
     return
+  else
+    puts 'Invalid state, exiting.'.yellow
+    return
   end
 
   recipes = client.req_get_recipes_for_item(mythic_loot_id)
@@ -62,9 +65,9 @@ def handle_mythic_essence(client)
       "#{craft_mythic_type_names[craft_mythic_type.to_i - 1]}?",
       (1..loot_essence['count'].to_i)
         .to_a
+        .map!(&:to_s)
         .append('all')
-        .append('x')
-        .map!(&:to_s),
+        .append('x'),
       "[1..#{loot_essence['count']}|all|x]"
     )
 

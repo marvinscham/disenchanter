@@ -120,6 +120,8 @@ def run
       handle_debug
     when 'x'
       done = true
+    else
+      puts 'Invalid state, exiting.'.yellow
     end
     client.refresh_loot
     puts separator
