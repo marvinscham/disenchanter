@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Will keep one shard for each champion
 def handle_champions_collection(loot_shards)
   loot_shards.each do |l|
     l['count'] -= 1

@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
+# Redeems mastery 6/7 tokens as efficiently as possible:
+# Prefers champion shard over champion permanent over blue essence
+# @param client Client connector
 def handle_mastery_tokens(client)
   player_loot = client.req_get_player_loot
+
   loot_shards = player_loot.select { |l| l['type'] == 'CHAMPION_RENTAL' }
   loot_perms = player_loot.select { |l| l['type'] == 'CHAMPION' }
 
   recipes6 = client.req_get_recipes_for_item('CHAMPION_TOKEN_6-1')
   recipes7 = client.req_get_recipes_for_item('CHAMPION_TOKEN_7-1')
+
   recipe6_cost =
     recipes6.select do |r|
       r['recipeName'] == 'CHAMPION_TOKEN_6_redeem_withessence'
@@ -52,8 +57,9 @@ def handle_mastery_tokens(client)
 
     print pad(t['itemDesc'], 15, false).light_white
     print ' to Mastery Level '.light_black
-    print (t['lootName'])[-1].light_white
+    print t['lootName'][-1].light_white
     print ' using '.light_black
+
     if !ref_shard.empty? && ref_shard[0]['count'].positive?
       print 'a champion shard.'.green
       needed_shards += 1
@@ -68,6 +74,7 @@ def handle_mastery_tokens(client)
       needed_essence += recipe_cost
       t['upgrade_type'] = 'essence'
     end
+
     puts
   end
   puts

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Opens keyless chests/capsules
+# @param client Client connector
 def handle_capsules(client)
   player_loot = client.req_get_player_loot
 

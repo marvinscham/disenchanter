@@ -5,6 +5,7 @@ require_relative '../modules/detect_client'
 # Holds port and token info
 class Client
   attr_accessor :stat_tracker
+  attr_reader :debug
 
   def initialize(stat_tracker)
     begin
@@ -90,19 +91,19 @@ class Client
 
     loot_id_string = "[\"#{Array(loot_ids).join('", "')}\"]"
 
-    op =
+    post_answer =
       request_post(
         "lol-loot/v1/recipes/#{recipe}/craft?repeat=#{repeat}",
         loot_id_string
       )
-    handle_post_debug
-    op
+    handle_post_debug(post_answer)
+    post_answer
   end
 
-  def handle_post_debug
+  def handle_post_debug(post_answer)
     return unless @debug
 
-    File.write('disenchanter_post.json', op.to_json)
+    File.write('disenchanter_post.json', post_answer.to_json)
     puts('Okay, written to disenchanter_post.json.')
   end
 end

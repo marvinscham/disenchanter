@@ -5,6 +5,8 @@ require_relative 'materials/key_fragments'
 require_relative 'materials/mastery_tokens'
 require_relative 'materials/mythic_essence'
 
+# Handles anything from the 'materials' loot section like keys, capsules and more
+# @param client Client connector
 def handle_materials(client)
   done = false
   things_todo = {
@@ -54,6 +56,7 @@ def handle_materials(client)
     when 'x'
       done = true
     end
+
     puts separator
   end
 end

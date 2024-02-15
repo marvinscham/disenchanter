@@ -6,6 +6,8 @@ require_relative 'champions/mastery'
 require_relative 'champions/owned'
 require_relative 'champions/tokens'
 
+# Handles any champion shard and champion permanent related loot actions
+# @param client Client connector
 def handle_champions(client)
   player_loot = client.req_get_player_loot
   loot_shards = player_loot.select { |l| l['type'] == 'CHAMPION_RENTAL' }

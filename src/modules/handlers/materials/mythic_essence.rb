@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Handles mythic essence crafting
+# @param client Client connector
 def handle_mythic_essence(client)
   player_loot = client.req_get_player_loot
   mythic_loot_id = 'CURRENCY_mythic'

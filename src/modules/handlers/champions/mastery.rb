@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Will keep shards to max out champions above a user-specified mastery level
+# @param client Client connector
+# @param loot_shards Loot array, pre-filtered to only champion shards and permanents
+# @param keep_all Whether to keep all shards that could possibly be used for non-collection purposes
 def handle_champions_mastery(client, loot_shards, keep_all: false)
   summoner = client.req_get_current_summoner
   player_mastery = client.req_get_champion_mastery(summoner['summonerId'])

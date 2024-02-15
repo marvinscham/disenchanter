@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Combines key fragments to keys
+# @param client Client connector
 def handle_key_fragments(client)
   player_loot = client.req_get_player_loot
 
