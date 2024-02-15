@@ -3,6 +3,7 @@ disenchanter_up.exe
 tmpin
 tmpout
 
+disenchanter_*.json
 settings.json
 rubocop-report.json
 
