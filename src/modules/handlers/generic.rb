@@ -9,6 +9,8 @@ def handle_generic(client, name, type)
   disenchant_all = true
 
   loot_generic = player_loot.select { |l| l['type'] == type }
+  # Things like esports icons cannot be disenchanted -> drop
+  loot_generic = loot_generic.reject { |l| l['disenchantLootName'] == '' }
   if count_loot_items(loot_generic).zero?
     puts "Found no #{name} to disenchant.".yellow
     return
@@ -39,8 +41,7 @@ def handle_generic(client, name, type)
       return
     when 'y'
       disenchant_all = false
-      loot_generic =
-        loot_generic.select { |g| g['redeemableStatus'] == 'ALREADY_OWNED' }
+      loot_generic = loot_generic.select { |g| g['redeemableStatus'] == 'ALREADY_OWNED' }
       puts "Filtered to #{count_loot_items(loot_generic)} items.".light_blue
     end
   end
@@ -78,8 +79,13 @@ def handle_generic(client, name, type)
     puts
   end
 
+  disenchant_info = ''
+  disenchant_info += "#{total_oe_value} Orange Essence" if total_oe_value.positive?
+  disenchant_info += ' and ' if total_oe_value.positive? && total_be_value.positive?
+  disenchant_info += "#{total_be_value} Blue Essence" if total_be_value.positive?
+
   if ans_y.include? user_input_check(
-    "Disenchant #{count_loot_items(loot_generic)} #{name} for #{total_oe_value} Orange Essence and #{total_be_value} Blue Essence?",
+    "Disenchant #{count_loot_items(loot_generic)} #{name} for #{disenchant_info}?",
     ans_yn,
     ans_yn_d,
     'confirm'
