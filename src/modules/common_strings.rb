@@ -27,3 +27,17 @@ end
 def pad(str, len, right: true)
   format("%#{right ? '-' : ''}#{len}s", str)
 end
+
+unless String.method_defined?(:light_yellow)
+  # Type hints!
+  class String
+    def light_yellow = self
+    def light_blue = self
+    def light_green = self
+    def light_white = self
+    def light_black = self
+    def light_red = self
+    def light_magenta = self
+    def light_cyan = self
+  end
+end

@@ -8,14 +8,15 @@ def handle_champions_tokens(player_loot, loot_shards)
     player_loot.select { |l| l['type'] == 'CHAMPION_TOKEN' }
 
   loot_mastery_tokens.each do |token|
-    if token['lootName'] = 'CHAMPION_TOKEN_6'
+    if token['lootName'] == 'CHAMPION_TOKEN_6'
       token6_champion_ids << token['refId'].to_i
-    elsif token['lootName'] = 'CHAMPION_TOKEN_7'
+    elsif token['lootName'] == 'CHAMPION_TOKEN_7'
       token7_champion_ids << token['refId'].to_i
     end
   end
 
-  puts "Found #{token6_champion_ids.length + token7_champion_ids.length} champions with owned mastery tokens".light_black
+  token_champion_count = token6_champion_ids.length + token7_champion_ids.length
+  puts "Found #{token_champion_count} champions with owned mastery tokens".light_black
 
   loot_shards.each do |l|
     if token6_champion_ids.include? l['storeItemId']

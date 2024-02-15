@@ -42,15 +42,12 @@ def gather_stats(stat_tracker)
   stats = ['Actions', 'Disenchanted', 'Opened', 'Crafted', 'Redeemed', 'Blue Essence', 'Orange Essence']
 
   out += stats.map { |stat| wrap_stat_line(stat, stat_tracker.send(stat.downcase.gsub(' ', '_'))) }.join
-  out
 end
 
 def wrap_stat_line(name, value)
   strlen = 15
   numlen = 7
   out = pad(name, strlen)
-  out += pad(value.to_s, numlen, false).light_white
+  out += pad(value.to_s, numlen, right: false).light_white
   out += "\n"
-
-  out
 end
