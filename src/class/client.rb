@@ -7,6 +7,7 @@ class Client
   attr_accessor :stat_tracker
   attr_reader :debug
 
+  # @param stat_tracker StatTracker
   def initialize(stat_tracker)
     begin
       @port, @token = grab_lockfile
