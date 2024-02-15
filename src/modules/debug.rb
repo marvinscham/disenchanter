@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Handles debug related stuff
+# @param client Client connector
 def handle_debug(client)
   done = false
   things_todo = {

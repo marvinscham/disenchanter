@@ -4,8 +4,7 @@ require_relative '../modules/detect_client'
 
 # Holds port and token info
 class Client
-  attr_accessor :stat_tracker
-  attr_reader :debug
+  attr_accessor :stat_tracker, :debug
 
   # @param stat_tracker StatTracker
   def initialize(stat_tracker)
