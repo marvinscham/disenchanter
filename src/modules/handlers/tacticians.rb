@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
-def handle_tacticians
-  puts 'Not yet supported, skipping'.light_black
+# Wrapper for tacticians
+# @param client Client connector
+# @note There are no shards for tacticians, only permanents
+def handle_tacticians(client)
+  handle_generic(client, 'Tacticians', 'COMPANION', 'COMPANION_disenchant')
 end
