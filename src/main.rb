@@ -117,7 +117,7 @@ def run
     when 'r'
       open_github
     when 'd'
-      handle_debug
+      handle_debug(client)
     when 'x'
       done = true
     else
