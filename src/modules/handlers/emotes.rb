@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
-def handle_emotes
-  handle_generic('Emotes', 'EMOTE', 'EMOTE_disenchant')
+# Wrapper for emotes
+# @param client Client connector
+# @note No shards for emotes
+def handle_emotes(client)
+  handle_generic(client, 'Emotes', 'EMOTE')
 end

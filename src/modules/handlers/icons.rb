@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
-def handle_icons
-  handle_generic('Icons', 'SUMMONERICON', 'SUMMONERICON_disenchant')
+# Wrapper for summoner icons
+# @param client Client connector
+# @note No shards for icons!
+def handle_icons(client)
+  handle_generic(client, 'Icons', 'SUMMONERICON')
 end

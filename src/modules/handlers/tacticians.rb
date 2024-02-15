@@ -4,5 +4,5 @@
 # @param client Client connector
 # @note There are no shards for tacticians, only permanents
 def handle_tacticians(client)
-  handle_generic(client, 'Tacticians', 'COMPANION', 'COMPANION_disenchant')
+  handle_generic(client, 'Tacticians', 'COMPANION')
 end

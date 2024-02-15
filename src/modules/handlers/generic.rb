@@ -4,8 +4,7 @@
 # @param client Client connector
 # @param name Display name ("Skin Shards")
 # @param type Riot loot type name ("SKIN_RENTAL")
-# @param recipe Riot recipe name ("SKIN_RENTAL_disenchant")
-def handle_generic(client, name, type, recipe)
+def handle_generic(client, name, type)
   player_loot = client.req_get_player_loot
   disenchant_all = true
 
@@ -52,8 +51,10 @@ def handle_generic(client, name, type, recipe)
   end
 
   total_oe_value = 0
+  total_be_value = 0
   loot_generic.each do |g|
-    total_oe_value += g['disenchantValue'] * g['count']
+    total_be_value += g['disenchantValue'] * g['count'] if g['disenchantLootName'] == 'CURRENCY_champion'
+    total_oe_value += g['disenchantValue'] * g['count'] if g['disenchantLootName'] == 'CURRENCY_cosmetic'
   end
 
   loot_name_index = 'itemDesc'
@@ -67,25 +68,28 @@ def handle_generic(client, name, type, recipe)
   puts "We'd disenchant #{count_loot_items(loot_generic)} #{name} using the option you chose:".light_blue
   loot_generic.each do |l|
     loot_value = l['disenchantValue'] * l['count']
+    loot_currency = l['disenchantLootName'] == 'CURRENCY_champion' ? 'BE' : 'OE'
+
     print pad("#{l['count']}x ", 5, right: false).light_black
     print pad(l[loot_name_index], 30).light_white
     print ' @ '.light_black
-    print pad("#{loot_value} OE", 8, right: false).light_black
+    print pad("#{loot_value} #{loot_currency}", 8, right: false).light_black
     print ' (not owned)'.yellow if disenchant_all && l['redeemableStatus'] != 'ALREADY_OWNED'
     puts
   end
 
   if ans_y.include? user_input_check(
-    "Disenchant #{count_loot_items(loot_generic)} #{name} for #{total_oe_value} Orange Essence?",
+    "Disenchant #{count_loot_items(loot_generic)} #{name} for #{total_oe_value} Orange Essence and #{total_be_value} Blue Essence?",
     ans_yn,
     ans_yn_d,
     'confirm'
   )
     client.stat_tracker.add_disenchanted(count_loot_items(loot_generic))
+    client.stat_tracker.add_blue_essence(total_be_value)
     client.stat_tracker.add_orange_essence(total_oe_value)
     threads =
       loot_generic.map do |g|
-        Thread.new { client.req_post_recipe(recipe, g['lootId'], g['count']) }
+        Thread.new { client.req_post_recipe(g['disenchantRecipeName'], g['lootId'], g['count']) }
       end
     threads.each(&:join)
 

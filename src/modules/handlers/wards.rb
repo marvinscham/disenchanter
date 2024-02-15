@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-def handle_ward_skins
-  handle_generic(
-    'Ward Skin Shards',
-    'WARDSKIN_RENTAL',
-    'WARDSKIN_RENTAL_disenchant'
-  )
-  handle_generic('Ward Skin Permanents', 'WARDSKIN', 'WARDSKIN_disenchant')
+# Wrapper for ward skins and their permanents
+# @param client Client connector
+def handle_ward_skins(client)
+  handle_generic(client, 'Ward Skin Shards', 'WARDSKIN_RENTAL')
+  handle_generic(client, 'Ward Skin Permanents', 'WARDSKIN')
 end

@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-def handle_eternals
-  handle_generic(
-    'Eternal Shards',
-    'STATSTONE_SHARD',
-    'STATSTONE_SHARD_DISENCHANT'
-  )
-  handle_generic('Eternals', 'STATSTONE', 'STATSTONE_DISENCHANT')
+# Wrapper for eternals sets and their shards
+# @param client Client connector
+def handle_eternals(client)
+  handle_generic(client, 'Eternals Set Shards', 'STATSTONE_SHARD')
+  handle_generic(client, 'Eternals Set Permanent', 'STATSTONE')
 end

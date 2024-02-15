@@ -141,7 +141,7 @@ def handle_champions(client)
       loot_shards.map do |s|
         Thread.new do
           client.req_post_recipe(
-            'CHAMPION_RENTAL_disenchant',
+            s['disenchantRecipeName'],
             s['lootId'],
             s['count']
           )
