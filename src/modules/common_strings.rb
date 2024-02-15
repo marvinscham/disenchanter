@@ -23,3 +23,7 @@ end
 def ans_yn_d
   '[y|n]'
 end
+
+def pad(str, len, right: true)
+  format("%#{right ? '-' : ''}#{len}s", str)
+end

@@ -8,8 +8,8 @@ def count_loot_items(loot_items)
   count
 end
 
-def get_chest_name(loot_id)
-  chest_info = get_loot_info(loot_id)
+def get_chest_name(client, loot_id)
+  chest_info = client.req_get_loot_info(loot_id)
   return chest_info['localizedName'] unless chest_info['localizedName'].empty?
 
   catalogue = {

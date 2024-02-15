@@ -97,7 +97,7 @@ def run
 
     case todo
     when '1'
-      handle_materials(client, stat_tracker)
+      handle_materials(client)
     when '2'
       handle_champions(client)
     when '3'
@@ -133,10 +133,6 @@ def run
   handle_stat_submission(stat_tracker)
   puts 'See you next time :)'.light_green
   ask exit_string
-end
-
-def pad(str, len, right: true)
-  format("%#{right ? '-' : ''}#{len}s", str)
 end
 
 run

@@ -4,12 +4,12 @@ require_relative '../modules/detect_client'
 
 # Holds port and token info
 class Client
+  attr_accessor :stat_tracker
+
   def initialize(stat_tracker)
     begin
       @port, @token = grab_lockfile
     rescue StandardError
-      puts 'Could not grab session!'.light_red
-      puts 'Make sure the script is in your League Client folder and that your Client is running.'.light_red
       ask exit_string
       exit 1
     end
@@ -49,7 +49,8 @@ class Client
     end
   end
 
-  def request_post(path, body)
+  def request_post(path, _body)
+    puts "Posting against #{host}/#{path}".light_black if @debug
     # create_client do |http|
     #   uri = URI("#{host}/#{path}")
     #   req = Net::HTTP::Post.new(uri, 'Content-Type': 'application/json')

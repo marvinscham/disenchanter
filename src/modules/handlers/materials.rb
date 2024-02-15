@@ -5,7 +5,7 @@ require_relative 'materials/key_fragments'
 require_relative 'materials/mastery_tokens'
 require_relative 'materials/mythic_essence'
 
-def handle_materials(client, stat_tracker)
+def handle_materials(client)
   done = false
   things_todo = {
     '1' => 'Mythic Essence',
@@ -44,13 +44,13 @@ def handle_materials(client, stat_tracker)
 
     case todo
     when '1'
-      handle_mythic_essence(client, stat_tracker)
+      handle_mythic_essence(client)
     when '2'
-      handle_key_fragments(client, stat_tracker)
+      handle_key_fragments(client)
     when '3'
-      handle_capsules(client, stat_tracker)
+      handle_capsules(client)
     when '4'
-      handle_mastery_tokens(client, stat_tracker)
+      handle_mastery_tokens(client)
     when 'x'
       done = true
     end

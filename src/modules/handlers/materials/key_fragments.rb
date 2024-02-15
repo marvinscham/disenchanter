@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-def handle_key_fragments(client, stat_tracker)
+def handle_key_fragments(client)
   player_loot = client.req_get_player_loot
 
   loot_keys =
@@ -20,7 +20,7 @@ def handle_key_fragments(client, stat_tracker)
     ans_yn_d,
     'confirm'
   )
-    stat_tracker.add_crafted(key_count)
+    client.stat_tracker.add_crafted(key_count)
     client.req_post_recipe(
       'MATERIAL_key_fragment_forge',
       'MATERIAL_key_fragment',

@@ -49,8 +49,9 @@ def grab_lockfile
     begin
       contents = File.read(lockfile)
     rescue StandardError
-      puts 'Failed to automatically find your League Client path.'.light_red
-      puts 'Please place the script directly in your League Client folder.'.light_red
+      puts 'Failed to automatically find your League Client.'.light_red
+      puts 'Make sure your client is running and logged into your account.'.light_red
+      puts 'If it\'s running and you\'re seeing this, please place the script directly in your League Client folder.'.light_red
     end
   end
 

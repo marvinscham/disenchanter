@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-def handle_mastery_tokens(client, stat_tracker)
+def handle_mastery_tokens(client)
   player_loot = client.req_get_player_loot
   loot_shards = player_loot.select { |l| l['type'] == 'CHAMPION_RENTAL' }
   loot_perms = player_loot.select { |l| l['type'] == 'CHAMPION' }
 
-  recipes6 = get_recipes_for_item('CHAMPION_TOKEN_6-1')
-  recipes7 = get_recipes_for_item('CHAMPION_TOKEN_7-1')
+  recipes6 = client.req_get_recipes_for_item('CHAMPION_TOKEN_6-1')
+  recipes7 = client.req_get_recipes_for_item('CHAMPION_TOKEN_7-1')
   recipe6_cost =
     recipes6.select do |r|
       r['recipeName'] == 'CHAMPION_TOKEN_6_redeem_withessence'
@@ -121,7 +121,7 @@ def handle_mastery_tokens(client, stat_tracker)
         )
       end
 
-      stat_tracker.add_redeemed(1)
+      client.stat_tracker.add_redeemed(1)
     end
   end
 rescue StandardError => e

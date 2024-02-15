@@ -7,7 +7,7 @@ def handle_champions_owned(loot_shards)
       l['count_keep'] += 1
     end
   end
-  loot_shards.select { |l| l['count'] > 0 }
+  loot_shards.select { |l| l['count'].positive? }
 rescue StandardError => e
-  handle_capsules(e, 'Owned Champion Shards')
+  handle_exception(e, 'Owned Champion Shards')
 end

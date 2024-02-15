@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-def handle_mythic_essence(client, stat_tracker)
+def handle_mythic_essence(client)
   player_loot = client.req_get_player_loot
   mythic_loot_id = 'CURRENCY_mythic'
 
@@ -21,10 +21,11 @@ def handle_mythic_essence(client, stat_tracker)
 
   craft_mythic_type =
     user_input_check(
-      "Okay, what would you like to craft?\n" +
-        "[1] #{craft_mythic_type_names[0]}\n" +
-        "[2] #{craft_mythic_type_names[1]}\n" +
-        "[3] #{craft_mythic_type_names[2]}\n" + "[x] Cancel\n",
+      "Okay, what would you like to craft?\n" \
+      "[1] #{craft_mythic_type_names[0]}\n" \
+      "[2] #{craft_mythic_type_names[1]}\n" \
+      "[3] #{craft_mythic_type_names[2]}\n" \
+      "[x] Cancel\n",
       %w[1 2 3 x],
       '[1|2|3|x]'
     )
@@ -62,6 +63,7 @@ def handle_mythic_essence(client, stat_tracker)
       (1..loot_essence['count'].to_i)
         .to_a
         .append('all')
+        .append('x')
         .map!(&:to_s),
       "[1..#{loot_essence['count']}|all|x]"
     )
@@ -93,13 +95,13 @@ def handle_mythic_essence(client, stat_tracker)
   )
     case craft_mythic_type
     when '1'
-      stat_tracker.add_blue_essence(craft_quantity)
+      client.stat_tracker.add_blue_essence(craft_quantity)
     when '2'
-      stat_tracker.add_orange_essence(craft_quantity)
+      client.stat_tracker.add_orange_essence(craft_quantity)
     end
-    stat_tracker.add_crafted(could_craft)
+    client.stat_tracker.add_crafted(could_craft)
 
-    post_recipe(
+    client.req_post_recipe(
       recipe['recipeName'],
       mythic_loot_id,
       (craft_mythic_amount / recipe['slots'][0]['quantity']).floor
