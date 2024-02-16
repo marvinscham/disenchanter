@@ -21,6 +21,12 @@ def handle_champions_tokens(player_loot, loot_shards)
   token_champion_count = token6_champion_ids.length + token7_champion_ids.length
   puts "Found #{token_champion_count} champions with owned mastery tokens".light_black
 
+  adjust_token_counts(loot_shards, token6_champion_ids, token7_champion_ids)
+rescue StandardError => e
+  handle_exception(e, 'Champion Shards by Tokens')
+end
+
+def adjust_token_counts(loot_shards, token6_champion_ids, token7_champion_ids)
   loot_shards.each do |l|
     if token6_champion_ids.include? l['storeItemId']
       l['count'] -= 2
@@ -30,6 +36,4 @@ def handle_champions_tokens(player_loot, loot_shards)
       l['count_keep'] += 1
     end
   end
-rescue StandardError => e
-  handle_exception(e, 'Champion Shards by Tokens')
 end

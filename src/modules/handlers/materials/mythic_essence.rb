@@ -67,9 +67,9 @@ def handle_mythic_essence(client)
       "#{craft_mythic_type_names[craft_mythic_type.to_i - 1]}?",
       (1..loot_essence['count'].to_i)
         .to_a
-        .map!(&:to_s)
         .append('all')
-        .append('x'),
+        .append('x')
+        .map!(&:to_s),
       "[1..#{loot_essence['count']}|all|x]"
     )
 

@@ -41,7 +41,7 @@ def gather_stats(stat_tracker)
   out = "Your stats:\n".light_blue
   stats = ['Actions', 'Disenchanted', 'Opened', 'Crafted', 'Redeemed', 'Blue Essence', 'Orange Essence']
 
-  out += stats.map { |stat| wrap_stat_line(stat, stat_tracker.send(stat.downcase.gsub(' ', '_'))) }.join
+  out + stats.map { |stat| wrap_stat_line(stat, stat_tracker.send(stat.downcase.gsub(' ', '_'))) }.join
 end
 
 def wrap_stat_line(name, value)
@@ -49,5 +49,5 @@ def wrap_stat_line(name, value)
   numlen = 7
   out = pad(name, strlen)
   out += pad(value.to_s, numlen, right: false).light_white
-  out += "\n"
+  "#{out}\n"
 end

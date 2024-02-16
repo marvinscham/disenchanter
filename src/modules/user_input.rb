@@ -15,7 +15,7 @@ def user_input_check(question, answers, answer_display, color_preset = 'default'
       "CONFIRM: #{question} ".light_magenta + answer_display.to_s.light_white + ': '.light_magenta
   when 'default'
     question =
-      "#{question} ".light_cyan + answer_display.to_s.light_white + ': '.light_cyan
+      question.light_cyan + "#{answer_display}: ".light_white
   end
 
   until answers.include? input

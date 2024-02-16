@@ -12,15 +12,13 @@ def handle_mastery_tokens(client)
   recipes6 = client.req_get_recipes_for_item('CHAMPION_TOKEN_6-1')
   recipes7 = client.req_get_recipes_for_item('CHAMPION_TOKEN_7-1')
 
-  recipe6_cost =
-    recipes6.select do |r|
-      r['recipeName'] == 'CHAMPION_TOKEN_6_redeem_withessence'
-    end
+  recipe6_cost = recipes6.select do |r|
+    r['recipeName'] == 'CHAMPION_TOKEN_6_redeem_withessence'
+  end
   recipe6_cost = recipe6_cost[0]['slots'][1]['quantity']
-  recipe7_cost =
-    recipes7.select do |r|
-      r['recipeName'] == 'CHAMPION_TOKEN_7_redeem_withessence'
-    end
+  recipe7_cost = recipes7.select do |r|
+    r['recipeName'] == 'CHAMPION_TOKEN_7_redeem_withessence'
+  end
   recipe7_cost = recipe7_cost[0]['slots'][1]['quantity']
 
   loot_overall_tokens =
