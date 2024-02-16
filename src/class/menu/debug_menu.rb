@@ -10,6 +10,7 @@ class DebugMenu < Menu
       '1' => 'Write player_loot to file',
       '2' => 'Write recipes of lootId to file',
       '3' => 'Write loot info of lootId to file',
+      '4' => 'Write summoner info to file',
       'm' => 'Toggle debug mode',
       'x' => 'Back to main menu'
     }
@@ -37,6 +38,9 @@ class DebugMenu < Menu
       loot_info = @client.req_get_loot_info(loot_id)
       File.write('disenchanter_lootinfo.json', loot_info.to_json)
       puts('Okay, written to disenchanter_lootinfo.json.')
+    when '4'
+      File.write('disenchanter_summoner.json', @client.req_get_current_summoner.to_json)
+      puts('Okay, written to disenchanter_summoner.json.')
     when 'm'
       @client.debug = !@client.debug
       puts @client.debug ? 'Debug mode enabled' : 'Debug mode disabled'
