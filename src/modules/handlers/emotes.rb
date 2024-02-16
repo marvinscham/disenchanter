@@ -10,7 +10,7 @@ def handle_emotes(client)
   player_loot = client.req_get_player_loot
   esports_emotes = player_loot.select do |l|
     l['type'] == 'EMOTE' \
-      && l['disenchantLootName'] != '' \
+      && l['disenchantLootName'] == '' \
       && l['redeemableStatus'] == 'ALREADY_OWNED'
   end
   if count_loot_items(esports_emotes).zero?
