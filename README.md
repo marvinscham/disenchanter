@@ -1,10 +1,10 @@
 <p align="center" style="margin-bottom: 0px !important;">
-  <img src="https://raw.githubusercontent.com/marvinscham/disenchanter/main/BE_icon.ico" width="120" align="center">
+  <img src="./assets/BE_icon.ico" width="120" align="center">
 </p>
 <h1 align="center">Disenchanter</h1>
 <div align="center">
 
-![Patch](https://img.shields.io/badge/league%20patch-14.1-brightgreen)
+![Patch](https://img.shields.io/badge/league%20patch-14.2-brightgreen)
 ![Release](https://img.shields.io/github/v/release/marvinscham/disenchanter)
 ![Last Commit](https://img.shields.io/github/last-commit/marvinscham/disenchanter)
 
@@ -19,7 +19,7 @@
 
 Mass disenchant LoL loot like champion shards, eternals, mythic essence and more!
 
-[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200" align="center">](https://www.buymeacoffee.com/mscham)
+[<img src="./assets/kofi-button.png" width="200" align="center">](https://www.buymeacoffee.com/mscham)
 
 Based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-champ-shards).
 
@@ -31,13 +31,15 @@ Based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-c
 
 Download the pre-built `disenchanter.exe` from the [Latest Release](https://github.com/marvinscham/disenchanter/releases).
 
-Put the `disenchanter.exe` file in the same folder as your `LeagueClient.exe`, e.g. `C:\Riot Games\League of Legends` and run it. Make sure your League Client is running without admin privileges and you're logged in before running Disenchanter.
+Start your League Client **without admin privileges** and log into your account, then start the script.
+
+## Details
 
 The script is interactive and will guide you through the process with simple `[y|n]` questions and mode options. Before you disenchant or craft anything, you will be asked to confirm the action in a magenta colored message with a big `CONFIRM:` banner so don't be scared to explore the different options!
 
 Once you're finished, you can _optionally_ contribute your (anonymous) stats to the [Global Stats](https://github.com/marvinscham/disenchanter/wiki/Stats). ([Details](https://github.com/marvinscham/disenchanter/wiki/Stat-Collection))
 
-![Demo](https://raw.githubusercontent.com/marvinscham/disenchanter/main/disenchanter.png)
+![Demo](./assets/disenchanter.png)
 
 ## Is this a virus?
 
@@ -51,43 +53,26 @@ The script triggers the same server requests as you would in your League Client.
 
 ## Features
 
-- _Note: no longer supports event tokens since Riot updated event passes_
 
 - Materials
-
   - Craft Mythic Essence to Skins or Blue/Orange Essence
-
   - Combine Key Fragments
-
   - Open keyless capsules
-
-  - Upgrade Mastery Tokens
-
+  - Upgrade Mastery Tokens efficiently
 - Champion Shards
-
   - Disenchant all
-
   - Keep one for champions you don't own yet
-
   - Keep enough (1/2) for champions you own mastery 6/7 tokens for
-
   - Keep enough (1/2) to fully master champions at least at mastery level x (select from 1 to 6)
-
   - Keep enough (1/2) to fully master all champions (only disenchant shards that have no possible use)
-
   - Keep one of each champion regardless of mastery
-
   - Manual exceptions
-
 - Disenchant various items
-
   - Eternals
-
   - Emotes
-
   - Ward Skins
-
   - Summoner Icons
+  - Tacticians
 
 ## Problems, Bugs and Feature Suggestions
 
@@ -95,13 +80,11 @@ Something isn't working properly or you'd like to see a feature that isn't yet s
 
 - [Create an issue](https://github.com/marvinscham/disenchanter/issues/new/choose)
 - (**If you have no GitHub account**) hit me up at dev[at]marvinscham.de
-
 - Open a pull request with your contribution.
 
 ## ❤ Sponsors ❤
 
 - Ze Interrupter
-
 - tsunamihorseracing
 
 ## Disclaimer

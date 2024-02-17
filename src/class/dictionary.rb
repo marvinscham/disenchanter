@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+# Holds constants for Loot IDs
+class Dictionary
+  BLUE_ESSENCE = 'CURRENCY_champion'
+  ORANGE_ESSENCE = 'CURRENCY_cosmetic'
+  MYTHIC_ESSENCE = 'CURRENCY_mythic'
+
+  CHAMPION_SHARD = 'CHAMPION_RENTAL'
+  CHAMPION_PERMANENT = 'CHAMPION'
+
+  MASTERY_6_TOKEN = 'CHAMPION_TOKEN_6'
+  MASTERY_7_TOKEN = 'CHAMPION_TOKEN_7'
+
+  MASTERY_6_RECIPE = 'CHAMPION_TOKEN_6_redeem_withessence'
+  MASTERY_7_RECIPE = 'CHAMPION_TOKEN_7_redeem_withessence'
+
+  RANDOM_SKIN_SHARD = 'CHEST_291'
+end

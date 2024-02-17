@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - 'dependabot**'
+      - 'release**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    name: Analyze
+    if: github.event_name != 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions: read-all
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.3
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: RuboCop scan
+        run: bundle exec rubocop --format json -o rubocop-report.json || echo "Failed on RuboCop rules"
+
+      - name: Upload RuboCop report
+        uses: actions/upload-artifact@v2
+        with:
+          name: rubocop-report
+          path: rubocop-report.json
+
+      - name: SonarQube scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: Quality gate check
+        if: github.event_name != 'pull_request' || github.event_name == 'workflow_dispatch'
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
