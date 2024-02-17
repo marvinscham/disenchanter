@@ -40,7 +40,6 @@ GEM
     rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
     ruby-progressbar (1.13.0)
-    rufo (0.17.1)
     stringio (3.1.0)
     time (0.3.0)
       date
@@ -62,7 +61,6 @@ DEPENDENCIES
   open-uri (~> 0.2.0)
   openssl (= 3.1.0)
   rubocop (~> 1.60)
-  rufo (>= 0.13.0)
   win32-shortcut (~> 0.3.0)
 
 RUBY VERSION
