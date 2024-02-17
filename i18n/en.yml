@@ -1,0 +1,5 @@
+en:
+  meta:
+    locale_name: "English"
+    manually_set_locale: "Set to English!"
+    translation_note: "Translation missing? Help by offering yours: https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md"
