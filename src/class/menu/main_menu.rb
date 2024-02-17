@@ -29,6 +29,7 @@ class MainMenu < Menu
       '6' => 'Emotes',
       '7' => 'Ward Skins',
       '8' => 'Icons',
+      'm' => 'Open Mastery Chart profile',
       's' => 'Open Disenchanter Global Stats',
       'r' => 'Open GitHub repository',
       'd' => 'Debug Tools',
@@ -57,6 +58,8 @@ class MainMenu < Menu
       handle_ward_skins(@client)
     when '8'
       handle_icons(@client)
+    when 'm'
+      open_masterychart(@client)
     when 's'
       open_stats
     when 'r'
