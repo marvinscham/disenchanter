@@ -19,7 +19,7 @@
 
 Mass disenchant LoL loot like champion shards, eternals, mythic essence and more!
 
-[<img src="./assets/kofi-button.png" width="200" align="center">](https://www.buymeacoffee.com/mscham)
+[<img src="./assets/kofi-button.png" width="200" align="center">](https://ko-fi.com/marvinscham)
 
 Based on [Anujan/disenchant-champ-shards](https://github.com/Anujan/disenchant-champ-shards).
 
