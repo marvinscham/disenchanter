@@ -41,7 +41,8 @@ def download_remote_version(version)
     ans_yn,
     ans_yn_d
   )
-    `curl https://github.com/marvinscham/disenchanter/releases/download/#{version}/disenchanter_up.exe -L -o disenchanter_up.exe`
+    exe_url = "https://github.com/marvinscham/disenchanter/releases/download/#{version}/disenchanter_up.exe"
+    `curl #{exe_url} -L -o disenchanter_up.exe`
     puts 'Done downloading!'.green
 
     pid = spawn('start cmd.exe @cmd /k "disenchanter_up.exe"')

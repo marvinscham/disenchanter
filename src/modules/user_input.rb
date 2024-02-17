@@ -11,11 +11,11 @@ def user_input_check(question, answers, answer_display, color_preset = 'default'
 
   case color_preset
   when 'confirm'
-    question =
-      "CONFIRM: #{question} ".light_magenta + answer_display.to_s.light_white + ': '.light_magenta
+    question = "CONFIRM: #{question} ".light_magenta + answer_display.to_s.light_white + ': '.light_magenta
   when 'default'
-    question =
-      question.light_cyan + "#{answer_display}: ".light_white
+    question += " #{answer_display}: ".light_white
+  when 'dry'
+    question += " #{answer_display} (DRY): ".light_red
   end
 
   until answers.include? input

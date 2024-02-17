@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'colorize'
+
 def exit_string
   'Press Enter to exit.'.cyan
 end

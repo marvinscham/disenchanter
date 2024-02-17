@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'launchy'
+
 def open_github
   puts 'Opening GitHub repository at https://github.com/marvinscham/disenchanter/ in your browser...'.light_blue
   Launchy.open('https://github.com/marvinscham/disenchanter/')

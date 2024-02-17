@@ -2,6 +2,8 @@
 
 # An interactive terminal menu
 class Menu
+  attr_reader :things_todo
+
   # @param client Client connector
   # @param menu_text Text presented at the menu's top
   # @param answer_display Display text for answers
@@ -15,22 +17,29 @@ class Menu
     @things_done = []
   end
 
+  # Runs a menu loop until it's either done or the user bails to the main menu
+  # @return true if user bailed
   def run_loop
     done = false
+    bail = false
 
-    until done
+    until done || bail
       thing_todo = user_input_check(
         "\n#{@menu_text}\n\n".light_cyan + todo_str,
         @things_todo.keys,
         @answer_display,
-        'default'
+        @client.dry_run ? 'dry' : 'default'
       )
       @things_done << thing_todo
       puts separator + "\n\nOption chosen: #{@things_todo[thing_todo]}".light_white
 
       done = handle_option(thing_todo)
+      bail = thing_todo == 'x'
+
       puts separator
     end
+
+    bail
   end
 
   def todo_str
@@ -48,7 +57,7 @@ class Menu
   end
 
   # Override this!
-  def handle_option(todo)
-    puts "Stump for option: #{todo}."
+  def handle_option(thing_todo)
+    puts "Stump for option: #{thing_todo}."
   end
 end

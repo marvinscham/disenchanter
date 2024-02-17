@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
+require 'base64'
+require 'net/http'
+require 'json'
+
 require_relative '../modules/detect_client'
 
 # Holds port and token info
 class Client
-  attr_accessor :stat_tracker, :debug
+  attr_accessor :stat_tracker, :debug, :dry_run
 
   # @param stat_tracker StatTracker
   def initialize(stat_tracker)
@@ -16,6 +20,7 @@ class Client
     end
     @stat_tracker = stat_tracker
     @debug = false
+    @dry_run = false
   end
 
   def host
@@ -52,6 +57,9 @@ class Client
 
   def request_post(path, _body)
     puts "Posting against #{host}/#{path}".light_black if @debug
+    puts 'DRY RUN ENABLED - actually did nothing'.light_red if @dry_run
+    return if @dry_run
+
     # create_client do |http|
     #   uri = URI("#{host}/#{path}")
     #   req = Net::HTTP::Post.new(uri, 'Content-Type': 'application/json')

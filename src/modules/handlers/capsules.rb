@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../loot_metainfo'
+
 # Opens keyless chests/capsules
 # @param client Client connector
 def handle_capsules(client)

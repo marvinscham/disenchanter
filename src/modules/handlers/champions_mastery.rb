@@ -32,20 +32,24 @@ def handle_champions_mastery(client, loot_shards, keep_all: false)
   end
 
   loot_shards.each do |l|
-    if mastery7_champion_ids.include? l['storeItemId']
-      l['disenchant_note'] = 'at mastery 7'.light_black
-    elsif mastery6_champion_ids.include? l['storeItemId']
-      l['count'] -= 1
-      l['count_keep'] += 1
-    elsif keep_all || (threshold_champion_ids.include? l['storeItemId'])
-      l['count'] -= 2
-      l['count_keep'] += 2
-    else
-      l['disenchant_note'] = 'below threshold'.yellow
-    end
+    adjust_shard_counts_by_threshold(l, keep_all, mastery6_champion_ids, mastery7_champion_ids, threshold_champion_ids)
   end
 
   loot_shards
 rescue StandardError => e
   handle_exception(e, 'Champion Shards by Mastery')
+end
+
+def adjust_shard_counts_by_threshold(shard, keep_all, m6_ids, m7_ids, threshold_ids)
+  if m7_ids.include? shard['storeItemId']
+    shard['disenchant_note'] = 'at mastery 7'.light_black
+  elsif m6_ids.include? shard['storeItemId']
+    shard['count'] -= 1
+    shard['count_keep'] += 1
+  elsif keep_all || (threshold_ids.include? shard['storeItemId'])
+    shard['count'] -= 2
+    shard['count_keep'] += 2
+  else
+    shard['disenchant_note'] = 'below threshold'.yellow
+  end
 end

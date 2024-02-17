@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 # Keeps only shards to max out champions with owned mastery 6/7 tokens
-# @param player_loot Loot array to grab mastery tokens
+# @param client Client connector
 # @param loot_shards Loot array pre-filtered to only champion shards and permanents
-def handle_champions_tokens(player_loot, loot_shards)
+def handle_champions_tokens(client, loot_shards)
   token6_champion_ids = []
   token7_champion_ids = []
+  player_loot = client.req_get_player_loot
 
   loot_mastery_tokens =
     player_loot.select { |l| l['type'] == 'CHAMPION_TOKEN' }
