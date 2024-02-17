@@ -28,6 +28,8 @@ def handle_champions_mastery(client, loot_shards, keep_all: false)
       mastery6_champion_ids << m['championId']
     when level_threshold..5
       threshold_champion_ids << m['championId']
+    else
+      # Nothing to do
     end
   end
 

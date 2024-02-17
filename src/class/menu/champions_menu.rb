@@ -44,6 +44,8 @@ class ChampionsMenu < Menu
       @loot_shards = handle_champions_mastery(@client, @loot_shards, keep_all: true)
     when '5'
       @loot_shards = handle_champions_collection(@loot_shards)
+    else
+      return false
     end
 
     @loot_shards = @loot_shards.select { |l| l['count'].positive? }

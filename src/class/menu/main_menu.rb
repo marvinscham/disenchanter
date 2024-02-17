@@ -68,6 +68,8 @@ class MainMenu < Menu
       handle_debug(@client)
     when 'x'
       return true
+    else
+      return false
     end
 
     @client.refresh_loot

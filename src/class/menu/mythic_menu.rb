@@ -35,6 +35,8 @@ class MythicMenu < Menu
       thing_to_craft = Dictionary::RANDOM_SKIN_SHARD
     when 'x'
       return true
+    else
+      return false
     end
 
     recipes = @client.req_get_recipes_for_item(Dictionary::MYTHIC_ESSENCE)

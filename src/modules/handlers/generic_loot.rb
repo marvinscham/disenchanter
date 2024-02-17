@@ -76,6 +76,10 @@ def handle_generic_owned(loot_generic, name)
     when 'y'
       loot_generic = loot_generic.select { |g| g['redeemableStatus'] == 'ALREADY_OWNED' }
       puts "Filtered to #{count_loot_items(loot_generic)} items.".light_blue
+    when 'n'
+      # Nothing to do
+    else
+      raise StandardError, "This shouldn't be possible yet here we are."
     end
   end
 

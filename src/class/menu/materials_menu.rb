@@ -38,6 +38,8 @@ class MaterialsMenu < Menu
       handle_mastery_tokens(@client)
     when 'x'
       return true
+    else
+      return false
     end
 
     false

@@ -16,3 +16,5 @@ Metrics/AbcSize:
   CountRepeatedAttributes: false
   Max: 30
   Severity: refactor
+Style/EmptyElse:
+  AllowComments: true

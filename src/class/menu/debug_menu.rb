@@ -42,6 +42,8 @@ class DebugMenu < Menu
       puts @client.debug ? 'Debug mode enabled' : 'Debug mode disabled'
     when 'x'
       return true
+    else
+      return false
     end
 
     false

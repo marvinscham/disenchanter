@@ -153,6 +153,8 @@ def execute_token_crafting(client, loot_mastery_tokens, needed_resources)
         [t['lootId'], 'CURRENCY_champion'],
         1
       )
+    else
+      # Weird, do nothing.
     end
 
     client.stat_tracker.add_redeemed(1)

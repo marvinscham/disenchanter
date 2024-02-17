@@ -83,6 +83,8 @@ def execute_mythic_crafting(client, target_name, recipe, craft_amount)
     client.stat_tracker.add_blue_essence(craft_quantity)
   when Dictionary::ORANGE_ESSENCE
     client.stat_tracker.add_orange_essence(craft_quantity)
+  else
+    # Nothing to track here
   end
   client.stat_tracker.add_crafted(craft_amount)
 
