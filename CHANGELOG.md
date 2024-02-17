@@ -1,15 +1,19 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Also see the [versioning strategy](./VERSIONING.md).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
-## v1.6.0 - next
+## v1.6.0 - Feb 17, 2024
 ### Added
+- #35 Disenchanter can be started from anywhere now
+  - It will try to find your League Client via registry > start menu > default path > locally
 - #57 Rerolling owned esports emotes that cannot be disenchanted
 - #19 Tacticians can now be disenchanted
-- #27 Proper changelog and versioning files
+- Shortcut to your [Mastery Chart](https://masterychart.com) profile
+- #27 Proper changelog and versioning info
 ### Changed
 - (dev) Code is split in modules now instead of stuffed into a single script
+- (dev) Switched from ocra to ocran for building the executable
 ### Fixed
 - #142 Script won't crash if you don't have a summoner name
   - Essentially Riot ID support
