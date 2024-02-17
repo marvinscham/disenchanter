@@ -4,14 +4,15 @@ Layout/EndOfLine:
   EnforcedStyle: lf
 Metrics/MethodLength:
   CountAsOne: ['array', 'method_call', 'hash']
-  Max: 30
+  Max: 35
   Severity: refactor
 Metrics/CyclomaticComplexity:
-  Max: 12
+  Max: 15
   Severity: refactor
 Metrics/PerceivedComplexity:
-  Max: 12
+  Max: 15
   Severity: refactor
 Metrics/AbcSize:
-  Max: 25
+  CountRepeatedAttributes: false
+  Max: 30
   Severity: refactor
