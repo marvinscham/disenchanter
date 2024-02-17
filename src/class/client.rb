@@ -55,19 +55,19 @@ class Client
     end
   end
 
-  def request_post(path, _body)
+  def request_post(path, body)
     puts "Posting against #{host}/#{path}".light_black if @debug
     puts 'DRY RUN ENABLED - actually did nothing'.light_red if @dry_run
     return if @dry_run
 
-    # create_client do |http|
-    #   uri = URI("#{host}/#{path}")
-    #   req = Net::HTTP::Post.new(uri, 'Content-Type': 'application/json')
-    #   req.body = body
-    #   req_set_headers(req)
-    #   res = http.request req
-    #   JSON.parse(res.body)
-    # end
+    create_client do |http|
+      uri = URI("#{host}/#{path}")
+      req = Net::HTTP::Post.new(uri, 'Content-Type': 'application/json')
+      req.body = body
+      req_set_headers(req)
+      res = http.request req
+      JSON.parse(res.body)
+    end
   end
 
   def refresh_loot

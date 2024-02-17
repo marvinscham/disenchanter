@@ -5,12 +5,12 @@ def submit_stats(stat_tracker)
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  http.request(build_stat_request(stat_tracker))
+  http.request(build_stat_request(uri, stat_tracker))
 rescue StandardError => e
   handle_exception(e, 'stat submission')
 end
 
-def build_stat_request(stat_tracker)
+def build_stat_request(uri, stat_tracker)
   req = Net::HTTP::Post.new(uri, 'Content-Type': 'application/json')
   req.body = { a: stat_tracker.actions,
                d: stat_tracker.disenchanted,
