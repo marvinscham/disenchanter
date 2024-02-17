@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'openssl'
+
 def check_update(version_local)
   tag_name = grab_remote_tag_name
 

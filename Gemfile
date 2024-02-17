@@ -8,6 +8,7 @@ gem 'base64', '~> 0.2'
 gem 'colorize', '~> 1.1'
 gem 'json', '~> 2.6'
 gem 'launchy', '~> 2.5'
+gem 'openssl', '= 3.1.0'
 gem 'open-uri', '~> 0.2.0'
 gem 'win32-shortcut', '~> 0.3.0'
 
