@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |_repo| 'https://github.com/marvinscham/disenchanter.git' }
 ruby '3.2.3'
@@ -12,10 +13,9 @@ gem 'win32-shortcut', '~> 0.3.0'
 
 group :development do
   # Builds windows executable
-  gem 'ocra', '1.3.11', require: false
+  gem 'ocran', '1.3.15', require: false
   # Ruby formatter, config in .rufo
   gem 'rufo', '>= 0.13.0', require: false
   # Ruby linter, config in .rubocop
   gem 'rubocop', '~> 1.60', require: false
 end
-
