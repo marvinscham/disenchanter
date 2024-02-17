@@ -1,2 +1,20 @@
-Style/EndOfLine:
+AllCops:
+  NewCops: enable
+Layout/EndOfLine:
   EnforcedStyle: lf
+Metrics/MethodLength:
+  CountAsOne: ['array', 'method_call', 'hash']
+  Max: 35
+  Severity: refactor
+Metrics/CyclomaticComplexity:
+  Max: 15
+  Severity: refactor
+Metrics/PerceivedComplexity:
+  Max: 15
+  Severity: refactor
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+  Max: 30
+  Severity: refactor
+Style/EmptyElse:
+  AllowComments: true
