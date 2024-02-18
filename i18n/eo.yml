@@ -1,1 +1,48 @@
-{}
+common:
+  exiting: Elirante...
+main_menu:
+  time_saved: Ni ŝparis al vi proksimume %{time_saved} sekundojn de atendo por finiĝi
+    la animacioj.
+  summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu restartigi
+    vian League-klienton.
+  hello: Saluton! :)
+  version_info: Lanĉante Elreviĝilo %{version}
+  exit_shortcut_notice: Vi povas eliri ĉi tiun skripton en iu ajn momento premante
+  exit_shortcut: '[STIRKLAVO + C]'
+  logged_in_as: 'Vi estas ensalutinta kiel %{name} #%{tagline}.'
+  confirm_banner_intro: 'Via ŝtelo estas sekura, neniuj agoj estos faritaj ĝis vi
+    konfirmas rubandon kiel ĉi tiu:'
+  confirm_banner_example: 'KONFIRMU: Ĉu plenumi tiun agon?'
+  all_done: Jen ĝi!
+  see_you: Ĝis la revido :)
+meta:
+  manually_set_locale: Agordita al Esperanto!
+  translation_note: 'Mankasita traduko? Helpu proponante vian: https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md'
+  auto_loaded_locale: Trovita esperanta kliento!
+  locale_name: Esperanto
+menu:
+  choose_option: Bone, kion vi volus fari?
+  option: Opcio
+  back_to_main: Reiri al ĉefmenuon
+update_checker:
+  up_to_date: Vi estas ĝisdata!
+  local_beta_note: Bonvenon al la estonteco!
+  local_beta_version: 'Lasta fora versio: v%{version}'
+  update_available: Nova versio %{version} havebla!
+  ask_download_now: Ĉu vi ŝatus elŝuti la novan version nun?
+  done_downloading: Finiĝis elŝuto!
+debug:
+  dry_run:
+    notice: PROVKURO - fakte ne faris ion
+  file_written_notice: Bone, skribite al %{filename}.
+  post_request_info: Sendante peton al %{path}
+champions_menu:
+  options:
+    all: Elreviĝu ĉiujn ĉampionajn fragmentojn
+    tokens: Konservu sufiĉe (1/2) pecetojn por la ĉampionoj, por kiuj vi posedas majstreco
+      6/7-markojn
+    mastery_threshold: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉampionojn
+      je almenaŭ majstreco nivelo x (elektu de 1 ĝis 6)
+    mastery_full: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉiujn ĉampionojn
+      (nur elreviĝu pecetojn kiuj ne havas eblan uzon)
+    collector: Konservu po unu peceton de ĉiu ĉampiono, sendepende de majstraĵo
