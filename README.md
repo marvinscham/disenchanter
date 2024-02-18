@@ -11,6 +11,7 @@
 ![Language](https://img.shields.io/badge/language-Ruby-%23701516)
 ![License](https://img.shields.io/github/license/marvinscham/disenchanter)
 ![Downloads](https://img.shields.io/github/downloads/marvinscham/disenchanter/total)
+[![Translated](https://weblate.ms-ds.org/widget/disenchanter/disenchanter/svg-badge.svg)](https://weblate.ms-ds.org/engage/disenchanter/)
 
 ![Stat Submissions](https://img.shields.io/badge/dynamic/json?color=blue&label=stat%20submissions&query=%24%5B%3A1%5D.submissions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php)
 ![Shards Disenchanted](https://img.shields.io/badge/dynamic/json?color=blue&label=shards%20disenchanted&query=%24%5B%3A1%5D.disenchanted_thousands&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=K)
@@ -33,7 +34,7 @@ Download the pre-built `disenchanter.exe` from the [Latest Release](https://gith
 
 Start your League Client **without admin privileges** and log into your account, then start the script.
 
-## Details
+### Details
 
 The script is interactive and will guide you through the process with simple `[y|n]` questions and mode options. Before you disenchant or craft anything, you will be asked to confirm the action in a magenta colored message with a big `CONFIRM:` banner so don't be scared to explore the different options!
 
@@ -81,6 +82,13 @@ Something isn't working properly or you'd like to see a feature that isn't yet s
 - [Create an issue](https://github.com/marvinscham/disenchanter/issues/new/choose)
 - (**If you have no GitHub account**) hit me up at dev[at]marvinscham.de
 - Open a pull request with your contribution.
+
+## Translation
+
+You can help to make Disenchanter available in your language! More info [here!](https://weblate.ms-ds.org/engage/disenchanter/)
+
+[![](https://weblate.ms-ds.org/widget/disenchanter/disenchanter/multi-auto.svg)](https://weblate.ms-ds.org/engage/disenchanter/)
+
 
 ## ❤ Sponsors ❤
 
