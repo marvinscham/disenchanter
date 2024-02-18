@@ -7,7 +7,7 @@ en:
     manually_set_locale: "Set to English!"
     translation_note: "Translation missing? Help by offering yours: https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md"
   menu:
-    choose_option: "Okay, which option would you like to go by?"
+    choose_option: "Okay, which option would you like to go for?"
     option: "Option"
     back_to_main: "Back to main menu"
   main_menu:
@@ -15,12 +15,15 @@ en:
     version_info: "Running Disenchanter %{version}"
     exit_shortcut_notice: "You can exit this script at any point by pressing"
     exit_shortcut: "[CTRL + C]"
-    summoner_check_failed: "Could not grab summoner info. Try restarting your League Client."
+    summoner_check_failed: "Could not grab summoner info. Try restarting your League
+      Client."
     logged_in_as: "You're logged in as %{name} #%{tagline}."
-    confirm_banner_intro: "Your loot is safe, no actions will be taken until you confirm a banner like this:"
+    confirm_banner_intro: "Your loot is safe, no actions will be taken until you confirm
+      a banner like this:"
     confirm_banner_example: "CONFIRM: Perform this action?"
     all_done: "That's it!"
-    time_saved: "We saved you about %{time_saved} seconds of waiting for animations to finish."
+    time_saved: "We saved you about %{time_saved} seconds of waiting for animations
+      to finish."
     see_you: "See you next time :)"
   update_checker:
     up_to_date: "You're up to date!"
@@ -38,6 +41,8 @@ en:
     options:
       all: "Disenchant all champion shards"
       tokens: "Keep enough (1/2) shards for champions you own mastery 6/7 tokens for"
-      mastery_threshold: "Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)"
-      mastery_full: "Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)"
+      mastery_threshold: "Keep enough (1/2) shards to fully master champions at least
+        at mastery level x (select from 1 to 6)"
+      mastery_full: "Keep enough (1/2) shards to fully master all champions (only
+        disenchant shards that have no possible use)"
       collector: "Keep one shard of each champion regardless of mastery"
