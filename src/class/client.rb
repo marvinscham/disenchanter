@@ -5,16 +5,21 @@ require 'net/http'
 require 'json'
 
 require_relative '../modules/detect_client'
+require_relative '../modules/handlers/exception'
+require_relative '../modules/locale'
 
 # Holds port and token info
 class Client
-  attr_accessor :stat_tracker, :debug, :dry_run
+  attr_accessor :stat_tracker, :debug, :dry_run, :locale
 
   # @param stat_tracker StatTracker
   def initialize(stat_tracker)
     begin
-      @port, @token = grab_lockfile
-    rescue StandardError
+      @port, @token, path = grab_lockfile
+      @locale = grab_locale(path)
+      setup_locale(self)
+    rescue StandardError => e
+      handle_exception(e, 'Client connection')
       ask exit_string
       exit 1
     end
@@ -56,8 +61,8 @@ class Client
   end
 
   def request_post(path, body)
-    puts "Posting against #{host}/#{path}".light_black if @debug
-    puts 'DRY RUN ENABLED - actually did nothing'.light_red if @dry_run
+    puts I18n.t(:'debug.post_request_info', path: "#{host}/#{path}").light_black if @debug
+    puts I18n.t(:'debug.dry_run.notice').light_red if @dry_run
     return if @dry_run
 
     create_client do |http|
@@ -76,6 +81,14 @@ class Client
 
   def req_get_current_summoner
     request_get('lol-summoner/v1/current-summoner')
+  end
+
+  def req_get_settings
+    request_get('lol-platform-config/v1/namespaces')
+  end
+
+  def req_get_region
+    request_get('lol-platform-config/v1/namespaces/LoginDataPacket/platformId')
   end
 
   def req_get_player_loot
@@ -112,6 +125,6 @@ class Client
     return unless @debug
 
     File.write('disenchanter_post.json', post_answer.to_json)
-    puts('Okay, written to disenchanter_post.json.')
+    puts I18n.t(:'debug.file_written_notice', filename: 'disenchanter_post.json')
   end
 end

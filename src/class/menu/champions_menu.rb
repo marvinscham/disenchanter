@@ -13,17 +13,16 @@ class ChampionsMenu < Menu
   attr_reader :loot_shards
 
   def initialize(client, loot_shards)
-    menu_text = 'Okay, which option would you like to go by?'
+    menu_text = I18n.t(:'menu.choose_option')
     things_todo = {
-      '1' => 'Disenchant all champion shards',
-      '2' => 'Keep enough (1/2) shards for champions you own mastery 6/7 tokens for',
-      '3' => 'Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)',
-      '4' => 'Keep enough (1/2) shards to fully master all champions ' \
-             '(only disenchant shards that have no possible use)',
-      '5' => 'Keep one shard of each champion regardless of mastery',
-      'x' => 'Back to main menu'
+      '1' => I18n.t(:'champions_menu.options.all_shards'),
+      '2' => I18n.t(:'champions_menu.options.mastery_6_7'),
+      '3' => I18n.t(:'champions_menu.options.mastery_threshold'),
+      '4' => I18n.t(:'champions_menu.options.mastery_full'),
+      '5' => I18n.t(:'champions_menu.options.collector'),
+      'x' => I18n.t(:'menu.back_to_main')
     }
-    answer_display = 'Option'
+    answer_display = I18n.t(:'menu.option')
 
     super(client, menu_text, answer_display, things_todo)
     @loot_shards = loot_shards

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require_relative '../../class/menu/debug_menu'
 
 # Wrapper for debug
@@ -31,4 +32,26 @@ end
 def debug_save_summoner_info(client)
   File.write('disenchanter_summoner.json', client.req_get_current_summoner.to_json)
   puts('Okay, written to disenchanter_summoner.json.')
+end
+
+def debug_save_settings(client)
+  File.write('disenchanter_settings.json', client.req_get_settings.to_json)
+  puts('Okay, written to disenchanter_settings.json.')
+end
+
+def debug_request_terminal(client)
+  done = false
+  puts(
+    'Manual request terminal entered. If you don\'t know what you\'re doing ' \
+    'or someone is urging you to do this, stop now.'.light_red
+  )
+  puts('Press [x] to leave'.light_white)
+
+  until done
+    request_path = ask "Enter path to GET from:\n"
+
+    return if request_path == 'x'
+
+    puts JSON.pretty_generate(client.request_get(request_path))
+  end
 end

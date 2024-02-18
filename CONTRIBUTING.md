@@ -2,7 +2,15 @@
 
 ## Translations
 
-tbd
+You can contribute translations for your language using the translation platform [Weblate](https://weblate.ms-ds.org/projects/disenchanter/disenchanter/).
+
+**Steps:**
+- Register by email or using GitHub SSO
+- Choose an [existing translation](https://weblate.ms-ds.org/projects/disenchanter/disenchanter/) or [start a new translation](https://weblate.ms-ds.org/new-lang/disenchanter/disenchanter/)
+- You will be presented with the English source text and can enter your language's translation
+- To prevent abuse, your translations will be saved as suggestions that will regularly be accepted and merged by project maintainers.
+- Make sure to place interpolated variables where appropriate
+  - They look like this: `My name is %{name}`, so you'd translate like this: `Ich heiße %{name}`
 
 ## Code
 

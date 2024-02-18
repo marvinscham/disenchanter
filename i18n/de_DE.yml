@@ -1,0 +1,8 @@
+de_DE:
+  meta:
+    locale_name: "Deutsch"
+    auto_loaded_locale: "Deutscher Client gefunden!"
+    manually_set_locale: "Auf Deutsch gestellt!"
+    translation_note: "Übersetzung fehlt? Hilf mit: https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md"
+  main_menu:
+    logged_in_as: "Du bist als %{name} #%{tagline} eingeloggt."
