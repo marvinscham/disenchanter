@@ -36,8 +36,8 @@ en:
     post_request_info: "Posting against %{path}"
   champions_menu:
     options:
-      all_shards: "Disenchant all champion shards"
-      mastery_6_7: "Keep enough (1/2) shards for champions you own mastery 6/7 tokens for"
+      all: "Disenchant all champion shards"
+      tokens: "Keep enough (1/2) shards for champions you own mastery 6/7 tokens for"
       mastery_threshold: "Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)"
       mastery_full: "Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)"
       collector: "Keep one shard of each champion regardless of mastery"
