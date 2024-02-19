@@ -31,7 +31,7 @@ class Menu
         @client.dry_run ? 'dry' : 'default'
       )
       @things_done << thing_todo
-      puts separator + "\n\nOption chosen: #{@things_todo[thing_todo]}".light_white
+      puts separator + "\n\n#{I18n.t(:'menu.option_chosen')}: #{@things_todo[thing_todo]}".light_white
 
       done = handle_option(thing_todo)
       bail = thing_todo == 'x'
@@ -47,7 +47,7 @@ class Menu
     @things_todo.each do |k, v|
       todo_string += "[#{k}] ".light_white
       todo_string += if @things_done.include? k
-                       "#{v} (done)\n".light_green
+                       "#{v} (#{I18n.t(:'menu.option_done')})\n".light_green
                      else
                        "#{v}\n".light_cyan
                      end

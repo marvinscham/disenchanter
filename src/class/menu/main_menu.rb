@@ -19,24 +19,24 @@ require_relative '../../modules/stat_submission'
 # The main menu
 class MainMenu < Menu
   def initialize(client)
-    menu_text = 'What would you like to do? (Hint: go top to bottom so you don\'t miss anything!)'
+    menu_text = I18n.t(:'main_menu.what_to_do')
     things_todo = {
-      '1' => 'Materials',
-      '2' => 'Champions',
-      '3' => 'Skins',
-      '4' => 'Tacticians',
-      '5' => 'Eternals',
-      '6' => 'Emotes',
-      '7' => 'Ward Skins',
-      '8' => 'Icons',
-      'l' => 'Language settings',
-      'm' => 'Open Mastery Chart profile',
-      's' => 'Open Disenchanter Global Stats',
-      'r' => 'Open GitHub repository',
-      'd' => 'Debug Tools',
-      'x' => 'Exit'
+      '1' => I18n.t(:'main_menu.options.materials'),
+      '2' => I18n.t(:'main_menu.options.champions'),
+      '3' => I18n.t(:'main_menu.options.skins'),
+      '4' => I18n.t(:'main_menu.options.tacticians'),
+      '5' => I18n.t(:'main_menu.options.eternals'),
+      '6' => I18n.t(:'main_menu.options.emotes'),
+      '7' => I18n.t(:'main_menu.options.ward_skins'),
+      '8' => I18n.t(:'main_menu.options.icons'),
+      'l' => I18n.t(:'main_menu.options.language_settings'),
+      'm' => I18n.t(:'main_menu.options.open_mastery_chart'),
+      's' => I18n.t(:'main_menu.options.open_usage_stats'),
+      'r' => I18n.t(:'main_menu.options.open_repository'),
+      'd' => I18n.t(:'main_menu.options.debug_tools'),
+      'x' => I18n.t(:'main_menu.options.exit')
     }
-    answer_display = 'Option'
+    answer_display = I18n.t(:'menu.option')
 
     super(client, menu_text, answer_display, things_todo)
   end

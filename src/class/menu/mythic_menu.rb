@@ -9,14 +9,14 @@ class MythicMenu < Menu
   attr_reader :thing_todo, :recipe
 
   def initialize(client)
-    menu_text = 'Okay, what would you like to craft?'
+    menu_text = I18n.t(:'menu.what_to_do')
     things_todo = {
-      '1' => 'Blue Essence',
-      '2' => 'Orange Essence',
-      '3' => 'Random Skin Shards',
-      'x' => 'Back to main menu'
+      '1' => I18n.t(:'mythic_menu.options.blue_essence'),
+      '2' => I18n.t(:'mythic_menu.options.orange_essence'),
+      '3' => I18n.t(:'mythic_menu.options.random_skin_shards'),
+      'x' => I18n.t(:'menu.back_to_main')
     }
-    answer_display = 'Option'
+    answer_display = I18n.t(:'menu.option')
 
     super(client, menu_text, answer_display, things_todo)
     @thing_todo = ''
@@ -43,13 +43,14 @@ class MythicMenu < Menu
     recipes = recipes.select { |r| r['outputs'][0]['lootName'] == thing_to_craft }
 
     if recipes.empty?
-      puts "Recipes for #{@things_todo[@thing_todo]} seem to be unavailable.".yellow
+      puts I18n.t(:'mythic_menu.recipes_unavailable', loot: @things_todo[@thing_todo]).yellow
       return
     end
     @recipe = recipes[0]
 
-    puts "Recipe found: #{@recipe['contextMenuText']} for " \
-         "#{@recipe['slots'][0]['quantity']} Mythic Essence".light_blue
+    puts I18n.t(:'mythic_menu.recipe_found',
+                thing_to_craft: @recipe['contextMenuText'],
+                amount: @recipe['slots'][0]['quantity']).light_blue
 
     true
   end

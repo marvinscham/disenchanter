@@ -10,15 +10,15 @@ require_relative '../../modules/handlers/mastery_tokens'
 # Menu for handling materials such as fragments, mythic essence or capsules
 class MaterialsMenu < Menu
   def initialize(client)
-    menu_text = 'What would you like to do?'
+    menu_text = I18n.t(:'menu.what_to_do')
     things_todo = {
-      '1' => 'Mythic Essence',
-      '2' => 'Key Fragments',
-      '3' => 'Capsules',
-      '4' => 'Mastery Tokens',
-      'x' => 'Back to main menu'
+      '1' => I18n.t(:'materials_menu.options.mythic_essence'),
+      '2' => I18n.t(:'materials_menu.options.key_fragments'),
+      '3' => I18n.t(:'materials_menu.options.capsules'),
+      '4' => I18n.t(:'materials_menu.options.mastery_tokens'),
+      'x' => I18n.t(:'menu.back_to_main')
     }
-    answer_display = 'Option'
+    answer_display = I18n.t(:'menu.option')
 
     super(client, menu_text, answer_display, things_todo)
   end

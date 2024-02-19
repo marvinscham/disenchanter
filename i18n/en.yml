@@ -7,9 +7,12 @@ en:
     manually_set_locale: "Set to English!"
     translation_note: "Translation missing? Help by offering yours: https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md"
   menu:
-    choose_option: "Okay, which option would you like to go by?"
+    choose_option: "Okay, which option would you like to go for?"
+    what_to_do: "What would you like to do?"
     option: "Option"
     back_to_main: "Back to main menu"
+    option_chosen: "Option chosen"
+    option_done: "done"
   main_menu:
     hello: "Hi! :)"
     version_info: "Running Disenchanter %{version}"
@@ -22,6 +25,22 @@ en:
     all_done: "That's it!"
     time_saved: "We saved you about %{time_saved} seconds of waiting for animations to finish."
     see_you: "See you next time :)"
+    what_to_do: "What would you like to do? (Hint: go top to bottom so you don't miss anything!)"
+    options:
+      materials: "Materials"
+      champions: "Champions"
+      skins: "Skins"
+      tacticians: "Tacticians"
+      eternals: "Eternals"
+      emotes: "Emotes"
+      ward_skins: "Ward Skins"
+      icons: "Icons"
+      language_settings: "Language settings"
+      open_mastery_chart: "Open Mastery Chart profile"
+      open_usage_stats: "Open Disenchanter global stats"
+      open_repository: "Open GitHub repository"
+      debug_tools: "Debug tools"
+      exit: "Exit"
   update_checker:
     up_to_date: "You're up to date!"
     local_beta_note: "Welcome to the future!"
@@ -29,11 +48,25 @@ en:
     update_available: "New version %{version} available!"
     ask_download_now: "Would you like to download the new version now?"
     done_downloading: "Done downloading!"
-  debug:
+  debug_menu:
     dry_run:
       notice: "DRY RUN ENABLED - actually did nothing"
+      enabled: "Dry run + debug enabled"
+      disabled: "Dry run + debug disabled"
+    debug_mode:
+      enabled: "Debug mode enabled"
+      disabled: "Debug mode disabled"
     file_written_notice: "Okay, written to %{filename}."
     post_request_info: "Posting against %{path}"
+    options:
+      loot_to_file: "Write player_loot to file"
+      recipes_to_file: "Write recipes of lootId to file"
+      loot_info_to_file: "Write loot info of lootId to file"
+      summoner_info_to_file: "Write summoner info to file"
+      settings_to_file: "Write settings to file"
+      toggle_dry_run: "Toggle dry run"
+      toggle_debug_mode: "Toggle debug mode"
+      request_terminal: "Request terminal"
   champions_menu:
     options:
       all: "Disenchant all champion shards"
@@ -41,3 +74,16 @@ en:
       mastery_threshold: "Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)"
       mastery_full: "Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)"
       collector: "Keep one shard of each champion regardless of mastery"
+  materials_menu:
+    options:
+      mythic_essence: "Mythic Essence"
+      key_fragments: "Key Fragments"
+      capsules: "Capsules"
+      mastery_tokens: "Mastery Tokens"
+  mythic_menu:
+    options:
+      blue_essence: "Blue Essence"
+      orange_essence: "Orange Essence"
+      random_skin_shards: "Random Skin Shards"
+    recipes_unavailable: "Recipes for %{loot} seem to be unavailable."
+    recipe_found: "Recipe found: %{thing_to_craft} for %{amount} Mythic Essence"
