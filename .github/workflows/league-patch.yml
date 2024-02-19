@@ -9,7 +9,7 @@ jobs:
     name: Create PR for new League Patch
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Check out current commit
         
       - id: patch
