@@ -2,7 +2,7 @@
 
 ## Translations
 
-You can contribute translations for your language using the translation platform [Weblate](https://weblate.ms-ds.org/projects/disenchanter/disenchanter/).
+You can contribute translations for your language using the translation platform [Weblate](https://weblate.ms-ds.org/engage/disenchanter/).
 
 **Steps:**
 - Register by email or using GitHub SSO
@@ -11,6 +11,10 @@ You can contribute translations for your language using the translation platform
 - To prevent abuse, your translations will be saved as suggestions that will regularly be accepted and merged by project maintainers.
 - Make sure to place interpolated variables where appropriate
   - They look like this: `My name is %{name}`, so you'd translate like this: `Ich heiße %{name}`
+
+### Translation status
+
+[![](https://weblate.ms-ds.org/widget/disenchanter/disenchanter/multi-auto.svg)](https://weblate.ms-ds.org/engage/disenchanter/)
 
 ## Code
 
