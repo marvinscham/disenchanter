@@ -18,3 +18,5 @@ Metrics/AbcSize:
   Severity: refactor
 Style/EmptyElse:
   AllowComments: true
+Lint/ScriptPermission:
+  Enabled: false
