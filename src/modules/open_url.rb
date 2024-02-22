@@ -15,13 +15,17 @@ def open_stats
 end
 
 def open_masterychart(client)
-  server = ask("Which server do you play on (EUW/NA/BR/TR...)?\n".light_cyan)
   player = client.req_get_current_summoner
-  url = "https://masterychart.com/profile/#{server}/#{player['gameName']}-#{player['tagLine']}?ref=disenchanter"
+  region = client.req_get_region
+
+  region = region[0...-1] if region[-1] == '1' || region[-1] == '2'
+  region = region.downcase
+
+  url = "https://masterychart.com/profile/#{region}/#{player['gameName']}-#{player['tagLine']}?ref=disenchanter"
   puts I18n.t(:'handler.url.opening_mastery_chart', url:).light_blue
   Launchy.open(url)
 end
 
 def translation_url
-  "https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md"
+  'https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md'
 end
