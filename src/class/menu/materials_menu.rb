@@ -12,10 +12,10 @@ class MaterialsMenu < Menu
   def initialize(client)
     menu_text = I18n.t(:'menu.what_to_do')
     things_todo = {
-      '1' => I18n.t(:'materials_menu.options.mythic_essence'),
-      '2' => I18n.t(:'materials_menu.options.key_fragments'),
-      '3' => I18n.t(:'materials_menu.options.capsules'),
-      '4' => I18n.t(:'materials_menu.options.mastery_tokens'),
+      '1' => I18n.t(:'menu.materials.options.mythic_essence'),
+      '2' => I18n.t(:'menu.materials.options.key_fragments'),
+      '3' => I18n.t(:'menu.materials.options.capsules'),
+      '4' => I18n.t(:'menu.materials.options.mastery_tokens'),
       'x' => I18n.t(:'menu.back_to_main')
     }
     answer_display = I18n.t(:'menu.option')

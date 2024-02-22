@@ -19,22 +19,22 @@ require_relative '../../modules/stat_submission'
 # The main menu
 class MainMenu < Menu
   def initialize(client)
-    menu_text = I18n.t(:'main_menu.what_to_do')
+    menu_text = I18n.t(:'menu.main.what_to_do')
     things_todo = {
-      '1' => I18n.t(:'main_menu.options.materials'),
-      '2' => I18n.t(:'main_menu.options.champions'),
-      '3' => I18n.t(:'main_menu.options.skins'),
-      '4' => I18n.t(:'main_menu.options.tacticians'),
-      '5' => I18n.t(:'main_menu.options.eternals'),
-      '6' => I18n.t(:'main_menu.options.emotes'),
-      '7' => I18n.t(:'main_menu.options.ward_skins'),
-      '8' => I18n.t(:'main_menu.options.icons'),
-      'l' => I18n.t(:'main_menu.options.language_settings'),
-      'm' => I18n.t(:'main_menu.options.open_mastery_chart'),
-      's' => I18n.t(:'main_menu.options.open_usage_stats'),
-      'r' => I18n.t(:'main_menu.options.open_repository'),
-      'd' => I18n.t(:'main_menu.options.debug_tools'),
-      'x' => I18n.t(:'main_menu.options.exit')
+      '1' => I18n.t(:'loot.materials'),
+      '2' => I18n.t(:'loot.champions'),
+      '3' => I18n.t(:'loot.skins'),
+      '4' => I18n.t(:'loot.tacticians'),
+      '5' => I18n.t(:'loot.eternals'),
+      '6' => I18n.t(:'loot.emotes'),
+      '7' => I18n.t(:'loot.ward_skins'),
+      '8' => I18n.t(:'loot.icons'),
+      'l' => I18n.t(:'menu.main.options.language_settings'),
+      'm' => I18n.t(:'menu.main.options.open_mastery_chart'),
+      's' => I18n.t(:'menu.main.options.open_usage_stats'),
+      'r' => I18n.t(:'menu.main.options.open_repository'),
+      'd' => I18n.t(:'menu.main.options.debug_tools'),
+      'x' => I18n.t(:'menu.main.options.exit')
     }
     answer_display = I18n.t(:'menu.option')
 

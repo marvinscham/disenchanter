@@ -3,7 +3,7 @@
 require 'colorize'
 
 def exit_string
-  'Press Enter to exit.'.cyan
+  I18n.t(:'common.press_enter_to_exit').cyan
 end
 
 def separator

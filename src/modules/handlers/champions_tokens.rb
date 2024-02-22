@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../class/dictionary'
+
 # Keeps only shards to max out champions with owned mastery 6/7 tokens
 # @param client Client connector
 # @param loot_shards Loot array pre-filtered to only champion shards and permanents
@@ -9,22 +11,22 @@ def handle_champions_tokens(client, loot_shards)
   player_loot = client.req_get_player_loot
 
   loot_mastery_tokens =
-    player_loot.select { |l| l['type'] == 'CHAMPION_TOKEN' }
+    player_loot.select { |l| l['type'] == Dictionary::MASTERY_TOKEN }
 
   loot_mastery_tokens.each do |token|
-    if token['lootName'] == 'CHAMPION_TOKEN_6'
+    if token['lootName'] == Dictionary::MASTERY_6_TOKEN
       token6_champion_ids << token['refId'].to_i
-    elsif token['lootName'] == 'CHAMPION_TOKEN_7'
+    elsif token['lootName'] == Dictionary::MASTERY_7_TOKEN
       token7_champion_ids << token['refId'].to_i
     end
   end
 
   token_champion_count = token6_champion_ids.length + token7_champion_ids.length
-  puts "Found #{token_champion_count} champions with owned mastery tokens".light_black
+  puts I18n.t(:'handler.champion.found_champs_with_tokens', count: token_champion_count).light_black
 
   adjust_token_counts(loot_shards, token6_champion_ids, token7_champion_ids)
 rescue StandardError => e
-  handle_exception(e, 'Champion Shards by Tokens')
+  handle_exception(e, I18n.t(:'handler.exception.step.champions.tokens'))
 end
 
 def adjust_token_counts(loot_shards, token6_champion_ids, token7_champion_ids)

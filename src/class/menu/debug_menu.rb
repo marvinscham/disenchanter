@@ -7,14 +7,14 @@ class DebugMenu < Menu
   def initialize(client)
     menu_text = I18n.t(:'menu.what_to_do')
     things_todo = {
-      '1' => I18n.t(:'debug_menu.options.loot_to_file'),
-      '2' => I18n.t(:'debug_menu.options.recipes_to_file'),
-      '3' => I18n.t(:'debug_menu.options.loot_info_to_file'),
-      '4' => I18n.t(:'debug_menu.options.summoner_info_to_file'),
-      '5' => I18n.t(:'debug_menu.options.settings_to_file'),
-      'd' => I18n.t(:'debug_menu.options.toggle_dry_run'),
-      'm' => I18n.t(:'debug_menu.options.toggle_debug_mode'),
-      't' => I18n.t(:'debug_menu.options.request_terminal'),
+      '1' => I18n.t(:'menu.debug.options.loot_to_file'),
+      '2' => I18n.t(:'menu.debug.options.recipes_to_file'),
+      '3' => I18n.t(:'menu.debug.options.loot_info_to_file'),
+      '4' => I18n.t(:'menu.debug.options.summoner_info_to_file'),
+      '5' => I18n.t(:'menu.debug.options.settings_to_file'),
+      'd' => I18n.t(:'menu.debug.options.toggle_dry_run'),
+      'm' => I18n.t(:'menu.debug.options.toggle_debug_mode'),
+      't' => I18n.t(:'menu.debug.options.request_terminal'),
       'x' => I18n.t(:'menu.back_to_main')
     }
     answer_display = I18n.t(:'menu.option')
@@ -40,10 +40,10 @@ class DebugMenu < Menu
     when 'd'
       @client.dry_run = !@client.dry_run
       @client.debug = @client.dry_run
-      puts @client.dry_run ? I18n.t(:'debug_menu.dry_run.enabled') : I18n.t(:'debug_menu.dry_run.disabled')
+      puts @client.dry_run ? I18n.t(:'menu.debug.dry_run.enabled') : I18n.t(:'menu.debug.dry_run.disabled')
     when 'm'
       @client.debug = !@client.debug
-      puts @client.debug ? I18n.t(:'debug_menu.debug_mode.enabled') : I18n.t(:'debug_menu.debug_mode.disabled')
+      puts @client.debug ? I18n.t(:'menu.debug.debug_mode.enabled') : I18n.t(:'menu.debug.debug_mode.disabled')
     when 't'
       debug_request_terminal(@client)
     when 'x'

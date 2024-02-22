@@ -11,9 +11,9 @@ class MythicMenu < Menu
   def initialize(client)
     menu_text = I18n.t(:'menu.what_to_do')
     things_todo = {
-      '1' => I18n.t(:'mythic_menu.options.blue_essence'),
-      '2' => I18n.t(:'mythic_menu.options.orange_essence'),
-      '3' => I18n.t(:'mythic_menu.options.random_skin_shards'),
+      '1' => I18n.t(:'menu.mythic.options.blue_essence'),
+      '2' => I18n.t(:'menu.mythic.options.orange_essence'),
+      '3' => I18n.t(:'menu.mythic.options.random_skin_shards'),
       'x' => I18n.t(:'menu.back_to_main')
     }
     answer_display = I18n.t(:'menu.option')
@@ -43,12 +43,12 @@ class MythicMenu < Menu
     recipes = recipes.select { |r| r['outputs'][0]['lootName'] == thing_to_craft }
 
     if recipes.empty?
-      puts I18n.t(:'mythic_menu.recipes_unavailable', loot: @things_todo[@thing_todo]).yellow
+      puts I18n.t(:'menu.mythic.recipes_unavailable', loot: @things_todo[@thing_todo]).yellow
       return
     end
     @recipe = recipes[0]
 
-    puts I18n.t(:'mythic_menu.recipe_found',
+    puts I18n.t(:'menu.mythic.recipe_found',
                 thing_to_craft: @recipe['contextMenuText'],
                 amount: @recipe['slots'][0]['quantity']).light_blue
 

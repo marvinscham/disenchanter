@@ -10,17 +10,17 @@ require_relative '../../class/dictionary'
 def handle_generic(client, name, type)
   loot_generic = select_generic_loot(client, type)
   if count_loot_items(loot_generic).zero?
-    puts "Found no #{name} to disenchant.".yellow
+    puts I18n.t(:'handler.generic.found_nothing').yellow
     return
   end
 
-  puts "Found #{count_loot_items(loot_generic)} #{name}.".light_blue
+  puts I18n.t(:'handler.generic.found_some', count: count_loot_items(loot_generic), name:).light_blue
 
   loot_generic = handle_generic_owned(loot_generic, name)
   return if loot_generic == false
 
   if count_loot_items(loot_generic).zero?
-    puts "Found no owned #{name} to disenchant.".yellow
+    puts I18n.t(:'handler.generic.found_no_owned', name:).yellow
     return
   end
 
@@ -29,7 +29,10 @@ def handle_generic(client, name, type)
   disenchant_info = create_generic_disenchant_info(loot_generic, loot_name_index, name, totals)
 
   unless ans_y.include? user_input_check(
-    "Disenchant #{count_loot_items(loot_generic)} #{name} for #{disenchant_info}?",
+    I18n.t(:'handler.generic.ask_disenchant',
+           count: count_loot_items(loot_generic),
+           loot: name,
+           currency: disenchant_info),
     ans_yn,
     ans_yn_d,
     'confirm'
@@ -39,7 +42,7 @@ def handle_generic(client, name, type)
 
   execute_generic_disenchant(client, loot_generic, totals)
 
-  puts 'Done!'.green
+  puts I18n.t(:'common.done').green
 rescue StandardError => e
   handle_exception(e, name)
 end
@@ -54,16 +57,16 @@ end
 def handle_generic_owned(loot_generic, name)
   contains_unowned_items = false
   loot_generic.each do |l|
-    contains_unowned_items = true if l['redeemableStatus'] != 'ALREADY_OWNED'
+    contains_unowned_items = true if l['redeemableStatus'] != Dictionary::STATUS_OWNED
   end
 
   if contains_unowned_items
     user_option =
       user_input_check(
-        "Keep #{name} you don't own yet?\n".light_cyan +
-          '[y] '.light_white + "Yes\n".light_cyan + '[n] '.light_white +
-          "No\n".light_cyan + '[x] '.light_white +
-          "Exit to main menu\n".light_cyan + 'Option: '.white,
+        "#{I18n.t(:'handler.generic.keep_unowned', loot: name)}\n".light_cyan +
+          '[y] '.light_white + "#{I18n.t(:'common.yes')}\n".light_cyan + '[n] '.light_white +
+          "#{I18n.t(:'common.no')}\n".light_cyan + '[x] '.light_white +
+          "#{I18n.t(:'menu.back_to_main')}\n".light_cyan + "#{I18n.t(:'menu.option')} ".white,
         %w[y n x],
         '[y|n|x]',
         ''
@@ -71,15 +74,15 @@ def handle_generic_owned(loot_generic, name)
 
     case user_option
     when 'x'
-      puts 'Action cancelled'.yellow
+      puts I18n.t(:'handler.generic.action_cancelled').yellow
       return false
     when 'y'
-      loot_generic = loot_generic.select { |g| g['redeemableStatus'] == 'ALREADY_OWNED' }
-      puts "Filtered to #{count_loot_items(loot_generic)} items.".light_blue
+      loot_generic = loot_generic.select { |g| g['redeemableStatus'] == Dictionary::STATUS_OWNED }
+      puts I18n.t(:'handler.generic.filtered_down', count: count_loot_items(loot_generic)).light_blue
     when 'n'
       # Nothing to do
     else
-      raise StandardError, "This shouldn't be possible yet here we are."
+      raise StandardError, I18n.t(:'handler.exception.unusual_state')
     end
   end
 
@@ -104,27 +107,31 @@ def create_generic_disenchant_info(loot_generic, loot_name_index, name, totals)
     [l['redeemableStatus'], l[loot_name_index]]
   end
 
-  puts "We'd disenchant #{count_loot_items(loot_generic)} #{name} using the option you chose:".light_blue
+  puts I18n.t(:'handler.generic.disenchant_preview', count: count_loot_items(loot_generic), loot: name).light_blue
   loot_generic.each do |l|
     create_generic_info_single(l, loot_name_index)
   end
 
   disenchant_info = ''
-  disenchant_info += "#{totals['oe']} Orange Essence" if totals['oe'].positive?
+  disenchant_info += "#{totals['oe']} #{I18n.t(:'loot.orange_essence')}" if totals['oe'].positive?
   disenchant_info += ' and ' if totals['be'].positive? && totals['oe'].positive?
-  disenchant_info += "#{totals['be']} Blue Essence" if totals['be'].positive?
+  disenchant_info += "#{totals['be']} #{I18n.t(:'loot.blue_essence')}" if totals['be'].positive?
   disenchant_info
 end
 
 def create_generic_info_single(loot, loot_name_index)
   loot_value = loot['disenchantValue'] * loot['count']
-  loot_currency = loot['disenchantLootName'] == Dictionary::BLUE_ESSENCE ? 'BE' : 'OE'
+  loot_currency = if loot['disenchantLootName'] == Dictionary::BLUE_ESSENCE
+                    I18n.t(:'loot.blue_essence_short')
+                  else
+                    I18n.t(:'loot.orange_essence_short')
+                  end
 
   print pad("#{loot['count']}x ", 5, right: false).light_black
   print pad(loot[loot_name_index], 30).light_white
   print ' @ '.light_black
   print pad("#{loot_value} #{loot_currency}", 8, right: false).light_black
-  print ' (not owned)'.yellow if loot['redeemableStatus'] != 'ALREADY_OWNED'
+  print " (#{I18n.t(:'common.not_owned')})".yellow unless loot['redeemableStatus'] == Dictionary::STATUS_OWNED
   puts
 end
 

@@ -15,11 +15,11 @@ class ChampionsMenu < Menu
   def initialize(client, loot_shards)
     menu_text = I18n.t(:'menu.choose_option')
     things_todo = {
-      '1' => I18n.t(:'champions_menu.options.all'),
-      '2' => I18n.t(:'champions_menu.options.tokens'),
-      '3' => I18n.t(:'champions_menu.options.mastery_threshold'),
-      '4' => I18n.t(:'champions_menu.options.mastery_full'),
-      '5' => I18n.t(:'champions_menu.options.collector'),
+      '1' => I18n.t(:'menu.champions.options.all'),
+      '2' => I18n.t(:'menu.champions.options.tokens'),
+      '3' => I18n.t(:'menu.champions.options.mastery_threshold'),
+      '4' => I18n.t(:'menu.champions.options.mastery_full'),
+      '5' => I18n.t(:'menu.champions.options.collector'),
       'x' => I18n.t(:'menu.back_to_main')
     }
     answer_display = I18n.t(:'menu.option')

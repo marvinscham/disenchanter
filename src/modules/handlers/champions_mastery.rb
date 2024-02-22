@@ -14,7 +14,7 @@ def handle_champions_mastery(client, loot_shards, keep_all: false)
 
   unless keep_all
     level_threshold = user_input_check(
-      'Which mastery level should champions at least be for their shards to be kept?',
+      I18n.t(:'handler.champion.by_mastery.ask_which_level'),
       %w[1 2 3 4 5 6],
       '[1..6]'
     ).to_i
@@ -39,12 +39,12 @@ def handle_champions_mastery(client, loot_shards, keep_all: false)
 
   loot_shards
 rescue StandardError => e
-  handle_exception(e, 'Champion Shards by Mastery')
+  handle_exception(e, I18n.t(:'handler.exception.step.champions.by_mastery'))
 end
 
 def adjust_shard_counts_by_threshold(shard, keep_all, m6_ids, m7_ids, threshold_ids)
   if m7_ids.include? shard['storeItemId']
-    shard['disenchant_note'] = 'at mastery 7'.light_black
+    shard['disenchant_note'] = I18n.t(:'handler.champion.by_mastery.note_level7').light_black
   elsif m6_ids.include? shard['storeItemId']
     shard['count'] -= 1
     shard['count_keep'] += 1
@@ -52,6 +52,6 @@ def adjust_shard_counts_by_threshold(shard, keep_all, m6_ids, m7_ids, threshold_
     shard['count'] -= 2
     shard['count_keep'] += 2
   else
-    shard['disenchant_note'] = 'below threshold'.yellow
+    shard['disenchant_note'] = I18n.t(:'handler.champion.by_mastery.note_below_threshold').yellow
   end
 end

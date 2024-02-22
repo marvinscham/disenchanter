@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'menu'
+require_relative '../../modules/open_url'
 
 # Manual language selection menu
 class LanguageMenu < Menu
@@ -9,6 +10,7 @@ class LanguageMenu < Menu
     things_todo = {
       'en' => 'English',
       'de' => 'Deutsch',
+      'eo' => 'Esperanto',
       'x' => 'Back to main menu'
     }
     answer_display = 'Option'
@@ -23,11 +25,13 @@ class LanguageMenu < Menu
     I18n.locale = case thing_todo
                   when 'de'
                     'de_DE'
+                  when 'eo'
+                    'eo'
                   else
                     'en'
                   end
     puts I18n.t(:'meta.manually_set_locale')
-    puts I18n.t(:'meta.translation_note').light_yellow
+    puts I18n.t(:'meta.translation_note', url: translation_url).light_yellow
 
     true
   end

@@ -10,26 +10,26 @@ def handle_mastery_tokens(client)
   loot_mastery_tokens = grab_upgradable_tokens(client)
 
   if loot_mastery_tokens.count.zero?
-    puts 'Found no upgradable set of Mastery Tokens.'.yellow
+    puts I18n.t(:'handler.mastery_tokens.none_found').yellow
     return
   end
 
   loot_mastery_tokens = loot_mastery_tokens.sort_by { |l| [l['lootName'], l['itemDesc']] }
-  puts "We could upgrade the following champions:\n".light_blue
+  puts "#{I18n.t(:'handler.mastery_tokens.could_upgrade_champions')}\n".light_blue
 
-  needed_resources = determine_token_crafting_recources(client, loot_mastery_tokens)
+  needed_resources = determine_token_crafting_resources(client, loot_mastery_tokens)
   owned_essence = client.req_get_player_loot.select { |l| l['lootId'] == Dictionary::BLUE_ESSENCE }[0]['count']
 
   essence_missing = needed_resources['essence'] - owned_essence
   if essence_missing.positive?
-    puts "You're missing #{essence_missing} Blue Essence needed to proceed. Skipping...".yellow
+    puts I18n.t(:'handler.mastery_tokens.missing_essence', essence_missing:).yellow
     return
   end
 
   execute_token_crafting(client, loot_mastery_tokens, needed_resources)
-  puts 'Done!'.green
+  puts I18n.t(:'common.done').green
 rescue StandardError => e
-  handle_exception(e, 'token upgrades')
+  handle_exception(e, I18n.t(:'menu.materials.options.mastery_tokens'))
 end
 
 # Reduces player loot to a set of tokens that can be upgraded
@@ -44,7 +44,7 @@ end
 # Calculates the cheapest way to upgrade each token set
 # @param client Client connector
 # @param loot_mastery_tokens Set of upgradable tokens
-def determine_token_crafting_recources(client, loot_mastery_tokens)
+def determine_token_crafting_resources(client, loot_mastery_tokens)
   player_loot = client.req_get_player_loot
   needed_resources = {
     'shards' => 0,
@@ -54,9 +54,9 @@ def determine_token_crafting_recources(client, loot_mastery_tokens)
 
   loot_mastery_tokens.each do |t|
     print pad(t['itemDesc'], 15, right: false).light_white
-    print ' to Mastery Level '.light_black
+    print " #{I18n.t(:'handler.mastery_tokens.to_mastery_level')} ".light_black
     print t['lootName'][-1].light_white
-    print ' using '.light_black
+    print " #{I18n.t(:'handler.mastery_tokens.using')} ".light_black
 
     calc_token_crafting_resource(player_loot, t, needed_resources)
     puts
@@ -78,16 +78,16 @@ end
 
 def calc_token_crafting_resource(player_loot, token, needed_resources)
   if check_token_ref_crafting_material(player_loot, token['refId'], 'shard')
-    print 'a champion shard.'.green
+    print I18n.t(:'handler.mastery_tokens.using_champion_shard').green
     needed_resources['shards'] += 1
     token['upgrade_type'] = 'shard'
   elsif check_token_ref_crafting_material(player_loot, token['refId'], 'perm')
-    print 'a champion permanent.'.green
+    print I18n.t(:'handler.mastery_tokens.using_champion_permanent').green
     needed_resources['perms'] += 1
     token['upgrade_type'] = 'permanent'
   else
     recipe_cost = mastery_upgrade_cost(client, (token['lootName'])[-1])
-    print "#{recipe_cost} Blue Essence.".yellow
+    print I18n.t(:'handler.mastery_tokens.using_blue_essence', recipe_cost:).yellow
     needed_resources['essence'] += recipe_cost
     token['upgrade_type'] = 'essence'
   end
@@ -100,7 +100,7 @@ def mastery_upgrade_cost(client, level)
   recipes = client.req_get_recipes_for_item("#{Dictionary.const_get("MASTERY_#{level}_TOKEN")}-1")
 
   recipe_cost = recipes.select do |r|
-    r['recipeName'] == "CHAMPION_TOKEN_#{level}_redeem_withessence"
+    r['recipeName'] == Dictionary.const_get("MASTERY_#{level}_BE_RECIPE")
   end
   recipe_cost[0]['slots'][1]['quantity']
 end
@@ -109,10 +109,10 @@ end
 # @param loot_mastery_tokens Upgradable token sets
 # @param needed_resources Hash of needed shards, perms and blue essence
 def build_token_crafting_confirm_question(loot_mastery_tokens, needed_resources)
-  question_string = "Upgrade #{loot_mastery_tokens.count} champions using "
-  question_string += "#{needed_resources['shards']} Shards, " if needed_resources['shards'].positive?
-  question_string += "#{needed_resources['perms']} Permanents, " if needed_resources['perms'].positive?
-  question_string += "#{needed_resources['essence']} Blue Essence, " if needed_resources['essence'].positive?
+  question_string = "#{I18n.t(:'handler.mastery_tokens.confirm_total_upgrades', count: loot_mastery_tokens.count)} "
+  question_string += "#{needed_resources['shards']} #{I18n.t(:'loot.shards')}, " if needed_resources['shards'].positive?
+  question_string += "#{needed_resources['perms']} #{I18n.t(:'loot.permanents')}, " if needed_resources['perms'].positive?
+  question_string += "#{needed_resources['essence']} #{I18n.t(:'loot.blue_essence')}, " if needed_resources['essence'].positive?
 
   question_string = question_string.delete_suffix(', ')
   "#{question_string}?"
@@ -133,23 +133,23 @@ def execute_token_crafting(client, loot_mastery_tokens, needed_resources)
   end
 
   loot_mastery_tokens.each do |t|
-    target_level = (t['lootName'])[-1]
+    level = (t['lootName'])[-1]
     case t['upgrade_type']
     when 'shard'
       client.req_post_recipe(
-        "CHAMPION_TOKEN_#{target_level}_redeem_withshard",
+        Dictionary.const_get("MASTERY_#{level}_SHARD_RECIPE"),
         [t['lootId'], "CHAMPION_RENTAL_#{t['refId']}"],
         1
       )
     when 'permanent'
       client.req_post_recipe(
-        "CHAMPION_TOKEN_#{target_level}_redeem_withpermanent",
+        Dictionary.const_get("MASTERY_#{level}_PERM_RECIPE"),
         [t['lootId'], "CHAMPION_#{t['refId']}"],
         1
       )
     when 'essence'
       client.req_post_recipe(
-        "CHAMPION_TOKEN_#{target_level}_redeem_withessence",
+        Dictionary.const_get("MASTERY_#{level}_BE_RECIPE"),
         [t['lootId'], 'CURRENCY_champion'],
         1
       )

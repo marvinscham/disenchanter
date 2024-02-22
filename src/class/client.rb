@@ -61,8 +61,8 @@ class Client
   end
 
   def request_post(path, body)
-    puts I18n.t(:'debug_menu.post_request_info', path: "#{host}/#{path}").light_black if @debug
-    puts I18n.t(:'debug_menu.dry_run.notice').light_red if @dry_run
+    puts I18n.t(:'menu.debug.post_request_info', path: "#{host}/#{path}").light_black if @debug
+    puts I18n.t(:'menu.debug.dry_run.notice').light_red if @dry_run
     return if @dry_run
 
     create_client do |http|
@@ -125,6 +125,6 @@ class Client
     return unless @debug
 
     File.write('disenchanter_post.json', post_answer.to_json)
-    puts I18n.t(:'debug_menu.file_written_notice', filename: 'disenchanter_post.json')
+    puts I18n.t(:'menu.debug.file_written_notice', filename: 'disenchanter_post.json')
   end
 end

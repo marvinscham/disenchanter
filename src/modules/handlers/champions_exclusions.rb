@@ -9,7 +9,7 @@ def handle_champions_exclusions(loot_shards)
 
   until exclusions_done
     if ans_y.include? user_input_check(
-      'Would you like to add exclusions?',
+      I18n.t(:'handler.champion.exclusions.ask'),
       ans_yn,
       ans_yn_d
     )
@@ -21,21 +21,21 @@ def handle_champions_exclusions(loot_shards)
 
   loot_shards.reject { |l| exclusions_arr.include? l['itemDesc'] }
 rescue StandardError => e
-  handle_exception(e, 'Champion Shard Exceptions')
+  handle_exception(e, I18n.t(:'handler.exception.step.champions.exclusions'))
 end
 
 def handle_champion_exclusion(loot_shards, exclusions_str)
   exclusions_str += ','
   exclusions_str += ask(
-    'Okay, which champions? '.light_cyan +
-      '(case-sensitive, comma-separated)'.light_white +
+    "#{I18n.t(:'handler.champion.exclusions.ask_which')} ".light_cyan +
+      I18n.t(:'handler.champion.exclusions.entry_requirements').light_white +
       ': '.light_cyan
   )
 
   exclusions_arr = exclusions_str.split(/\s*,\s*/)
   exclusions_matched = loot_shards.select { |l| exclusions_arr.include? l['itemDesc'] }
 
-  print 'Exclusions recognized: '.green
+  print "#{I18n.t(:'handler.champion.exclusions.recognized')} ".green
   exclusions_matched.each { |e| print "#{e['itemDesc'].light_white} " }
   puts
 

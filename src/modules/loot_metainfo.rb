@@ -13,10 +13,10 @@ def get_chest_name(client, loot_id)
   return chest_info['localizedName'] unless chest_info['localizedName'].empty?
 
   catalogue = {
-    'CHEST_128' => 'Champion Capsule',
-    'CHEST_129' => 'Glorious Champion Capsule',
-    'CHEST_210' => 'Honor Level 4 Orb',
-    'CHEST_211' => 'Honor Level 5 Orb'
+    'CHEST_128' => I18n.t(:'loot.champion_capsule'),
+    'CHEST_129' => I18n.t(:'loot.glorious_champion_capsule'),
+    'CHEST_210' => I18n.t(:'loot.honor_4_orb'),
+    'CHEST_211' => I18n.t(:'loot.honor_5_orb')
   }
 
   return catalogue[loot_id] if catalogue.key?(loot_id)

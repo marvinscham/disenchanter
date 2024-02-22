@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'open_url'
+
 def setup_locale(client)
   I18n::Backend::Simple.include(I18n::Backend::Fallbacks)
 
@@ -15,7 +17,7 @@ def setup_locale(client)
   I18n.locale = user_locale
 
   puts I18n.t(:'meta.auto_loaded_locale').light_white
-  puts I18n.t(:'meta.translation_note').light_yellow
+  puts I18n.t(:'meta.translation_note', url: translation_url).light_yellow
 rescue StandardError
   LanguageMenu.new(client).run_loop
 end
