@@ -35,7 +35,7 @@ jobs:
         run: bundle exec rubocop --format json -o rubocop-report.json || echo "Failed on RuboCop rules"
 
       - name: Upload RuboCop report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: rubocop-report
           path: rubocop-report.json
