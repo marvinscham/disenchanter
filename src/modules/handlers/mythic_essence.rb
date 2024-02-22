@@ -72,8 +72,7 @@ def execute_mythic_crafting(client, target_name, recipe, craft_amount)
     I18n.t(:'handler.mythic_essence.craft_confirm',
            quantity: craft_quantity,
            loot_name: target_name,
-           total_price: craft_price
-    ),
+           total_price: craft_price),
     ans_yn,
     ans_yn_d,
     'confirm'

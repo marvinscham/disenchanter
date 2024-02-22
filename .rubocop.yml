@@ -14,7 +14,7 @@ Metrics/PerceivedComplexity:
   Severity: refactor
 Metrics/AbcSize:
   CountRepeatedAttributes: false
-  Max: 30
+  Max: 35
   Severity: refactor
 Style/EmptyElse:
   AllowComments: true

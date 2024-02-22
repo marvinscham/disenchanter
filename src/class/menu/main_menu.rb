@@ -20,6 +20,13 @@ require_relative '../../modules/stat_submission'
 class MainMenu < Menu
   def initialize(client)
     menu_text = I18n.t(:'menu.main.what_to_do')
+
+    lang_supp_text = if I18n.t(:'menu.main.options.language_settings') == 'Language settings'
+                       ' (Language settings)'
+                     else
+                       ''
+                     end
+
     things_todo = {
       '1' => I18n.t(:'loot.materials'),
       '2' => I18n.t(:'loot.champions'),
@@ -29,7 +36,7 @@ class MainMenu < Menu
       '6' => I18n.t(:'loot.emotes'),
       '7' => I18n.t(:'loot.ward_skins'),
       '8' => I18n.t(:'loot.icons'),
-      'l' => I18n.t(:'menu.main.options.language_settings'),
+      'l' => I18n.t(:'menu.main.options.language_settings') + lang_supp_text,
       'm' => I18n.t(:'menu.main.options.open_mastery_chart'),
       's' => I18n.t(:'menu.main.options.open_usage_stats'),
       'r' => I18n.t(:'menu.main.options.open_repository'),

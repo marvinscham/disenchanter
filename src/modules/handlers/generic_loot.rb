@@ -60,33 +60,34 @@ def handle_generic_owned(loot_generic, name)
     contains_unowned_items = true if l['redeemableStatus'] != Dictionary::STATUS_OWNED
   end
 
-  if contains_unowned_items
-    user_option =
-      user_input_check(
-        "#{I18n.t(:'handler.generic.keep_unowned', loot: name)}\n".light_cyan +
-          '[y] '.light_white + "#{I18n.t(:'common.yes')}\n".light_cyan + '[n] '.light_white +
-          "#{I18n.t(:'common.no')}\n".light_cyan + '[x] '.light_white +
-          "#{I18n.t(:'menu.back_to_main')}\n".light_cyan + "#{I18n.t(:'menu.option')} ".white,
-        %w[y n x],
-        '[y|n|x]',
-        ''
-      )
+  return loot_generic unless contains_unowned_items
 
-    case user_option
-    when 'x'
-      puts I18n.t(:'handler.generic.action_cancelled').yellow
-      return false
-    when 'y'
-      loot_generic = loot_generic.select { |g| g['redeemableStatus'] == Dictionary::STATUS_OWNED }
-      puts I18n.t(:'handler.generic.filtered_down', count: count_loot_items(loot_generic)).light_blue
-    when 'n'
-      # Nothing to do
-    else
-      raise StandardError, I18n.t(:'handler.exception.unusual_state')
-    end
+  case ask_option_keep_unowned(name)
+  when 'x'
+    puts I18n.t(:'handler.generic.action_cancelled').yellow
+    return false
+  when 'y'
+    loot_generic = loot_generic.select { |g| g['redeemableStatus'] == Dictionary::STATUS_OWNED }
+    puts I18n.t(:'handler.generic.filtered_down', count: count_loot_items(loot_generic)).light_blue
+  when 'n'
+    # Nothing to do
+  else
+    raise StandardError, I18n.t(:'handler.exception.unusual_state')
   end
 
   loot_generic
+end
+
+def ask_option_keep_unowned(name)
+  user_input_check(
+    "#{I18n.t(:'handler.generic.keep_unowned', loot: name)}\n".light_cyan +
+      '[y] '.light_white + "#{I18n.t(:'common.yes')}\n".light_cyan + '[n] '.light_white +
+      "#{I18n.t(:'common.no')}\n".light_cyan + '[x] '.light_white +
+      "#{I18n.t(:'menu.back_to_main')}\n".light_cyan + "#{I18n.t(:'menu.option')} ".white,
+    %w[y n x],
+    '[y|n|x]',
+    ''
+  )
 end
 
 def prepare_generic_totals(loot_generic)

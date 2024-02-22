@@ -11,8 +11,8 @@ def user_input_check(question, answers, answer_display, color_preset = 'default'
 
   case color_preset
   when 'confirm'
-    question = "#{I18n.t(:'common.confirm_banner')}: #{question} ".light_magenta
-    + answer_display.to_s.light_white + ': '.light_magenta
+    question = "#{I18n.t(:'common.confirm_banner')}: #{question} ".light_magenta +
+               answer_display.to_s.light_white + ': '.light_magenta
   when 'dry'
     question += " #{answer_display} (#{I18n.t(:'common.dry_run_banner')}): ".light_red
   else
@@ -21,7 +21,9 @@ def user_input_check(question, answers, answer_display, color_preset = 'default'
 
   until answers.include? input
     input = ask question
-    puts "#{I18n.t(:'common.invalid_answer')}: ".light_red + answer_display.to_s.light_white unless answers.include? input
+    unless answers.include? input
+      puts "#{I18n.t(:'common.invalid_answer')}: ".light_red + answer_display.to_s.light_white
+    end
   end
 
   input

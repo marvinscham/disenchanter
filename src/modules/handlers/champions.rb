@@ -23,11 +23,11 @@ def handle_champions(client)
   puts I18n.t(:'handler.champion.found_shards', count: count_loot_items(loot_shards)).light_blue
   loot_shards = handle_champions_owned(loot_shards)
 
-  menu.champions = ChampionsMenu.new(client, loot_shards)
-  bail = menu.champions.run_loop
+  champions_menu = ChampionsMenu.new(client, loot_shards)
+  bail = champions_menu.run_loop
   return if bail
 
-  loot_shards = menu.champions.loot_shards
+  loot_shards = champions_menu.loot_shards
 
   if count_loot_items(loot_shards).zero?
     puts I18n.t(:'handler.champion.already_done').green

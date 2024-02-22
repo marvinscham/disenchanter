@@ -111,8 +111,12 @@ end
 def build_token_crafting_confirm_question(loot_mastery_tokens, needed_resources)
   question_string = "#{I18n.t(:'handler.mastery_tokens.confirm_total_upgrades', count: loot_mastery_tokens.count)} "
   question_string += "#{needed_resources['shards']} #{I18n.t(:'loot.shards')}, " if needed_resources['shards'].positive?
-  question_string += "#{needed_resources['perms']} #{I18n.t(:'loot.permanents')}, " if needed_resources['perms'].positive?
-  question_string += "#{needed_resources['essence']} #{I18n.t(:'loot.blue_essence')}, " if needed_resources['essence'].positive?
+  if needed_resources['perms'].positive?
+    question_string += "#{needed_resources['perms']} #{I18n.t(:'loot.permanents')}, "
+  end
+  if needed_resources['essence'].positive?
+    question_string += "#{needed_resources['essence']} #{I18n.t(:'loot.blue_essence')}, "
+  end
 
   question_string = question_string.delete_suffix(', ')
   "#{question_string}?"
