@@ -67,9 +67,7 @@ class MainMenu < Menu
     when '8'
       handle_icons(@client)
     when 'l'
-      LanguageMenu.new(@client).run_loop
-      initialize(@client) # Reload is required to replace menu in old language
-      @client.greet
+      swap_language
     when 'm'
       open_masterychart(@client)
     when 's'
@@ -86,5 +84,11 @@ class MainMenu < Menu
 
     @client.refresh_loot
     false
+  end
+
+  def swap_language
+    LanguageMenu.new(@client).run_loop
+    initialize(@client) # Reload is required to replace menu in old language
+    @client.greet
   end
 end
