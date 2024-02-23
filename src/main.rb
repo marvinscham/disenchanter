@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 require 'i18n'
 
 require_relative 'class/client'
@@ -11,47 +14,19 @@ require_relative 'class/stat_tracker'
 require_relative 'modules/common_strings'
 require_relative 'modules/user_input'
 
-require_relative 'modules/update/checker'
-
 def run
   check_build_env
 
   current_version = 'v1.6.0'
   stat_tracker = StatTracker.new
-  client = Client.new(stat_tracker)
+  client = Client.new(stat_tracker, current_version)
 
-  greet(client, current_version)
+  client.greet
+  client.check_summoner
 
   MainMenu.new(client).run_loop
 
   finish(stat_tracker)
-end
-
-def greet(client, current_version)
-  puts I18n.t(:'menu.main.hello').light_green
-
-  puts I18n.t(:'menu.main.version_info', version: current_version).light_blue
-  check_update(current_version)
-  print "#{I18n.t(:'menu.main.exit_shortcut_notice')} ".light_blue
-  puts I18n.t(:'menu.main.exit_shortcut').light_white + '.'.light_blue
-  puts separator
-
-  check_summoner(client)
-end
-
-def check_summoner(client)
-  summoner = client.req_get_current_summoner
-  if summoner['gameName'].nil? || summoner['gameName'].empty?
-    puts I18n.t(:'menu.main.summoner_check_failed').light_red
-    ask exit_string
-    exit 1
-  end
-
-  puts "\n#{I18n.t(:'menu.main.logged_in_as', name: summoner['gameName'], tagline: summoner['tagLine'])}".light_blue
-  puts separator
-  puts "\n#{I18n.t(:'menu.main.confirm_banner_intro')}".light_blue
-  puts "#{I18n.t(:'common.confirm_banner')}: #{I18n.t(:'menu.main.confirm_banner_example')} [y|n]".light_magenta
-  puts separator
 end
 
 def finish(stat_tracker)

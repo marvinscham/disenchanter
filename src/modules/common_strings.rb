@@ -27,7 +27,9 @@ def ans_yn_d
 end
 
 def pad(str, len, right: true)
-  format("%#{right ? '-' : ''}#{len}s", str)
+  full_width_str_len = str.scan(/\p{Han}/).size
+  full_width_str_len += str.scan(/\p{Symbol}/).size
+  format("%#{right ? '-' : ''}#{len - full_width_str_len}s", str)
 end
 
 unless String.method_defined?(:light_yellow)

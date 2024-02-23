@@ -22,9 +22,9 @@ class MainMenu < Menu
     menu_text = I18n.t(:'menu.main.what_to_do')
 
     lang_supp_text = if I18n.t(:'menu.main.options.language_settings') == 'Language settings'
-                       ' (Language settings)'
-                     else
                        ''
+                     else
+                       ' (Language settings)'
                      end
 
     things_todo = {
@@ -67,7 +67,7 @@ class MainMenu < Menu
     when '8'
       handle_icons(@client)
     when 'l'
-      LanguageMenu.new(@client).run_loop
+      swap_language
     when 'm'
       open_masterychart(@client)
     when 's'
@@ -83,7 +83,12 @@ class MainMenu < Menu
     end
 
     @client.refresh_loot
-    puts separator
     false
+  end
+
+  def swap_language
+    LanguageMenu.new(@client).run_loop
+    initialize(@client) # Reload is required to replace menu in old language
+    @client.greet
   end
 end

@@ -2,8 +2,7 @@
 
 def ask(question)
   print(question)
-  question = gets
-  question.chomp
+  $stdin.gets.encode('UTF-8').chomp
 end
 
 def user_input_check(question, answers, answer_display, color_preset = 'default')
