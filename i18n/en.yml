@@ -18,7 +18,7 @@ en:
     auto_loaded_locale: Found English client!
     locale_name: English
     manually_set_locale: Set to English!
-    translation_note: "Translation missing? Help by offering yours: %{url}"
+    translation_note: "Translation missing/bad? Help by offering yours: %{url}"
   loot:
     blue_essence: Blue Essence
     blue_essence_short: BE
