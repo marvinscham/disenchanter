@@ -4,17 +4,20 @@ require 'base64'
 require 'net/http'
 require 'json'
 
-require_relative '../modules/detect_client'
-require_relative '../modules/handlers/exception'
 require_relative '../modules/locale'
+require_relative '../modules/detect_client'
+require_relative '../modules/update/checker'
+require_relative '../modules/handlers/exception'
 
 # Holds port and token info
+# rubocop:disable Metrics/ClassLength
 class Client
   attr_accessor :stat_tracker, :debug, :dry_run, :locale
 
   # @param stat_tracker StatTracker
-  def initialize(stat_tracker)
+  def initialize(stat_tracker, current_version)
     begin
+      @version = current_version
       @port, @token, path = grab_lockfile
       @locale = grab_locale(path)
       setup_locale(self)
@@ -26,6 +29,33 @@ class Client
     @stat_tracker = stat_tracker
     @debug = false
     @dry_run = false
+  end
+
+  def greet
+    puts I18n.t(:'menu.main.hello').light_green
+
+    print "#{I18n.t(:'menu.main.version_info', version: @version)} - ".light_blue
+    check_update(@version)
+    puts separator
+
+    print "#{I18n.t(:'menu.main.exit_shortcut_notice')} ".light_blue
+    puts I18n.t(:'menu.main.exit_shortcut').light_white + '.'.light_blue
+    puts "\n#{I18n.t(:'menu.main.confirm_banner_intro')}".light_blue
+    puts "#{I18n.t(:'common.confirm_banner')}: #{I18n.t(:'menu.main.confirm_banner_example')} [y|n]".light_magenta
+
+    puts separator
+  end
+
+  def check_summoner
+    summoner = req_get_current_summoner
+    if summoner['gameName'].nil? || summoner['gameName'].empty?
+      puts I18n.t(:'menu.main.summoner_check_failed').light_red
+      ask exit_string
+      exit 1
+    end
+
+    puts "\n#{I18n.t(:'menu.main.logged_in_as', name: summoner['gameName'], tagline: summoner['tagLine'])}".light_blue
+    puts separator
   end
 
   def host
@@ -128,3 +158,4 @@ class Client
     puts I18n.t(:'menu.debug.file_written_notice', filename: 'disenchanter_post.json')
   end
 end
+# rubocop:enable Metrics/ClassLength

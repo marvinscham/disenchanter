@@ -10,7 +10,7 @@ require_relative '../../class/dictionary'
 def handle_generic(client, name, type)
   loot_generic = select_generic_loot(client, type)
   if count_loot_items(loot_generic).zero?
-    puts I18n.t(:'handler.generic.found_nothing').yellow
+    puts I18n.t(:'handler.generic.found_nothing', name:).yellow
     return
   end
 

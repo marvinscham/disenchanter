@@ -61,6 +61,8 @@ en:
     back_to_main: Back to main menu
     option_chosen: Option chosen
     option_done: done
+    language:
+      preferred: What's your preferred language?
     main:
       hello: Hi! :)
       version_info: Running Disenchanter %{version}
