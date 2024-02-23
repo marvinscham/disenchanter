@@ -115,6 +115,8 @@ de_DE:
         key_fragments: Schlüsselfragmente
         capsules: Kapseln
         mastery_tokens: Meisterschaftsmarken
+    language:
+      preferred: Was ist deine bevorzugte Sprache?
   handler:
     generic:
       action_cancelled: Aktion abgebrochen
