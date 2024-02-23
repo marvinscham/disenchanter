@@ -6,14 +6,15 @@ require_relative '../../modules/open_url'
 # Manual language selection menu
 class LanguageMenu < Menu
   def initialize(client)
-    menu_text = 'What\'s your preferred language?'
+    menu_text = I18n.t(:'menu.language.preferred')
     things_todo = {
       'en' => 'English',
       'de' => 'Deutsch',
+      'zh' => '繁體中文',
       'eo' => 'Esperanto',
-      'x' => 'Back to main menu'
+      'x' => I18n.t(:'menu.back_to_main')
     }
-    answer_display = 'Option'
+    answer_display = I18n.t(:'menu.option')
 
     super(client, menu_text, answer_display, things_todo)
   end
@@ -27,6 +28,8 @@ class LanguageMenu < Menu
                     'de_DE'
                   when 'eo'
                     'eo'
+                  when 'zh'
+                    'zh_TW'
                   else
                     'en'
                   end
