@@ -33,7 +33,7 @@ class LanguageMenu < Menu
                   else
                     'en'
                   end
-    puts I18n.t(:'meta.manually_set_locale')
+    puts I18n.t(:'meta.manually_set_locale', locale_name: I18n.t(:'meta.locale_name'))
     puts I18n.t(:'meta.translation_note', url: translation_url).light_yellow
 
     true
