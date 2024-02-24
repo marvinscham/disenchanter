@@ -28,6 +28,14 @@ zh_TW:
     materials:
       options:
         mastery_tokens: 專精代幣
+    champions:
+      options:
+        all: 分解所有的英雄碎片
+        mastery_threshold: 保留足夠(1到2個)的碎片給當前專精等級x到持有專精7代幣的英雄(可以選擇1到6)
+        tokens: 保留足夠(1到2個)的碎片給當前持有專精6代幣到專精7代幣的英雄
+        mastery_full: 保留足夠(1到2個)的碎片給所有還沒達到專精7的英雄(只會分解完全沒有用處的碎片)
+        collector: 完全不考慮專精，為每個英雄留一個碎片
+    choose_option: 好的, 你希望執行哪個選項?
   common:
     press_enter_to_exit: 按下 Enter鍵 離開.
     invalid_answer: 錯誤答案, 選項
@@ -35,6 +43,11 @@ zh_TW:
     exiting: 退出中...
     yes: 是
     no: 否
+    actions: 操作
+    disenchanted: 分解
+    opened: 開啟
+    crafted: 製作
+    redeemed: 領取
   loot:
     eternals: 永恆精雕
     skin_shards: 造型碎片
@@ -59,6 +72,8 @@ zh_TW:
     skin_permanents: 永久造型
     eternal_shards: 永恆精雕
     eternal_permanents: 永恆精雕
+    ward_skin_shards: 守衛造型碎片
+    ward_skin_permanents: 永久守衛造型
   handler:
     exception:
       error_occurred: 在處理 %{name} 時發生了一個錯誤.
@@ -97,6 +112,31 @@ zh_TW:
       using_blue_essence: '%{recipe_cost} 藍色結晶粉末.'
       missing_essence: 你缺少了 %{essence_missing} 藍色結晶粉末以進行. 跳過了...
       none_found: 沒有找到可解鎖專精等級的專精代幣.
+    champion:
+      found_shards: 找到 %{count} 個英雄碎片.
+      ask_keep_unowned_champs: 要幫你保留一個未擁有英雄的英雄碎片嗎?
+      already_done: '完工了: 符合你篩選條件的英雄碎片均已分解.'
+      no_shards_found: 沒有找到可分解的英雄碎片.
+      no_unowned_champs_found: 沒找到未擁有英雄的英雄碎片.
+      present_selection: '我們將分解 %{count} 個英雄碎片基於你選擇的選項:'
+      shards_to_keep: 保留 %{count}
+      ask_disenchant: 分解 %{count} 英雄碎片以換取 %{amount} 藍色結晶粉末?
+      found_champs_with_tokens: 找到 %{count} 個持有專精代幣的英雄
+      by_mastery:
+        ask_which_level: 你希望留下英雄碎片的英雄, 專精等級至少要達到多少?
+        note_level7: 達到專精7
+        note_below_threshold: 低於下限/高於上限
+      exclusions:
+        ask: 你希望增加例外嗎?
+        ask_which: 好的, 該去除哪些英雄?
+        recognized: '已正確讀取的例外:'
+    url:
+      opening_repository: 正在使用你的瀏覽器開啟位於 %{url} 的 Github 專案頁面...
+      opening_stats: 正在使用你的瀏覽器開啟位於 %{url} 的全球數據統計...
+    stat_submission:
+      your_stats: '你的數據:'
+      ask_contribute: 你願意(匿名的)上傳你的數據到全球統計數據嗎?
+      thanks: 非常的感謝你!
   update_checker:
     local_beta_version: '最新的線上版本: v%{version}'
     ask_download_now: 你希望現在下載新版本嗎?
