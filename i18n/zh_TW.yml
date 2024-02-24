@@ -15,9 +15,12 @@ zh_TW:
       all_done: 大功告成!
       time_saved: 我們節省了大約 %{time_saved} 秒鐘等待分解動畫放完的時間.
       see_you: 下次再見 :)
+      exit_shortcut_notice: 你可以在任何時刻按 [CTRL + C] 來離開本程式.
     mythic:
       options:
         random_skin_shards: 隨機造型碎片
+        blue_essence: 藍色結晶粉末
+        orange_essence: 橘色結晶粉末
       recipe_found: '找到製作項目: %{thing_to_craft} 花費 %{amount} 神話結晶粉末'
       recipes_unavailable: 似乎不可能進行 %{loot} 的製作.
     option_done: 完成
@@ -28,6 +31,9 @@ zh_TW:
     materials:
       options:
         mastery_tokens: 專精代幣
+        mythic_essence: 神話結晶粉末
+        key_fragments: 鑰匙碎片
+        capsules: 典藏罐/禮包/晶球
     champions:
       options:
         all: 分解所有的英雄碎片
@@ -88,6 +94,7 @@ zh_TW:
       filtered_down: 篩選至 %{count} 個物件.
       found_no_owned: 沒有找到持有可分解的 %{name}.
       found_nothing: 沒有找到可分解的 %{name}.
+      ask_disenchant: 分解 %{count} 個 %{loot} 換取 %{currency}?
     key_fragments:
       not_enough_fragments: 持有的鑰匙碎片少於三個.
       found_fragments: 找到 %{count} 個鑰匙碎片.
@@ -143,6 +150,7 @@ zh_TW:
     done_downloading: 下載完成!
     local_beta_note: 更新成功, 歡迎來到未來!
     up_to_date: 目前使用的是最新版本, 沒問題!
+    update_available: 新版本 %{version} 可下載!
   meta:
     auto_loaded_locale: Found Traditional Chinese client!
     locale_name: 繁體中文
