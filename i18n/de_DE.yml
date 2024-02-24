@@ -3,7 +3,8 @@ de_DE:
     locale_name: "Deutsch"
     auto_loaded_locale: "Sprache des Clients: %{locale_name}"
     manually_set_locale: "Auf Deutsch gestellt!"
-    translation_note: "Fehlende Übersetzung? Hilf mit, indem du deine anbietest: %{url}"
+    translation_note: "Fehlende oder schlechte Übersetzung? Hilf mit, indem du deine
+      anbietest: %{url}"
   loot:
     permanents: Permanent
     honor_5_orb: „Ehrungsstufe 5“-Kugel
@@ -34,8 +35,7 @@ de_DE:
     orange_essence: Orangene Essenzen
   menu:
     main:
-      exit_shortcut_notice: 'Du kannst das Skript jederzeit mit dieser Tastenkombination
-        verlassen:'
+      exit_shortcut_notice: 'Du kannst das Skript jederzeit mit [STRG + C] verlassen.'
       time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen
         gespart.
       options:
@@ -150,7 +150,7 @@ de_DE:
         hier.
     champion:
       exclusions:
-        entry_requirements: (Klein- und Großschreibung beachten, durch Kommas getrennt)
+        entry_requirements: (Championnamen EXAKT einfügen/eingeben)
         ask: Möchtest du Ausschlüsse hinzufügen?
         ask_which: Okay, welche Champions?
         recognized: 'Erkannte Ausschlüsse:'
