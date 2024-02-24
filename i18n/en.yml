@@ -66,8 +66,10 @@ en:
     main:
       hello: Hi! :)
       version_info: Running Disenchanter %{version}
-      exit_shortcut_notice: "You can exit this script at any point by pressing [CTRL + C]."
-      summoner_check_failed: Could not grab summoner info. Try restarting your League Client.
+      exit_shortcut_notice: "You can exit this script at any point by pressing [CTRL
+        + C]."
+      summoner_check_failed: Could not grab summoner info. Try restarting your League
+        Client.
       logged_in_as: "You're logged in as %{name} #%{tagline}."
       confirm_banner_intro: "Your loot is safe, no actions will be taken until you
         confirm a banner like this:"
@@ -180,7 +182,7 @@ en:
       exclusions:
         ask: Would you like to add exclusions?
         ask_which: Okay, which champions?
-        entry_requirements: (case-sensitive, comma-separated)
+        entry_requirements: (type/paste the EXACT champion name)
         recognized: "Exclusions recognized:"
       by_mastery:
         ask_which_level: Which mastery level should champions at least be for their
