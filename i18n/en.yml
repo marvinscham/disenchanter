@@ -69,12 +69,15 @@ en:
       exit_shortcut_notice: "You can exit this script at any point by pressing [CTRL + C]."
       summoner_check_failed: Could not grab summoner info. Try restarting your League Client.
       logged_in_as: "You're logged in as %{name} #%{tagline}."
-      confirm_banner_intro: "Your loot is safe, no actions will be taken until you confirm a banner like this:"
+      confirm_banner_intro: "Your loot is safe, no actions will be taken until you
+        confirm a banner like this:"
       confirm_banner_example: Perform this action?
       all_done: That's it!
-      time_saved: We saved you about %{time_saved} seconds of waiting for animations to finish.
+      time_saved: We saved you about %{time_saved} seconds of waiting for animations
+        to finish.
       see_you: See you next time :)
-      what_to_do: "What would you like to do? (Hint: go top to bottom so you don't miss anything!)"
+      what_to_do: "What would you like to do? (Hint: go top to bottom so you don't
+        miss anything!)"
       options:
         language_settings: Language settings
         open_mastery_chart: Open Mastery Chart profile
@@ -104,16 +107,19 @@ en:
       ask_which_loot_info: Which lootId would you like the info for?
       ask_which_loot_recipes: Which lootId would you like the recipes for?
       request_terminal:
-        warning: Manual request terminal entered. 
-          If you don't know what you're doing or someone is urging you to do this, stop immediately.
+        warning: Manual request terminal entered. If you don't know what you're doing
+          or someone is urging you to do this, stop immediately.
         exit: Press [%{key}] to leave.
         ask_path: "Enter path to GET from:"
     champions:
       options:
         all: Disenchant all champion shards
-        tokens: Keep enough (1/2) shards for champions you own mastery 6/7 tokens for
-        mastery_threshold: Keep enough (1/2) shards to fully master champions at least at mastery level x (select from 1 to 6)
-        mastery_full: Keep enough (1/2) shards to fully master all champions (only disenchant shards that have no possible use)
+        tokens: Keep enough (1/2) shards for champions you own mastery 6/7 tokens
+          for
+        mastery_threshold: Keep enough (1/2) shards to fully master champions at least
+          at mastery level x (select from 1 to 6)
+        mastery_full: Keep enough (1/2) shards to fully master all champions (only
+          disenchant shards that have no possible use)
         collector: Keep one shard of each champion regardless of mastery
     materials:
       options:
@@ -142,7 +148,8 @@ en:
       error_occurred: An error occurred while handling %{name}.
       create_an_issue: Please take a screenshot and create an issue at %{url}
       send_email_instead: If you don't have a GitHub account, send it to %{email}
-      error_description: "Exception occurred: %{error_type}. Message: %{message}. Backtrace:"
+      error_description: "Exception occurred: %{error_type}. Message: %{message}.
+        Backtrace:"
       skipping_step: Skipping this step...
       unusual_state: This shouldn't be possible yet here we are.
       step:
@@ -165,7 +172,8 @@ en:
       no_shards_found: Found no champion shards to disenchant.
       found_shards: Found %{count} champion shards.
       already_done: "Job's already done: no champion shards left matching your selection."
-      present_selection: "We'd disenchant %{count} champion shards using the option you chose:"
+      present_selection: "We'd disenchant %{count} champion shards using the option
+        you chose:"
       shards_to_keep: keeping %{count}
       ask_include_permanents: Should we include champion permanents in this process?
       ask_disenchant: Disenchant %{count} champion shards for %{amount} Blue Essence?
@@ -175,7 +183,8 @@ en:
         entry_requirements: (case-sensitive, comma-separated)
         recognized: "Exclusions recognized:"
       by_mastery:
-        ask_which_level: Which mastery level should champions at least be for their shards to be kept?
+        ask_which_level: Which mastery level should champions at least be for their
+          shards to be kept?
         note_level7: at mastery 7
         note_below_threshold: below threshold
       no_unowned_champs_found: Found no shards of champions you don't own yet.
@@ -192,7 +201,8 @@ en:
     mastery_tokens:
       none_found: Found no upgradable set of Mastery Tokens.
       could_upgrade_champions: "We could upgrade the following champions:"
-      missing_essence: You're missing %{essence_missing} Blue Essence needed to proceed. Skipping...
+      missing_essence: You're missing %{essence_missing} Blue Essence needed to proceed.
+        Skipping...
       to_mastery_level: to Mastery Level
       using: using
       using_champion_shard: a champion shard.
@@ -211,7 +221,8 @@ en:
       opening_stats: Opening Global Stats at %{url} in your browser...
       opening_mastery_chart: Opening your profile at %{url} in your browser...
     stat_submission:
-      ask_contribute: Would you like to contribute your (anonymous) stats to the global stats?
+      ask_contribute: Would you like to contribute your (anonymous) stats to the global
+        stats?
       thanks: Thank you very much!
       your_stats: "Your stats:"
       ask_submit: Submit anonymous stats?

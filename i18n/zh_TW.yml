@@ -2,3 +2,107 @@ zh_TW:
   menu:
     main:
       hello: 嗨! :)
+      version_info: 執行分解者版本 %{version}
+      confirm_banner_intro: '請放心嘗試所有選項, 沒有任何動作會在以下這個警告出現前被執行:'
+      options:
+        exit: 離開
+        open_usage_stats: 前往網頁：分解者全球統計數據
+        open_repository: 前往網頁：GitHub專案頁面
+      what_to_do: '你現在希望做些甚麼? (提示: 先從海克斯材料開始, 可以確保你接下來不會放過任何東西! 例如海克斯寶箱開出的造型碎片!)'
+      summoner_check_failed: 無法獲取召喚師資訊. 請重新啟動英雄聯盟客戶端.
+      logged_in_as: '你當前的登入身分為 %{name} #%{tagline}.'
+      confirm_banner_example: 執行這個動作嗎?
+      all_done: 大功告成!
+      time_saved: 我們節省了大約 %{time_saved} 秒鐘等待分解動畫放完的時間.
+      see_you: 下次再見 :)
+    mythic:
+      options:
+        random_skin_shards: 隨機造型碎片
+      recipe_found: '找到製作項目: %{thing_to_craft} 花費 %{amount} 神話結晶粉末'
+      recipes_unavailable: 似乎不可能進行 %{loot} 的製作.
+    option_done: 完成
+    what_to_do: 你現在希望做些甚麼?
+    option: 選項
+    back_to_main: 回到主選單
+    option_chosen: 選擇的操作
+    materials:
+      options:
+        mastery_tokens: 專精代幣
+  common:
+    press_enter_to_exit: 按下 Enter鍵 離開.
+    invalid_answer: 錯誤答案, 選項
+    confirm_banner: 最終確認
+    exiting: 退出中...
+    yes: 是
+    no: 否
+  loot:
+    eternals: 永恆精雕
+    skin_shards: 造型碎片
+    materials: 海克斯材料
+    champions: 英雄碎片
+    skins: 造型碎片
+    tacticians: 聯盟精靈
+    blue_essence: 藍色結晶粉末
+    orange_essence: 橘色結晶粉末
+    orange_essence_short: 橘粉
+    blue_essence_short: 藍粉
+    emotes: 表情
+    ward_skins: 偵查守衛造型
+    icons: 頭像
+    champion_capsule: 英雄典藏罐
+    glorious_champion_capsule: 榮耀英雄典藏罐
+    honor_4_orb: 榮譽等級 4 晶球
+    honor_5_orb: 榮譽等級 5 晶球
+    mythic_essence: 神話結晶粉末
+    key_fragments: 鑰匙碎片
+    capsules: 典藏罐/禮包/晶球
+    skin_permanents: 永久造型
+    eternal_shards: 永恆精雕
+    eternal_permanents: 永恆精雕
+  handler:
+    exception:
+      error_occurred: 在處理 %{name} 時發生了一個錯誤.
+      send_email_instead: 如果你沒有或不希望申請一個 GitHub 帳號, 請將本截圖及你遇到的問題用英文寄信至 %{email}
+      create_an_issue: 請截圖並在 %{url} 發起一個新的問題討論串
+      skipping_step: 跳過這一步驟...
+    generic:
+      disenchant_preview: '我們將分解 %{count} 個 %{loot} 基於你選擇的選項:'
+      keep_unowned: 保留你未擁有的 %{loot} 嗎?
+      found_some: 找到 %{count} %{name}.
+      action_cancelled: 操作取消
+      filtered_down: 篩選至 %{count} 個物件.
+      found_no_owned: 沒有找到持有可分解的 %{name}.
+      found_nothing: 沒有找到可分解的 %{name}.
+    key_fragments:
+      not_enough_fragments: 持有的鑰匙碎片少於三個.
+      found_fragments: 找到 %{count} 個鑰匙碎片.
+      ask_craft_keys: 製作 %{key_count} 個鑰匙, 花費 %{fragment_count} 個鑰匙碎片?
+    capsule:
+      found_capsules: '找到 %{count} 個典藏罐/禮包/晶球:'
+      ask_open_capsules: 開啟 %{count} (不需鑰匙的) 典藏罐/禮包/晶球?
+      no_capsules_found: 沒有找到不需鑰匙即可開啟的典藏罐/禮包/晶球.
+    mythic_essence:
+      found_some: 找到 %{amount} 神話結晶粉末.
+      amount_to_use: 好的, 要使用多少神話結晶粉末來製作 %{target_name}?
+      craft_confirm: 製作 %{quantity} %{loot_name} 花費 %{total_cost} 神話結晶粉末?
+      not_enough: 神話結晶粉末數量不足以製作.
+      cancelled: 已取消神話製作.
+      none_found: 沒有找到可使用的神話結晶粉末.
+    mastery_tokens:
+      could_upgrade_champions: '我們可以升級下列的英雄:'
+      to_mastery_level: 至專精等級
+      using: 花費
+      using_champion_shard: 一個英雄碎片.
+      using_champion_permanent: 一個永久英雄.
+      using_blue_essence: '%{recipe_cost} 藍色結晶粉末.'
+      missing_essence: 你缺少了 %{essence_missing} 藍色結晶粉末以進行. 跳過了...
+      none_found: 沒有找到可解鎖專精等級的專精代幣.
+  update_checker:
+    local_beta_version: '最新的線上版本: v%{version}'
+    ask_download_now: 你希望現在下載新版本嗎?
+    done_downloading: 下載完成!
+    local_beta_note: 更新成功, 歡迎來到未來!
+    up_to_date: 目前使用的是最新版本, 沒問題!
+  meta:
+    auto_loaded_locale: Found Traditional Chinese client!
+    locale_name: 繁體中文
