@@ -19,7 +19,7 @@ eo:
   meta:
     manually_set_locale: Agordita al Esperanto!
     translation_note: 'Mankasita traduko? Helpu proponante vian: https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md'
-    auto_loaded_locale: Trovita esperanta kliento!
+    auto_loaded_locale: 'Klienta lingvo detektita: Esperanto (kiel?!)'
     locale_name: Esperanto
   menu:
     choose_option: Bone, kion vi volus fari?
@@ -40,8 +40,8 @@ eo:
   champions_menu:
     options:
       all: Elreviĝu ĉiujn ĉampionajn fragmentojn
-      tokens: Konservu sufiĉe (1/2) pecetojn por la ĉampionoj, por kiuj vi posedas majstreco
-        6/7-markojn
+      tokens: Konservu sufiĉe (1/2) pecetojn por la ĉampionoj, por kiuj vi posedas
+        majstreco 6/7-markojn
       mastery_threshold: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉampionojn
         je almenaŭ majstreco nivelo x (elektu de 1 ĝis 6)
       mastery_full: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉiujn ĉampionojn
