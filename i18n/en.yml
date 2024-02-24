@@ -17,7 +17,7 @@ en:
   meta:
     auto_loaded_locale: "Detected client language: %{locale_name}"
     locale_name: English
-    manually_set_locale: Set to English!
+    manually_set_locale: Set to %{locale_name}!
     translation_note: "Missing or bad translation? Help by offering yours: %{url}"
   loot:
     blue_essence: Blue Essence
