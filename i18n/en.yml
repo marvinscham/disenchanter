@@ -15,7 +15,7 @@ en:
     redeemed: Redeemed
     invalid_answer: Invalid answer, options
   meta:
-    auto_loaded_locale: Found English client!
+    auto_loaded_locale: "Detected client language: %{locale_name}"
     locale_name: English
     manually_set_locale: Set to English!
     translation_note: "Translation missing/bad? Help by offering yours: %{url}"
@@ -66,8 +66,7 @@ en:
     main:
       hello: Hi! :)
       version_info: Running Disenchanter %{version}
-      exit_shortcut_notice: You can exit this script at any point by pressing
-      exit_shortcut: "[CTRL + C]"
+      exit_shortcut_notice: "You can exit this script at any point by pressing [CTRL + C]."
       summoner_check_failed: Could not grab summoner info. Try restarting your League Client.
       logged_in_as: "You're logged in as %{name} #%{tagline}."
       confirm_banner_intro: "Your loot is safe, no actions will be taken until you confirm a banner like this:"

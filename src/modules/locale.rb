@@ -16,7 +16,7 @@ def setup_locale(client)
   user_locale = map_locale(client.locale)
   I18n.locale = user_locale
 
-  puts I18n.t(:'meta.auto_loaded_locale').light_white
+  puts I18n.t(:'meta.auto_loaded_locale', locale_name: I18n.t(:'meta.locale_name')).light_white
   puts I18n.t(:'meta.translation_note', url: translation_url).light_yellow
 rescue StandardError
   LanguageMenu.new(client).run_loop

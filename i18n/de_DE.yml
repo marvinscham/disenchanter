@@ -1,11 +1,9 @@
 de_DE:
   meta:
     locale_name: "Deutsch"
-    auto_loaded_locale: "Deutscher Client gefunden!"
+    auto_loaded_locale: "Sprache des Clients: %{locale_name}"
     manually_set_locale: "Auf Deutsch gestellt!"
     translation_note: "Fehlende Übersetzung? Hilf mit, indem du deine anbietest: %{url}"
-  menu.main:
-    logged_in_as: "Du bist als %{name} #%{tagline} eingeloggt."
   loot:
     permanents: Permanent
     honor_5_orb: „Ehrungsstufe 5“-Kugel

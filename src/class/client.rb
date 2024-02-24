@@ -38,9 +38,8 @@ class Client
     check_update(@version)
     puts separator
 
-    print "#{I18n.t(:'menu.main.exit_shortcut_notice')} ".light_blue
-    puts I18n.t(:'menu.main.exit_shortcut').light_white + '.'.light_blue
-    puts "\n#{I18n.t(:'menu.main.confirm_banner_intro')}".light_blue
+    puts "#{I18n.t(:'menu.main.exit_shortcut_notice')}\n".light_blue
+    puts I18n.t(:'menu.main.confirm_banner_intro').light_blue
     puts "#{I18n.t(:'common.confirm_banner')}: #{I18n.t(:'menu.main.confirm_banner_example')} [y|n]".light_magenta
 
     puts separator
