@@ -2,7 +2,7 @@ de_DE:
   meta:
     locale_name: "Deutsch"
     auto_loaded_locale: "Sprache des Clients: %{locale_name}"
-    manually_set_locale: "Auf Deutsch gestellt!"
+    manually_set_locale: "Auf %{locale_name} gestellt!"
     translation_note: "Fehlende oder schlechte Übersetzung? Hilf mit, indem du deine
       anbietest: %{url}"
   loot:
@@ -105,7 +105,7 @@ de_DE:
       create_an_issue: Bitte mach einen Screenshot und erstelle einen Issue unter
         %{url}
       send_email_instead: Wenn du kein GitHub-Konto hast, schick ihn an %{email}
-      skipping_step: Überspringe diesen Schritt...
+      skipping_step: Etwas ist schiefgelaufen. Überspringe diesen Schritt...
     champion:
       exclusions:
         entry_requirements: (Championnamen EXAKT einfügen/eingeben)
