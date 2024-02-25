@@ -152,5 +152,5 @@ zh_TW:
     up_to_date: 目前使用的是最新版本, 沒問題!
     update_available: 新版本 %{version} 可下載!
   meta:
-    auto_loaded_locale: Found Traditional Chinese client!
+    auto_loaded_locale: ''
     locale_name: 繁體中文
