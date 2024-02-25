@@ -13,7 +13,7 @@ def user_input_check(question, answers, answer_display, color_preset = 'default'
     question = "#{I18n.t(:'common.confirm_banner')}: #{question} ".light_magenta +
                answer_display.to_s.light_white + ': '.light_magenta
   when 'dry'
-    question += " #{answer_display} (#{I18n.t(:'common.dry_run_banner')}): ".light_red
+    question += " #{answer_display} (DRY RUN): ".light_red
   else
     question += " #{answer_display}: ".light_white
   end

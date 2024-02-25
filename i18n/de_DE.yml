@@ -189,7 +189,6 @@ de_DE:
     yes: Ja
     no: Nein
     confirm_banner: BESTÄTIGE
-    dry_run_banner: TROCKENLAUF
     not_owned: nicht im Besitz
     press_enter_to_exit: Drücke die Eingabetaste, um zu beenden.
     actions: Aktionen

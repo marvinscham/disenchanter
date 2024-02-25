@@ -5,7 +5,6 @@ en:
     yes: "Yes"
     no: "No"
     confirm_banner: CONFIRM
-    dry_run_banner: DRY RUN
     not_owned: not owned
     press_enter_to_exit: Press Enter to exit.
     actions: Actions
@@ -85,7 +84,6 @@ en:
         open_mastery_chart: Open Mastery Chart profile
         open_usage_stats: Open Disenchanter global stats
         open_repository: Open GitHub repository
-        debug_tools: Debug tools
         exit: Exit
     champions:
       options:

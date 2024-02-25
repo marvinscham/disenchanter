@@ -32,11 +32,6 @@ eo:
     update_available: Nova versio %{version} havebla!
     ask_download_now: Ĉu vi ŝatus elŝuti la novan version nun?
     done_downloading: Finiĝis elŝuto!
-  debug:
-    dry_run:
-      notice: PROVKURO - fakte ne faris ion
-    file_written_notice: Bone, skribite al %{filename}.
-    post_request_info: Sendante peton al %{path}
   champions_menu:
     options:
       all: Elreviĝu ĉiujn ĉampionajn fragmentojn
