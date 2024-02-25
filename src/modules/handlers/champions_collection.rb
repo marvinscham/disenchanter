@@ -9,5 +9,5 @@ def handle_champions_collection(loot_shards)
 
   loot_shards
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.champions.collection'))
+  handle_exception(e, 'champions: collection')
 end

@@ -7,14 +7,14 @@ class DebugMenu < Menu
   def initialize(client)
     menu_text = I18n.t(:'menu.what_to_do')
     things_todo = {
-      '1' => I18n.t(:'menu.debug.options.loot_to_file'),
-      '2' => I18n.t(:'menu.debug.options.recipes_to_file'),
-      '3' => I18n.t(:'menu.debug.options.loot_info_to_file'),
-      '4' => I18n.t(:'menu.debug.options.summoner_info_to_file'),
-      '5' => I18n.t(:'menu.debug.options.settings_to_file'),
-      'd' => I18n.t(:'menu.debug.options.toggle_dry_run'),
-      'm' => I18n.t(:'menu.debug.options.toggle_debug_mode'),
-      't' => I18n.t(:'menu.debug.options.request_terminal'),
+      '1' => 'Write player_loot to file',
+      '2' => 'Write recipes of loodId to file',
+      '3' => 'Write loot_info of lootId to file',
+      '4' => 'Write summoner info to file',
+      '5' => 'Write settings to file',
+      'd' => 'Toggle dry run',
+      'm' => 'Toggle debug mode',
+      't' => 'Request terminal',
       'x' => I18n.t(:'menu.back_to_main')
     }
     answer_display = I18n.t(:'menu.option')
@@ -40,10 +40,10 @@ class DebugMenu < Menu
     when 'd'
       @client.dry_run = !@client.dry_run
       @client.debug = @client.dry_run
-      puts @client.dry_run ? I18n.t(:'menu.debug.dry_run.enabled') : I18n.t(:'menu.debug.dry_run.disabled')
+      puts "Dry run #{@client.dry_run ? 'enabled' : 'disabled'}"
     when 'm'
       @client.debug = !@client.debug
-      puts @client.debug ? I18n.t(:'menu.debug.debug_mode.enabled') : I18n.t(:'menu.debug.debug_mode.disabled')
+      puts "Debug mode #{@client.debug ? 'enabled' : 'disabled'}"
     when 't'
       debug_request_terminal(@client)
     when 'x'

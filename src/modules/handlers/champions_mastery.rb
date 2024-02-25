@@ -39,7 +39,7 @@ def handle_champions_mastery(client, loot_shards, keep_all: false)
 
   loot_shards
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.champions.by_mastery'))
+  handle_exception(e, 'champions: by mastery')
 end
 
 def adjust_shard_counts_by_threshold(shard, keep_all, m6_ids, m7_ids, threshold_ids)

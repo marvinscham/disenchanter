@@ -46,7 +46,7 @@ def handle_champions(client)
   execute_champions_disenchant(client, loot_shards)
   puts I18n.t(:'common.done').green
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'loot.champions'))
+  handle_exception(e, 'champions')
 end
 
 def present_champion_selection(loot_shards)

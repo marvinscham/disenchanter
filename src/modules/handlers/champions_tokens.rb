@@ -26,7 +26,7 @@ def handle_champions_tokens(client, loot_shards)
 
   adjust_token_counts(loot_shards, token6_champion_ids, token7_champion_ids)
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.champions.tokens'))
+  handle_exception(e, 'champions: tokens')
 end
 
 def adjust_token_counts(loot_shards, token6_champion_ids, token7_champion_ids)

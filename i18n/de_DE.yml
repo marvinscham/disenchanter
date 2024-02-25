@@ -58,32 +58,6 @@ de_DE:
       see_you: Bis bald :)
       what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit
         du nichts verpasst!)'
-    debug:
-      dry_run:
-        disabled: Trockenlauf + Debug-Modus deaktiviert
-        notice: TROCKENLAUF AKTIVIERT - nichts ist passiert
-        enabled: Trockenlauf + Debug-Modus aktiviert
-      options:
-        loot_to_file: Schreibe player_loot in Datei
-        request_terminal: Request-Terminal
-        recipes_to_file: Schreibe Rezepte von lootId in Datei
-        loot_info_to_file: Schreibe die Beute-Infos von lootId in Datei
-        summoner_info_to_file: Schreibe Beschwörer-Infos in Datei
-        settings_to_file: Einstellungen in Datei schreiben
-        toggle_dry_run: Trockenlauf umschalten
-        toggle_debug_mode: Debug-Modus umschalten
-      request_terminal:
-        warning: Manuelles Request-Terminal geöffnet. Wenn du nicht weißt, was du
-          tust, oder dich jemand hierzu drängt, hör sofort auf.
-        exit: Drücke [%{key}] zum Verlassen.
-        ask_path: 'Gib den Pfad für die GET-Request ein:'
-      debug_mode:
-        enabled: Debug-Modus aktiviert
-        disabled: Debug-Modus deaktiviert
-      file_written_notice: Okay, in %{filename} geschrieben.
-      post_request_info: Sende POST-Anfrage an %{path}
-      ask_which_loot_info: Für welche lootId möchtest du Infos?
-      ask_which_loot_recipes: Für welche lootId möchtest du Rezepte?
     mythic:
       recipe_found: 'Rezept gefunden: %{thing_to_craft} für %{amount} Mythische Essenzen'
       options:
@@ -128,26 +102,10 @@ de_DE:
         entzaubern:'
     exception:
       error_occurred: Beim Bearbeiten von %{name} ist ein Fehler aufgetreten.
-      error_description: 'Ein Fehler ist aufgetreten: %{error_type}. Nachricht: %{message}.
-        Fehlerverlauf:'
-      step:
-        champions:
-          owned: Championsplitter im Besitz
-          collection: Championsplitter zum Sammeln
-          exclusions: Championsplitter-Ausschlüsse
-          by_mastery: Championsplitter nach Meisterschaftsstufe
-          tokens: Championsplitter nach Meisterschaftsmarken
-        capsules:
-          filtering: 'Kapseln: Beute filtern'
-          request: 'Kapseln: Anforderungsausführung'
-          summary: 'Kapseln: Zusammenfassungserstellung'
-        stat_submission: Einsendung der Statistik
       create_an_issue: Bitte mach einen Screenshot und erstelle einen Issue unter
         %{url}
       send_email_instead: Wenn du kein GitHub-Konto hast, schick ihn an %{email}
       skipping_step: Überspringe diesen Schritt...
-      unusual_state: Das sollte eigentlich nicht möglich sein, und trotzdem sind wir
-        hier.
     champion:
       exclusions:
         entry_requirements: (Championnamen EXAKT einfügen/eingeben)
