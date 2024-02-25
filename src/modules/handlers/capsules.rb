@@ -25,7 +25,7 @@ def handle_capsules(client)
     puts I18n.t(:'common.done').green
   end
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'loot.capsules'))
+  handle_exception(e, 'capsules')
 end
 
 def filter_key_capsules(client, player_loot)
@@ -38,7 +38,7 @@ def filter_key_capsules(client, player_loot)
 
   loot_capsules.reject { |c| c['needs_key'] }
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.capsules.filtering'))
+  handle_exception(e, 'capsules: filtering')
 end
 
 def process_keyless_capsule_requests(loot_capsules, client)
@@ -63,7 +63,7 @@ def process_keyless_capsule_requests(loot_capsules, client)
 
   client.stat_tracker.add_opened(count_loot_items(loot_capsules))
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.capsules.request'))
+  handle_exception(e, 'capsules: request')
 end
 
 def print_capsule_summary(client, loot_capsules)
@@ -72,5 +72,5 @@ def print_capsule_summary(client, loot_capsules)
     puts "#{c['count']}x ".light_black + get_chest_name(client, c['lootId']).light_white
   end
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.capsules.summary'))
+  handle_exception(e, 'capsules: summary')
 end

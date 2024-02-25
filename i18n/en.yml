@@ -85,32 +85,6 @@ en:
         open_repository: Open GitHub repository
         debug_tools: Debug tools
         exit: Exit
-    debug:
-      dry_run:
-        notice: DRY RUN ENABLED - actually did nothing
-        enabled: Dry run + debug enabled
-        disabled: Dry run + debug disabled
-      debug_mode:
-        enabled: Debug mode enabled
-        disabled: Debug mode disabled
-      file_written_notice: Okay, written to %{filename}.
-      post_request_info: Posting against %{path}
-      options:
-        loot_to_file: Write player_loot to file
-        recipes_to_file: Write recipes of lootId to file
-        loot_info_to_file: Write loot info of lootId to file
-        summoner_info_to_file: Write summoner info to file
-        settings_to_file: Write settings to file
-        toggle_dry_run: Toggle dry run
-        toggle_debug_mode: Toggle debug mode
-        request_terminal: Request terminal
-      ask_which_loot_info: Which lootId would you like the info for?
-      ask_which_loot_recipes: Which lootId would you like the recipes for?
-      request_terminal:
-        warning: Manual request terminal entered. If you don't know what you're doing
-          or someone is urging you to do this, stop immediately.
-        exit: Press [%{key}] to leave.
-        ask_path: "Enter path to GET from:"
     champions:
       options:
         all: Disenchant all champion shards
@@ -148,22 +122,7 @@ en:
       error_occurred: An error occurred while handling %{name}.
       create_an_issue: Please take a screenshot and create an issue at %{url}
       send_email_instead: If you don't have a GitHub account, send it to %{email}
-      error_description: "Exception occurred: %{error_type}. Message: %{message}.
-        Backtrace:"
-      skipping_step: Skipping this step...
-      unusual_state: This shouldn't be possible yet here we are.
-      step:
-        capsules:
-          filtering: "capsules: filtering loot"
-          request: "capsules: request execution"
-          summary: "capsules: summary generation"
-        champions:
-          collection: champion shards for collection
-          exclusions: champion shard exclusions
-          by_mastery: champion shards by mastery
-          owned: owned champion shards
-          tokens: champion shards by mastery tokens
-        stat_submission: stat submission
+      skipping_step: Something went wrong. Skipping this step...
     capsule:
       no_capsules_found: Found no keyless capsules to open.
       found_capsules: "Found %{count} capsules:"

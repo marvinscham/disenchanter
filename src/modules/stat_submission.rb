@@ -7,7 +7,7 @@ def submit_stats(stat_tracker)
   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
   http.request(build_stat_request(uri, stat_tracker))
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.stat_submission'))
+  handle_exception(e, 'stat submission')
 end
 
 def build_stat_request(uri, stat_tracker)

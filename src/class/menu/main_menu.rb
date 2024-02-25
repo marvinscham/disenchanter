@@ -40,7 +40,7 @@ class MainMenu < Menu
       'm' => I18n.t(:'menu.main.options.open_mastery_chart'),
       's' => I18n.t(:'menu.main.options.open_usage_stats'),
       'r' => I18n.t(:'menu.main.options.open_repository'),
-      'd' => I18n.t(:'menu.main.options.debug_tools'),
+      'd' => 'Debug Tools',
       'x' => I18n.t(:'menu.main.options.exit')
     }
     answer_display = I18n.t(:'menu.option')

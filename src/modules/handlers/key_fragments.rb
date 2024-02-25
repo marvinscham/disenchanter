@@ -33,5 +33,5 @@ def handle_key_fragments(client)
     puts I18n.t(:'common.done').green
   end
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'loot.key_fragments'))
+  handle_exception(e, 'key fragments')
 end

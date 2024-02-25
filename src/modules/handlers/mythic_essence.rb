@@ -31,7 +31,7 @@ def handle_mythic_essence(client)
   execute_mythic_crafting(client, craft_target_name, mythic_menu.recipe, craft_amount)
   puts I18n.t(:'common.done').green
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'loot.mythic_essence'))
+  handle_exception(e, 'mythic essence')
 end
 
 # Calculates how the amount of things that can be crafted with user-specified mythic essence

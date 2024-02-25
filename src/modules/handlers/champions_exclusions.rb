@@ -21,7 +21,7 @@ def handle_champions_exclusions(loot_shards)
 
   loot_shards.reject { |l| exclusions_arr.include? l['itemDesc'] }
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'handler.exception.step.champions.exclusions'))
+  handle_exception(e, 'champions: exclusions')
 end
 
 def handle_champion_exclusion(loot_shards, exclusions_str)

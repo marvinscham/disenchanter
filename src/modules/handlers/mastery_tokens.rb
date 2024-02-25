@@ -29,7 +29,7 @@ def handle_mastery_tokens(client)
   execute_token_crafting(client, loot_mastery_tokens, needed_resources)
   puts I18n.t(:'common.done').green
 rescue StandardError => e
-  handle_exception(e, I18n.t(:'menu.materials.options.mastery_tokens'))
+  handle_exception(e, 'token upgrades')
 end
 
 # Reduces player loot to a set of tokens that can be upgraded
