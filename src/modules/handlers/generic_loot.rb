@@ -81,8 +81,8 @@ end
 def ask_option_keep_unowned(name)
   user_input_check(
     "#{I18n.t(:'handler.generic.keep_unowned', loot: name)}\n".light_cyan +
-      '[y] '.light_white + "#{I18n.t(:'common.yes')}\n".light_cyan + '[n] '.light_white +
-      "#{I18n.t(:'common.no')}\n".light_cyan + '[x] '.light_white +
+      '[y] '.light_white + "#{I18n.t(:'common.yup')}\n".light_cyan + '[n] '.light_white +
+      "#{I18n.t(:'common.nah')}\n".light_cyan + '[x] '.light_white +
       "#{I18n.t(:'menu.back_to_main')}\n".light_cyan + "#{I18n.t(:'menu.option')} ".white,
     %w[y n x],
     '[y|n|x]',

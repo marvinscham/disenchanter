@@ -186,8 +186,8 @@ de_DE:
   common:
     exiting: Beende...
     done: Fertig!
-    yes: Ja
-    no: Nein
+    yup: Ja
+    nah: Nein
     confirm_banner: BESTÄTIGE
     not_owned: nicht im Besitz
     press_enter_to_exit: Drücke die Eingabetaste, um zu beenden.

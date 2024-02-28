@@ -2,8 +2,8 @@ eo:
   common:
     exiting: Elirante...
     done: Kompleta!
-    yes: Jes
-    no: Ne
+    yup: Jes
+    nah: Ne
     confirm_banner: KONFIRMU
     actions: Agoj
     disenchanted: Malsorĉigita

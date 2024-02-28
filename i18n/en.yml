@@ -2,8 +2,8 @@ en:
   common:
     done: Done!
     exiting: Exiting...
-    yes: "Yes"
-    no: "No"
+    yup: "Yes"
+    nah: "No"
     confirm_banner: CONFIRM
     not_owned: not owned
     press_enter_to_exit: Press Enter to exit.

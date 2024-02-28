@@ -47,8 +47,8 @@ zh_TW:
     invalid_answer: 錯誤答案, 選項
     confirm_banner: 最終確認
     exiting: 退出中...
-    yes: 是
-    no: 否
+    yup: 是
+    nah: 否
     actions: 操作
     disenchanted: 分解
     opened: 開啟
