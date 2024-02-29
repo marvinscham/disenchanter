@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v1.7.1 - Not yet released
+### Fixed
+- #34 Loot with line breaks in its name will now properly be listed in the disenchant preview
+- #126 Network related errors will no longer break the script
+
 ## v1.7.0 - Feb 29, 2024
 ### Added
 - #144 Support for i18n, you can contribute using [Weblate](https://weblate.ms-ds.org/engage/disenchanter/).

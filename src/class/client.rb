@@ -102,6 +102,12 @@ class Client
       res = http.request req
       JSON.parse(res.body)
     end
+  rescue Net::OpenTimeout, SocketError, Errno::ETIMEDOUT, Net::HTTPFatalError => e
+    puts "#{e.class}/#{e.message}".light_yellow
+
+    e.backtrace = ['No backtrace'] unless e.backtrace
+    puts e.backtrace.join("\n").light_black
+    puts I18n.t(:'handler.exception.network_error', email: 'dev@marvinscham.de').light_red
   end
 
   def refresh_loot
