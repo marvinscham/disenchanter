@@ -72,7 +72,7 @@ def handle_generic_owned(loot_generic, name)
   when 'n'
     # Nothing to do
   else
-    raise StandardError, I18n.t(:'handler.exception.unusual_state')
+    raise StandardError, 'This shouldn\'t be possible, yet here we are.'
   end
 
   loot_generic
