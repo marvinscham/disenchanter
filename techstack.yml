@@ -2,7 +2,7 @@ repo_name: marvinscham/disenchanter
 report_id: 77abef689a45d775d034168bffbe8c69
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T08:51:35+00:00'
+timestamp: '2024-02-29T18:38:00+00:00'
 requested_by: marvinscham
 provider: github
 branch: main
@@ -23,7 +23,7 @@ tools:
   last_updated_by: Marvin Scham
   last_updated_on: 2022-07-24 23:09:25.000000000 Z
 - name: Swift
-  description: 'An innovative new programming language for Cocoa and Cocoa Touch. '
+  description: An innovative new programming language for Cocoa and Cocoa Touch.
   website_url: https://developer.apple.com/swift/
   license: Apache-2.0
   open_source: true
