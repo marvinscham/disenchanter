@@ -121,6 +121,7 @@ def create_generic_disenchant_info(loot_generic, loot_name_index, name, totals)
 end
 
 def create_generic_info_single(loot, loot_name_index)
+  loot_name = loot[loot_name_index].gsub("\n", ' ').gsub("\n", ' ')
   loot_value = loot['disenchantValue'] * loot['count']
   loot_currency = if loot['disenchantLootName'] == Dictionary::BLUE_ESSENCE
                     I18n.t(:'loot.blue_essence_short')
@@ -129,7 +130,7 @@ def create_generic_info_single(loot, loot_name_index)
                   end
 
   print pad("#{loot['count']}x ", 5, right: false).light_black
-  print pad(loot[loot_name_index], 30).light_white
+  print pad(loot_name, 40).light_white
   print ' @ '.light_black
   print pad("#{loot_value} #{loot_currency}", 8, right: false).light_black
   print " (#{I18n.t(:'common.not_owned')})".yellow unless loot['redeemableStatus'] == Dictionary::STATUS_OWNED
