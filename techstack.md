@@ -5,8 +5,8 @@ marvinscham/disenchanter is built on the following main stack:
 
 - [Ruby](https://www.ruby-lang.org) – Languages
 - [Swift](https://developer.apple.com/swift/) – Languages
-- [RuboCop](http://batsov.com/rubocop/) – Code Review
 - [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+- [RuboCop](http://batsov.com/rubocop/) – Code Review
 
 Full tech stack [here](/techstack.md)
 
@@ -18,8 +18,8 @@ marvinscham/disenchanter is built on the following main stack:
 
 - <img width='25' height='25' src='https://img.stackshare.io/service/989/ruby.png' alt='Ruby'/> [Ruby](https://www.ruby-lang.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1009/tuHsaI2U.png' alt='Swift'/> [Swift](https://developer.apple.com/swift/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/2643/rubocop.png' alt='RuboCop'/> [RuboCop](http://batsov.com/rubocop/) – Code Review
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+- <img width='25' height='25' src='https://img.stackshare.io/service/2643/rubocop.png' alt='RuboCop'/> [RuboCop](http://batsov.com/rubocop/) – Code Review
 
 Full tech stack [here](/techstack.md)
 
@@ -30,7 +30,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [marvinscham/disenchanter](https://github.com/marvinscham/disenchanter)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|12<br/>Tools used|01/05/24 <br/>Report generated|
+|12<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
