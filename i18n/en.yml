@@ -123,6 +123,8 @@ en:
       create_an_issue: Please take a screenshot and create an issue at %{url}
       send_email_instead: If you don't have a GitHub account, send it to %{email}
       skipping_step: Something went wrong. Skipping this step...
+      network_error: Oops, we probably hit an API limit. Retry in a minute or report 
+        to %{email} if this keeps happening.
     capsule:
       no_capsules_found: Found no keyless capsules to open.
       found_capsules: "Found %{count} capsules:"
@@ -146,6 +148,7 @@ en:
           shards to be kept?
         note_level7: at mastery 7
         note_below_threshold: below threshold
+        note_more_valuable: value higher than Mastery 7 upgrade
       no_unowned_champs_found: Found no shards of champions you don't own yet.
       ask_keep_unowned_champs: Keep a shard for champions you don't own yet?
       found_champs_with_tokens: Found %{count} champions with owned mastery tokens

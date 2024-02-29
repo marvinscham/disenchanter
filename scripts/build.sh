@@ -9,4 +9,9 @@ ocran src/main.rb \
     --icon ./assets/BE_icon.ico \
     --output ./build/disenchanter.exe
 
+ocran src/updater.rb \
+    --gemfile ./Gemfile \
+    --icon ./assets/BE_icon.ico \
+    --output ./build/disenchanter_up.exe
+
 rm ./build/.build.lockfile

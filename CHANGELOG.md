@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v1.7.1 - Feb 29, 2024
+### Fixed
+- Fixed and extended English locale detection
+- #34 Loot with line breaks in its name will now properly be listed in the disenchant preview
+- #126 Network related errors will no longer break the script
+- #152 Mastery Token upgrade no longer offers inefficient upgrades
+  - This happened when you had a champion permanent that had a disenchant value higher than the upgrade price
+  - Champion shard disenchanting will now also take this into consideration
+
 ## v1.7.0 - Feb 29, 2024
 ### Added
 - #144 Support for i18n, you can contribute using [Weblate](https://weblate.ms-ds.org/engage/disenchanter/).
@@ -16,7 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - #35 Disenchanter can be started from anywhere now
   - It will try to find your League Client via registry > start menu > default path > locally
-- #57 Rerolling owned esports emotes that cannot be disenchanted
+- #57 Re-rolling owned esports emotes that cannot be disenchanted
 - #19 Tacticians can now be disenchanted
 - Shortcut to your [Mastery Chart](https://masterychart.com) profile
 - #27 Proper changelog and versioning info
