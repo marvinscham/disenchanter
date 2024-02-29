@@ -121,7 +121,7 @@ def create_generic_disenchant_info(loot_generic, loot_name_index, name, totals)
 end
 
 def create_generic_info_single(loot, loot_name_index)
-  loot_name = loot[loot_name_index].gsub("\n", ' ').gsub("\n", ' ')
+  loot_name = loot[loot_name_index].chomp
   loot_value = loot['disenchantValue'] * loot['count']
   loot_currency = if loot['disenchantLootName'] == Dictionary::BLUE_ESSENCE
                     I18n.t(:'loot.blue_essence_short')
