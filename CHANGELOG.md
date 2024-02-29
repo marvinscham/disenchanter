@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v1.7.0 - Feb 29, 2024
+### Added
+- #144 Support for i18n, you can contribute using [Weblate](https://weblate.ms-ds.org/engage/disenchanter/).
+  - Support for (most of) German, Esperanto and Traditional Chinese
+- Documentation for contributions, project setup, translation credits
+### Changed
+- Mastery Chart shortcut will now auto-detect your region
+- Some wording and display colors have been updated
+
 ## v1.6.0 - Feb 17, 2024
 ### Added
 - #35 Disenchanter can be started from anywhere now
