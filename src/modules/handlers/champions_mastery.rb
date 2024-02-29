@@ -44,7 +44,10 @@ end
 
 def adjust_shard_counts_by_threshold(shard, keep_all, m6_ids, m7_ids, threshold_ids)
   if m7_ids.include? shard['storeItemId']
-    shard['disenchant_note'] = I18n.t(:'handler.champion.by_mastery.note_level7').light_black
+    shard['disenchant_note'] = I18n.t(:'handler.champion.by_mastery.note_level7').light_green
+  elsif shard['disenchantValue'] > 2950
+    # Upgrade price to M7 is 2950 BE so it's not worth to keep
+    shard['disenchant_note'] = I18n.t(:'handler.champion.by_mastery.note_more_valuable').light_magenta
   elsif m6_ids.include? shard['storeItemId']
     shard['count'] -= 1
     shard['count_keep'] += 1

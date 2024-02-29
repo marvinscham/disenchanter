@@ -148,6 +148,7 @@ en:
           shards to be kept?
         note_level7: at mastery 7
         note_below_threshold: below threshold
+        note_more_valuable: value higher than Mastery 7 upgrade
       no_unowned_champs_found: Found no shards of champions you don't own yet.
       ask_keep_unowned_champs: Keep a shard for champions you don't own yet?
       found_champs_with_tokens: Found %{count} champions with owned mastery tokens
