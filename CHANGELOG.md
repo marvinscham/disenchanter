@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v1.7.2 - Mar 03, 2024
+### Fixed
+- #157 Fixed a broken placeholder variable reference blocking mythic crafting from executing
+
 ## v1.7.1 - Feb 29, 2024
 ### Fixed
 - Fixed and extended English locale detection
