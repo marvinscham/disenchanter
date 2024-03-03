@@ -106,6 +106,8 @@ de_DE:
         %{url}
       send_email_instead: Wenn du kein GitHub-Konto hast, schick ihn an %{email}
       skipping_step: Etwas ist schiefgelaufen. Überspringe diesen Schritt...
+      network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche
+        es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
     champion:
       exclusions:
         entry_requirements: (Championnamen EXAKT einfügen/eingeben)
@@ -129,6 +131,7 @@ de_DE:
           sein, damit ihre Splitter aufbewahrt werden?
         note_level7: auf Stufe 7
         note_below_threshold: unter der Schwelle
+        note_more_valuable: Wert höher als Upgrade auf Meisterschaft 7
       ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch
         nicht besitzt, behalten?
       found_champs_with_tokens: '%{count} Champions mit Meisterschaftsmarken im Besitz
