@@ -17,5 +17,5 @@ group :development do
   # Builds windows executable
   gem 'ocran', '1.3.15', require: false
   # Ruby linter, config in .rubocop
-  gem 'rubocop', '~> 1.61', require: false
+  gem 'rubocop', '~> 1.62', require: false
 end
