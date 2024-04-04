@@ -6,3 +6,9 @@ common:
   confirm_banner: POTWIEDŹ
   not_owned: Nie posiadane
   press_enter_to_exit: Wciśnij Enter aby wyjść
+  common:
+    actions: Akcje
+    disenchanted: Rozmienione
+    opened: Otworzono
+    crafted: Stworzono
+    redeemed: Wykorzystany
