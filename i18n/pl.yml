@@ -87,7 +87,7 @@ common:
     generic:
       found_nothing: Nie znaleziono %{name} do rozłożenia.
       found_some: Znaleziono %{count} %{name}.
-      found_no_owned: Nie znaleziono posiadanych %{name} do rozłożenia
+      found_no_owned: Nie znaleziono posiadanych %{name} do rozłożenia.
       filtered_down: Odfiltrowano do %{count} przedmiotów.
       disenchant_preview: 'Rozłożylibyśmy %{count} %{loot} używając wybranej opcji:'
       ask_disenchant: Rozłożyć %{count} %{loot} na %{currency}?
