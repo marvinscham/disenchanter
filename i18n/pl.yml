@@ -81,3 +81,10 @@ common:
         orange_essence: Pomarańczowa Esencja
         random_skin_shards: Losowy Odłamek Skórki
       recipes_unavailable: Receptury dla %{loot} wydają się być niedostępne
+      recipe_found: 'Znaleziono recepturę: %{thing_to_craft} za %{amount} Mitycznej
+        Esencji'
+  handler:
+    generic:
+      found_nothing: Nie znaleziono %{name} do rozłożenia.
+      found_some: Znaleziono %{count} %{name}.
+      found_no_owned: Nie znaleziono posiadanych %{name} do rozłożenia
