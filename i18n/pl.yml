@@ -88,3 +88,21 @@ common:
       found_nothing: Nie znaleziono %{name} do rozłożenia.
       found_some: Znaleziono %{count} %{name}.
       found_no_owned: Nie znaleziono posiadanych %{name} do rozłożenia
+      filtered_down: Odfiltrowano do %{count} przedmiotów.
+      disenchant_preview: 'Rozłożylibyśmy %{count} %{loot} używając wybranej opcji:'
+      ask_disenchant: Rozłożyć %{count} %{loot} na %{currency}?
+      keep_unowned: Zachować jeszcze nie posiadany %{loot}?
+      action_cancelled: Akcja anulowana
+    exception:
+      skipping_step: Coś poszło nie tak. Pomijanie kroku…
+      error_occurred: Wydarzył się błąd w trakcie przetwarzania %{name}.
+      create_an_issue: Proszę zrobić zrzut ekranu i stworzyć zagadnienie na %{url}
+      send_email_instead: Jeśli nie Posiadasz konta GitHub, wyślij je na %{email}
+      network_error: Oops, prawdopodobnie Osiągnęliśmy limit API. Proszę spróbować
+        ponownie lub zgłosić na %{email} jeśli będzie się to powtarzać.
+    capsule:
+      found_capsules: 'Znaleziono %{count} kapsuł:'
+      no_capsules_found: Nie znaleziono kapsuł nie potrzebujących kluczy do otworzenia.
+      ask_open_capsules: Otworzyć %{count} (nie potrzebujące kluczy) kapsuły?
+    champion:
+      no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia
