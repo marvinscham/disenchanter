@@ -14,6 +14,12 @@ common:
     redeemed: Wykorzystany
     press_enter_to_exit: Wciśnij Enter aby wyjść.
     invalid_answer: Nieprawidłowa odpowiedź, opcje
+    done: Zrobione!
+    exiting: Wychodzenie…
+    yup: Tak
+    nah: Nie
+    confirm_banner: POTWIEDŹ
+    not_owned: Nie posiadane
   meta:
     auto_loaded_locale: 'Wykryty język klienta: %{locale_name}'
     locale_name: Polski
@@ -47,6 +53,7 @@ common:
     skin_shards: Odłamki Skórek
     skin_permanents: Trwałe Odłamki Skórek
     champion_capsule: Kapsuła Czempionów
+    honor_3_orb: Kula Honoru 3. Poziomu
   update_checker:
     up_to_date: Jesteś na bieżąco!
     local_beta_note: Witamy w przyszłości!
