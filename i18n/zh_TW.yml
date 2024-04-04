@@ -94,7 +94,7 @@ zh_TW:
       send_email_instead: 如果你沒有或不希望申請一個 GitHub 帳號, 請將本截圖及你遇到的問題用英文寄信至 %{email}
       create_an_issue: 請截圖並在 %{url} 發起一個新的問題討論串
       skipping_step: 跳過這一步驟...
-      network_error: 噢, 我們似乎超出了某個 API 的限制. 請等等再重新嘗試, 如果還是一直發生請回報至 %{email}
+      network_error: 噢, 我們似乎超出了某個 API 的限制. 請等等再重新嘗試, 如果還是一直發生請回報至 %{email}.
     generic:
       disenchant_preview: '我們將分解 %{count} 個 %{loot} 基於你選擇的選項:'
       keep_unowned: 保留你未擁有的 %{loot} 嗎?
