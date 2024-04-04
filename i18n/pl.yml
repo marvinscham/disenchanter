@@ -153,7 +153,7 @@ common:
           ich odłamki zostały zachowane?
         note_level7: na 7 poziomie Maestrii
         note_below_threshold: poniżej progu
-        note_more_valuable: wartość wyższa niż ulepszenie Maestrii poziomu 7.
+        note_more_valuable: wartość wyższa niż ulepszenie Maestrii poziomu 7
       no_unowned_champs_found: Nie znaleziono odłamków nieposiadanych czempionów.
       ask_keep_unowned_champs: Zachować odłamki dla czempionów, których jeszcze nie
         Posiadasz?
