@@ -105,4 +105,4 @@ common:
       no_capsules_found: Nie znaleziono kapsuł nie potrzebujących kluczy do otworzenia.
       ask_open_capsules: Otworzyć %{count} (nie potrzebujące kluczy) kapsuły?
     champion:
-      no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia
+      no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia.
