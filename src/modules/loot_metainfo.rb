@@ -15,6 +15,7 @@ def get_chest_name(client, loot_id)
   catalogue = {
     'CHEST_128' => I18n.t(:'loot.champion_capsule'),
     'CHEST_129' => I18n.t(:'loot.glorious_champion_capsule'),
+    'CHEST_209' => I18n.t(:'loot.honor_3_orb'),
     'CHEST_210' => I18n.t(:'loot.honor_4_orb'),
     'CHEST_211' => I18n.t(:'loot.honor_5_orb')
   }

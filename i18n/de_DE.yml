@@ -7,6 +7,7 @@ de_DE:
       anbietest: %{url}"
   loot:
     permanents: Permanent
+    honor_3_orb: „Ehrungsstufe 3“-Kugel
     honor_5_orb: „Ehrungsstufe 5“-Kugel
     mythic_essence: Mythische Essenzen
     skin_shards: Skinsplitter
