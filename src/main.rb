@@ -17,7 +17,7 @@ require_relative 'modules/user_input'
 def run
   check_build_env
 
-  current_version = 'v1.7.2'
+  current_version = 'v1.7.3'
   stat_tracker = StatTracker.new
   client = Client.new(stat_tracker, current_version)
 
