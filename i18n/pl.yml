@@ -1,1 +1,8 @@
-{}
+common:
+  done: Zrobione!
+  exiting: Wychodzenie…
+  yup: Tak
+  nah: Nie
+  confirm_banner: POTWIEDŹ
+  not_owned: Nie posiadane
+  press_enter_to_exit: Wciśnij Enter aby wyjść
