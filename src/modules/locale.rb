@@ -28,7 +28,8 @@ def map_locale(locale)
     'en_US' => 'en',
     'en_AU' => 'en',
     'en_PH' => 'en',
-    'en_SG' => 'en'
+    'en_SG' => 'en',
+    'pl_PL' => 'pl'
   }
 
   return dictionary[locale] if dictionary.key?(locale)
