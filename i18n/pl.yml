@@ -13,3 +13,71 @@ common:
     crafted: Stworzono
     redeemed: Wykorzystany
     press_enter_to_exit: Wciśnij Enter aby wyjść.
+    invalid_answer: Nieprawidłowa odpowiedź, opcje
+  meta:
+    auto_loaded_locale: 'Wykryty język klienta: %{locale_name}'
+  loot:
+    glorious_champion_capsule: Wspaniałą Kapsuła Bohaterów
+    honor_4_orb: Kula Honoru 4. Poziomu
+    honor_5_orb: Kula Honoru 5. Poziomu
+  update_checker:
+    up_to_date: Jesteś na bieżąco!
+    local_beta_note: Witamy w przyszłości!
+    local_beta_version: 'Najnowsza wersja zdalna: v%{version}'
+    update_available: Nowa wersja %{version} dostępna!
+    ask_download_now: Czy Chciałbyś pobrać nową wersję teraz?
+    done_downloading: Pobieranie zakończone!
+  menu:
+    choose_option: Okej, którą opcję Chciałbyś wybrać?
+    what_to_do: Co Chciałbyś zrobić?
+    option: Opcje
+    back_to_main: Powrót do menu głównego
+    option_chosen: Opcja wybrana
+    option_done: Zrobione
+    language:
+      preferred: Jaki jest Twój preferowany język?
+    main:
+      hello: Cześć! :)
+      version_info: Uruchamiane Disenchanter %{version}
+      logged_in_as: 'Zalogowano jako %{name} #%{tagline}.'
+      confirm_banner_intro: 'Twój łup jest bezpieczny, żadne akcje nie zostaną przeprowadzone
+        dopóki nie Potwierdzisz banneru takiego jak ten:'
+      confirm_banner_example: Wykonać tę akcję?
+      all_done: To tyle!
+      see_you: Do zobaczenia następnym razem :)
+      what_to_do: 'Co Chciałbyś zrobić? (Podpowiedź: idź z góry na dół, aby niczego
+        nie pominąć!)'
+      options:
+        language_settings: Ustawienia języka
+        open_mastery_chart: Otwórz profil Mastery Chart
+        open_usage_stats: Otwórz globalne statystyki Disenchanter
+        open_repository: Otwórz repozytorium GitHub
+        exit: Wyjdź
+      summoner_check_failed: Nie można zdobyć informacji o Przywoływaczu. Spróbuj
+        zrestartować swojego Klienta League.
+      time_saved: Zaoszczędziliśmy Ci około %{time_saved} sekund czekania na zakończenie
+        animacji.
+      exit_shortcut_notice: Możesz opuścić ten skrypt w dowolnym momencie używając
+        [CTRL + C].
+    champions:
+      options:
+        all: Rozmień wszystkie odłamki czempionów
+        mastery_threshold: Pozostaw wystarczająco (1/2) odłamków aby w pełni ulepszyć
+          czempionów na poziomie Maestrii co najmniej x (wybierz od 1 do 6)
+        collector: Pozostaw jeden odłamek czempiona niezależnie od jego poziomu Maestrii
+        tokens: Pozostaw wystarczająco (1/2) odłamków dla czempionów dla których Posiadasz
+          żetony 6/7 Maestrii
+        mastery_full: Pozostaw wystarczająco (1/2) odłamków aby w pełni ulepszyć Maestrię
+          wszystkich czempionów (Rozmień tylko te odłamki, bez możliwego użycia)
+    materials:
+      options:
+        mythic_essence: Mityczna Esencja
+        key_fragments: Fragmenty Klucza
+        capsules: Kapsuły
+        mastery_tokens: Żetony Maestrii
+    mythic:
+      options:
+        blue_essence: Niebieska Esencja
+        orange_essence: Pomarańczowa Esencja
+        random_skin_shards: Losowy Odłamek Skórki
+      recipes_unavailable: Receptury dla %{loot} wydają się być niedostępne
