@@ -80,7 +80,7 @@ common:
         blue_essence: Niebieska Esencja
         orange_essence: Pomarańczowa Esencja
         random_skin_shards: Losowy Odłamek Skórki
-      recipes_unavailable: Receptury dla %{loot} wydają się być niedostępne
+      recipes_unavailable: Receptury dla %{loot} wydają się być niedostępne.
       recipe_found: 'Znaleziono recepturę: %{thing_to_craft} za %{amount} Mitycznej
         Esencji'
   handler:
