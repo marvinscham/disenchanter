@@ -106,3 +106,24 @@ common:
       ask_open_capsules: Otworzyć %{count} (nie potrzebujące kluczy) kapsuły?
     champion:
       no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia.
+      found_shards: Znaleziono %{count} odłamki czempionów.
+      already_done: 'Sprawa już załatwiona: nie zostały żadne odłamki pasujące do
+        twojego wyboru.'
+      present_selection: 'Rozłożylibyśmy %{count} odłamków czempionów używając wybranej
+        opcji:'
+      shards_to_keep: Zachowywanie %{count}
+      ask_include_permanents: Czy powinniśmy uwzględnić trwałe odłamki czempionów
+        w procesie?
+      ask_disenchant: Rozłożyć %{count} odłamków czempionów na %{amount} Niebieskiej
+        Esencji?
+      exclusions:
+        ask: Czy chciałbyś dodać wykluczenia?
+        ask_which: Okej, którzy czempioni?
+        entry_requirements: (Wpisz/wklej DOKŁADNE imię czempiona)
+        recognized: 'Wykluczenia rozpoznane:'
+      by_mastery:
+        ask_which_level: Na którym co najmniej poziomie powinni być czempioni, aby
+          ich odłamki zostały zachowane?
+        note_level7: na 7 poziomie Maestrii
+        note_below_threshold: poniżej progu
+        note_more_valuable: wartość wyższa niż ulepszenie Maestrii poziomu 7.
