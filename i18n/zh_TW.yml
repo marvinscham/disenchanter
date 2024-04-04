@@ -146,6 +146,7 @@ zh_TW:
         ask: 你希望增加例外嗎?
         ask_which: 好的, 該去除哪些英雄?
         recognized: '已正確讀取的例外:'
+      ask_include_permanents: 需要包含永久英雄嗎?
     url:
       opening_repository: 正在使用你的瀏覽器開啟位於 %{url} 的 Github 專案頁面...
       opening_stats: 正在使用你的瀏覽器開啟位於 %{url} 的全球數據統計...
