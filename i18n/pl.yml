@@ -16,10 +16,37 @@ common:
     invalid_answer: Nieprawidłowa odpowiedź, opcje
   meta:
     auto_loaded_locale: 'Wykryty język klienta: %{locale_name}'
+    locale_name: Polski
+    manually_set_locale: Ustawiono na %{locale_name}!
+    translation_note: 'Brakujące lub złe tłumaczenie? Pomóż, oferując swoje: %{url}'
   loot:
     glorious_champion_capsule: Wspaniałą Kapsuła Bohaterów
     honor_4_orb: Kula Honoru 4. Poziomu
     honor_5_orb: Kula Honoru 5. Poziomu
+    blue_essence: Niebieska Esencja
+    blue_essence_short: NE
+    orange_essence: Pomarańczowa Esencja
+    orange_essence_short: PE
+    materials: Materiały
+    champions: Czempioni
+    skins: Skórki
+    tacticians: Taktycy
+    eternals: Patronowie
+    eternal_shards: Odłamki Zestawu patronów
+    eternal_permanents: Trwały Odłamek Zestawu Patronów
+    emotes: Emotki
+    ward_skins: Skórki Totemów
+    ward_skin_shards: Odłamki Skórek Totemów
+    ward_skin_permanents: Trwałe Odłamki Skórek Totemów
+    icons: Ikony
+    capsules: Kapsuły
+    key_fragments: Fragmenty Klucza
+    shards: Odłamki
+    permanents: Trwałe Odłamki
+    mythic_essence: Mityczna Esencja
+    skin_shards: Odłamki Skórek
+    skin_permanents: Trwałe Odłamki Skórek
+    champion_capsule: Kapsuła Czempionów
   update_checker:
     up_to_date: Jesteś na bieżąco!
     local_beta_note: Witamy w przyszłości!
@@ -127,3 +154,46 @@ common:
         note_level7: na 7 poziomie Maestrii
         note_below_threshold: poniżej progu
         note_more_valuable: wartość wyższa niż ulepszenie Maestrii poziomu 7.
+      no_unowned_champs_found: Nie znaleziono odłamków nieposiadanych czempionów.
+      ask_keep_unowned_champs: Zachować odłamki dla czempionów, których jeszcze nie
+        Posiadasz?
+      found_champs_with_tokens: Znaleziono %{count} czempionów z posiadanymi odłamkami
+        Maestrii
+    url:
+      opening_mastery_chart: Otwieranie Twojego profilu na %{url} w Twojej przeglądarce…
+      opening_repository: Otwieranie repozytorium GitHub na %{url} w Twojej przeglądarce…
+      opening_stats: Otwieranie Globalnych Statystyk na %{url} w Twojej przeglądarce…
+    esports_emotes:
+      ask_re_roll: Wymienić na losowe %{count} już posiadane Emotki Esport?
+      none_found: Nie znaleziono Emotek Esportu do wymiany na losową.
+      found_some: Znaleziono %{count} Emotek Esport.
+    mastery_tokens:
+      none_found: Nie znaleziono możliwych do ulepszenia zestawów Odłamków Maestrii.
+      confirm_total_upgrades: Ulepsz %{count} czempionów używając
+      could_upgrade_champions: 'Moglibyśmy ulepszyć takowych czempionów:'
+      missing_essence: Brakuje Ci %{essence_missing} Niebieskiej Esencji potrzebnej
+        by kontynuować. Pomijanie…
+      to_mastery_level: na Poziom Maestrii
+      using: używając
+      using_champion_shard: odłamku czempiona.
+      using_champion_permanent: trwałego odłamku czempiona.
+      using_blue_essence: '%{recipe_cost} Niebieskiej Esencji.'
+    mythic_essence:
+      amount_to_use: Dobra, ile Mitycznej Esencji powinniśmy użyć to stworzenia %{target_name}?
+      none_found: Nie znaleziono Mitycznej Esencji do użycia.
+      found_some: Znaleziono %{amount} Mitycznej Esencji.
+      not_enough: Nie wystarczająco Mitycznej Esencji na to.
+      cancelled: Mityczne tworzenie anulowane.
+      craft_confirm: Stworzyć %{quantity} %{loot_name} z %{total_cost} Mitycznej Esencji?
+    key_fragments:
+      not_enough_fragments: Nie wystarczająca ilość fragmentów klucza, by cokolwiek
+        stworzyć.
+      found_fragments: Znaleziono %{count} fragmentów klucza.
+      ask_craft_keys: Stworzyć %{key_count} klucze z %{fragment_count} fragmentów
+        kluczy?
+    stat_submission:
+      ask_contribute: Czy Chciałbyś dodać Swoje (anonimowe) statystyki do globalnych
+        statystyk?
+      thanks: Wielkie Dzięki!
+      your_stats: 'Twoje statystyki:'
+      ask_submit: Złożyć anonimowe statystyki?
