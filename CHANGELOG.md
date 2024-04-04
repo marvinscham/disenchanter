@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v1.7.3 - Apr 04, 2024
+### Fixed
+- #167 Honor Level 3 Orbs now have proper display names
+
 ## v1.7.2 - Mar 03, 2024
 ### Fixed
 - #157 Fixed a broken placeholder variable reference blocking mythic crafting from executing

@@ -122,6 +122,7 @@ eo:
           fragmentoj estu tenataj?
         note_level7: je majstreco 7
         note_below_threshold: sub sojlo
+        note_more_valuable: pli valora ol Majstreco 7 plibonigo
       no_unowned_champs_found: Ne trovis pecojn de ĉampionoj kiujn vi ankoraŭ ne posedas.
       ask_keep_unowned_champs: Ĉu teni pecon por ĉampionoj, kiujn vi ankoraŭ ne posedas?
       present_selection: 'Ni malsorĉus %{count} da ĉampionfragmentoj uzante la elektan
@@ -169,6 +170,8 @@ eo:
       create_an_issue: Bonvolu fari ekrankopion kaj krei problemon ĉe %{url}
       send_email_instead: Se vi ne havas GitHub-konton, sendu ĝin al %{email}
       skipping_step: Io misfunkciis. Preterlasante ĉi tiun paŝon...
+      network_error: Ups, probable ni atingis API-limon. Reprovu post minuto aŭ raportu
+        al %{email} se tio daŭre okazas.
     esports_emotes:
       none_found: Ne trovis bitsportajn glumarkojn por konverti.
       found_some: Trovis %{count} da bitsportaj glumarkoj.
@@ -213,5 +216,6 @@ eo:
     skin_permanents: Ŝeloj (permanenta rabaĵo)
     champion_capsule: Ĉampiona kapsulo
     glorious_champion_capsule: Gloria ĉampiona kapsulo
+    honor_3_orb: Honornivela 3-a globo
     honor_4_orb: Honornivela 4-a globo
     honor_5_orb: Honornivela 5-a globo
