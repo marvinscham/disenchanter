@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updates to Traditional Chinese translation by @nico12313 (Thank you!)
 
 ### Fixed
+- Reverted `launchy` update since it broke link opening in the browser
 - Dependency updates
 
 ## v1.7.3 - Apr 04, 2024
