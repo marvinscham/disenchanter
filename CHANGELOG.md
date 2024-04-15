@@ -3,9 +3,15 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
-## Unreleased
+## v1.8.0 - Apr 15, 2024
 ### Added
 - Polish translation by **The_Shade2** (Thank you!)
+
+### Changed
+- Updates to Traditional Chinese translation by @nico12313 (Thank you!)
+
+### Fixed
+- Dependency updates
 
 ## v1.7.3 - Apr 04, 2024
 ### Fixed
