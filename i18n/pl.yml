@@ -1,0 +1,199 @@
+pl:
+  common:
+    actions: Akcje
+    disenchanted: Rozmienione
+    opened: Otworzono
+    crafted: Stworzono
+    redeemed: Wykorzystany
+    press_enter_to_exit: Wciśnij Enter aby wyjść.
+    invalid_answer: Nieprawidłowa odpowiedź, opcje
+    done: Zrobione!
+    exiting: Wychodzenie…
+    yup: Tak
+    nah: Nie
+    confirm_banner: POTWIEDŹ
+    not_owned: Nie posiadane
+  meta:
+    auto_loaded_locale: 'Wykryty język klienta: %{locale_name}'
+    locale_name: Polski
+    manually_set_locale: Ustawiono na %{locale_name}!
+    translation_note: 'Brakujące lub złe tłumaczenie? Pomóż, oferując swoje: %{url}'
+  loot:
+    glorious_champion_capsule: Wspaniałą Kapsuła Bohaterów
+    honor_4_orb: Kula Honoru 4. Poziomu
+    honor_5_orb: Kula Honoru 5. Poziomu
+    blue_essence: Niebieska Esencja
+    blue_essence_short: NE
+    orange_essence: Pomarańczowa Esencja
+    orange_essence_short: PE
+    materials: Materiały
+    champions: Czempioni
+    skins: Skórki
+    tacticians: Taktycy
+    eternals: Patronowie
+    eternal_shards: Odłamki Zestawu patronów
+    eternal_permanents: Trwały Odłamek Zestawu Patronów
+    emotes: Emotki
+    ward_skins: Skórki Totemów
+    ward_skin_shards: Odłamki Skórek Totemów
+    ward_skin_permanents: Trwałe Odłamki Skórek Totemów
+    icons: Ikony
+    capsules: Kapsuły
+    key_fragments: Fragmenty Klucza
+    shards: Odłamki
+    permanents: Trwałe Odłamki
+    mythic_essence: Mityczna Esencja
+    skin_shards: Odłamki Skórek
+    skin_permanents: Trwałe Odłamki Skórek
+    champion_capsule: Kapsuła Czempionów
+    honor_3_orb: Kula Honoru 3. Poziomu
+  update_checker:
+    up_to_date: Jesteś na bieżąco!
+    local_beta_note: Witamy w przyszłości!
+    local_beta_version: 'Najnowsza wersja zdalna: v%{version}'
+    update_available: Nowa wersja %{version} dostępna!
+    ask_download_now: Czy Chciałbyś pobrać nową wersję teraz?
+    done_downloading: Pobieranie zakończone!
+  menu:
+    choose_option: Okej, którą opcję Chciałbyś wybrać?
+    what_to_do: Co Chciałbyś zrobić?
+    option: Opcje
+    back_to_main: Powrót do menu głównego
+    option_chosen: Opcja wybrana
+    option_done: Zrobione
+    language:
+      preferred: Jaki jest Twój preferowany język?
+    main:
+      hello: Cześć! :)
+      version_info: Uruchamiane Disenchanter %{version}
+      logged_in_as: 'Zalogowano jako %{name} #%{tagline}.'
+      confirm_banner_intro: 'Twój łup jest bezpieczny, żadne akcje nie zostaną przeprowadzone
+        dopóki nie Potwierdzisz banneru takiego jak ten:'
+      confirm_banner_example: Wykonać tę akcję?
+      all_done: To tyle!
+      see_you: Do zobaczenia następnym razem :)
+      what_to_do: 'Co Chciałbyś zrobić? (Podpowiedź: idź z góry na dół, aby niczego
+        nie pominąć!)'
+      options:
+        language_settings: Ustawienia języka
+        open_mastery_chart: Otwórz profil Mastery Chart
+        open_usage_stats: Otwórz globalne statystyki Disenchanter
+        open_repository: Otwórz repozytorium GitHub
+        exit: Wyjdź
+      summoner_check_failed: Nie można zdobyć informacji o Przywoływaczu. Spróbuj
+        zrestartować swojego Klienta League.
+      time_saved: Zaoszczędziliśmy Ci około %{time_saved} sekund czekania na zakończenie
+        animacji.
+      exit_shortcut_notice: Możesz opuścić ten skrypt w dowolnym momencie używając
+        [CTRL + C].
+    champions:
+      options:
+        all: Rozmień wszystkie odłamki czempionów
+        mastery_threshold: Pozostaw wystarczająco (1/2) odłamków aby w pełni ulepszyć
+          czempionów na poziomie Maestrii co najmniej x (wybierz od 1 do 6)
+        collector: Pozostaw jeden odłamek czempiona niezależnie od jego poziomu Maestrii
+        tokens: Pozostaw wystarczająco (1/2) odłamków dla czempionów dla których Posiadasz
+          żetony 6/7 Maestrii
+        mastery_full: Pozostaw wystarczająco (1/2) odłamków aby w pełni ulepszyć Maestrię
+          wszystkich czempionów (Rozmień tylko te odłamki, bez możliwego użycia)
+    materials:
+      options:
+        mythic_essence: Mityczna Esencja
+        key_fragments: Fragmenty Klucza
+        capsules: Kapsuły
+        mastery_tokens: Żetony Maestrii
+    mythic:
+      options:
+        blue_essence: Niebieska Esencja
+        orange_essence: Pomarańczowa Esencja
+        random_skin_shards: Losowy Odłamek Skórki
+      recipes_unavailable: Receptury dla %{loot} wydają się być niedostępne.
+      recipe_found: 'Znaleziono recepturę: %{thing_to_craft} za %{amount} Mitycznej
+        Esencji'
+  handler:
+    generic:
+      found_nothing: Nie znaleziono %{name} do rozłożenia.
+      found_some: Znaleziono %{count} %{name}.
+      found_no_owned: Nie znaleziono posiadanych %{name} do rozłożenia.
+      filtered_down: Odfiltrowano do %{count} przedmiotów.
+      disenchant_preview: 'Rozłożylibyśmy %{count} %{loot} używając wybranej opcji:'
+      ask_disenchant: Rozłożyć %{count} %{loot} na %{currency}?
+      keep_unowned: Zachować jeszcze nie posiadany %{loot}?
+      action_cancelled: Akcja anulowana
+    exception:
+      skipping_step: Coś poszło nie tak. Pomijanie kroku…
+      error_occurred: Wydarzył się błąd w trakcie przetwarzania %{name}.
+      create_an_issue: Proszę zrobić zrzut ekranu i stworzyć zagadnienie na %{url}
+      send_email_instead: Jeśli nie Posiadasz konta GitHub, wyślij je na %{email}
+      network_error: Oops, prawdopodobnie Osiągnęliśmy limit API. Proszę spróbować
+        ponownie lub zgłosić na %{email} jeśli będzie się to powtarzać.
+    capsule:
+      found_capsules: 'Znaleziono %{count} kapsuł:'
+      no_capsules_found: Nie znaleziono kapsuł nie potrzebujących kluczy do otworzenia.
+      ask_open_capsules: Otworzyć %{count} (nie potrzebujące kluczy) kapsuły?
+    champion:
+      no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia.
+      found_shards: Znaleziono %{count} odłamki czempionów.
+      already_done: 'Sprawa już załatwiona: nie zostały żadne odłamki pasujące do
+        twojego wyboru.'
+      present_selection: 'Rozłożylibyśmy %{count} odłamków czempionów używając wybranej
+        opcji:'
+      shards_to_keep: Zachowywanie %{count}
+      ask_include_permanents: Czy powinniśmy uwzględnić trwałe odłamki czempionów
+        w procesie?
+      ask_disenchant: Rozłożyć %{count} odłamków czempionów na %{amount} Niebieskiej
+        Esencji?
+      exclusions:
+        ask: Czy chciałbyś dodać wykluczenia?
+        ask_which: Okej, którzy czempioni?
+        entry_requirements: (Wpisz/wklej DOKŁADNE imię czempiona)
+        recognized: 'Wykluczenia rozpoznane:'
+      by_mastery:
+        ask_which_level: Na którym co najmniej poziomie powinni być czempioni, aby
+          ich odłamki zostały zachowane?
+        note_level7: na 7 poziomie Maestrii
+        note_below_threshold: poniżej progu
+        note_more_valuable: wartość wyższa niż ulepszenie Maestrii poziomu 7
+      no_unowned_champs_found: Nie znaleziono odłamków nieposiadanych czempionów.
+      ask_keep_unowned_champs: Zachować odłamki dla czempionów, których jeszcze nie
+        Posiadasz?
+      found_champs_with_tokens: Znaleziono %{count} czempionów z posiadanymi odłamkami
+        Maestrii
+    url:
+      opening_mastery_chart: Otwieranie Twojego profilu na %{url} w Twojej przeglądarce…
+      opening_repository: Otwieranie repozytorium GitHub na %{url} w Twojej przeglądarce…
+      opening_stats: Otwieranie Globalnych Statystyk na %{url} w Twojej przeglądarce…
+    esports_emotes:
+      ask_re_roll: Wymienić na losowe %{count} już posiadane Emotki Esport?
+      none_found: Nie znaleziono Emotek Esportu do wymiany na losową.
+      found_some: Znaleziono %{count} Emotek Esport.
+    mastery_tokens:
+      none_found: Nie znaleziono możliwych do ulepszenia zestawów Odłamków Maestrii.
+      confirm_total_upgrades: Ulepsz %{count} czempionów używając
+      could_upgrade_champions: 'Moglibyśmy ulepszyć takowych czempionów:'
+      missing_essence: Brakuje Ci %{essence_missing} Niebieskiej Esencji potrzebnej
+        by kontynuować. Pomijanie…
+      to_mastery_level: na Poziom Maestrii
+      using: używając
+      using_champion_shard: odłamku czempiona.
+      using_champion_permanent: trwałego odłamku czempiona.
+      using_blue_essence: '%{recipe_cost} Niebieskiej Esencji.'
+    mythic_essence:
+      amount_to_use: Dobra, ile Mitycznej Esencji powinniśmy użyć to stworzenia %{target_name}?
+      none_found: Nie znaleziono Mitycznej Esencji do użycia.
+      found_some: Znaleziono %{amount} Mitycznej Esencji.
+      not_enough: Nie wystarczająco Mitycznej Esencji na to.
+      cancelled: Mityczne tworzenie anulowane.
+      craft_confirm: Stworzyć %{quantity} %{loot_name} z %{total_cost} Mitycznej Esencji?
+    key_fragments:
+      not_enough_fragments: Nie wystarczająca ilość fragmentów klucza, by cokolwiek
+        stworzyć.
+      found_fragments: Znaleziono %{count} fragmentów klucza.
+      ask_craft_keys: Stworzyć %{key_count} klucze z %{fragment_count} fragmentów
+        kluczy?
+    stat_submission:
+      ask_contribute: Czy Chciałbyś dodać Swoje (anonimowe) statystyki do globalnych
+        statystyk?
+      thanks: Wielkie Dzięki!
+      your_stats: 'Twoje statystyki:'
+      ask_submit: Złożyć anonimowe statystyki?

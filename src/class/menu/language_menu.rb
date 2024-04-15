@@ -10,6 +10,7 @@ class LanguageMenu < Menu
     things_todo = {
       'en' => 'English',
       'de' => 'Deutsch',
+      'pl' => 'Polski',
       'zh' => '繁體中文',
       'eo' => 'Esperanto',
       'x' => I18n.t(:'menu.back_to_main')
@@ -28,6 +29,8 @@ class LanguageMenu < Menu
                     'de_DE'
                   when 'eo'
                     'eo'
+                  when 'pl'
+                    'pl'
                   when 'zh'
                     'zh_TW'
                   else

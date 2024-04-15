@@ -8,6 +8,8 @@ zh_TW:
         exit: 離開
         open_usage_stats: 前往網頁：分解者全球統計數據
         open_repository: 前往網頁：GitHub專案頁面
+        language_settings: 語言設定
+        open_mastery_chart: 開啟專精氣泡圖個人檔案
       what_to_do: '你現在希望做些甚麼? (提示: 先從海克斯材料開始, 可以確保你接下來不會放過任何東西! 例如海克斯寶箱開出的造型碎片!)'
       summoner_check_failed: 無法獲取召喚師資訊. 請重新啟動英雄聯盟客戶端.
       logged_in_as: '你當前的登入身分為 %{name} #%{tagline}.'
@@ -42,6 +44,8 @@ zh_TW:
         mastery_full: 保留足夠(1到2個)的碎片給所有還沒達到專精7的英雄(只會分解完全沒有用處的碎片)
         collector: 完全不考慮專精，為每個英雄留一個碎片
     choose_option: 好的, 你希望執行哪個選項?
+    language:
+      preferred: 你的偏好語言為何?
   common:
     press_enter_to_exit: 按下 Enter鍵 離開.
     invalid_answer: 錯誤答案, 選項
@@ -54,6 +58,8 @@ zh_TW:
     opened: 開啟
     crafted: 製作
     redeemed: 領取
+    done: 完成!
+    not_owned: 未擁有
   loot:
     eternals: 永恆精雕
     skin_shards: 造型碎片
@@ -81,12 +87,15 @@ zh_TW:
     eternal_permanents: 永恆精雕
     ward_skin_shards: 守衛造型碎片
     ward_skin_permanents: 永久守衛造型
+    shards: 碎片
+    permanents: 永久物品
   handler:
     exception:
       error_occurred: 在處理 %{name} 時發生了一個錯誤.
       send_email_instead: 如果你沒有或不希望申請一個 GitHub 帳號, 請將本截圖及你遇到的問題用英文寄信至 %{email}
       create_an_issue: 請截圖並在 %{url} 發起一個新的問題討論串
       skipping_step: 跳過這一步驟...
+      network_error: 噢, 我們似乎超出了某個 API 的限制. 請等等再重新嘗試, 如果還是一直發生請回報至 %{email}.
     generic:
       disenchant_preview: '我們將分解 %{count} 個 %{loot} 基於你選擇的選項:'
       keep_unowned: 保留你未擁有的 %{loot} 嗎?
@@ -138,6 +147,7 @@ zh_TW:
         ask: 你希望增加例外嗎?
         ask_which: 好的, 該去除哪些英雄?
         recognized: '已正確讀取的例外:'
+      ask_include_permanents: 需要包含永久英雄嗎?
     url:
       opening_repository: 正在使用你的瀏覽器開啟位於 %{url} 的 Github 專案頁面...
       opening_stats: 正在使用你的瀏覽器開啟位於 %{url} 的全球數據統計...
@@ -153,5 +163,7 @@ zh_TW:
     up_to_date: 目前使用的是最新版本, 沒問題!
     update_available: 新版本 %{version} 可下載!
   meta:
-    auto_loaded_locale: ''
+    auto_loaded_locale: '偵測到客戶端語言為: %{locale_name}'
     locale_name: 繁體中文
+    manually_set_locale: 設為 %{locale_name}!
+    translation_note: '看到缺漏或不好的翻譯? 來幫忙提出你的翻譯: %{url}'

@@ -7,11 +7,11 @@ ocran src/main.rb \
     ./i18n/*.yml \
     --gemfile ./Gemfile \
     --icon ./assets/BE_icon.ico \
-    --output ./build/disenchanter.exe
-
+    --output ./build/disenchanter.exe && \
 ocran src/updater.rb \
     --gemfile ./Gemfile \
     --icon ./assets/BE_icon.ico \
-    --output ./build/disenchanter_up.exe
+    --output ./build/disenchanter_up.exe && \
+echo "Success!" || echo "Something went wrong."
 
 rm ./build/.build.lockfile
