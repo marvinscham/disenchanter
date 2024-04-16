@@ -30,7 +30,7 @@ class LanguageMenu < Menu
                   when 'eo'
                     'eo'
                   when 'pl'
-                    'pl'
+                    'pl_PL'
                   when 'zh'
                     'zh_TW'
                   else
