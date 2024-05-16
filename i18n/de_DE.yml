@@ -1,203 +1,181 @@
+---
 de_DE:
-  meta:
-    locale_name: "Deutsch"
-    auto_loaded_locale: "Sprache des Clients: %{locale_name}"
-    manually_set_locale: "Auf %{locale_name} gestellt!"
-    translation_note: "Fehlende oder schlechte Übersetzung? Hilf mit, indem du deine
-      anbietest: %{url}"
-  loot:
-    permanents: Permanent
-    honor_3_orb: „Ehrungsstufe 3“-Kugel
-    honor_5_orb: „Ehrungsstufe 5“-Kugel
-    mythic_essence: Mythische Essenzen
-    skin_shards: Skinsplitter
-    skin_permanents: Skin (permanent)
-    champion_capsule: Champion-Kapsel
-    glorious_champion_capsule: Glorreiche Champion-Kapsel
-    honor_4_orb: „Ehrungsstufe 4“-Kugel
-    blue_essence: Blaue Essenzen
-    blue_essence_short: BE
-    orange_essence_short: OE
-    materials: Materialien
-    champions: Champions
-    skins: Skins
-    tacticians: Taktiker
-    eternals: Ewige
-    eternal_shards: Ewigen-Set-Splitter
-    eternal_permanents: Ewigen-Set
-    emotes: Sticker
-    ward_skins: Augenskins
-    ward_skin_shards: Augenskinsplitter
-    ward_skin_permanents: Augenskin (permanent)
-    icons: Symbole
-    capsules: Kapseln
-    key_fragments: Schlüsselfragmente
-    shards: Splitter
-    orange_essence: Orangene Essenzen
-  menu:
-    main:
-      exit_shortcut_notice: 'Du kannst das Skript jederzeit mit [STRG + C] verlassen.'
-      time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen
-        gespart.
-      options:
-        language_settings: Spracheinstellungen
-        open_mastery_chart: Öffne dein „Mastery Chart“-Profil
-        open_usage_stats: Globale Statistiken für Disenchanter öffnen
-        open_repository: Öffne GitHub-Repository
-        debug_tools: Debug-Werkzeuge
-        exit: Raus hier
-      hello: Moin! :)
-      version_info: Starte Disenchanter %{version}
-      exit_shortcut: '[STRG + C]'
-      summoner_check_failed: Konnte keine Spieler-Info sammeln. Starte deinen League-Client
-        neu.
-      logged_in_as: 'Du bist als %{name} #%{tagline} eingeloggt.'
-      confirm_banner_intro: 'Deine Beute ist sicher, nichts wird passieren bis du
-        ein solches Banner bestätigst:'
-      confirm_banner_example: Diese Aktion ausführen?
-      all_done: Das war's!
-      see_you: Bis bald :)
-      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit
-        du nichts verpasst!)'
-    mythic:
-      recipe_found: 'Rezept gefunden: %{thing_to_craft} für %{amount} Mythische Essenzen'
-      options:
-        blue_essence: Blaue Essenzen
-        orange_essence: Orangene Essenzen
-        random_skin_shards: Zufällige Skinsplitter
-      recipes_unavailable: Rezepte für %{loot} scheinen nicht verfügbar zu sein.
-    option: Option
-    back_to_main: Zurück zum Hauptmenü
-    champions:
-      options:
-        mastery_threshold: Behalte genug (1/2) Splitter, um Champions auf min. Meisterschaft
-          x (wähle von 1 bis 6) vollständig meistern zu können
-        all: Entzaubere alle Championsplitter
-        mastery_full: Behalte genug (1/2) Splitter, um alle Champions zu meistern
-          (entzaubere nur Splitter ohne jeglichen Nutzen)
-        collector: Behalte einen Splitter für jeden Champion unabhängig von der Meisterschaft
-        tokens: Behalte genug (1/2) Splitter für Champions mit Meisterschaftsmarken
-          im Besitz
-    choose_option: Okay, was willst du machen?
-    what_to_do: Was möchtest du machen?
-    option_chosen: Ausgewählte Option
-    option_done: erledigt
-    materials:
-      options:
-        mythic_essence: Mythische Essenzen
-        key_fragments: Schlüsselfragmente
-        capsules: Kapseln
-        mastery_tokens: Meisterschaftsmarken
-    language:
-      preferred: Was ist deine bevorzugte Sprache?
+  common:
+    actions: Aktionen
+    confirm_banner: BESTÄTIGE
+    crafted: Hergestellt
+    disenchanted: Entzaubert
+    done: Fertig!
+    exiting: Beende...
+    invalid_answer: Ungültige Antwort, Optionen
+    nah: Nein
+    not_owned: nicht im Besitz
+    opened: Geöffnet
+    press_enter_to_exit: Drücke die Eingabetaste, um zu beenden.
+    redeemed: Freigeschaltet
+    yup: Ja
   handler:
-    generic:
-      action_cancelled: Aktion abgebrochen
-      ask_disenchant: '%{count} %{loot} entzaubern, um %{currency} zu erhalten?'
-      found_nothing: Keine %{name} zum Entzaubern gefunden.
-      found_some: '%{count} %{name} gefunden.'
-      found_no_owned: Keine %{name} (im Besitz) zum Entzaubern gefunden.
-      keep_unowned: '%{loot}, die du noch nicht im Besitz hast, behalten?'
-      filtered_down: Auf %{count} Items gefiltert.
-      disenchant_preview: 'Wir würden %{count} %{loot} mit der von dir gewählten Option
-        entzaubern:'
-    exception:
-      error_occurred: Beim Bearbeiten von %{name} ist ein Fehler aufgetreten.
-      create_an_issue: Bitte mach einen Screenshot und erstelle einen Issue unter
-        %{url}
-      send_email_instead: Wenn du kein GitHub-Konto hast, schick ihn an %{email}
-      skipping_step: Etwas ist schiefgelaufen. Überspringe diesen Schritt...
-      network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche
-        es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
+    capsule:
+      ask_open_capsules: "%{count} schlüssellose Kapseln öffnen?"
+      found_capsules: "%{count} Kapseln gefunden:"
+      no_capsules_found: Keine schlüssellosen Kapseln gefunden, die man öffnen könnte.
     champion:
+      already_done: 'Schon fertig: Keine Championsplitter übrig, die deiner Auswahl entsprechen.'
+      ask_disenchant: Möchtest du %{count} Championsplitter für %{amount} Blaue Essenzen entzaubern?
+      ask_include_permanents: Sollen wir permanente Champions in diesen Prozess einbeziehen?
+      ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch nicht besitzt, behalten?
+      by_mastery:
+        ask_which_level: Auf welcher Meisterschaftsstufe sollten Champions mindestens sein, damit ihre Splitter aufbewahrt werden?
+        note_below_threshold: unter der Schwelle
+        note_level7: auf Stufe 7
+        note_more_valuable: Wert höher als Upgrade auf Meisterschaft 7
       exclusions:
-        entry_requirements: (Championnamen EXAKT einfügen/eingeben)
         ask: Möchtest du Ausschlüsse hinzufügen?
         ask_which: Okay, welche Champions?
+        entry_requirements: "(Championnamen EXAKT einfügen/eingeben)"
         recognized: 'Erkannte Ausschlüsse:'
-      present_selection: 'Wir würden %{count} Championsplitter mit der von dir gewählten
-        Option entzaubern:'
-      no_unowned_champs_found: Keine Splitter von Champions gefunden, die du noch
-        nicht besitzt.
+      found_champs_with_tokens: "%{count} Champions mit Meisterschaftsmarken im Besitz gefunden"
+      found_shards: "%{count} Championsplitter gefunden."
       no_shards_found: Keine Championsplitter zum Entzaubern gefunden.
-      found_shards: '%{count} Championsplitter gefunden.'
-      already_done: 'Schon fertig: Keine Championsplitter übrig, die deiner Auswahl
-        entsprechen.'
+      no_unowned_champs_found: Keine Splitter von Champions gefunden, die du noch nicht besitzt.
+      present_selection: 'Wir würden %{count} Championsplitter mit der von dir gewählten Option entzaubern:'
       shards_to_keep: behält %{count}
-      ask_include_permanents: Sollen wir permanente Champions in diesen Prozess einbeziehen?
-      ask_disenchant: Möchtest du %{count} Championsplitter für %{amount} Blaue Essenzen
-        entzaubern?
-      by_mastery:
-        ask_which_level: Auf welcher Meisterschaftsstufe sollten Champions mindestens
-          sein, damit ihre Splitter aufbewahrt werden?
-        note_level7: auf Stufe 7
-        note_below_threshold: unter der Schwelle
-        note_more_valuable: Wert höher als Upgrade auf Meisterschaft 7
-      ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch
-        nicht besitzt, behalten?
-      found_champs_with_tokens: '%{count} Champions mit Meisterschaftsmarken im Besitz
-        gefunden'
     esports_emotes:
-      found_some: '%{count} E-Sports-Sticker gefunden.'
-      none_found: Es wurden keine E-Sports-Sticker zum Umwandeln gefunden.
       ask_re_roll: Möchtest du %{count} E-Sports-Sticker (bereits im Besitz) umwandeln?
-    mythic_essence:
-      none_found: Keine Mythischen Essenzen zum Benutzen gefunden.
-      cancelled: Verwertung Mythischer Essenzen abgebrochen.
-      found_some: '%{amount} Mythische Essenzen gefunden.'
-      not_enough: Nicht genug Mythische Essenzen dafür.
-      amount_to_use: Wie viel Mythische Essenzen sollen wir benutzen, um %{target_name}
-        herzustellen?
-      craft_confirm: '%{quantity} %{loot_name} für %{total_cost} Mythische Essenzen
-        herstellen?'
-    capsule:
-      ask_open_capsules: '%{count} schlüssellose Kapseln öffnen?'
-      no_capsules_found: Keine schlüssellosen Kapseln gefunden, die man öffnen könnte.
-      found_capsules: '%{count} Kapseln gefunden:'
+      found_some: "%{count} E-Sports-Sticker gefunden."
+      none_found: Es wurden keine E-Sports-Sticker zum Umwandeln gefunden.
+    exception:
+      create_an_issue: Bitte mach einen Screenshot und erstelle einen Issue unter %{url}
+      error_occurred: Beim Bearbeiten von %{name} ist ein Fehler aufgetreten.
+      network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
+      send_email_instead: Wenn du kein GitHub-Konto hast, schick ihn an %{email}
+      skipping_step: Etwas ist schiefgelaufen. Überspringe diesen Schritt...
+    generic:
+      action_cancelled: Aktion abgebrochen
+      ask_disenchant: "%{count} %{loot} entzaubern, um %{currency} zu erhalten?"
+      disenchant_preview: 'Wir würden %{count} %{loot} mit der von dir gewählten Option entzaubern:'
+      filtered_down: Auf %{count} Items gefiltert.
+      found_no_owned: Keine %{name} (im Besitz) zum Entzaubern gefunden.
+      found_nothing: Keine %{name} zum Entzaubern gefunden.
+      found_some: "%{count} %{name} gefunden."
+      keep_unowned: "%{loot}, die du noch nicht im Besitz hast, behalten?"
     key_fragments:
+      ask_craft_keys: "%{key_count} Schlüssel aus %{fragment_count} Schlüsselfragmenten herstellen?"
+      found_fragments: "%{count} Schlüsselfragmente gefunden."
       not_enough_fragments: Nicht genug Schlüsselfragmente, um etwas herzustellen.
-      found_fragments: '%{count} Schlüsselfragmente gefunden.'
-      ask_craft_keys: '%{key_count} Schlüssel aus %{fragment_count} Schlüsselfragmenten
-        herstellen?'
     mastery_tokens:
+      confirm_total_upgrades: Verbessere %{count} Champions mit
       could_upgrade_champions: 'Wir könnten die folgenden Champions hochstufen:'
+      missing_essence: Dir fehlen %{essence_missing} Blaue Essenzen, um fortzufahren. Überspringe...
       none_found: Kein freischaltbarer Satz von Meisterschaftsmarken gefunden.
-      missing_essence: Dir fehlen %{essence_missing} Blaue Essenzen, um fortzufahren.
-        Überspringe...
       to_mastery_level: zu Meisterschaftsstufe
       using: mit
-      using_champion_shard: einem Championsplitter.
+      using_blue_essence: "%{recipe_cost} Blauen Essenzen."
       using_champion_permanent: einem permanenten Champion.
-      using_blue_essence: '%{recipe_cost} Blauen Essenzen.'
-      confirm_total_upgrades: Verbessere %{count} Champions mit
+      using_champion_shard: einem Championsplitter.
+    mythic_essence:
+      amount_to_use: Wie viel Mythische Essenzen sollen wir benutzen, um %{target_name} herzustellen?
+      cancelled: Verwertung Mythischer Essenzen abgebrochen.
+      craft_confirm: "%{quantity} %{loot_name} für %{total_cost} Mythische Essenzen herstellen?"
+      found_some: "%{amount} Mythische Essenzen gefunden."
+      none_found: Keine Mythischen Essenzen zum Benutzen gefunden.
+      not_enough: Nicht genug Mythische Essenzen dafür.
+    stat_submission:
+      ask_contribute: Möchtest du deine Ergebnisse (anonym) zu den globalen Statistiken einsenden?
+      ask_submit: Anonyme Ergebnisse absenden?
+      thanks: Vielen Dank!
+      your_stats: 'Deine Ergebnisse:'
     url:
       opening_mastery_chart: Dein Profil wird unter %{url} in deinem Browser geöffnet...
       opening_repository: Öffne das GitHub-Repository unter %{url} in deinem Browser...
       opening_stats: Öffne Globale Statistiken unter %{url} in deinem Browser...
-    stat_submission:
-      ask_contribute: Möchtest du deine Ergebnisse (anonym) zu den globalen Statistiken
-        einsenden?
-      thanks: Vielen Dank!
-      your_stats: 'Deine Ergebnisse:'
-      ask_submit: Anonyme Ergebnisse absenden?
+  loot:
+    blue_essence: Blaue Essenzen
+    blue_essence_short: BE
+    capsules: Kapseln
+    champion_capsule: Champion-Kapsel
+    champions: Champions
+    emotes: Sticker
+    eternal_permanents: Ewigen-Set
+    eternal_shards: Ewigen-Set-Splitter
+    eternals: Ewige
+    glorious_champion_capsule: Glorreiche Champion-Kapsel
+    honor_3_orb: "„Ehrungsstufe 3“-Kugel"
+    honor_4_orb: "„Ehrungsstufe 4“-Kugel"
+    honor_5_orb: "„Ehrungsstufe 5“-Kugel"
+    icons: Symbole
+    key_fragments: Schlüsselfragmente
+    materials: Materialien
+    mythic_essence: Mythische Essenzen
+    orange_essence: Orangene Essenzen
+    orange_essence_short: OE
+    permanents: Permanent
+    shards: Splitter
+    skin_permanents: Skin (permanent)
+    skin_shards: Skinsplitter
+    skins: Skins
+    tacticians: Taktiker
+    ward_skin_permanents: Augenskin (permanent)
+    ward_skin_shards: Augenskinsplitter
+    ward_skins: Augenskins
+  menu:
+    back_to_main: Zurück zum Hauptmenü
+    champions:
+      options:
+        all: Entzaubere alle Championsplitter
+        collector: Behalte einen Splitter für jeden Champion unabhängig von der Meisterschaft
+        mastery_full: Behalte genug (1/2) Splitter, um alle Champions zu meistern (entzaubere nur Splitter ohne jeglichen Nutzen)
+        mastery_threshold: Behalte genug (1/2) Splitter, um Champions auf min. Meisterschaft x (wähle von 1 bis 6) vollständig meistern zu können
+        tokens: Behalte genug (1/2) Splitter für Champions mit Meisterschaftsmarken im Besitz
+    choose_option: Okay, was willst du machen?
+    language:
+      preferred: Was ist deine bevorzugte Sprache?
+    main:
+      all_done: Das war's!
+      confirm_banner_example: Diese Aktion ausführen?
+      confirm_banner_intro: 'Deine Beute ist sicher, nichts wird passieren bis du ein solches Banner bestätigst:'
+      exit_shortcut: "[STRG + C]"
+      exit_shortcut_notice: Du kannst das Skript jederzeit mit [STRG + C] verlassen.
+      hello: Moin! :)
+      logged_in_as: 'Du bist als %{name} #%{tagline} eingeloggt.'
+      options:
+        debug_tools: Debug-Werkzeuge
+        exit: Raus hier
+        language_settings: Spracheinstellungen
+        open_mastery_chart: Öffne dein „Mastery Chart“-Profil
+        open_repository: Öffne GitHub-Repository
+        open_usage_stats: Globale Statistiken für Disenchanter öffnen
+      see_you: Bis bald :)
+      summoner_check_failed: Konnte keine Spieler-Info sammeln. Starte deinen League-Client neu.
+      time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen gespart.
+      version_info: Starte Disenchanter %{version}
+      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit du nichts verpasst!)'
+    materials:
+      options:
+        capsules: Kapseln
+        key_fragments: Schlüsselfragmente
+        mastery_tokens: Meisterschaftsmarken
+        mythic_essence: Mythische Essenzen
+    mythic:
+      options:
+        blue_essence: Blaue Essenzen
+        orange_essence: Orangene Essenzen
+        random_skin_shards: Zufällige Skinsplitter
+      recipe_found: 'Rezept gefunden: %{thing_to_craft} für %{amount} Mythische Essenzen'
+      recipes_unavailable: Rezepte für %{loot} scheinen nicht verfügbar zu sein.
+    option: Option
+    option_chosen: Ausgewählte Option
+    option_done: erledigt
+    what_to_do: Was möchtest du machen?
+  meta:
+    auto_loaded_locale: 'Sprache des Clients: %{locale_name}'
+    locale_name: Deutsch
+    manually_set_locale: Auf %{locale_name} gestellt!
+    translation_note: 'Fehlende oder schlechte Übersetzung? Hilf mit, indem du deine anbietest: %{url}'
   update_checker:
     ask_download_now: Möchtest du die neue Version jetzt herunterladen?
     done_downloading: Download abgeschlossen!
-    up_to_date: Du bist auf dem neuesten Stand!
     local_beta_note: Willkommen in der Zukunft!
     local_beta_version: 'Neueste Remote-Version: v%{version}'
+    up_to_date: Du bist auf dem neuesten Stand!
     update_available: Neue Version %{version} verfügbar!
-  common:
-    exiting: Beende...
-    done: Fertig!
-    yup: Ja
-    nah: Nein
-    confirm_banner: BESTÄTIGE
-    not_owned: nicht im Besitz
-    press_enter_to_exit: Drücke die Eingabetaste, um zu beenden.
-    actions: Aktionen
-    disenchanted: Entzaubert
-    opened: Geöffnet
-    crafted: Hergestellt
-    redeemed: Freigeschaltet
-    invalid_answer: Ungültige Antwort, Optionen

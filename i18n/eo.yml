@@ -1,221 +1,198 @@
+---
 eo:
-  common:
-    exiting: Elirante...
-    done: Kompleta!
-    yup: Jes
-    nah: Ne
-    confirm_banner: KONFIRMU
-    actions: Agoj
-    disenchanted: Malsorĉigita
-    not_owned: ne posedata
-    press_enter_to_exit: Premu enen-klavo por eliri.
-    opened: Malfermita
-    crafted: Kreita
-    redeemed: Elaĉetita
-    invalid_answer: Nevalida respondo, ebloj
-  main_menu:
-    time_saved: Ni ŝparis al vi proksimume %{time_saved} sekundojn de atendo por finiĝi
-      la animacioj.
-    summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu restartigi
-      vian League-klienton.
-    hello: Saluton! :)
-    version_info: Lanĉante Elreviĝilo %{version}
-    exit_shortcut_notice: Vi povas eliri ĉi tiun skripton en iu ajn momento premante
-    exit_shortcut: '[STIRKLAVO + C]'
-    logged_in_as: 'Vi estas ensalutinta kiel %{name} #%{tagline}.'
-    confirm_banner_intro: 'Via ŝtelo estas sekura, neniuj agoj estos faritaj ĝis vi
-      konfirmas rubandon kiel ĉi tiu:'
-    confirm_banner_example: 'KONFIRMU: Ĉu plenumi tiun agon?'
-    all_done: Jen ĝi!
-    see_you: Ĝis la revido :)
-  meta:
-    manually_set_locale: Agordita al %{locale_name}!
-    translation_note: 'Ĉu mankanta aŭ malbona traduko? Helpu per via propono: %{url}'
-    auto_loaded_locale: 'Detektita klienta lingvo: %{locale_name} (kiel?!)'
-    locale_name: Esperanto
-  menu:
-    choose_option: Bone, kion vi volus fari?
-    option: Opcio
-    back_to_main: Reiri al ĉefmenuon
-    champions:
-      options:
-        all: Malsorĉiĝu ĉiujn ĉampionajn pecojn
-        mastery_threshold: Konservu sufiĉe da (1/2) pecoj por tute majstri ĉampionojn
-          je almenaŭ majstreco nivelo x (elektu de 1 ĝis 6)
-        mastery_full: Konservu sufiĉe da (1/2) pecoj por tute majstri ĉiujn ĉampionojn
-          (nur malsorĉu senutilajn pecojn)
-        collector: Konservu po unu pecon de ĉiu ĉampiono, sendepende de majstreco
-        tokens: Konservu sufiĉe (1/2) pecojn por la ĉampionoj, por kiuj vi posedas
-          majstrecaj 6/7-aj ĵetonoj
-    main:
-      what_to_do: 'Kion vi volus fari? (Aludo: iru de supre al malsupre por ke vi
-        ne preterlasu ion!)'
-      options:
-        language_settings: Lingvaj agordoj
-        open_mastery_chart: Malfermu profilon de “Mastery Chart”
-        open_usage_stats: Malfermu tutmondajn statistikojn de Malsorĉilo
-        open_repository: Malfermu GitHub-deponejon
-        exit: Eliru
-      hello: Saluton! :)
-      confirm_banner_example: Ĉu fari ĉi tiun agon?
-      all_done: Jen ĝi!
-      time_saved: Ni ŝparis al vi ĉirkaŭ %{time_saved} sekundojn da atendo por finiĝi
-        la animacioj.
-      see_you: Ĝis la revido :)
-      version_info: Lanĉante Malsorĉilo %{version}
-      exit_shortcut_notice: Vi povas eliri ĉi tiun skripton en iu ajn momento premante
-        [CTRL + C].
-      summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu
-        restartigi vian League-klienton.
-      logged_in_as: 'Vi estas ensalutinta kiel %{name} #%{tagline}.'
-      confirm_banner_intro: 'Via rabaĵo estas sekura, neniuj agoj estos faritaj ĝis
-        vi konfirmas rubandon kiel ĉi tiu:'
-    mythic:
-      recipes_unavailable: Planoj por %{loot} ŝajnas esti nedisponeblaj.
-      recipe_found: 'Trovis planon: Krei %{thing_to_craft} uzante %{amount} da mita
-        esenco'
-      options:
-        blue_essence: Blua esenco
-        orange_essence: Oranĝa esenco
-        random_skin_shards: Hazardaj pecoj de ŝeloj
-    what_to_do: Kion vi volus fari?
-    option_chosen: Elektita opcio
-    option_done: kompleta
-    language:
-      preferred: Kiu estas via preferata lingvo?
-    materials:
-      options:
-        mythic_essence: Mita esenco
-        key_fragments: Ŝlosilfragmentoj
-        capsules: Kapsuloj
-        mastery_tokens: Mastrecaj ĵetonoj
-  update_checker:
-    up_to_date: Vi estas ĝisdata!
-    local_beta_note: Bonvenon al la estonteco!
-    local_beta_version: 'Lasta fora versio: v%{version}'
-    update_available: Nova versio %{version} havebla!
-    ask_download_now: Ĉu vi ŝatus elŝuti la novan version nun?
-    done_downloading: Finiĝis elŝuto!
   champions_menu:
     options:
       all: Elreviĝu ĉiujn ĉampionajn fragmentojn
-      tokens: Konservu sufiĉe (1/2) pecetojn por la ĉampionoj, por kiuj vi posedas
-        majstreco 6/7-markojn
-      mastery_threshold: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉampionojn
-        je almenaŭ majstreco nivelo x (elektu de 1 ĝis 6)
-      mastery_full: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉiujn ĉampionojn
-        (nur elreviĝu pecetojn kiuj ne havas eblan uzon)
       collector: Konservu po unu peceton de ĉiu ĉampiono, sendepende de majstraĵo
+      mastery_full: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉiujn ĉampionojn (nur elreviĝu pecetojn kiuj ne havas eblan uzon)
+      mastery_threshold: Konservu sufiĉe da (1/2) pecetoj por tute majstri ĉampionojn je almenaŭ majstreco nivelo x (elektu de 1 ĝis 6)
+      tokens: Konservu sufiĉe (1/2) pecetojn por la ĉampionoj, por kiuj vi posedas majstreco 6/7-markojn
+  common:
+    actions: Agoj
+    confirm_banner: KONFIRMU
+    crafted: Kreita
+    disenchanted: Malsorĉigita
+    done: Kompleta!
+    exiting: Elirante...
+    invalid_answer: Nevalida respondo, ebloj
+    nah: Ne
+    not_owned: ne posedata
+    opened: Malfermita
+    press_enter_to_exit: Premu enen-klavo por eliri.
+    redeemed: Elaĉetita
+    yup: Jes
   handler:
-    champion:
-      exclusions:
-        ask_which: Bone, kiuj ĉampionoj?
-        entry_requirements: (tajpu/alglui la EKZAKTAN nomon de la ĉampiono)
-        recognized: 'Esceptoj rekonataj:'
-        ask: Ĉu vi volas aldoni esceptojn?
-      no_shards_found: Ne trovis ĉampionajn pecojn por malsorĉi.
-      already_done: 'Jam faritas: ne restas ĉampionaj pecoj kiuj kongruas kun via
-        elekto.'
-      found_shards: Trovis %{count} da ĉampionaj pecoj.
-      by_mastery:
-        ask_which_level: Kiun majstrecan nivelon ĉampionoj almenaŭ estu por ke iliaj
-          fragmentoj estu tenataj?
-        note_level7: je majstreco 7
-        note_below_threshold: sub sojlo
-        note_more_valuable: pli valora ol Majstreco 7 plibonigo
-      no_unowned_champs_found: Ne trovis pecojn de ĉampionoj kiujn vi ankoraŭ ne posedas.
-      ask_keep_unowned_champs: Ĉu teni pecon por ĉampionoj, kiujn vi ankoraŭ ne posedas?
-      present_selection: 'Ni malsorĉus %{count} da ĉampionfragmentoj uzante la elektan
-        opcion:'
-      shards_to_keep: tenante %{count}
-      ask_include_permanents: Ĉu ni inkluzu ĉampionajn (permanenta rabaĵo) en ĉi tiun
-        procezon?
-      ask_disenchant: Ĉu malsorĉi %{count} da ĉampionaj pecoj por %{amount} da blua
-        esenco?
-      found_champs_with_tokens: Trovis %{count} da ĉampionoj kun posedataj majstrecaj
-        ĵetonoj
-    mythic_essence:
-      not_enough: Ne sufiĉe da mita esenco por tio.
-      amount_to_use: Bone, kiom da mita esenco ni uzu por krei %{target_name}?
-      cancelled: Mita fabrikado nuligita.
-      craft_confirm: Ĉu krei %{quantity} da %{loot_name} uzante %{total_cost} da mita
-        esenco?
-      none_found: Ne trovis mitan esencon por uzi.
-      found_some: Trovis %{amount} da mita esenco.
-    mastery_tokens:
-      none_found: Ne trovis plibonigebla aro de majstrecaj ĵetonoj.
-      missing_essence: Vi mankas %{essence_missing} blua esenco por progresi. Preterlasante...
-      to_mastery_level: al majstreca nivelo
-      using: uzante
-      using_blue_essence: '%{recipe_cost} bluan esencon.'
-      using_champion_shard: ĉampionan pecon.
-      using_champion_permanent: ĉampionon (permanenta rabaĵo).
-      confirm_total_upgrades: Plibonigu %{count} da ĉampionojn uzante
-      could_upgrade_champions: 'Ni povus plibonigi la jenajn ĉampionojn:'
     capsule:
-      found_capsules: 'Trovis %{count} da kapsuloj:'
       ask_open_capsules: Ĉu malfermi %{count} da (senŝlosaj) kapsuloj?
+      found_capsules: 'Trovis %{count} da kapsuloj:'
       no_capsules_found: Neniuj senŝlosaj kapsuloj trovis por malfermi.
-    generic:
-      filtered_down: Filtrita al %{count} eroj.
-      disenchant_preview: 'Ni malsorĉus %{count} da %{loot} uzante la elektan opcion:'
-      found_nothing: Ne trovis %{name} por malsorĉi.
-      found_no_owned: Ne trovis jam posedatajn %{name}n por malsorĉi.
-      ask_disenchant: Ĉu malsorĉi %{count} da %{loot} por akiri %{currency}?
-      keep_unowned: Tenu %{loot} kiun vi ankoraŭ ne posedas?
-      action_cancelled: Ago nuligita
-      found_some: Trovis %{count} da %{name}.
+    champion:
+      already_done: 'Jam faritas: ne restas ĉampionaj pecoj kiuj kongruas kun via elekto.'
+      ask_disenchant: Ĉu malsorĉi %{count} da ĉampionaj pecoj por %{amount} da blua esenco?
+      ask_include_permanents: Ĉu ni inkluzu ĉampionajn (permanenta rabaĵo) en ĉi tiun procezon?
+      ask_keep_unowned_champs: Ĉu teni pecon por ĉampionoj, kiujn vi ankoraŭ ne posedas?
+      by_mastery:
+        ask_which_level: Kiun majstrecan nivelon ĉampionoj almenaŭ estu por ke iliaj fragmentoj estu tenataj?
+        note_below_threshold: sub sojlo
+        note_level7: je majstreco 7
+        note_more_valuable: pli valora ol Majstreco 7 plibonigo
+      exclusions:
+        ask: Ĉu vi volas aldoni esceptojn?
+        ask_which: Bone, kiuj ĉampionoj?
+        entry_requirements: "(tajpu/alglui la EKZAKTAN nomon de la ĉampiono)"
+        recognized: 'Esceptoj rekonataj:'
+      found_champs_with_tokens: Trovis %{count} da ĉampionoj kun posedataj majstrecaj ĵetonoj
+      found_shards: Trovis %{count} da ĉampionaj pecoj.
+      no_shards_found: Ne trovis ĉampionajn pecojn por malsorĉi.
+      no_unowned_champs_found: Ne trovis pecojn de ĉampionoj kiujn vi ankoraŭ ne posedas.
+      present_selection: 'Ni malsorĉus %{count} da ĉampionfragmentoj uzante la elektan opcion:'
+      shards_to_keep: tenante %{count}
+    esports_emotes:
+      ask_re_roll: Ĉu konverti %{count} da jam posedataj bitsportaj glumarkoj?
+      found_some: Trovis %{count} da bitsportaj glumarkoj.
+      none_found: Ne trovis bitsportajn glumarkojn por konverti.
     exception:
-      error_occurred: Okazis eraro dum traktado de %{name}.
       create_an_issue: Bonvolu fari ekrankopion kaj krei problemon ĉe %{url}
+      error_occurred: Okazis eraro dum traktado de %{name}.
+      network_error: Ups, probable ni atingis API-limon. Reprovu post minuto aŭ raportu al %{email} se tio daŭre okazas.
       send_email_instead: Se vi ne havas GitHub-konton, sendu ĝin al %{email}
       skipping_step: Io misfunkciis. Preterlasante ĉi tiun paŝon...
-      network_error: Ups, probable ni atingis API-limon. Reprovu post minuto aŭ raportu
-        al %{email} se tio daŭre okazas.
-    esports_emotes:
-      none_found: Ne trovis bitsportajn glumarkojn por konverti.
-      found_some: Trovis %{count} da bitsportaj glumarkoj.
-      ask_re_roll: Ĉu konverti %{count} da jam posedataj bitsportaj glumarkoj?
-    url:
-      opening_stats: Malfermante Tutmondajn Statistikojn ĉe %{url} en via retumilo...
-      opening_repository: Malfermante GitHub-deponejon je %{url} en via retumilo...
-      opening_mastery_chart: Malfermante vian profilon ĉe %{url} en via retumilo...
+    generic:
+      action_cancelled: Ago nuligita
+      ask_disenchant: Ĉu malsorĉi %{count} da %{loot} por akiri %{currency}?
+      disenchant_preview: 'Ni malsorĉus %{count} da %{loot} uzante la elektan opcion:'
+      filtered_down: Filtrita al %{count} eroj.
+      found_no_owned: Ne trovis jam posedatajn %{name}n por malsorĉi.
+      found_nothing: Ne trovis %{name} por malsorĉi.
+      found_some: Trovis %{count} da %{name}.
+      keep_unowned: Tenu %{loot} kiun vi ankoraŭ ne posedas?
+    key_fragments:
+      ask_craft_keys: Ĉu fari %{key_count} da ŝlosiloj el %{fragment_count} da ŝlosilfragmentoj?
+      found_fragments: Trovis %{count} da ŝlosilfragmentoj.
+      not_enough_fragments: Ne sufiĉe da ŝlosilfragmentoj por krei ŝlosilon.
+    mastery_tokens:
+      confirm_total_upgrades: Plibonigu %{count} da ĉampionojn uzante
+      could_upgrade_champions: 'Ni povus plibonigi la jenajn ĉampionojn:'
+      missing_essence: Vi mankas %{essence_missing} blua esenco por progresi. Preterlasante...
+      none_found: Ne trovis plibonigebla aro de majstrecaj ĵetonoj.
+      to_mastery_level: al majstreca nivelo
+      using: uzante
+      using_blue_essence: "%{recipe_cost} bluan esencon."
+      using_champion_permanent: ĉampionon (permanenta rabaĵo).
+      using_champion_shard: ĉampionan pecon.
+    mythic_essence:
+      amount_to_use: Bone, kiom da mita esenco ni uzu por krei %{target_name}?
+      cancelled: Mita fabrikado nuligita.
+      craft_confirm: Ĉu krei %{quantity} da %{loot_name} uzante %{total_cost} da mita esenco?
+      found_some: Trovis %{amount} da mita esenco.
+      none_found: Ne trovis mitan esencon por uzi.
+      not_enough: Ne sufiĉe da mita esenco por tio.
     stat_submission:
-      ask_contribute: Ĉu vi ŝatus kontribui viajn (sennomajn) statistikojn al la tutmondaj
-        statistikoj?
+      ask_contribute: Ĉu vi ŝatus kontribui viajn (sennomajn) statistikojn al la tutmondaj statistikoj?
+      ask_submit: Ĉu sendi sennomajn statistikojn?
       thanks: Koran dankon!
       your_stats: 'Viaj statistikoj:'
-      ask_submit: Ĉu sendi sennomajn statistikojn?
-    key_fragments:
-      not_enough_fragments: Ne sufiĉe da ŝlosilfragmentoj por krei ŝlosilon.
-      found_fragments: Trovis %{count} da ŝlosilfragmentoj.
-      ask_craft_keys: Ĉu fari %{key_count} da ŝlosiloj el %{fragment_count} da ŝlosilfragmentoj?
+    url:
+      opening_mastery_chart: Malfermante vian profilon ĉe %{url} en via retumilo...
+      opening_repository: Malfermante GitHub-deponejon je %{url} en via retumilo...
+      opening_stats: Malfermante Tutmondajn Statistikojn ĉe %{url} en via retumilo...
   loot:
-    champions: Ĉampionoj
-    skins: Ŝeloj
-    tacticians: Taktikistoj
-    eternals: Eternuloj
-    eternal_permanents: Eternularoj (permanenta rabaĵo)
-    emotes: Glumarkoj
-    eternal_shards: Pecoj de Eternularoj
-    ward_skins: Observilaj ŝeloj
-    ward_skin_shards: Pecoj de observilaj ŝeloj
-    blue_essence_short: BE
-    orange_essence: Oranĝa esenco
     blue_essence: Blua esenco
-    orange_essence_short: OE
-    materials: Materialoj
-    ward_skin_permanents: Observilaj ŝeloj (permanenta rabaĵo)
-    icons: Avataroj
+    blue_essence_short: BE
     capsules: Kapsuloj
-    key_fragments: Ŝlosilfragmentoj
-    shards: Pecoj
-    permanents: Permanentaj rabaĵoj
-    mythic_essence: Mita esenco
-    skin_shards: Ŝelaj pecoj
-    skin_permanents: Ŝeloj (permanenta rabaĵo)
     champion_capsule: Ĉampiona kapsulo
+    champions: Ĉampionoj
+    emotes: Glumarkoj
+    eternal_permanents: Eternularoj (permanenta rabaĵo)
+    eternal_shards: Pecoj de Eternularoj
+    eternals: Eternuloj
     glorious_champion_capsule: Gloria ĉampiona kapsulo
     honor_3_orb: Honornivela 3-a globo
     honor_4_orb: Honornivela 4-a globo
     honor_5_orb: Honornivela 5-a globo
+    icons: Avataroj
+    key_fragments: Ŝlosilfragmentoj
+    materials: Materialoj
+    mythic_essence: Mita esenco
+    orange_essence: Oranĝa esenco
+    orange_essence_short: OE
+    permanents: Permanentaj rabaĵoj
+    shards: Pecoj
+    skin_permanents: Ŝeloj (permanenta rabaĵo)
+    skin_shards: Ŝelaj pecoj
+    skins: Ŝeloj
+    tacticians: Taktikistoj
+    ward_skin_permanents: Observilaj ŝeloj (permanenta rabaĵo)
+    ward_skin_shards: Pecoj de observilaj ŝeloj
+    ward_skins: Observilaj ŝeloj
+  main_menu:
+    all_done: Jen ĝi!
+    confirm_banner_example: 'KONFIRMU: Ĉu plenumi tiun agon?'
+    confirm_banner_intro: 'Via ŝtelo estas sekura, neniuj agoj estos faritaj ĝis vi konfirmas rubandon kiel ĉi tiu:'
+    exit_shortcut: "[STIRKLAVO + C]"
+    exit_shortcut_notice: Vi povas eliri ĉi tiun skripton en iu ajn momento premante
+    hello: Saluton! :)
+    logged_in_as: 'Vi estas ensalutinta kiel %{name} #%{tagline}.'
+    see_you: Ĝis la revido :)
+    summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu restartigi vian League-klienton.
+    time_saved: Ni ŝparis al vi proksimume %{time_saved} sekundojn de atendo por finiĝi la animacioj.
+    version_info: Lanĉante Elreviĝilo %{version}
+  menu:
+    back_to_main: Reiri al ĉefmenuon
+    champions:
+      options:
+        all: Malsorĉiĝu ĉiujn ĉampionajn pecojn
+        collector: Konservu po unu pecon de ĉiu ĉampiono, sendepende de majstreco
+        mastery_full: Konservu sufiĉe da (1/2) pecoj por tute majstri ĉiujn ĉampionojn (nur malsorĉu senutilajn pecojn)
+        mastery_threshold: Konservu sufiĉe da (1/2) pecoj por tute majstri ĉampionojn je almenaŭ majstreco nivelo x (elektu de 1 ĝis 6)
+        tokens: Konservu sufiĉe (1/2) pecojn por la ĉampionoj, por kiuj vi posedas majstrecaj 6/7-aj ĵetonoj
+    choose_option: Bone, kion vi volus fari?
+    language:
+      preferred: Kiu estas via preferata lingvo?
+    main:
+      all_done: Jen ĝi!
+      confirm_banner_example: Ĉu fari ĉi tiun agon?
+      confirm_banner_intro: 'Via rabaĵo estas sekura, neniuj agoj estos faritaj ĝis vi konfirmas rubandon kiel ĉi tiu:'
+      exit_shortcut_notice: Vi povas eliri ĉi tiun skripton en iu ajn momento premante [CTRL + C].
+      hello: Saluton! :)
+      logged_in_as: 'Vi estas ensalutinta kiel %{name} #%{tagline}.'
+      options:
+        exit: Eliru
+        language_settings: Lingvaj agordoj
+        open_mastery_chart: Malfermu profilon de “Mastery Chart”
+        open_repository: Malfermu GitHub-deponejon
+        open_usage_stats: Malfermu tutmondajn statistikojn de Malsorĉilo
+      see_you: Ĝis la revido :)
+      summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu restartigi vian League-klienton.
+      time_saved: Ni ŝparis al vi ĉirkaŭ %{time_saved} sekundojn da atendo por finiĝi la animacioj.
+      version_info: Lanĉante Malsorĉilo %{version}
+      what_to_do: 'Kion vi volus fari? (Aludo: iru de supre al malsupre por ke vi ne preterlasu ion!)'
+    materials:
+      options:
+        capsules: Kapsuloj
+        key_fragments: Ŝlosilfragmentoj
+        mastery_tokens: Mastrecaj ĵetonoj
+        mythic_essence: Mita esenco
+    mythic:
+      options:
+        blue_essence: Blua esenco
+        orange_essence: Oranĝa esenco
+        random_skin_shards: Hazardaj pecoj de ŝeloj
+      recipe_found: 'Trovis planon: Krei %{thing_to_craft} uzante %{amount} da mita esenco'
+      recipes_unavailable: Planoj por %{loot} ŝajnas esti nedisponeblaj.
+    option: Opcio
+    option_chosen: Elektita opcio
+    option_done: kompleta
+    what_to_do: Kion vi volus fari?
+  meta:
+    auto_loaded_locale: 'Detektita klienta lingvo: %{locale_name} (kiel?!)'
+    locale_name: Esperanto
+    manually_set_locale: Agordita al %{locale_name}!
+    translation_note: 'Ĉu mankanta aŭ malbona traduko? Helpu per via propono: %{url}'
+  update_checker:
+    ask_download_now: Ĉu vi ŝatus elŝuti la novan version nun?
+    done_downloading: Finiĝis elŝuto!
+    local_beta_note: Bonvenon al la estonteco!
+    local_beta_version: 'Lasta fora versio: v%{version}'
+    up_to_date: Vi estas ĝisdata!
+    update_available: Nova versio %{version} havebla!

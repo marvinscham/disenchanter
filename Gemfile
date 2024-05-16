@@ -18,4 +18,5 @@ group :development do
   gem 'ocran', '1.3.15', require: false
   # Ruby linter, config in .rubocop
   gem 'rubocop', '~> 1.63', require: false
+  gem 'i18n-tasks', '~> 1.0.14'
 end
