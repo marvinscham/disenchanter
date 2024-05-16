@@ -4,9 +4,7 @@ require_relative 'menu'
 
 require_relative '../../modules/handlers/champions_collection'
 require_relative '../../modules/handlers/champions_exclusions'
-require_relative '../../modules/handlers/champions_mastery'
 require_relative '../../modules/handlers/champions_owned'
-require_relative '../../modules/handlers/champions_tokens'
 
 # Menu to select and call filtering options
 class ChampionsMenu < Menu
@@ -16,10 +14,7 @@ class ChampionsMenu < Menu
     menu_text = I18n.t(:'menu.choose_option')
     things_todo = {
       '1' => I18n.t(:'menu.champions.options.all'),
-      '2' => I18n.t(:'menu.champions.options.tokens'),
-      '3' => I18n.t(:'menu.champions.options.mastery_threshold'),
-      '4' => I18n.t(:'menu.champions.options.mastery_full'),
-      '5' => I18n.t(:'menu.champions.options.collector'),
+      '2' => I18n.t(:'menu.champions.options.collector'),
       'x' => I18n.t(:'menu.back_to_main')
     }
     answer_display = I18n.t(:'menu.option')
@@ -36,12 +31,6 @@ class ChampionsMenu < Menu
     when '1', 'x'
       # no filtering needed -> done
     when '2'
-      @loot_shards = handle_champions_tokens(@client, @loot_shards)
-    when '3'
-      @loot_shards = handle_champions_mastery(@client, @loot_shards)
-    when '4'
-      @loot_shards = handle_champions_mastery(@client, @loot_shards, keep_all: true)
-    when '5'
       @loot_shards = handle_champions_collection(@loot_shards)
     else
       return false

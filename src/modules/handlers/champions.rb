@@ -6,9 +6,7 @@ require_relative '../loot_metainfo'
 
 require_relative 'champions_collection'
 require_relative 'champions_exclusions'
-require_relative 'champions_mastery'
 require_relative 'champions_owned'
-require_relative 'champions_tokens'
 
 # Handles any champion shard and champion permanent related loot actions
 # @param client Client connector
