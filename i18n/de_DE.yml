@@ -24,17 +24,11 @@ de_DE:
       ask_disenchant: Möchtest du %{count} Championsplitter für %{amount} Blaue Essenzen entzaubern?
       ask_include_permanents: Sollen wir permanente Champions in diesen Prozess einbeziehen?
       ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch nicht besitzt, behalten?
-      by_mastery:
-        ask_which_level: Auf welcher Meisterschaftsstufe sollten Champions mindestens sein, damit ihre Splitter aufbewahrt werden?
-        note_below_threshold: unter der Schwelle
-        note_level7: auf Stufe 7
-        note_more_valuable: Wert höher als Upgrade auf Meisterschaft 7
       exclusions:
         ask: Möchtest du Ausschlüsse hinzufügen?
         ask_which: Okay, welche Champions?
         entry_requirements: "(Championnamen EXAKT einfügen/eingeben)"
         recognized: 'Erkannte Ausschlüsse:'
-      found_champs_with_tokens: "%{count} Champions mit Meisterschaftsmarken im Besitz gefunden"
       found_shards: "%{count} Championsplitter gefunden."
       no_shards_found: Keine Championsplitter zum Entzaubern gefunden.
       no_unowned_champs_found: Keine Splitter von Champions gefunden, die du noch nicht besitzt.
@@ -63,16 +57,6 @@ de_DE:
       ask_craft_keys: "%{key_count} Schlüssel aus %{fragment_count} Schlüsselfragmenten herstellen?"
       found_fragments: "%{count} Schlüsselfragmente gefunden."
       not_enough_fragments: Nicht genug Schlüsselfragmente, um etwas herzustellen.
-    mastery_tokens:
-      confirm_total_upgrades: Verbessere %{count} Champions mit
-      could_upgrade_champions: 'Wir könnten die folgenden Champions hochstufen:'
-      missing_essence: Dir fehlen %{essence_missing} Blaue Essenzen, um fortzufahren. Überspringe...
-      none_found: Kein freischaltbarer Satz von Meisterschaftsmarken gefunden.
-      to_mastery_level: zu Meisterschaftsstufe
-      using: mit
-      using_blue_essence: "%{recipe_cost} Blauen Essenzen."
-      using_champion_permanent: einem permanenten Champion.
-      using_champion_shard: einem Championsplitter.
     mythic_essence:
       amount_to_use: Wie viel Mythische Essenzen sollen wir benutzen, um %{target_name} herzustellen?
       cancelled: Verwertung Mythischer Essenzen abgebrochen.
@@ -84,7 +68,6 @@ de_DE:
       ask_contribute: Möchtest du deine Ergebnisse (anonym) zu den globalen Statistiken einsenden?
       ask_submit: Anonyme Ergebnisse absenden?
       thanks: Vielen Dank!
-      your_stats: 'Deine Ergebnisse:'
     url:
       opening_mastery_chart: Dein Profil wird unter %{url} in deinem Browser geöffnet...
       opening_repository: Öffne das GitHub-Repository unter %{url} in deinem Browser...
@@ -92,7 +75,6 @@ de_DE:
   loot:
     blue_essence: Blaue Essenzen
     blue_essence_short: BE
-    capsules: Kapseln
     champion_capsule: Champion-Kapsel
     champions: Champions
     emotes: Sticker
@@ -104,19 +86,13 @@ de_DE:
     honor_4_orb: "„Ehrungsstufe 4“-Kugel"
     honor_5_orb: "„Ehrungsstufe 5“-Kugel"
     icons: Symbole
-    key_fragments: Schlüsselfragmente
     materials: Materialien
-    mythic_essence: Mythische Essenzen
     orange_essence: Orangene Essenzen
     orange_essence_short: OE
-    permanents: Permanent
-    shards: Splitter
     skin_permanents: Skin (permanent)
     skin_shards: Skinsplitter
     skins: Skins
     tacticians: Taktiker
-    ward_skin_permanents: Augenskin (permanent)
-    ward_skin_shards: Augenskinsplitter
     ward_skins: Augenskins
   menu:
     back_to_main: Zurück zum Hauptmenü
@@ -124,9 +100,6 @@ de_DE:
       options:
         all: Entzaubere alle Championsplitter
         collector: Behalte einen Splitter für jeden Champion unabhängig von der Meisterschaft
-        mastery_full: Behalte genug (1/2) Splitter, um alle Champions zu meistern (entzaubere nur Splitter ohne jeglichen Nutzen)
-        mastery_threshold: Behalte genug (1/2) Splitter, um Champions auf min. Meisterschaft x (wähle von 1 bis 6) vollständig meistern zu können
-        tokens: Behalte genug (1/2) Splitter für Champions mit Meisterschaftsmarken im Besitz
     choose_option: Okay, was willst du machen?
     language:
       preferred: Was ist deine bevorzugte Sprache?
@@ -134,12 +107,10 @@ de_DE:
       all_done: Das war's!
       confirm_banner_example: Diese Aktion ausführen?
       confirm_banner_intro: 'Deine Beute ist sicher, nichts wird passieren bis du ein solches Banner bestätigst:'
-      exit_shortcut: "[STRG + C]"
       exit_shortcut_notice: Du kannst das Skript jederzeit mit [STRG + C] verlassen.
       hello: Moin! :)
       logged_in_as: 'Du bist als %{name} #%{tagline} eingeloggt.'
       options:
-        debug_tools: Debug-Werkzeuge
         exit: Raus hier
         language_settings: Spracheinstellungen
         open_mastery_chart: Öffne dein „Mastery Chart“-Profil
@@ -154,7 +125,6 @@ de_DE:
       options:
         capsules: Kapseln
         key_fragments: Schlüsselfragmente
-        mastery_tokens: Meisterschaftsmarken
         mythic_essence: Mythische Essenzen
     mythic:
       options:

@@ -24,17 +24,11 @@ pl_PL:
       ask_disenchant: Rozłożyć %{count} odłamków czempionów na %{amount} Niebieskiej Esencji?
       ask_include_permanents: Czy powinniśmy uwzględnić trwałe odłamki czempionów w procesie?
       ask_keep_unowned_champs: Zachować odłamki dla czempionów, których jeszcze nie Posiadasz?
-      by_mastery:
-        ask_which_level: Na którym co najmniej poziomie powinni być czempioni, aby ich odłamki zostały zachowane?
-        note_below_threshold: poniżej progu
-        note_level7: na 7 poziomie Maestrii
-        note_more_valuable: wartość wyższa niż ulepszenie Maestrii poziomu 7
       exclusions:
         ask: Czy chciałbyś dodać wykluczenia?
         ask_which: Okej, którzy czempioni?
         entry_requirements: "(Wpisz/wklej DOKŁADNE imię czempiona)"
         recognized: 'Wykluczenia rozpoznane:'
-      found_champs_with_tokens: Znaleziono %{count} czempionów z posiadanymi odłamkami Maestrii
       found_shards: Znaleziono %{count} odłamki czempionów.
       no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia.
       no_unowned_champs_found: Nie znaleziono odłamków nieposiadanych czempionów.
@@ -63,16 +57,6 @@ pl_PL:
       ask_craft_keys: Stworzyć %{key_count} klucze z %{fragment_count} fragmentów kluczy?
       found_fragments: Znaleziono %{count} fragmentów klucza.
       not_enough_fragments: Nie wystarczająca ilość fragmentów klucza, by cokolwiek stworzyć.
-    mastery_tokens:
-      confirm_total_upgrades: Ulepsz %{count} czempionów używając
-      could_upgrade_champions: 'Moglibyśmy ulepszyć takowych czempionów:'
-      missing_essence: Brakuje Ci %{essence_missing} Niebieskiej Esencji potrzebnej by kontynuować. Pomijanie…
-      none_found: Nie znaleziono możliwych do ulepszenia zestawów Odłamków Maestrii.
-      to_mastery_level: na Poziom Maestrii
-      using: używając
-      using_blue_essence: "%{recipe_cost} Niebieskiej Esencji."
-      using_champion_permanent: trwałego odłamku czempiona.
-      using_champion_shard: odłamku czempiona.
     mythic_essence:
       amount_to_use: Dobra, ile Mitycznej Esencji powinniśmy użyć to stworzenia %{target_name}?
       cancelled: Mityczne tworzenie anulowane.
@@ -84,7 +68,6 @@ pl_PL:
       ask_contribute: Czy Chciałbyś dodać Swoje (anonimowe) statystyki do globalnych statystyk?
       ask_submit: Złożyć anonimowe statystyki?
       thanks: Wielkie Dzięki!
-      your_stats: 'Twoje statystyki:'
     url:
       opening_mastery_chart: Otwieranie Twojego profilu na %{url} w Twojej przeglądarce…
       opening_repository: Otwieranie repozytorium GitHub na %{url} w Twojej przeglądarce…
@@ -92,7 +75,6 @@ pl_PL:
   loot:
     blue_essence: Niebieska Esencja
     blue_essence_short: NE
-    capsules: Kapsuły
     champion_capsule: Kapsuła Czempionów
     champions: Czempioni
     emotes: Emotki
@@ -104,19 +86,13 @@ pl_PL:
     honor_4_orb: Kula Honoru 4. Poziomu
     honor_5_orb: Kula Honoru 5. Poziomu
     icons: Ikony
-    key_fragments: Fragmenty Klucza
     materials: Materiały
-    mythic_essence: Mityczna Esencja
     orange_essence: Pomarańczowa Esencja
     orange_essence_short: PE
-    permanents: Trwałe Odłamki
-    shards: Odłamki
     skin_permanents: Trwałe Odłamki Skórek
     skin_shards: Odłamki Skórek
     skins: Skórki
     tacticians: Taktycy
-    ward_skin_permanents: Trwałe Odłamki Skórek Totemów
-    ward_skin_shards: Odłamki Skórek Totemów
     ward_skins: Skórki Totemów
   menu:
     back_to_main: Powrót do menu głównego
@@ -124,9 +100,6 @@ pl_PL:
       options:
         all: Rozmień wszystkie odłamki czempionów
         collector: Pozostaw jeden odłamek czempiona niezależnie od jego poziomu Maestrii
-        mastery_full: Pozostaw wystarczająco (1/2) odłamków aby w pełni ulepszyć Maestrię wszystkich czempionów (Rozmień tylko te odłamki, bez możliwego użycia)
-        mastery_threshold: Pozostaw wystarczająco (1/2) odłamków aby w pełni ulepszyć czempionów na poziomie Maestrii co najmniej x (wybierz od 1 do 6)
-        tokens: Pozostaw wystarczająco (1/2) odłamków dla czempionów dla których Posiadasz żetony 6/7 Maestrii
     choose_option: Okej, którą opcję Chciałbyś wybrać?
     language:
       preferred: Jaki jest Twój preferowany język?
@@ -152,7 +125,6 @@ pl_PL:
       options:
         capsules: Kapsuły
         key_fragments: Fragmenty Klucza
-        mastery_tokens: Żetony Maestrii
         mythic_essence: Mityczna Esencja
     mythic:
       options:

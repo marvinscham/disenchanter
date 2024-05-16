@@ -24,15 +24,10 @@ zh_TW:
       ask_disenchant: 分解 %{count} 英雄碎片以換取 %{amount} 藍色結晶粉末?
       ask_include_permanents: 需要包含永久英雄嗎?
       ask_keep_unowned_champs: 要幫你保留一個未擁有英雄的英雄碎片嗎?
-      by_mastery:
-        ask_which_level: 你希望留下英雄碎片的英雄, 專精等級至少要達到多少?
-        note_below_threshold: 低於下限/高於上限
-        note_level7: 達到專精7
       exclusions:
         ask: 你希望增加例外嗎?
         ask_which: 好的, 該去除哪些英雄?
         recognized: '已正確讀取的例外:'
-      found_champs_with_tokens: 找到 %{count} 個持有專精代幣的英雄
       found_shards: 找到 %{count} 個英雄碎片.
       no_shards_found: 沒有找到可分解的英雄碎片.
       no_unowned_champs_found: 沒找到未擁有英雄的英雄碎片.
@@ -57,15 +52,6 @@ zh_TW:
       ask_craft_keys: 製作 %{key_count} 個鑰匙, 花費 %{fragment_count} 個鑰匙碎片?
       found_fragments: 找到 %{count} 個鑰匙碎片.
       not_enough_fragments: 持有的鑰匙碎片少於三個.
-    mastery_tokens:
-      could_upgrade_champions: '我們可以升級下列的英雄:'
-      missing_essence: 你缺少了 %{essence_missing} 藍色結晶粉末以進行. 跳過了...
-      none_found: 沒有找到可解鎖專精等級的專精代幣.
-      to_mastery_level: 至專精等級
-      using: 花費
-      using_blue_essence: "%{recipe_cost} 藍色結晶粉末."
-      using_champion_permanent: 一個永久英雄.
-      using_champion_shard: 一個英雄碎片.
     mythic_essence:
       amount_to_use: 好的, 要使用多少神話結晶粉末來製作 %{target_name}?
       cancelled: 已取消神話製作.
@@ -76,14 +62,12 @@ zh_TW:
     stat_submission:
       ask_contribute: 你願意(匿名的)上傳你的數據到全球統計數據嗎?
       thanks: 非常的感謝你!
-      your_stats: '你的數據:'
     url:
       opening_repository: 正在使用你的瀏覽器開啟位於 %{url} 的 Github 專案頁面...
       opening_stats: 正在使用你的瀏覽器開啟位於 %{url} 的全球數據統計...
   loot:
     blue_essence: 藍色結晶粉末
     blue_essence_short: 藍粉
-    capsules: 典藏罐/禮包/晶球
     champion_capsule: 英雄典藏罐
     champions: 英雄碎片
     emotes: 表情
@@ -95,19 +79,13 @@ zh_TW:
     honor_4_orb: 榮譽等級 4 晶球
     honor_5_orb: 榮譽等級 5 晶球
     icons: 頭像
-    key_fragments: 鑰匙碎片
     materials: 海克斯材料
-    mythic_essence: 神話結晶粉末
     orange_essence: 橘色結晶粉末
     orange_essence_short: 橘粉
-    permanents: 永久物品
-    shards: 碎片
     skin_permanents: 永久造型
     skin_shards: 造型碎片
     skins: 造型碎片
     tacticians: 聯盟精靈
-    ward_skin_permanents: 永久守衛造型
-    ward_skin_shards: 守衛造型碎片
     ward_skins: 偵查守衛造型
   menu:
     back_to_main: 回到主選單
@@ -115,9 +93,6 @@ zh_TW:
       options:
         all: 分解所有的英雄碎片
         collector: 完全不考慮專精，為每個英雄留一個碎片
-        mastery_full: 保留足夠(1到2個)的碎片給所有還沒達到專精7的英雄(只會分解完全沒有用處的碎片)
-        mastery_threshold: 保留足夠(1到2個)的碎片給當前專精等級x到持有專精7代幣的英雄(可以選擇1到6)
-        tokens: 保留足夠(1到2個)的碎片給當前持有專精6代幣到專精7代幣的英雄
     choose_option: 好的, 你希望執行哪個選項?
     language:
       preferred: 你的偏好語言為何?
@@ -143,7 +118,6 @@ zh_TW:
       options:
         capsules: 典藏罐/禮包/晶球
         key_fragments: 鑰匙碎片
-        mastery_tokens: 專精代幣
         mythic_essence: 神話結晶粉末
     mythic:
       options:
