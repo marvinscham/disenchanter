@@ -108,7 +108,7 @@ eo:
     champions:
       options:
         all: Malsorĉiĝu ĉiujn ĉampionajn pecojn
-        collector: Konservu po unu pecon de ĉiu ĉampiono, sendepende de majstreco
+        collector: Konservu po unu pecon de ĉiu ĉampiono
     choose_option: Bone, kion vi volus fari?
     language:
       preferred: Kiu estas via preferata lingvo?
@@ -153,6 +153,11 @@ eo:
     option_done: kompleta
     what_to_do: Kion vi volus fari?
     back_to_detail: Reen al detala menuo
+    detail:
+      what_to_do: 'Kion vi volus fari? (Aludo: iru de supre al malsupre por ke vi
+        ne preterlasu ion!)'
+    mass:
+      all_steps_success: Ĉiuj agoj sukcese plenumiĝis!
   meta:
     auto_loaded_locale: 'Detektita klienta lingvo: %{locale_name} (kiel?!)'
     locale_name: Esperanto
