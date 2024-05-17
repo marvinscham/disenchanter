@@ -7,7 +7,8 @@ require_relative '../../class/dictionary'
 # @param client Client connector
 # @param name Display name ("Skin Shards")
 # @param type Riot loot type name ("SKIN_RENTAL")
-def handle_generic(client, name, type)
+# @param accept Auto-accept level
+def handle_generic(client, name, type, accept = 0)
   loot_generic = select_generic_loot(client, type)
   if count_loot_items(loot_generic).zero?
     puts I18n.t(:'handler.generic.found_nothing', name:).yellow
@@ -16,7 +17,7 @@ def handle_generic(client, name, type)
 
   puts I18n.t(:'handler.generic.found_some', count: count_loot_items(loot_generic), name:).light_blue
 
-  loot_generic = handle_generic_owned(loot_generic, name)
+  loot_generic = handle_generic_owned(loot_generic, name, accept)
   return if loot_generic == false
 
   if count_loot_items(loot_generic).zero?
@@ -28,15 +29,16 @@ def handle_generic(client, name, type)
   totals = prepare_generic_totals(loot_generic)
   disenchant_info = create_generic_disenchant_info(loot_generic, loot_name_index, name, totals)
 
-  unless ans_y.include? user_input_check(
-    I18n.t(:'handler.generic.ask_disenchant',
-           count: count_loot_items(loot_generic),
-           loot: name,
-           currency: disenchant_info),
-    ans_yn,
-    ans_yn_d,
-    'confirm'
-  )
+  unless accept >= 1 ||
+         ans_y.include?(user_input_check(
+                          I18n.t(:'handler.generic.ask_disenchant',
+                                 count: count_loot_items(loot_generic),
+                                 loot: name,
+                                 currency: disenchant_info),
+                          ans_yn,
+                          ans_yn_d,
+                          'confirm'
+                        ))
     return
   end
 
@@ -54,7 +56,7 @@ def select_generic_loot(client, type)
   generic_loot.reject { |l| l['disenchantLootName'] == '' }
 end
 
-def handle_generic_owned(loot_generic, name)
+def handle_generic_owned(loot_generic, name, accept)
   contains_unowned_items = false
   loot_generic.each do |l|
     contains_unowned_items = true if l['redeemableStatus'] != Dictionary::STATUS_OWNED
@@ -62,7 +64,7 @@ def handle_generic_owned(loot_generic, name)
 
   return loot_generic unless contains_unowned_items
 
-  case ask_option_keep_unowned(name)
+  case ask_option_keep_unowned(name, accept)
   when 'x'
     puts I18n.t(:'handler.generic.action_cancelled').yellow
     return false
@@ -78,7 +80,10 @@ def handle_generic_owned(loot_generic, name)
   loot_generic
 end
 
-def ask_option_keep_unowned(name)
+def ask_option_keep_unowned(name, accept)
+  return 'n' if accept == 2
+  return 'y' if accept == 1
+
   user_input_check(
     "#{I18n.t(:'handler.generic.keep_unowned', loot: name)}\n".light_cyan +
       '[y] '.light_white + "#{I18n.t(:'common.yup')}\n".light_cyan + '[n] '.light_white +

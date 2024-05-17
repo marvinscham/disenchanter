@@ -14,7 +14,7 @@ class MythicMenu < Menu
       '1' => I18n.t(:'menu.mythic.options.blue_essence'),
       '2' => I18n.t(:'menu.mythic.options.orange_essence'),
       '3' => I18n.t(:'menu.mythic.options.random_skin_shards'),
-      'x' => I18n.t(:'menu.back_to_main')
+      'x' => I18n.t(:'menu.back_to_detail')
     }
     answer_display = I18n.t(:'menu.option')
 

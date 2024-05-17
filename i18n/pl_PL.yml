@@ -1,0 +1,165 @@
+pl_PL:
+  common:
+    actions: Akcje
+    confirm_banner: POTWIEDŹ
+    crafted: Stworzono
+    disenchanted: Rozmienione
+    done: Zrobione!
+    exiting: Wychodzenie…
+    invalid_answer: Nieprawidłowa odpowiedź, opcje
+    nah: Nie
+    not_owned: Nie posiadane
+    opened: Otworzono
+    press_enter_to_exit: Wciśnij Enter aby wyjść.
+    redeemed: Wykorzystany
+    yup: Tak
+  handler:
+    capsule:
+      ask_open_capsules: Otworzyć %{count} (nie potrzebujące kluczy) kapsuły?
+      found_capsules: 'Znaleziono %{count} kapsuł:'
+      no_capsules_found: Nie znaleziono kapsuł nie potrzebujących kluczy do otworzenia.
+    champion:
+      already_done: 'Sprawa już załatwiona: nie zostały żadne odłamki pasujące do
+        twojego wyboru.'
+      ask_disenchant: Rozłożyć %{count} odłamków czempionów na %{amount} Niebieskiej
+        Esencji?
+      ask_include_permanents: Czy powinniśmy uwzględnić trwałe odłamki czempionów
+        w procesie?
+      ask_keep_unowned_champs: Zachować odłamki dla czempionów, których jeszcze nie
+        Posiadasz?
+      exclusions:
+        ask: Czy chciałbyś dodać wykluczenia?
+        ask_which: Okej, którzy czempioni?
+        entry_requirements: "(Wpisz/wklej DOKŁADNE imię czempiona)"
+        recognized: 'Wykluczenia rozpoznane:'
+      found_shards: Znaleziono %{count} odłamki czempionów.
+      no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia.
+      no_unowned_champs_found: Nie znaleziono odłamków nieposiadanych czempionów.
+      present_selection: 'Rozłożylibyśmy %{count} odłamków czempionów używając wybranej
+        opcji:'
+      shards_to_keep: Zachowywanie %{count}
+    esports_emotes:
+      ask_re_roll: Wymienić na losowe %{count} już posiadane Emotki Esport?
+      found_some: Znaleziono %{count} Emotek Esport.
+      none_found: Nie znaleziono Emotek Esportu do wymiany na losową.
+    exception:
+      create_an_issue: Proszę zrobić zrzut ekranu i stworzyć zagadnienie na %{url}
+      error_occurred: Wydarzył się błąd w trakcie przetwarzania %{name}.
+      network_error: Oops, prawdopodobnie Osiągnęliśmy limit API. Proszę spróbować
+        ponownie lub zgłosić na %{email} jeśli będzie się to powtarzać.
+      send_email_instead: Jeśli nie Posiadasz konta GitHub, wyślij je na %{email}
+      skipping_step: Coś poszło nie tak. Pomijanie kroku…
+    generic:
+      action_cancelled: Akcja anulowana
+      ask_disenchant: Rozłożyć %{count} %{loot} na %{currency}?
+      disenchant_preview: 'Rozłożylibyśmy %{count} %{loot} używając wybranej opcji:'
+      filtered_down: Odfiltrowano do %{count} przedmiotów.
+      found_no_owned: Nie znaleziono posiadanych %{name} do rozłożenia.
+      found_nothing: Nie znaleziono %{name} do rozłożenia.
+      found_some: Znaleziono %{count} %{name}.
+      keep_unowned: Zachować jeszcze nie posiadany %{loot}?
+    key_fragments:
+      ask_craft_keys: Stworzyć %{key_count} klucze z %{fragment_count} fragmentów
+        kluczy?
+      found_fragments: Znaleziono %{count} fragmentów klucza.
+      not_enough_fragments: Nie wystarczająca ilość fragmentów klucza, by cokolwiek
+        stworzyć.
+    mythic_essence:
+      amount_to_use: Dobra, ile Mitycznej Esencji powinniśmy użyć to stworzenia %{target_name}?
+      cancelled: Mityczne tworzenie anulowane.
+      craft_confirm: Stworzyć %{quantity} %{loot_name} z %{total_cost} Mitycznej Esencji?
+      found_some: Znaleziono %{amount} Mitycznej Esencji.
+      none_found: Nie znaleziono Mitycznej Esencji do użycia.
+      not_enough: Nie wystarczająco Mitycznej Esencji na to.
+    stat_submission:
+      ask_contribute: Czy Chciałbyś dodać Swoje (anonimowe) statystyki do globalnych
+        statystyk?
+      ask_submit: Złożyć anonimowe statystyki?
+      thanks: Wielkie Dzięki!
+    url:
+      opening_mastery_chart: Otwieranie Twojego profilu na %{url} w Twojej przeglądarce…
+      opening_repository: Otwieranie repozytorium GitHub na %{url} w Twojej przeglądarce…
+      opening_stats: Otwieranie Globalnych Statystyk na %{url} w Twojej przeglądarce…
+  loot:
+    blue_essence: Niebieska Esencja
+    blue_essence_short: NE
+    champion_capsule: Kapsuła Czempionów
+    champions: Czempioni
+    emotes: Emotki
+    eternal_permanents: Trwały Odłamek Zestawu Patronów
+    eternal_shards: Odłamki Zestawu patronów
+    eternals: Patronowie
+    glorious_champion_capsule: Wspaniałą Kapsuła Bohaterów
+    honor_3_orb: Kula Honoru 3. Poziomu
+    honor_4_orb: Kula Honoru 4. Poziomu
+    honor_5_orb: Kula Honoru 5. Poziomu
+    icons: Ikony
+    materials: Materiały
+    orange_essence: Pomarańczowa Esencja
+    orange_essence_short: PE
+    skin_permanents: Trwałe Odłamki Skórek
+    skin_shards: Odłamki Skórek
+    skins: Skórki
+    tacticians: Taktycy
+    ward_skins: Skórki Totemów
+  menu:
+    back_to_main: Powrót do menu głównego
+    champions:
+      options:
+        all: Rozmień wszystkie odłamki czempionów
+        collector: Pozostaw jeden odłamek czempiona niezależnie od jego poziomu Maestrii
+    choose_option: Okej, którą opcję Chciałbyś wybrać?
+    language:
+      preferred: Jaki jest Twój preferowany język?
+    main:
+      all_done: To tyle!
+      confirm_banner_example: Wykonać tę akcję?
+      confirm_banner_intro: 'Twój łup jest bezpieczny, żadne akcje nie zostaną przeprowadzone
+        dopóki nie Potwierdzisz banneru takiego jak ten:'
+      exit_shortcut_notice: Możesz opuścić ten skrypt w dowolnym momencie używając
+        [CTRL + C].
+      hello: Cześć! :)
+      logged_in_as: 'Zalogowano jako %{name} #%{tagline}.'
+      options:
+        exit: Wyjdź
+        language_settings: Ustawienia języka
+        open_mastery_chart: Otwórz profil Mastery Chart
+        open_repository: Otwórz repozytorium GitHub
+        open_usage_stats: Otwórz globalne statystyki Disenchanter
+      see_you: Do zobaczenia następnym razem :)
+      summoner_check_failed: Nie można zdobyć informacji o Przywoływaczu. Spróbuj
+        zrestartować swojego Klienta League.
+      time_saved: Zaoszczędziliśmy Ci około %{time_saved} sekund czekania na zakończenie
+        animacji.
+      version_info: Uruchamiane Disenchanter %{version}
+      what_to_do: 'Co Chciałbyś zrobić? (Podpowiedź: idź z góry na dół, aby niczego
+        nie pominąć!)'
+    materials:
+      options:
+        capsules: Kapsuły
+        key_fragments: Fragmenty Klucza
+        mythic_essence: Mityczna Esencja
+    mythic:
+      options:
+        blue_essence: Niebieska Esencja
+        orange_essence: Pomarańczowa Esencja
+        random_skin_shards: Losowy Odłamek Skórki
+      recipe_found: 'Znaleziono recepturę: %{thing_to_craft} za %{amount} Mitycznej
+        Esencji'
+      recipes_unavailable: Receptury dla %{loot} wydają się być niedostępne.
+    option: Opcje
+    option_chosen: Opcja wybrana
+    option_done: Zrobione
+    what_to_do: Co Chciałbyś zrobić?
+  meta:
+    auto_loaded_locale: 'Wykryty język klienta: %{locale_name}'
+    locale_name: Polski
+    manually_set_locale: Ustawiono na %{locale_name}!
+    translation_note: 'Brakujące lub złe tłumaczenie? Pomóż, oferując swoje: %{url}'
+  update_checker:
+    ask_download_now: Czy Chciałbyś pobrać nową wersję teraz?
+    done_downloading: Pobieranie zakończone!
+    local_beta_note: Witamy w przyszłości!
+    local_beta_version: 'Najnowsza wersja zdalna: v%{version}'
+    up_to_date: Jesteś na bieżąco!
+    update_available: Nowa wersja %{version} dostępna!

@@ -1,191 +1,160 @@
+---
 en:
   common:
+    actions: Actions
+    confirm_banner: CONFIRM
+    crafted: Crafted
+    disenchanted: Disenchanted
     done: Done!
     exiting: Exiting...
-    yup: "Yes"
-    nah: "No"
-    confirm_banner: CONFIRM
-    not_owned: not owned
-    press_enter_to_exit: Press Enter to exit.
-    actions: Actions
-    disenchanted: Disenchanted
-    opened: Opened
-    crafted: Crafted
-    redeemed: Redeemed
     invalid_answer: Invalid answer, options
-  meta:
-    auto_loaded_locale: "Detected client language: %{locale_name}"
-    locale_name: English
-    manually_set_locale: Set to %{locale_name}!
-    translation_note: "Missing or bad translation? Help by offering yours: %{url}"
+    nah: 'No'
+    not_owned: not owned
+    opened: Opened
+    press_enter_to_exit: Press Enter to exit.
+    redeemed: Redeemed
+    yup: 'Yes'
+  handler:
+    capsule:
+      ask_open_capsules: Open %{count} (keyless) capsules?
+      found_capsules: 'Found %{count} capsules:'
+      no_capsules_found: Found no keyless capsules to open.
+    champion:
+      already_done: 'Job''s already done: no champion shards left matching your selection.'
+      ask_disenchant: Disenchant %{count} champion shards for %{amount} Blue Essence?
+      ask_include_permanents: Should we include champion permanents in this process?
+      ask_keep_unowned_champs: Keep a shard for champions you don't own yet?
+      exclusions:
+        ask: Would you like to add exclusions?
+        ask_which: Okay, which champions?
+        entry_requirements: "(type/paste the EXACT champion name)"
+        recognized: 'Exclusions recognized:'
+      found_shards: Found %{count} champion shards.
+      no_shards_found: Found no champion shards to disenchant.
+      no_unowned_champs_found: Found no shards of champions you don't own yet.
+      present_selection: 'We''d disenchant %{count} champion shards using the option you chose:'
+      shards_to_keep: keeping %{count}
+    esports_emotes:
+      ask_re_roll: Re-roll %{count} already owned Esports Emotes?
+      found_some: Found %{count} Esports Emotes.
+      none_found: Found no Esports Emotes to re-roll.
+    exception:
+      create_an_issue: Please take a screenshot and create an issue at %{url}
+      error_occurred: An error occurred while handling %{name}.
+      network_error: Oops, we probably hit an API limit. Retry in a minute or report to %{email} if this keeps happening.
+      send_email_instead: If you don't have a GitHub account, send it to %{email}
+      skipping_step: Something went wrong. Skipping this step...
+    generic:
+      action_cancelled: Action cancelled
+      ask_disenchant: Disenchant %{count} %{loot} to %{currency}?
+      disenchant_preview: 'We''d disenchant %{count} %{loot} using the option you chose:'
+      filtered_down: Filtered to %{count} items.
+      found_no_owned: Found no owned %{name} to disenchant.
+      found_nothing: Found no %{name} to disenchant.
+      found_some: Found %{count} %{name}.
+      keep_unowned: Keep %{loot} you don't own yet?
+    key_fragments:
+      ask_craft_keys: Craft %{key_count} keys from %{fragment_count} key fragments?
+      found_fragments: Found %{count} key fragments.
+      not_enough_fragments: Not enough key fragments to craft anything.
+    mythic_essence:
+      amount_to_use: Alright, how much Mythic Essence should we use to craft %{target_name}?
+      cancelled: Mythic crafting cancelled.
+      craft_confirm: Craft %{quantity} %{loot_name} from %{total_cost} Mythic Essence?
+      found_some: Found %{amount} Mythic Essence.
+      none_found: Found no Mythic Essence to use.
+      not_enough: Not enough Mythic Essence for that.
+    stat_submission:
+      ask_contribute: Would you like to contribute your (anonymous) stats to the global stats?
+      ask_submit: Submit anonymous stats?
+      thanks: Thank you very much!
+    url:
+      opening_mastery_chart: Opening your profile at %{url} in your browser...
+      opening_repository: Opening GitHub repository at %{url} in your browser...
+      opening_stats: Opening Global Stats at %{url} in your browser...
   loot:
     blue_essence: Blue Essence
     blue_essence_short: BE
-    orange_essence: Orange Essence
-    orange_essence_short: OE
-    materials: Materials
-    champions: Champions
-    skins: Skins
-    tacticians: Tacticians
-    eternals: Eternals
-    eternal_shards: Eternals Set Shards
-    eternal_permanents: Eternals Set Permanents
-    emotes: Emotes
-    ward_skins: Ward Skins
-    ward_skin_shards: Ward Skin Shards
-    ward_skin_permanents: Ward Skin Permanents
-    icons: Icons
-    capsules: Capsules
-    key_fragments: Key Fragments
-    shards: Shards
-    permanents: Permanents
-    mythic_essence: Mythic Essence
-    skin_shards: Skin Shards
-    skin_permanents: Skin Permanents
     champion_capsule: Champion Capsule
+    champions: Champions
+    detailed: Detailed (choose things to mass disenchant)
+    emotes: Emotes
+    eternal_permanents: Eternals Set Permanents
+    eternal_shards: Eternals Set Shards
+    eternals: Eternals
     glorious_champion_capsule: Glorious Champion Capsule
+    hard: Hard (disenchants ALL loot)
     honor_3_orb: Honor Level 3 Orb
     honor_4_orb: Honor Level 4 Orb
     honor_5_orb: Honor Level 5 Orb
-  update_checker:
-    up_to_date: You're up to date!
-    local_beta_note: Welcome to the future!
-    local_beta_version: "Latest remote version: v%{version}"
-    update_available: New version %{version} available!
-    ask_download_now: Would you like to download the new version now?
-    done_downloading: Done downloading!
+    icons: Icons
+    materials: Materials
+    orange_essence: Orange Essence
+    orange_essence_short: OE
+    skin_permanents: Skin Permanents
+    skin_shards: Skin Shards
+    skins: Skins
+    soft: Soft (disenchants everything already owned)
+    tacticians: Tacticians
+    ward_skins: Ward Skins
   menu:
-    choose_option: Okay, which option would you like to go for?
-    what_to_do: What would you like to do?
-    option: Option
+    back_to_detail: Back to detailed menu
     back_to_main: Back to main menu
-    option_chosen: Option chosen
-    option_done: done
-    language:
-      preferred: What's your preferred language?
-    main:
-      hello: Hi! :)
-      version_info: Running Disenchanter %{version}
-      exit_shortcut_notice: "You can exit this script at any point by pressing [CTRL
-        + C]."
-      summoner_check_failed: Could not grab summoner info. Try restarting your League
-        Client.
-      logged_in_as: "You're logged in as %{name} #%{tagline}."
-      confirm_banner_intro: "Your loot is safe, no actions will be taken until you
-        confirm a banner like this:"
-      confirm_banner_example: Perform this action?
-      all_done: That's it!
-      time_saved: We saved you about %{time_saved} seconds of waiting for animations
-        to finish.
-      see_you: See you next time :)
-      what_to_do: "What would you like to do? (Hint: go top to bottom so you don't
-        miss anything!)"
-      options:
-        language_settings: Language settings
-        open_mastery_chart: Open Mastery Chart profile
-        open_usage_stats: Open Disenchanter global stats
-        open_repository: Open GitHub repository
-        exit: Exit
     champions:
       options:
         all: Disenchant all champion shards
-        tokens: Keep enough (1/2) shards for champions you own mastery 6/7 tokens
-          for
-        mastery_threshold: Keep enough (1/2) shards to fully master champions at least
-          at mastery level x (select from 1 to 6)
-        mastery_full: Keep enough (1/2) shards to fully master all champions (only
-          disenchant shards that have no possible use)
-        collector: Keep one shard of each champion regardless of mastery
+        collector: Keep one shard of each champion
+    choose_option: Okay, which option would you like to go for?
+    detail:
+      what_to_do: 'What would you like to do? (Hint: go top to bottom so you don''t miss anything!)'
+    language:
+      preferred: What's your preferred language?
+    main:
+      all_done: That's it!
+      confirm_banner_example: Perform this action?
+      confirm_banner_intro: 'Your loot is safe, no actions will be taken until you confirm a banner like this:'
+      exit_shortcut_notice: You can exit this script at any point by pressing [CTRL + C].
+      hello: Hi! :)
+      logged_in_as: 'You''re logged in as %{name} #%{tagline}.'
+      options:
+        exit: Exit
+        language_settings: Language settings
+        open_mastery_chart: Open Mastery Chart profile
+        open_repository: Open GitHub repository
+        open_usage_stats: Open Disenchanter global stats
+      see_you: See you next time :)
+      summoner_check_failed: Could not grab summoner info. Try restarting your League Client.
+      time_saved: We saved you about %{time_saved} seconds of waiting for animations to finish.
+      version_info: Running Disenchanter %{version}
+    mass:
+      all_steps_success: All steps ran successfully!
+      ask_run_hard: This will disenchant ALL of your loot items! Proceed?
+      ask_run_soft: This will disenchant all loot of items you already own. Proceed?
     materials:
       options:
-        mythic_essence: Mythic Essence
-        key_fragments: Key Fragments
         capsules: Capsules
-        mastery_tokens: Mastery Tokens
+        key_fragments: Key Fragments
+        mythic_essence: Mythic Essence
     mythic:
       options:
         blue_essence: Blue Essence
         orange_essence: Orange Essence
         random_skin_shards: Random Skin Shards
+      recipe_found: 'Recipe found: %{thing_to_craft} for %{amount} Mythic Essence'
       recipes_unavailable: Recipes for %{loot} seem to be unavailable.
-      recipe_found: "Recipe found: %{thing_to_craft} for %{amount} Mythic Essence"
-  handler:
-    generic:
-      found_nothing: Found no %{name} to disenchant.
-      found_some: Found %{count} %{name}.
-      found_no_owned: Found no owned %{name} to disenchant.
-      ask_disenchant: Disenchant %{count} %{loot} to %{currency}?
-      keep_unowned: Keep %{loot} you don't own yet?
-      action_cancelled: Action cancelled
-      filtered_down: Filtered to %{count} items.
-      disenchant_preview: "We'd disenchant %{count} %{loot} using the option you chose:"
-    exception:
-      error_occurred: An error occurred while handling %{name}.
-      create_an_issue: Please take a screenshot and create an issue at %{url}
-      send_email_instead: If you don't have a GitHub account, send it to %{email}
-      skipping_step: Something went wrong. Skipping this step...
-      network_error: Oops, we probably hit an API limit. Retry in a minute or report 
-        to %{email} if this keeps happening.
-    capsule:
-      no_capsules_found: Found no keyless capsules to open.
-      found_capsules: "Found %{count} capsules:"
-      ask_open_capsules: Open %{count} (keyless) capsules?
-    champion:
-      no_shards_found: Found no champion shards to disenchant.
-      found_shards: Found %{count} champion shards.
-      already_done: "Job's already done: no champion shards left matching your selection."
-      present_selection: "We'd disenchant %{count} champion shards using the option
-        you chose:"
-      shards_to_keep: keeping %{count}
-      ask_include_permanents: Should we include champion permanents in this process?
-      ask_disenchant: Disenchant %{count} champion shards for %{amount} Blue Essence?
-      exclusions:
-        ask: Would you like to add exclusions?
-        ask_which: Okay, which champions?
-        entry_requirements: (type/paste the EXACT champion name)
-        recognized: "Exclusions recognized:"
-      by_mastery:
-        ask_which_level: Which mastery level should champions at least be for their
-          shards to be kept?
-        note_level7: at mastery 7
-        note_below_threshold: below threshold
-        note_more_valuable: value higher than Mastery 7 upgrade
-      no_unowned_champs_found: Found no shards of champions you don't own yet.
-      ask_keep_unowned_champs: Keep a shard for champions you don't own yet?
-      found_champs_with_tokens: Found %{count} champions with owned mastery tokens
-    esports_emotes:
-      none_found: Found no Esports Emotes to re-roll.
-      found_some: Found %{count} Esports Emotes.
-      ask_re_roll: Re-roll %{count} already owned Esports Emotes?
-    key_fragments:
-      not_enough_fragments: Not enough key fragments to craft anything.
-      found_fragments: Found %{count} key fragments.
-      ask_craft_keys: Craft %{key_count} keys from %{fragment_count} key fragments?
-    mastery_tokens:
-      none_found: Found no upgradable set of Mastery Tokens.
-      could_upgrade_champions: "We could upgrade the following champions:"
-      missing_essence: You're missing %{essence_missing} Blue Essence needed to proceed.
-        Skipping...
-      to_mastery_level: to Mastery Level
-      using: using
-      using_champion_shard: a champion shard.
-      using_champion_permanent: a champion permanent.
-      using_blue_essence: "%{recipe_cost} Blue Essence."
-      confirm_total_upgrades: Upgrade %{count} champions using
-    mythic_essence:
-      none_found: Found no Mythic Essence to use.
-      found_some: Found %{amount} Mythic Essence.
-      not_enough: Not enough Mythic Essence for that.
-      amount_to_use: Alright, how much Mythic Essence should we use to craft %{target_name}?
-      cancelled: Mythic crafting cancelled.
-      craft_confirm: Craft %{quantity} %{loot_name} from %{total_cost} Mythic Essence?
-    url:
-      opening_repository: Opening GitHub repository at %{url} in your browser...
-      opening_stats: Opening Global Stats at %{url} in your browser...
-      opening_mastery_chart: Opening your profile at %{url} in your browser...
-    stat_submission:
-      ask_contribute: Would you like to contribute your (anonymous) stats to the global
-        stats?
-      thanks: Thank you very much!
-      your_stats: "Your stats:"
-      ask_submit: Submit anonymous stats?
+    option: Option
+    option_chosen: Option chosen
+    option_done: done
+    what_to_do: What would you like to do?
+  meta:
+    auto_loaded_locale: 'Detected client language: %{locale_name}'
+    locale_name: English
+    manually_set_locale: Set to %{locale_name}!
+    translation_note: 'Missing or bad translation? Help by offering yours: %{url}'
+  update_checker:
+    ask_download_now: Would you like to download the new version now?
+    done_downloading: Done downloading!
+    local_beta_note: Welcome to the future!
+    local_beta_version: 'Latest remote version: v%{version}'
+    up_to_date: You're up to date!
+    update_available: New version %{version} available!

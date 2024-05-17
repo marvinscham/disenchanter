@@ -3,12 +3,12 @@ mkdir -p build
 touch ./build/.build.lockfile
 
 # Deleting the i18n gem's tests might be necessary
-ocran src/main.rb \
+bundle exec ocran src/main.rb \
     ./i18n/*.yml \
     --gemfile ./Gemfile \
     --icon ./assets/BE_icon.ico \
     --output ./build/disenchanter.exe && \
-ocran src/updater.rb \
+bundle exec ocran src/updater.rb \
     --gemfile ./Gemfile \
     --icon ./assets/BE_icon.ico \
     --output ./build/disenchanter_up.exe && \

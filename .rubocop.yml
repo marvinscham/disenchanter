@@ -20,3 +20,5 @@ Style/EmptyElse:
   AllowComments: true
 Lint/ScriptPermission:
   Enabled: false
+Style/OptionalBooleanParameter:
+  Enabled: false

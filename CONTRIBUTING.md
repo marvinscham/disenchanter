@@ -4,6 +4,8 @@
 
 You can contribute translations for your language using the translation platform [Weblate](https://weblate.ms-ds.org/engage/disenchanter/).
 
+Once a translation is at least 80% complete, it will be included in the language menu and shipped with the next update.
+
 **Steps:**
 - Register by email or using GitHub SSO
 - Choose an [existing translation](https://weblate.ms-ds.org/projects/disenchanter/disenchanter/) or [start a new translation](https://weblate.ms-ds.org/new-lang/disenchanter/disenchanter/)

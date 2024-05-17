@@ -5,7 +5,6 @@ require_relative 'menu'
 require_relative '../../modules/handlers/mythic_essence'
 require_relative '../../modules/handlers/key_fragments'
 require_relative '../../modules/handlers/capsules'
-require_relative '../../modules/handlers/mastery_tokens'
 
 # Menu for handling materials such as fragments, mythic essence or capsules
 class MaterialsMenu < Menu
@@ -15,8 +14,7 @@ class MaterialsMenu < Menu
       '1' => I18n.t(:'menu.materials.options.mythic_essence'),
       '2' => I18n.t(:'menu.materials.options.key_fragments'),
       '3' => I18n.t(:'menu.materials.options.capsules'),
-      '4' => I18n.t(:'menu.materials.options.mastery_tokens'),
-      'x' => I18n.t(:'menu.back_to_main')
+      'x' => I18n.t(:'menu.back_to_detail')
     }
     answer_display = I18n.t(:'menu.option')
 
@@ -34,8 +32,6 @@ class MaterialsMenu < Menu
       handle_key_fragments(@client)
     when '3'
       handle_capsules(@client)
-    when '4'
-      handle_mastery_tokens(@client)
     when 'x'
       return true
     else
