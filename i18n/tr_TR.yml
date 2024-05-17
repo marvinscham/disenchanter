@@ -1,4 +1,58 @@
----
 tr_TR:
   meta:
     locale_name: Türkçe
+    manually_set_locale: Şuna ayarla %{locale_name}!
+    translation_note: 'Hatalı ya da eksik çeviri mi? Çevirinizle destek olun: %{url}'
+    auto_loaded_locale: 'Tespit edilen dil: % %{locale_name}'
+  menu:
+    option_chosen: Seçilen ayar
+    option_done: bitti
+    what_to_do: Ne yapmak istersin?
+    option: Seçenek
+    back_to_main: Ana menüye dön
+    choose_option: Tamam, hangi seçeneği istersin?
+    language:
+      preferred: Hangi dili tercih edersin?
+    main:
+      exit_shortcut_notice: '[CTRL + C] ile bu yazıdan çıkabilirsin.'
+      hello: Selam! :)
+      summoner_check_failed: Sihirdar verisi alınamadı. League İstemcisini yeniden
+        başlatmayı deneyin.
+      version_info: Disenchanter mevcut sürümü %{version}
+  update_checker:
+    ask_download_now: Yeni versiyonu şimdi indirmek ister misin?
+    done_downloading: İndirme tamamlandı!
+    local_beta_version: 'Güncel sürüm: v%{version}'
+    up_to_date: Güncelsin!
+    update_available: Yeni versiyon %{version} kullanılabilir!
+    local_beta_note: Geleceğe hoşgeldin!
+  loot:
+    honor_3_orb: Onur Seviyesi 3 Küresi
+    ward_skins: Totem Görünümleri
+    blue_essence: Mavi Öz
+    blue_essence_short: MÖ
+    champion_capsule: Şampiyon Kapsülü
+    champions: Şampiyonlar
+    emotes: İfadeler
+    eternal_shards: Ebedi Seti Kristalleri
+    eternals: Ebediler
+    honor_4_orb: Onur Seviyesi 4 Küresi
+    honor_5_orb: Onur Seviyesi 5 Küresi
+    icons: Semboller
+    materials: Malzemeler
+    orange_essence: Turuncu Öz
+    orange_essence_short: TÖ
+    skin_shards: Kostüm Kristali
+    skins: Kostümler
+    tacticians: Strateji Ustaları
+  common:
+    actions: Eylemler
+    confirm_banner: ONAYLA
+    done: Tamam!
+    exiting: Çıkılıyor...
+    nah: Hayır
+    press_enter_to_exit: Çıkmak için Enter'a bas.
+    yup: Evet
+    crafted: Yapıldı
+    invalid_answer: Geçersiz yanıt, seçenekler
+    opened: Açıldı
