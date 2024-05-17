@@ -32,4 +32,6 @@ bundle exec i18n-tasks remove-unused
 
 ## Increment version
 
-- `bumpversion --new-version <version> <major|minor|fix>`
+```bash
+bumpversion --new-version <version> <major|minor|fix>
+```

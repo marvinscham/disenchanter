@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v2.0.0 - May 17, 2024
+The context for this update is Patch 14.10, which changed the way Champion Mastery works and how the system interacts with player loot.
+
+### Added
+- #150 _Soft_ and _Hard_ quick modes, which will either disenchant all loot the player has already unlocked permanently or disenchant everything
+- Start of Turkish translation (Thank you, **ismailenes01**!)
+
+### Changed
+- #150 Old main menu moved to a new "Detailed Menu"
+
+### Removed
+- #184 Champion Shard filters by Champion Mastery
+- #184 Champion Shard filters by Mastery Tokens
+- #184 Mastery Token upgrading
+
 ## v1.8.0 - Apr 15, 2024
 ### Added
 - Polish translation by **The_Shade2** (Thank you!)
