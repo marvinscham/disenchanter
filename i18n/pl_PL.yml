@@ -120,7 +120,6 @@ pl_PL:
       summoner_check_failed: Nie można zdobyć informacji o Przywoływaczu. Spróbuj zrestartować swojego Klienta League.
       time_saved: Zaoszczędziliśmy Ci około %{time_saved} sekund czekania na zakończenie animacji.
       version_info: Uruchamiane Disenchanter %{version}
-      what_to_do: 'Co Chciałbyś zrobić? (Podpowiedź: idź z góry na dół, aby niczego nie pominąć!)'
     materials:
       options:
         capsules: Kapsuły

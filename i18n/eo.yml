@@ -120,7 +120,6 @@ eo:
       summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu restartigi vian League-klienton.
       time_saved: Ni ŝparis al vi ĉirkaŭ %{time_saved} sekundojn da atendo por finiĝi la animacioj.
       version_info: Lanĉante Malsorĉilo %{version}
-      what_to_do: 'Kion vi volus fari? (Aludo: iru de supre al malsupre por ke vi ne preterlasu ion!)'
     materials:
       options:
         capsules: Kapsuloj

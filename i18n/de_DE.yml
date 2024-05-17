@@ -120,7 +120,6 @@ de_DE:
       summoner_check_failed: Konnte keine Spieler-Info sammeln. Starte deinen League-Client neu.
       time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen gespart.
       version_info: Starte Disenchanter %{version}
-      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit du nichts verpasst!)'
     materials:
       options:
         capsules: Kapseln

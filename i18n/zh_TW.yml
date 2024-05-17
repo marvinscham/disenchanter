@@ -113,7 +113,6 @@ zh_TW:
       summoner_check_failed: 無法獲取召喚師資訊. 請重新啟動英雄聯盟客戶端.
       time_saved: 我們節省了大約 %{time_saved} 秒鐘等待分解動畫放完的時間.
       version_info: 執行分解者版本 %{version}
-      what_to_do: '你現在希望做些甚麼? (提示: 先從海克斯材料開始, 可以確保你接下來不會放過任何東西! 例如海克斯寶箱開出的造型碎片!)'
     materials:
       options:
         capsules: 典藏罐/禮包/晶球
