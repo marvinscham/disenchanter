@@ -1,4 +1,3 @@
----
 de_DE:
   common:
     actions: Aktionen
@@ -20,10 +19,13 @@ de_DE:
       found_capsules: "%{count} Kapseln gefunden:"
       no_capsules_found: Keine schlüssellosen Kapseln gefunden, die man öffnen könnte.
     champion:
-      already_done: 'Schon fertig: Keine Championsplitter übrig, die deiner Auswahl entsprechen.'
-      ask_disenchant: Möchtest du %{count} Championsplitter für %{amount} Blaue Essenzen entzaubern?
+      already_done: 'Schon fertig: Keine Championsplitter übrig, die deiner Auswahl
+        entsprechen.'
+      ask_disenchant: Möchtest du %{count} Championsplitter für %{amount} Blaue Essenzen
+        entzaubern?
       ask_include_permanents: Sollen wir permanente Champions in diesen Prozess einbeziehen?
-      ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch nicht besitzt, behalten?
+      ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch
+        nicht besitzt, behalten?
       exclusions:
         ask: Möchtest du Ausschlüsse hinzufügen?
         ask_which: Okay, welche Champions?
@@ -31,41 +33,50 @@ de_DE:
         recognized: 'Erkannte Ausschlüsse:'
       found_shards: "%{count} Championsplitter gefunden."
       no_shards_found: Keine Championsplitter zum Entzaubern gefunden.
-      no_unowned_champs_found: Keine Splitter von Champions gefunden, die du noch nicht besitzt.
-      present_selection: 'Wir würden %{count} Championsplitter mit der von dir gewählten Option entzaubern:'
+      no_unowned_champs_found: Keine Splitter von Champions gefunden, die du noch
+        nicht besitzt.
+      present_selection: 'Wir würden %{count} Championsplitter mit der von dir gewählten
+        Option entzaubern:'
       shards_to_keep: behält %{count}
     esports_emotes:
       ask_re_roll: Möchtest du %{count} E-Sports-Sticker (bereits im Besitz) umwandeln?
       found_some: "%{count} E-Sports-Sticker gefunden."
       none_found: Es wurden keine E-Sports-Sticker zum Umwandeln gefunden.
     exception:
-      create_an_issue: Bitte mach einen Screenshot und erstelle einen Issue unter %{url}
+      create_an_issue: Bitte mach einen Screenshot und erstelle einen Issue unter
+        %{url}
       error_occurred: Beim Bearbeiten von %{name} ist ein Fehler aufgetreten.
-      network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
+      network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche
+        es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
       send_email_instead: Wenn du kein GitHub-Konto hast, schick ihn an %{email}
       skipping_step: Etwas ist schiefgelaufen. Überspringe diesen Schritt...
     generic:
       action_cancelled: Aktion abgebrochen
       ask_disenchant: "%{count} %{loot} entzaubern, um %{currency} zu erhalten?"
-      disenchant_preview: 'Wir würden %{count} %{loot} mit der von dir gewählten Option entzaubern:'
+      disenchant_preview: 'Wir würden %{count} %{loot} mit der von dir gewählten Option
+        entzaubern:'
       filtered_down: Auf %{count} Items gefiltert.
       found_no_owned: Keine %{name} (im Besitz) zum Entzaubern gefunden.
       found_nothing: Keine %{name} zum Entzaubern gefunden.
       found_some: "%{count} %{name} gefunden."
       keep_unowned: "%{loot}, die du noch nicht im Besitz hast, behalten?"
     key_fragments:
-      ask_craft_keys: "%{key_count} Schlüssel aus %{fragment_count} Schlüsselfragmenten herstellen?"
+      ask_craft_keys: "%{key_count} Schlüssel aus %{fragment_count} Schlüsselfragmenten
+        herstellen?"
       found_fragments: "%{count} Schlüsselfragmente gefunden."
       not_enough_fragments: Nicht genug Schlüsselfragmente, um etwas herzustellen.
     mythic_essence:
-      amount_to_use: Wie viel Mythische Essenzen sollen wir benutzen, um %{target_name} herzustellen?
+      amount_to_use: Wie viel Mythische Essenzen sollen wir benutzen, um %{target_name}
+        herzustellen?
       cancelled: Verwertung Mythischer Essenzen abgebrochen.
-      craft_confirm: "%{quantity} %{loot_name} für %{total_cost} Mythische Essenzen herstellen?"
+      craft_confirm: "%{quantity} %{loot_name} für %{total_cost} Mythische Essenzen
+        herstellen?"
       found_some: "%{amount} Mythische Essenzen gefunden."
       none_found: Keine Mythischen Essenzen zum Benutzen gefunden.
       not_enough: Nicht genug Mythische Essenzen dafür.
     stat_submission:
-      ask_contribute: Möchtest du deine Ergebnisse (anonym) zu den globalen Statistiken einsenden?
+      ask_contribute: Möchtest du deine Ergebnisse (anonym) zu den globalen Statistiken
+        einsenden?
       ask_submit: Anonyme Ergebnisse absenden?
       thanks: Vielen Dank!
     url:
@@ -106,7 +117,8 @@ de_DE:
     main:
       all_done: Das war's!
       confirm_banner_example: Diese Aktion ausführen?
-      confirm_banner_intro: 'Deine Beute ist sicher, nichts wird passieren bis du ein solches Banner bestätigst:'
+      confirm_banner_intro: 'Deine Beute ist sicher, nichts wird passieren bis du
+        ein solches Banner bestätigst:'
       exit_shortcut_notice: Du kannst das Skript jederzeit mit [STRG + C] verlassen.
       hello: Moin! :)
       logged_in_as: 'Du bist als %{name} #%{tagline} eingeloggt.'
@@ -117,10 +129,13 @@ de_DE:
         open_repository: Öffne GitHub-Repository
         open_usage_stats: Globale Statistiken für Disenchanter öffnen
       see_you: Bis bald :)
-      summoner_check_failed: Konnte keine Spieler-Info sammeln. Starte deinen League-Client neu.
-      time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen gespart.
+      summoner_check_failed: Konnte keine Spieler-Info sammeln. Starte deinen League-Client
+        neu.
+      time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen
+        gespart.
       version_info: Starte Disenchanter %{version}
-      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit du nichts verpasst!)'
+      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit
+        du nichts verpasst!)'
     materials:
       options:
         capsules: Kapseln
@@ -141,7 +156,8 @@ de_DE:
     auto_loaded_locale: 'Sprache des Clients: %{locale_name}'
     locale_name: Deutsch
     manually_set_locale: Auf %{locale_name} gestellt!
-    translation_note: 'Fehlende oder schlechte Übersetzung? Hilf mit, indem du deine anbietest: %{url}'
+    translation_note: 'Fehlende oder schlechte Übersetzung? Hilf mit, indem du deine
+      anbietest: %{url}'
   update_checker:
     ask_download_now: Möchtest du die neue Version jetzt herunterladen?
     done_downloading: Download abgeschlossen!
