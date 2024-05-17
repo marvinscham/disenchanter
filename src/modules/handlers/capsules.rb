@@ -5,7 +5,8 @@ require_relative '../loot_metainfo'
 
 # Opens keyless chests/capsules
 # @param client Client connector
-def handle_capsules(client)
+# @param accept Auto-accept all steps
+def handle_capsules(client, accept = 0)
   player_loot = client.req_get_player_loot
 
   loot_capsules = filter_key_capsules(client, player_loot)
@@ -17,10 +18,10 @@ def handle_capsules(client)
 
   print_capsule_summary(client, loot_capsules)
 
-  if ans_y.include? user_input_check(
+  if accept >= 1 || ans_y.include?(user_input_check(
     I18n.t(:'handler.capsule.ask_open_capsules', count: count_loot_items(loot_capsules)),
     ans_yn, ans_yn_d, 'confirm'
-  )
+  ))
     process_keyless_capsule_requests(loot_capsules, client)
     puts I18n.t(:'common.done').green
   end

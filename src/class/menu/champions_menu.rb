@@ -15,7 +15,7 @@ class ChampionsMenu < Menu
     things_todo = {
       '1' => I18n.t(:'menu.champions.options.all'),
       '2' => I18n.t(:'menu.champions.options.collector'),
-      'x' => I18n.t(:'menu.back_to_main')
+      'x' => I18n.t(:'menu.back_to_detail')
     }
     answer_display = I18n.t(:'menu.option')
 

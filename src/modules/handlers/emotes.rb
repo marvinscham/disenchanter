@@ -6,12 +6,13 @@ require_relative 'generic_loot'
 # Wrapper for emotes
 # @param client Client connector
 # @note No shards for emotes
-def handle_emotes(client)
-  handle_generic(client, I18n.t(:'loot.emotes'), Dictionary::EMOTE)
+# @param accept Auto-accept level
+def handle_emotes(client, accept = 0)
+  handle_generic(client, I18n.t(:'loot.emotes'), Dictionary::EMOTE, accept)
 
   client.refresh_loot
   # Re-handle icons in case new disenchant candidates came up
-  handle_generic(client, I18n.t(:'loot.emotes'), Dictionary::EMOTE) if handle_esports_emotes(client)
+  handle_generic(client, I18n.t(:'loot.emotes'), Dictionary::EMOTE, accept) if handle_esports_emotes(client)
 end
 
 # Rerolls non-disenchantable esports emotes into disenchantable ones
@@ -25,12 +26,12 @@ def handle_esports_emotes(client)
 
   puts I18n.t(:'handler.esports_emotes.found_some', count: count_loot_items(esports_emotes))
 
-  unless ans_y.include? user_input_check(
+  unless accept >= 1 || ans_y.include?(user_input_check(
     I18n.t(:'handler.esports_emotes.ask_re_roll'),
     ans_yn,
     ans_yn_d,
     'confirm'
-  )
+  ))
     return false
   end
 

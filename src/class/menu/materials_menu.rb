@@ -14,7 +14,7 @@ class MaterialsMenu < Menu
       '1' => I18n.t(:'menu.materials.options.mythic_essence'),
       '2' => I18n.t(:'menu.materials.options.key_fragments'),
       '3' => I18n.t(:'menu.materials.options.capsules'),
-      'x' => I18n.t(:'menu.back_to_main')
+      'x' => I18n.t(:'menu.back_to_detail')
     }
     answer_display = I18n.t(:'menu.option')
 

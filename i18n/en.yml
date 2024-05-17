@@ -77,11 +77,13 @@ en:
     blue_essence_short: BE
     champion_capsule: Champion Capsule
     champions: Champions
+    detailed: Detailed (choose things to mass disenchant)
     emotes: Emotes
     eternal_permanents: Eternals Set Permanents
     eternal_shards: Eternals Set Shards
     eternals: Eternals
     glorious_champion_capsule: Glorious Champion Capsule
+    hard: Hard (disenchants ALL loot)
     honor_3_orb: Honor Level 3 Orb
     honor_4_orb: Honor Level 4 Orb
     honor_5_orb: Honor Level 5 Orb
@@ -92,15 +94,19 @@ en:
     skin_permanents: Skin Permanents
     skin_shards: Skin Shards
     skins: Skins
+    soft: Soft (disenchants everything already owned)
     tacticians: Tacticians
     ward_skins: Ward Skins
   menu:
+    back_to_detail: Back to detailed menu
     back_to_main: Back to main menu
     champions:
       options:
         all: Disenchant all champion shards
         collector: Keep one shard of each champion
     choose_option: Okay, which option would you like to go for?
+    detail:
+      what_to_do: 'What would you like to do? (Hint: go top to bottom so you don''t miss anything!)'
     language:
       preferred: What's your preferred language?
     main:
@@ -120,7 +126,11 @@ en:
       summoner_check_failed: Could not grab summoner info. Try restarting your League Client.
       time_saved: We saved you about %{time_saved} seconds of waiting for animations to finish.
       version_info: Running Disenchanter %{version}
-      what_to_do: 'What would you like to do? (Hint: go top to bottom so you don''t miss anything!)'
+      what_to_do: '你現在希望做些甚麼? (提示: 先從海克斯材料開始, 可以確保你接下來不會放過任何東西! 例如海克斯寶箱開出的造型碎片!)'
+    mass:
+      all_steps_success: All steps ran successfully!
+      ask_run_hard: This will disenchant ALL of your loot items! Proceed?
+      ask_run_soft: This will disenchant all loot of items you already own. Proceed?
     materials:
       options:
         capsules: Capsules

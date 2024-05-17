@@ -1,17 +1,10 @@
 # frozen_string_literal: true
 
 require_relative 'menu'
+require_relative 'detail_menu'
 
-require_relative '../../modules/handlers/champions'
-require_relative '../../modules/handlers/emotes'
-require_relative '../../modules/handlers/eternals'
-require_relative '../../modules/handlers/exception'
-require_relative '../../modules/handlers/icons'
-require_relative '../../modules/handlers/skins'
-require_relative '../../modules/handlers/tacticians'
-require_relative '../../modules/handlers/wards'
+require_relative '../../modules/handlers/mass'
 require_relative '../../modules/handlers/debug'
-require_relative '../../modules/handlers/materials'
 
 require_relative '../../modules/open_url'
 require_relative '../../modules/stat_submission'
@@ -19,7 +12,7 @@ require_relative '../../modules/stat_submission'
 # The main menu
 class MainMenu < Menu
   def initialize(client)
-    menu_text = I18n.t(:'menu.main.what_to_do')
+    menu_text = I18n.t('menu.what_to_do')
 
     lang_supp_text = if I18n.t(:'menu.main.options.language_settings') == 'Language settings'
                        ''
@@ -28,14 +21,9 @@ class MainMenu < Menu
                      end
 
     things_todo = {
-      '1' => I18n.t(:'loot.materials'),
-      '2' => I18n.t(:'loot.champions'),
-      '3' => I18n.t(:'loot.skins'),
-      '4' => I18n.t(:'loot.tacticians'),
-      '5' => I18n.t(:'loot.eternals'),
-      '6' => I18n.t(:'loot.emotes'),
-      '7' => I18n.t(:'loot.ward_skins'),
-      '8' => I18n.t(:'loot.icons'),
+      '1' => I18n.t(:'loot.soft'),
+      '2' => I18n.t(:'loot.hard'),
+      '3' => I18n.t(:'loot.detailed'),
       'l' => I18n.t(:'menu.main.options.language_settings') + lang_supp_text,
       'm' => I18n.t(:'menu.main.options.open_mastery_chart'),
       's' => I18n.t(:'menu.main.options.open_usage_stats'),
@@ -51,21 +39,13 @@ class MainMenu < Menu
   def handle_option(todo)
     case todo
     when '1'
-      handle_materials(@client)
+      handle_mass(@client, 1)
+      return true
     when '2'
-      handle_champions(@client)
+      handle_mass(@client, 2)
+      return true
     when '3'
-      handle_skins(@client)
-    when '4'
-      handle_tacticians(@client)
-    when '5'
-      handle_eternals(@client)
-    when '6'
-      handle_emotes(@client)
-    when '7'
-      handle_ward_skins(@client)
-    when '8'
-      handle_icons(@client)
+      DetailMenu.new(@client).run_loop
     when 'l'
       swap_language
     when 'm'

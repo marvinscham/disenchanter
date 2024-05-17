@@ -1,0 +1,69 @@
+# i18n-tasks finds and manages missing and unused translations: https://github.com/glebm/i18n-tasks
+
+# The "main" locale.
+base_locale: en
+
+# Read and write translations.
+data:
+  read:
+    - i18n/%{locale}.yml
+
+  # Locale files to write new keys to, based on a list of key pattern => file rules. Matched from top to bottom:
+  # `i18n-tasks normalize -p` will force move the keys according to these rules
+  write:
+    ## For example, write devise and simple form keys to their respective files:
+    # - ['{devise, simple_form}.*', 'config/locales/\1.%{locale}.yml']
+    ## Catch-all default:
+    # - config/locales/%{locale}.yml
+
+  # External locale data (e.g. gems).
+  # This data is not considered unused and is never written to.
+  external:
+    ## Example (replace %#= with %=):
+    # - "<%#= %x[bundle info vagrant --path].chomp %>/templates/locales/%{locale}.yml"
+
+  ## Specify the router (see Readme for details). Valid values: conservative_router, pattern_router, or a custom class.
+  # router: conservative_router
+
+  yaml:
+    write:
+      # do not wrap lines at 80 characters
+      line_width: -1
+
+  ## Pretty-print JSON:
+  # json:
+  #   write:
+  #     indent: '  '
+  #     space: ' '
+  #     object_nl: "\n"
+  #     array_nl: "\n"
+
+# Find translate calls
+search:
+  ## Paths or `Find.find` patterns to search in:
+  paths:
+  - src/
+
+  ## Root directories for relative keys resolution.
+  # relative_roots:
+  #   - app/controllers
+  #   - app/helpers
+  #   - app/mailers
+  #   - app/presenters
+  #   - app/views
+
+  ## Directories where method names which should not be part of a relative key resolution.
+  # By default, if a relative translation is used inside a method, the name of the method will be considered part of the resolved key.
+  # Directories listed here will not consider the name of the method part of the resolved key
+  #
+  # relative_exclude_method_name_paths:
+  #  -
+
+  ## Files or `File.fnmatch` patterns to exclude from search. Some files are always excluded regardless of this setting:
+  ##   *.jpg *.jpeg *.png *.gif *.svg *.ico *.eot *.otf *.ttf *.woff *.woff2 *.pdf *.css *.sass *.scss *.less
+  ##   *.yml *.json *.zip *.tar.gz *.swf *.flv *.mp3 *.wav *.flac *.webm *.mp4 *.ogg *.opus *.webp *.map *.xlsx
+  exclude:
+    - app/assets/images
+    - app/assets/fonts
+    - app/assets/videos
+    - app/assets/builds
