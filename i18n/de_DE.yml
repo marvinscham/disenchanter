@@ -105,12 +105,15 @@ de_DE:
     skins: Skins
     tacticians: Taktiker
     ward_skins: Augenskins
+    detailed: Detailliert (wähle Dinge zum Massenentzaubern)
+    hard: Hart (entzaubert ALL deine Beute)
+    soft: Weich (entzaubert alles, was bereits im Besitz ist)
   menu:
     back_to_main: Zurück zum Hauptmenü
     champions:
       options:
         all: Entzaubere alle Championsplitter
-        collector: Behalte einen Splitter für jeden Champion unabhängig von der Meisterschaft
+        collector: Behalte einen Splitter für jeden Champion
     choose_option: Okay, was willst du machen?
     language:
       preferred: Was ist deine bevorzugte Sprache?
@@ -152,6 +155,15 @@ de_DE:
     option_chosen: Ausgewählte Option
     option_done: erledigt
     what_to_do: Was möchtest du machen?
+    mass:
+      ask_run_soft: Das wird alle Beute, die du bereits permanent besitzt, entzaubern.
+        Fortfahren?
+      ask_run_hard: Das wird ALLE deine Beute entzaubern! Fortfahren?
+      all_steps_success: Alle Schritte wurden erfolgreich ausgeführt!
+    back_to_detail: Zurück zum detaillierten Menü
+    detail:
+      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit
+        du nichts verpasst!)'
   meta:
     auto_loaded_locale: 'Sprache des Clients: %{locale_name}'
     locale_name: Deutsch
