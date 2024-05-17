@@ -1,4 +1,3 @@
----
 pl_PL:
   common:
     actions: Akcje
@@ -20,10 +19,14 @@ pl_PL:
       found_capsules: 'Znaleziono %{count} kapsuł:'
       no_capsules_found: Nie znaleziono kapsuł nie potrzebujących kluczy do otworzenia.
     champion:
-      already_done: 'Sprawa już załatwiona: nie zostały żadne odłamki pasujące do twojego wyboru.'
-      ask_disenchant: Rozłożyć %{count} odłamków czempionów na %{amount} Niebieskiej Esencji?
-      ask_include_permanents: Czy powinniśmy uwzględnić trwałe odłamki czempionów w procesie?
-      ask_keep_unowned_champs: Zachować odłamki dla czempionów, których jeszcze nie Posiadasz?
+      already_done: 'Sprawa już załatwiona: nie zostały żadne odłamki pasujące do
+        twojego wyboru.'
+      ask_disenchant: Rozłożyć %{count} odłamków czempionów na %{amount} Niebieskiej
+        Esencji?
+      ask_include_permanents: Czy powinniśmy uwzględnić trwałe odłamki czempionów
+        w procesie?
+      ask_keep_unowned_champs: Zachować odłamki dla czempionów, których jeszcze nie
+        Posiadasz?
       exclusions:
         ask: Czy chciałbyś dodać wykluczenia?
         ask_which: Okej, którzy czempioni?
@@ -32,7 +35,8 @@ pl_PL:
       found_shards: Znaleziono %{count} odłamki czempionów.
       no_shards_found: Nie znaleziono odłamków czempionów do rozłożenia.
       no_unowned_champs_found: Nie znaleziono odłamków nieposiadanych czempionów.
-      present_selection: 'Rozłożylibyśmy %{count} odłamków czempionów używając wybranej opcji:'
+      present_selection: 'Rozłożylibyśmy %{count} odłamków czempionów używając wybranej
+        opcji:'
       shards_to_keep: Zachowywanie %{count}
     esports_emotes:
       ask_re_roll: Wymienić na losowe %{count} już posiadane Emotki Esport?
@@ -41,7 +45,8 @@ pl_PL:
     exception:
       create_an_issue: Proszę zrobić zrzut ekranu i stworzyć zagadnienie na %{url}
       error_occurred: Wydarzył się błąd w trakcie przetwarzania %{name}.
-      network_error: Oops, prawdopodobnie Osiągnęliśmy limit API. Proszę spróbować ponownie lub zgłosić na %{email} jeśli będzie się to powtarzać.
+      network_error: Oops, prawdopodobnie Osiągnęliśmy limit API. Proszę spróbować
+        ponownie lub zgłosić na %{email} jeśli będzie się to powtarzać.
       send_email_instead: Jeśli nie Posiadasz konta GitHub, wyślij je na %{email}
       skipping_step: Coś poszło nie tak. Pomijanie kroku…
     generic:
@@ -54,9 +59,11 @@ pl_PL:
       found_some: Znaleziono %{count} %{name}.
       keep_unowned: Zachować jeszcze nie posiadany %{loot}?
     key_fragments:
-      ask_craft_keys: Stworzyć %{key_count} klucze z %{fragment_count} fragmentów kluczy?
+      ask_craft_keys: Stworzyć %{key_count} klucze z %{fragment_count} fragmentów
+        kluczy?
       found_fragments: Znaleziono %{count} fragmentów klucza.
-      not_enough_fragments: Nie wystarczająca ilość fragmentów klucza, by cokolwiek stworzyć.
+      not_enough_fragments: Nie wystarczająca ilość fragmentów klucza, by cokolwiek
+        stworzyć.
     mythic_essence:
       amount_to_use: Dobra, ile Mitycznej Esencji powinniśmy użyć to stworzenia %{target_name}?
       cancelled: Mityczne tworzenie anulowane.
@@ -65,7 +72,8 @@ pl_PL:
       none_found: Nie znaleziono Mitycznej Esencji do użycia.
       not_enough: Nie wystarczająco Mitycznej Esencji na to.
     stat_submission:
-      ask_contribute: Czy Chciałbyś dodać Swoje (anonimowe) statystyki do globalnych statystyk?
+      ask_contribute: Czy Chciałbyś dodać Swoje (anonimowe) statystyki do globalnych
+        statystyk?
       ask_submit: Złożyć anonimowe statystyki?
       thanks: Wielkie Dzięki!
     url:
@@ -106,8 +114,10 @@ pl_PL:
     main:
       all_done: To tyle!
       confirm_banner_example: Wykonać tę akcję?
-      confirm_banner_intro: 'Twój łup jest bezpieczny, żadne akcje nie zostaną przeprowadzone dopóki nie Potwierdzisz banneru takiego jak ten:'
-      exit_shortcut_notice: Możesz opuścić ten skrypt w dowolnym momencie używając [CTRL + C].
+      confirm_banner_intro: 'Twój łup jest bezpieczny, żadne akcje nie zostaną przeprowadzone
+        dopóki nie Potwierdzisz banneru takiego jak ten:'
+      exit_shortcut_notice: Możesz opuścić ten skrypt w dowolnym momencie używając
+        [CTRL + C].
       hello: Cześć! :)
       logged_in_as: 'Zalogowano jako %{name} #%{tagline}.'
       options:
@@ -117,10 +127,13 @@ pl_PL:
         open_repository: Otwórz repozytorium GitHub
         open_usage_stats: Otwórz globalne statystyki Disenchanter
       see_you: Do zobaczenia następnym razem :)
-      summoner_check_failed: Nie można zdobyć informacji o Przywoływaczu. Spróbuj zrestartować swojego Klienta League.
-      time_saved: Zaoszczędziliśmy Ci około %{time_saved} sekund czekania na zakończenie animacji.
+      summoner_check_failed: Nie można zdobyć informacji o Przywoływaczu. Spróbuj
+        zrestartować swojego Klienta League.
+      time_saved: Zaoszczędziliśmy Ci około %{time_saved} sekund czekania na zakończenie
+        animacji.
       version_info: Uruchamiane Disenchanter %{version}
-      what_to_do: 'Co Chciałbyś zrobić? (Podpowiedź: idź z góry na dół, aby niczego nie pominąć!)'
+      what_to_do: 'Co Chciałbyś zrobić? (Podpowiedź: idź z góry na dół, aby niczego
+        nie pominąć!)'
     materials:
       options:
         capsules: Kapsuły
@@ -131,7 +144,8 @@ pl_PL:
         blue_essence: Niebieska Esencja
         orange_essence: Pomarańczowa Esencja
         random_skin_shards: Losowy Odłamek Skórki
-      recipe_found: 'Znaleziono recepturę: %{thing_to_craft} za %{amount} Mitycznej Esencji'
+      recipe_found: 'Znaleziono recepturę: %{thing_to_craft} za %{amount} Mitycznej
+        Esencji'
       recipes_unavailable: Receptury dla %{loot} wydają się być niedostępne.
     option: Opcje
     option_chosen: Opcja wybrana
