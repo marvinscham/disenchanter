@@ -1,4 +1,3 @@
----
 eo:
   common:
     actions: Agoj
@@ -20,9 +19,12 @@ eo:
       found_capsules: 'Trovis %{count} da kapsuloj:'
       no_capsules_found: Neniuj senŝlosaj kapsuloj trovis por malfermi.
     champion:
-      already_done: 'Jam faritas: ne restas ĉampionaj pecoj kiuj kongruas kun via elekto.'
-      ask_disenchant: Ĉu malsorĉi %{count} da ĉampionaj pecoj por %{amount} da blua esenco?
-      ask_include_permanents: Ĉu ni inkluzu ĉampionajn (permanenta rabaĵo) en ĉi tiun procezon?
+      already_done: 'Jam faritas: ne restas ĉampionaj pecoj kiuj kongruas kun via
+        elekto.'
+      ask_disenchant: Ĉu malsorĉi %{count} da ĉampionaj pecoj por %{amount} da blua
+        esenco?
+      ask_include_permanents: Ĉu ni inkluzu ĉampionajn (permanenta rabaĵo) en ĉi tiun
+        procezon?
       ask_keep_unowned_champs: Ĉu teni pecon por ĉampionoj, kiujn vi ankoraŭ ne posedas?
       exclusions:
         ask: Ĉu vi volas aldoni esceptojn?
@@ -32,7 +34,8 @@ eo:
       found_shards: Trovis %{count} da ĉampionaj pecoj.
       no_shards_found: Ne trovis ĉampionajn pecojn por malsorĉi.
       no_unowned_champs_found: Ne trovis pecojn de ĉampionoj kiujn vi ankoraŭ ne posedas.
-      present_selection: 'Ni malsorĉus %{count} da ĉampionfragmentoj uzante la elektan opcion:'
+      present_selection: 'Ni malsorĉus %{count} da ĉampionfragmentoj uzante la elektan
+        opcion:'
       shards_to_keep: tenante %{count}
     esports_emotes:
       ask_re_roll: Ĉu konverti %{count} da jam posedataj bitsportaj glumarkoj?
@@ -41,7 +44,8 @@ eo:
     exception:
       create_an_issue: Bonvolu fari ekrankopion kaj krei problemon ĉe %{url}
       error_occurred: Okazis eraro dum traktado de %{name}.
-      network_error: Ups, probable ni atingis API-limon. Reprovu post minuto aŭ raportu al %{email} se tio daŭre okazas.
+      network_error: Ups, probable ni atingis API-limon. Reprovu post minuto aŭ raportu
+        al %{email} se tio daŭre okazas.
       send_email_instead: Se vi ne havas GitHub-konton, sendu ĝin al %{email}
       skipping_step: Io misfunkciis. Preterlasante ĉi tiun paŝon...
     generic:
@@ -60,12 +64,14 @@ eo:
     mythic_essence:
       amount_to_use: Bone, kiom da mita esenco ni uzu por krei %{target_name}?
       cancelled: Mita fabrikado nuligita.
-      craft_confirm: Ĉu krei %{quantity} da %{loot_name} uzante %{total_cost} da mita esenco?
+      craft_confirm: Ĉu krei %{quantity} da %{loot_name} uzante %{total_cost} da mita
+        esenco?
       found_some: Trovis %{amount} da mita esenco.
       none_found: Ne trovis mitan esencon por uzi.
       not_enough: Ne sufiĉe da mita esenco por tio.
     stat_submission:
-      ask_contribute: Ĉu vi ŝatus kontribui viajn (sennomajn) statistikojn al la tutmondaj statistikoj?
+      ask_contribute: Ĉu vi ŝatus kontribui viajn (sennomajn) statistikojn al la tutmondaj
+        statistikoj?
       ask_submit: Ĉu sendi sennomajn statistikojn?
       thanks: Koran dankon!
     url:
@@ -94,6 +100,9 @@ eo:
     skins: Ŝeloj
     tacticians: Taktikistoj
     ward_skins: Observilaj ŝeloj
+    detailed: Detala (elektu aĵojn por amase malsorĉi)
+    hard: Severa (malsorĉas ĈIUN rabaĵon)
+    soft: Malsevera (malsorĉas ĉion jam posedatan)
   menu:
     back_to_main: Reiri al ĉefmenuon
     champions:
@@ -106,8 +115,10 @@ eo:
     main:
       all_done: Jen ĝi!
       confirm_banner_example: Ĉu fari ĉi tiun agon?
-      confirm_banner_intro: 'Via rabaĵo estas sekura, neniuj agoj estos faritaj ĝis vi konfirmas rubandon kiel ĉi tiu:'
-      exit_shortcut_notice: Vi povas eliri ĉi tiun skripton en iu ajn momento premante [CTRL + C].
+      confirm_banner_intro: 'Via rabaĵo estas sekura, neniuj agoj estos faritaj ĝis
+        vi konfirmas rubandon kiel ĉi tiu:'
+      exit_shortcut_notice: Vi povas eliri ĉi tiun skripton en iu ajn momento premante
+        [CTRL + C].
       hello: Saluton! :)
       logged_in_as: 'Vi estas ensalutinta kiel %{name} #%{tagline}.'
       options:
@@ -117,10 +128,13 @@ eo:
         open_repository: Malfermu GitHub-deponejon
         open_usage_stats: Malfermu tutmondajn statistikojn de Malsorĉilo
       see_you: Ĝis la revido :)
-      summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu restartigi vian League-klienton.
-      time_saved: Ni ŝparis al vi ĉirkaŭ %{time_saved} sekundojn da atendo por finiĝi la animacioj.
+      summoner_check_failed: Ne povis ekstrakti informojn pri la alvokanto. Provu
+        restartigi vian League-klienton.
+      time_saved: Ni ŝparis al vi ĉirkaŭ %{time_saved} sekundojn da atendo por finiĝi
+        la animacioj.
       version_info: Lanĉante Malsorĉilo %{version}
-      what_to_do: 'Kion vi volus fari? (Aludo: iru de supre al malsupre por ke vi ne preterlasu ion!)'
+      what_to_do: 'Kion vi volus fari? (Aludo: iru de supre al malsupre por ke vi
+        ne preterlasu ion!)'
     materials:
       options:
         capsules: Kapsuloj
@@ -131,12 +145,14 @@ eo:
         blue_essence: Blua esenco
         orange_essence: Oranĝa esenco
         random_skin_shards: Hazardaj pecoj de ŝeloj
-      recipe_found: 'Trovis planon: Krei %{thing_to_craft} uzante %{amount} da mita esenco'
+      recipe_found: 'Trovis planon: Krei %{thing_to_craft} uzante %{amount} da mita
+        esenco'
       recipes_unavailable: Planoj por %{loot} ŝajnas esti nedisponeblaj.
     option: Opcio
     option_chosen: Elektita opcio
     option_done: kompleta
     what_to_do: Kion vi volus fari?
+    back_to_detail: Reen al detala menuo
   meta:
     auto_loaded_locale: 'Detektita klienta lingvo: %{locale_name} (kiel?!)'
     locale_name: Esperanto
