@@ -158,6 +158,9 @@ eo:
         ne preterlasu ion!)'
     mass:
       all_steps_success: Ĉiuj agoj sukcese plenumiĝis!
+      ask_run_soft: Tio malsorĉos ĉiujn rabaĵon de erojn, kiujn vi jam posedas. Ĉu
+        vi volas procedi?
+      ask_run_hard: Ĉi tio malsorĉos ĈIUJN viajn rabaĵajn erojn! Ĉu vi volas procedi?
   meta:
     auto_loaded_locale: 'Detektita klienta lingvo: %{locale_name} (kiel?!)'
     locale_name: Esperanto
