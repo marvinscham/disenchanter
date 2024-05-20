@@ -157,6 +157,7 @@ PLATFORMS
 
 DEPENDENCIES
   base64 (~> 0.2)
+  bundler (~> 2.5.10)
   colorize (~> 1.1)
   i18n (~> 1.14)
   i18n-tasks (~> 1.0.14)
@@ -172,4 +173,4 @@ RUBY VERSION
    ruby 3.2.3p157
 
 BUNDLED WITH
-   2.4.19
+   2.5.10
