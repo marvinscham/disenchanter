@@ -102,12 +102,15 @@ pl_PL:
     skins: Skórki
     tacticians: Taktycy
     ward_skins: Skórki Totemów
+    detailed: Detalowane (wybierz przedmioty do masowego rozmienienia)
+    hard: Całkowite (rozmienia WSZYSTKIE łupy)
+    soft: Lekkie (rozmienia wszystkie już posiadane)
   menu:
     back_to_main: Powrót do menu głównego
     champions:
       options:
         all: Rozmień wszystkie odłamki czempionów
-        collector: Pozostaw jeden odłamek czempiona niezależnie od jego poziomu Maestrii
+        collector: Pozostaw jeden odłamek czempiona
     choose_option: Okej, którą opcję Chciałbyś wybrać?
     language:
       preferred: Jaki jest Twój preferowany język?
@@ -151,6 +154,14 @@ pl_PL:
     option_chosen: Opcja wybrana
     option_done: Zrobione
     what_to_do: Co Chciałbyś zrobić?
+    back_to_detail: Powrót do menu detalowanych
+    detail:
+      what_to_do: 'Co chciałbyś zrobić? (Wskazówka: patrz od samej góry do samego
+        dołu, aby nic nie pominąć!)'
+    mass:
+      all_steps_success: Wszystkie kroki zakończone pomyślnie!
+      ask_run_hard: To rozmieni WSZYSTKIE twoje łupy! Kontynuować?
+      ask_run_soft: To rozmieni wszystkie łupy przedmiotów już posiadanych. Kontynuować?
   meta:
     auto_loaded_locale: 'Wykryty język klienta: %{locale_name}'
     locale_name: Polski
