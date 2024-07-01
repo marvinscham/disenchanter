@@ -4,6 +4,7 @@
 Encoding.default_external = Encoding::UTF_8
 Encoding.default_internal = Encoding::UTF_8
 
+require 'bundler/setup'
 require 'i18n'
 
 require_relative 'class/client'
@@ -17,7 +18,7 @@ require_relative 'modules/user_input'
 def run
   check_build_env
 
-  current_version = 'v2.0.0'
+  current_version = 'v2.0.1'
   stat_tracker = StatTracker.new
   client = Client.new(stat_tracker, current_version)
 

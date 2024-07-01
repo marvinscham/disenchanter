@@ -5,6 +5,7 @@ git_source(:github) { |_repo| 'https://github.com/marvinscham/disenchanter.git' 
 ruby '3.2.3'
 
 gem 'base64', '~> 0.2'
+gem 'bundler', '~> 2.5.10'
 gem 'colorize', '~> 1.1'
 gem 'i18n', '~> 1.14'
 gem 'json', '~> 2.7'
@@ -18,5 +19,5 @@ group :development do
   # Builds windows executable
   gem 'ocran', '1.3.15', require: false
   # Ruby linter, config in .rubocop
-  gem 'rubocop', '~> 1.63', require: false
+  gem 'rubocop', '~> 1.64', require: false
 end
