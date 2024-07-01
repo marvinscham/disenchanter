@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v2.0.1 - Jul 01, 2024
+
+### Fixed
+- Dependecy updates
+- Updated Polish translation, thanks again to **The_Shade2**
+
 ## v2.0.0 - May 17, 2024
 The context for this update is Patch 14.10, which changed the way Champion Mastery works and how the system interacts with player loot.
 
