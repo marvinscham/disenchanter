@@ -16,3 +16,4 @@ Disenchanter is based on [Anujan/disenchant-champ-shards](https://github.com/Anu
   - @nico12313
 - Turkish (Türkçe)
   - **ismailenes01**
+  - @KaanGaming
