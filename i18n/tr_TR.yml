@@ -19,6 +19,10 @@ tr_TR:
       summoner_check_failed: Sihirdar verisi alınamadı. League İstemcisini yeniden
         başlatmayı deneyin.
       version_info: Disenchanter mevcut sürümü %{version}
+    champions:
+      options:
+        all: Bütün şampiyon kristallerini ayrıştır
+        collector: Her şampiyon için tek bir tane kristal sakla
   update_checker:
     ask_download_now: Yeni versiyonu şimdi indirmek ister misin?
     done_downloading: İndirme tamamlandı!
@@ -45,6 +49,9 @@ tr_TR:
     skin_shards: Kostüm Kristali
     skins: Kostümler
     tacticians: Strateji Ustaları
+    detailed: Detaylı (çoğul olarak ayrıştırma işlemi için ganimet eşyaları seçiniz)
+    skin_permanents: Kalıcı Kostümler
+    eternal_permanents: Ebediler Seti Kalıcıları
   common:
     actions: Eylemler
     confirm_banner: ONAYLA
@@ -56,3 +63,66 @@ tr_TR:
     crafted: Yapıldı
     invalid_answer: Geçersiz yanıt, seçenekler
     opened: Açıldı
+    not_owned: buna sahip değilsiniz
+    disenchanted: Ayrıştırıldı
+  handler:
+    exception:
+      create_an_issue: Lütfen bir ekran resmi alıp %{url} sayfasında sorunu belirtiniz.
+      send_email_instead: Eğer bir GitHub hesabınız yoksa, sorunu %{email} e-posta
+        adresine gönderiniz.
+      network_error: Eyvah, biz muhtemelen bir API sınırına ulaştık. İşlemi bir dakika
+        içinde tekrar deneyin ya da bu sorun devam ederse sorunu %{email} e-postasına
+        iletiniz.
+    capsule:
+      ask_open_capsules: '%{count} (kilitsiz) kapsülleri açmak ister misiniz?'
+      found_capsules: '%{count} kapsül bulundu:'
+      no_capsules_found: Açılabilecek kilitsiz kapsül bulunamadı.
+    champion:
+      already_done: 'İş zaten bitti: seçiminize ait şampiyon kristali kalmadı.'
+      ask_disenchant: '%{count} şampiyon kristallerini %{amount} Mavi Öz için ayrıştırmak
+        ister misiniz?'
+      ask_include_permanents: Bu işleme şampiyon kalıcılarını katmak ister misiniz?
+      ask_keep_unowned_champs: Henüz sizin sahip olmadığınız şampiyonlar için kristalleri
+        saklamak ister misiniz?
+      exclusions:
+        ask_which: Peki, hangi şampiyonlar?
+      found_shards: '%{count} şampiyon kristalleri bulundu.'
+      no_shards_found: Ayrıştırılabilecek şampiyon kristalleri bulunamadı.
+      no_unowned_champs_found: Sahip olmadığınız şampiyonların kristalleri bulunamadı.
+      shards_to_keep: '%{count} saklanılıyor'
+    mythic_essence:
+      amount_to_use: Tamam, %{target_name} eşyasını yapmak için ne kadar İhtişamlı
+        Öz kullanmamızı istermisiniz?
+      cancelled: İhtişamlı Öz'le yapım işlemi iptal edildi.
+      craft_confirm: "%{total_cost} İhtişamlı Öz'den %{quantity} tane %{loot_name}
+        yapmak istermisiniz?"
+      found_some: '%{amount} İhtişamlı Öz bulundu.'
+      none_found: Kullanılabilir İhtişamlı Öz bulunamadı.
+      not_enough: Onun için yeterince İhtişamlı Öz bulunamadı.
+    stat_submission:
+      ask_contribute: Sizin (anonim) istatiklerinizi küresel istatiklerine katmak
+        istermisiniz?
+      ask_submit: Anonim istatiklerini yayınla?
+      thanks: Çok teşekkürler!
+    esports_emotes:
+      found_some: '%{count} Espor İfadeleri bulundu.'
+      none_found: Yineden İşlenebilecek Espor İfadeleri bulunamadı.
+    generic:
+      action_cancelled: İşlem iptal edildi
+      ask_disenchant: '%{count} tane %{loot} eşyalarını ayrıştırarak %{currency} edinmek
+        istermisiniz?'
+      filtered_down: '%{count} öğe filtrelendi.'
+      found_no_owned: Ayrıştırılacak sahip olduğunuz %{name} bulunamadı.
+      found_nothing: Ayrıştırılacak %{name} bulunamadı.
+      found_some: '%{count} tane %{name} bulundu.'
+      keep_unowned: Henüz sahip olmadığınız %{loot} saklamak istermisiniz?
+    key_fragments:
+      ask_craft_keys: '%{fragment_count} anahtar parçacıklarından %{key_count} anahtar
+        yapmak ister misiniz?'
+      found_fragments: '%{count} anahtar parçacıkları bulundu.'
+      not_enough_fragments: Herhangi anahtar yapmanız için yeterince anahtar parçacığı
+        bulunamadı.
+    url:
+      opening_mastery_chart: '%{url} sayfasında profilin açılıyor...'
+      opening_repository: '%{url} sayfasındaki GitHub reposu web tarayıcınızda açılıyor...'
+      opening_stats: Web tarayıcınızda %{url} sayfasında Küresel İstatistikler açılıyor...
