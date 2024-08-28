@@ -1,4 +1,15 @@
----
 pt_BR:
   meta:
     locale_name: Português
+  common:
+    actions: Ações
+    confirm_banner: CONFIRMAR
+    disenchanted: Desencantado
+    done: Pronto!
+    exiting: Fechando...
+    nah: Não
+    not_owned: Não ativado
+    opened: Aberto
+    press_enter_to_exit: Aperte Enter para sair.
+    redeemed: Resgatado
+    yup: Sim
