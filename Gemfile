@@ -11,7 +11,7 @@ gem 'i18n', '~> 1.14'
 gem 'json', '~> 2.7'
 gem 'launchy', '~> 2' # >3 breaks
 gem 'openssl', '~> 3.1.0' # >3.2 won't install
-gem 'open-uri', '~> 0.4.1'
+gem 'open-uri', '~> 0.5.0'
 gem 'win32-shortcut', '~> 0.3.0'
 
 group :development do
