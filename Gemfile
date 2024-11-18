@@ -8,7 +8,7 @@ gem 'base64', '~> 0.2'
 gem 'bundler', '~> 2.5.10'
 gem 'colorize', '~> 1.1'
 gem 'i18n', '~> 1.14'
-gem 'json', '~> 2.7'
+gem 'json', '~> 2.8'
 gem 'launchy', '~> 2' # >3 breaks
 gem 'openssl', '~> 3.1.0' # >3.2 won't install
 gem 'open-uri', '~> 0.4.1'
