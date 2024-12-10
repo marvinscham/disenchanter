@@ -1,6 +1,6 @@
 # Setup
 
-- Install Ruby 3.2.3
+- Install Ruby 3.2.6
 - `bundle install`
 
 ## Build executable
@@ -20,12 +20,15 @@ Useful commands:
 ```bash
 bundle exec i18n-tasks health
 ```
+
 ```bash
 bundle exec i18n-tasks normalize
 ```
+
 ```bash
 bundle exec i18n-tasks unused
 ```
+
 ```bash
 bundle exec i18n-tasks remove-unused
 ```
