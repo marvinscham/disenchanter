@@ -15,7 +15,7 @@ gem 'open-uri', '~> 0.5.0'
 gem 'win32-shortcut', '~> 0.3.0'
 
 group :development do
-  gem 'i18n-tasks', '~> 1.0.14', require: false
+  gem 'i18n-tasks', '~> 1.0.15', require: false
   # Builds windows executable
   gem 'ocran', '1.3.16', require: false
   # Ruby linter, config in .rubocop
