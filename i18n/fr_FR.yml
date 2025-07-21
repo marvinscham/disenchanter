@@ -3,3 +3,40 @@ fr_FR:
     locale_name: Français
   common:
     actions: Actions
+    yup: Oui
+    nah: Non
+    confirm_banner: CONFIRMER
+    not_owned: non possédé
+    crafted: Fabriqué
+    disenchanted: Désenchanté
+    invalid_answer: Réponse invalide, options
+    opened: Ouvert
+    press_enter_to_exit: Appuyez sur Entée pour quitter.
+    redeemed: Racheté(e)
+    exiting: Fermeture...
+  handler:
+    capsule:
+      ask_open_capsules: Ouvrir %{count} (keyless) capsules?
+      found_capsules: '%{count} capsules trouvées:'
+    champion:
+      already_done: 'Travail déjà effectué : il ne reste plus aucun fragment de champion
+        correspondant à votre sélection.'
+      ask_disenchant: Désenchanter %{count} fragment(s) de champion pour 
+        %{amount} Essences Bleues?
+      ask_include_permanents: Inclure les champions permanents dans ce processus
+        ?
+      ask_keep_unowned_champs: Garder un fragment pour les champions que vous ne
+        possédez pas encore ?
+      exclusions:
+        ask: Souhaitez-vous ajouter des exclusions ?
+        ask_which: D'accord, quel(s) champion(s) ?
+        entry_requirements: (tapez/collez le nom EXACT du champion)
+        recognized: 'Exclusions reconnues :'
+      found_shards: '%{count} fragment(s) de champion trouvés.'
+      no_shards_found: Aucun fragment de champion à désenchanter n'a été trouvé.
+      no_unowned_champs_found: Aucun fragment de champion non possédé n'a été 
+        trouvé.
+      present_selection: "%{count} fragments de champion seront désenchantés selon
+        l'option que vous avez choisie :"
+    esports_emotes:
+      ask_re_roll: Relancer %{count} emotes Esports déjà possédés ?
