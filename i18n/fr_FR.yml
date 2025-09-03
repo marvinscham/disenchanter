@@ -40,3 +40,5 @@ fr_FR:
         l'option que vous avez choisie :"
     esports_emotes:
       ask_re_roll: Relancer %{count} emotes Esports déjà possédés ?
+    generic:
+      action_cancelled: Action annulée
