@@ -4,7 +4,7 @@
 <h1 align="center">Disenchanter</h1>
 <div align="center">
 
-![Patch](https://img.shields.io/badge/league%20patch-15.21-brightgreen)
+![Patch](https://img.shields.io/badge/league%20patch-15.22-brightgreen)
 ![Release](https://img.shields.io/github/v/release/marvinscham/disenchanter)
 ![Last Commit](https://img.shields.io/github/last-commit/marvinscham/disenchanter)
 
