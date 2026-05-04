@@ -18,6 +18,7 @@ fr_FR:
     capsule:
       ask_open_capsules: Ouvrir %{count} (keyless) capsules?
       found_capsules: '%{count} capsules trouvées:'
+      no_capsules_found: Aucune capsule à ouvrir.
     champion:
       already_done: 'Travail déjà effectué : il ne reste plus aucun fragment de champion
         correspondant à votre sélection.'
