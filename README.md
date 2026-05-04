@@ -8,7 +8,7 @@
 ![Release](https://img.shields.io/github/v/release/marvinscham/disenchanter)
 ![Last Commit](https://img.shields.io/github/last-commit/marvinscham/disenchanter)
 
-![Language](https://img.shields.io/badge/language-Ruby-%23701516)
+![Language](https://img.shields.io/badge/language-Go-%2300ADD8)
 ![License](https://img.shields.io/github/license/marvinscham/disenchanter)
 ![Downloads](https://img.shields.io/github/downloads/marvinscham/disenchanter/total)
 

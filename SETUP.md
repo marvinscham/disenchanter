@@ -1,40 +1,25 @@
 # Setup
 
-- Install Ruby 3.2.6
-- `bundle install`
+- Install Go 1.23 or open the repository in the included devcontainer.
+- Download dependencies with `go mod download`.
 
 ## Build executable
 
-Uses [ocran](https://github.com/Largo/ocran).
+Builds both Windows executables from any supported Go host:
 
 ```bash
-./scripts/build.sh
+make build-windows
 ```
+
+Outputs:
+
+- `build/disenchanter.exe`
+- `build/disenchanter_up.exe`
 
 ## i18n
 
-The gem `i18n-tasks` is used for quality assurance for i18n.
-
-Useful commands:
-
-```bash
-bundle exec i18n-tasks health
-```
-
-```bash
-bundle exec i18n-tasks normalize
-```
-
-```bash
-bundle exec i18n-tasks unused
-```
-
-```bash
-bundle exec i18n-tasks remove-unused
-```
+Translation YAML files live in `i18n/`. The executable embeds an English fallback and loads repository translation files when present during development.
 
 ## Increment version
 
-```bash
-bumpversion --new-version <version> <major|minor|fix>
-```
+Update the version constant in `cmd/disenchanter/main.go`, then tag the release with the same `vMAJOR.MINOR.PATCH` version.
