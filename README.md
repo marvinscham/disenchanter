@@ -11,16 +11,11 @@
 ![Language](https://img.shields.io/badge/language-Ruby-%23701516)
 ![License](https://img.shields.io/github/license/marvinscham/disenchanter)
 ![Downloads](https://img.shields.io/github/downloads/marvinscham/disenchanter/total)
-[![Translated](https://weblate.ms-ds.org/widget/disenchanter/disenchanter/svg-badge.svg)](https://weblate.ms-ds.org/engage/disenchanter/)
 
-![Stat Submissions](https://img.shields.io/badge/dynamic/json?color=blue&label=stat%20submissions&query=%24%5B%3A1%5D.submissions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php)
 ![Shards Disenchanted](https://img.shields.io/badge/dynamic/json?color=blue&label=shards%20disenchanted&query=%24%5B%3A1%5D.disenchanted_thousands&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=K)
-![Blue Essence Gained](https://img.shields.io/badge/dynamic/json?color=blue&label=blue%20essence%20gained&query=%24%5B%3A1%5D.blue_essence_millions&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=M)
 ![Time Saved](https://img.shields.io/badge/dynamic/json?color=blue&label=time%20saved&query=%24%5B%3A1%5D.hours_saved&url=https%3A%2F%2Fchecksch.de%2Fhook%2Fdisenchanter.php&suffix=%20hours)
 
 Mass disenchant LoL loot like champion shards, eternals, mythic essence and more!
-
-[<img src="./assets/kofi-button.png" width="200" align="center">](https://ko-fi.com/marvinscham)
 
 </div>
 
@@ -70,11 +65,6 @@ Something isn't working properly or you'd like to see a feature that isn't yet s
 - [Create an issue](https://github.com/marvinscham/disenchanter/issues/new/choose)
 - (**If you have no GitHub account**) hit me up at dev[at]marvinscham.de
 - Open a pull request with your contribution.
-
-## Translation
-You can help to make Disenchanter available in your language! More info [here!](https://weblate.ms-ds.org/engage/disenchanter/)
-
-[![](https://weblate.ms-ds.org/widget/disenchanter/disenchanter/multi-auto.svg)](https://weblate.ms-ds.org/engage/disenchanter/)
 
 
 ## ❤ Sponsors ❤
