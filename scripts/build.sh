@@ -1,17 +1,5 @@
 #!/bin/bash
-mkdir -p build
-touch ./build/.build.lockfile
+set -euo pipefail
 
-# Deleting the i18n gem's tests might be necessary
-ocran src/main.rb \
-    ./i18n/*.yml \
-    --gemfile ./Gemfile \
-    --icon ./assets/BE_icon.ico \
-    --output ./build/disenchanter.exe && \
-ocran src/updater.rb \
-    --gemfile ./Gemfile \
-    --icon ./assets/BE_icon.ico \
-    --output ./build/disenchanter_up.exe && \
-echo "Success!" || echo "Something went wrong."
-
-rm ./build/.build.lockfile
+make build-windows
+echo "Success!"

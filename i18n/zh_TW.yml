@@ -27,6 +27,7 @@ zh_TW:
         ask: 你希望增加例外嗎?
         ask_which: 好的, 該去除哪些英雄?
         recognized: '已正確讀取的例外:'
+        entry_requirements: (輸入或複製貼上「完整正確」的英雄名稱)
       found_shards: 找到 %{count} 個英雄碎片.
       no_shards_found: 沒有找到可分解的英雄碎片.
       no_unowned_champs_found: 沒找到未擁有英雄的英雄碎片.
@@ -37,7 +38,7 @@ zh_TW:
       error_occurred: 在處理 %{name} 時發生了一個錯誤.
       network_error: 噢, 我們似乎超出了某個 API 的限制. 請等等再重新嘗試, 如果還是一直發生請回報至 %{email}.
       send_email_instead: 如果你沒有或不希望申請一個 GitHub 帳號, 請將本截圖及你遇到的問題用英文寄信至 %{email}
-      skipping_step: 跳過這一步驟...
+      skipping_step: 出錯了, 跳過這一步驟...
     generic:
       action_cancelled: 操作取消
       ask_disenchant: 分解 %{count} 個 %{loot} 換取 %{currency}?
@@ -50,28 +51,34 @@ zh_TW:
     key_fragments:
       ask_craft_keys: 製作 %{key_count} 個鑰匙, 花費 %{fragment_count} 個鑰匙碎片?
       found_fragments: 找到 %{count} 個鑰匙碎片.
-      not_enough_fragments: 持有的鑰匙碎片少於三個.
+      not_enough_fragments: 持有的鑰匙碎片不足以合成.
     mythic_essence:
       amount_to_use: 好的, 要使用多少神話結晶粉末來製作 %{target_name}?
       cancelled: 已取消神話製作.
       craft_confirm: 製作 %{quantity} %{loot_name} 花費 %{total_cost} 神話結晶粉末?
       found_some: 找到 %{amount} 神話結晶粉末.
       none_found: 沒有找到可使用的神話結晶粉末.
-      not_enough: 神話結晶粉末數量不足以製作.
+      not_enough: 神話結晶粉末數量不足.
     stat_submission:
       ask_contribute: 你願意(匿名的)上傳你的數據到全球統計數據嗎?
       thanks: 非常的感謝你!
+      ask_submit: 匿名上傳數據統計?
     url:
       opening_repository: 正在使用你的瀏覽器開啟位於 %{url} 的 Github 專案頁面...
       opening_stats: 正在使用你的瀏覽器開啟位於 %{url} 的全球數據統計...
+      opening_mastery_chart: 正在開啟瀏覽器前往你的個人檔案 %{url} ...
+    esports_emotes:
+      ask_re_roll: 重鑄 %{count} 個已擁有的電競表情?
+      found_some: 找到 %{count} 個電競表情.
+      none_found: 找不到可以重鑄的電競表情.
   loot:
     blue_essence: 藍色結晶粉末
     blue_essence_short: 藍粉
     champion_capsule: 英雄典藏罐
     champions: 英雄碎片
     emotes: 表情
-    eternal_permanents: 永恆精雕
-    eternal_shards: 永恆精雕
+    eternal_permanents: 永久永恆精雕
+    eternal_shards: 永恆精雕碎片
     eternals: 永恆精雕
     glorious_champion_capsule: 榮耀英雄典藏罐
     honor_3_orb: 榮譽等級 3 晶球
@@ -86,19 +93,22 @@ zh_TW:
     skins: 造型碎片
     tacticians: 聯盟精靈
     ward_skins: 偵查守衛造型
+    detailed: 自訂模式 (自行選擇想要大量分解的項目)
+    hard: 完全模式 (分解所有的戰利品)
+    soft: 簡易模式 (分解所有已擁有的戰利品)
   menu:
     back_to_main: 回到主選單
     champions:
       options:
         all: 分解所有的英雄碎片
-        collector: 完全不考慮專精，為每個英雄留一個碎片
+        collector: 為每個英雄留一個碎片
     choose_option: 好的, 你希望執行哪個選項?
     language:
       preferred: 你的偏好語言為何?
     main:
       all_done: 大功告成!
       confirm_banner_example: 執行這個動作嗎?
-      confirm_banner_intro: '請放心嘗試所有選項, 沒有任何動作會在以下這個警告出現前被執行:'
+      confirm_banner_intro: '你的戰利品很安全, 沒有任何動作會在以下這個警告出現前被執行:'
       exit_shortcut_notice: 你可以在任何時刻按 [CTRL + C] 來離開本程式.
       hello: 嗨! :)
       logged_in_as: '你當前的登入身分為 %{name} #%{tagline}.'
@@ -129,6 +139,13 @@ zh_TW:
     option_chosen: 選擇的操作
     option_done: 完成
     what_to_do: 你現在希望做些甚麼?
+    detail:
+      what_to_do: '你現在希望做些甚麼? (提示: 從頭到尾過一遍清單, 才不容易錯過東西!)'
+    mass:
+      all_steps_success: 成功完成所有步驟!
+      ask_run_hard: 即將分解你的所有戰利品! 確定嗎?
+      ask_run_soft: 即將分解你已擁有的戰利品! 確定嗎?
+    back_to_detail: 回到自訂模式選單
   meta:
     auto_loaded_locale: '偵測到客戶端語言為: %{locale_name}'
     locale_name: 繁體中文

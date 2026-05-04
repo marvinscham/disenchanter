@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
+## v3.0.0 - May 05, 2026
+
+### Changed
+
+- Rewrote app in Go
+
 ## v2.0.2 - Dec 11, 2024
 
 ### Fixed
