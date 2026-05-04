@@ -1,5 +1,5 @@
 BINARY_DIR := build
-VERSION ?= v2.0.2
+VERSION ?= v3.0.0
 GOFLAGS ?= -mod=mod
 export GOFLAGS
 
