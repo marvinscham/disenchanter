@@ -1,5 +1,5 @@
 BINARY_DIR := build
-VERSION ?= v3.0.0
+VERSION ?= v3.0.1
 GOFLAGS ?= -mod=mod
 ICON := assets/BE_icon.ico
 RSRC := go run github.com/akavel/rsrc@latest
