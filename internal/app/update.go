@@ -55,11 +55,13 @@ func RunUpdater() error {
 	backwardsCompat()
 	tag, err := remoteTag()
 	if err != nil {
-		return err
+		showErrorAndWait(err)
+		return nil
 	}
 	fmt.Println(green("Downloading Disenchanter " + tag))
 	if err := downloadFile("disenchanter.exe", "https://github.com/marvinscham/disenchanter/releases/download/"+tag+"/disenchanter.exe"); err != nil {
-		return err
+		showErrorAndWait(err)
+		return nil
 	}
 	fmt.Println(black("____________________________________________________________"))
 	fmt.Println(green("Done downloading!"))

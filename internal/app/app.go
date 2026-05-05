@@ -65,7 +65,8 @@ func Run(version string) error {
 	loadTranslations("en")
 	port, token, path, err := grabLockfile()
 	if err != nil {
-		return err
+		showErrorAndWait(err)
+		return nil
 	}
 	c := &Client{Port: port, Token: token, Version: version, Locale: grabLocale(path), Stats: &Stats{}, http: insecureClient()}
 	loadTranslations(mapLocale(c.Locale))
@@ -74,8 +75,9 @@ func Run(version string) error {
 	c.greet()
 	if err := c.checkSummoner(); err != nil {
 		fmt.Println(red(t("menu.main.summoner_check_failed")))
+		fmt.Println(black(err.Error()))
 		ask(exitString())
-		return err
+		return nil
 	}
 	mainMenu(c)
 	finish(c.Stats)
