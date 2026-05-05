@@ -330,7 +330,6 @@ func languageMenu(c *Client) {
 	m := map[string]string{"de": "de_DE", "pl": "pl_PL", "zh": "zh_TW", "eo": "eo", "en": "en"}
 	loadTranslations(m[choice])
 	fmt.Println(t("meta.manually_set_locale", "locale_name", t("meta.locale_name")))
-	fmt.Println(yellow(t("meta.translation_note", "url", translationURL())))
 }
 
 func debugMenu(c *Client) {

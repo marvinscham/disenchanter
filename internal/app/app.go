@@ -71,7 +71,6 @@ func Run(version string) error {
 	c := &Client{Port: port, Token: token, Version: version, Locale: grabLocale(path), Stats: &Stats{}, http: insecureClient()}
 	loadTranslations(mapLocale(c.Locale))
 	fmt.Println(white(t("meta.auto_loaded_locale", "locale_name", t("meta.locale_name"))))
-	fmt.Println(yellow(t("meta.translation_note", "url", translationURL())))
 	c.greet()
 	if err := c.checkSummoner(); err != nil {
 		fmt.Println(red(t("menu.main.summoner_check_failed")))
