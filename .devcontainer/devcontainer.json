@@ -1,6 +1,9 @@
 {
   "name": "Disenchanter Go",
-  "image": "mcr.microsoft.com/devcontainers/go:1.23-bookworm",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
@@ -11,6 +14,5 @@
       ]
     }
   },
-  "postCreateCommand": "go mod download",
   "remoteUser": "root"
 }
