@@ -35,13 +35,22 @@ jobs:
         run: go mod download
 
       - name: Test
-        run: go test ./...
+        run: go test -coverprofile=coverage.out ./...
 
       - name: Vet
         run: go vet ./...
 
       - name: Build Windows executables
         run: make build-windows
+
+      - name: Run Sonar scan
+        if: ${{ env.SONAR_TOKEN != '' }}
+        uses: SonarSource/sonarqube-scan-action@v5
+        with:
+          args: -Dsonar.qualitygate.wait=true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   release:
     name: Release
