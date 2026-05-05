@@ -17,6 +17,7 @@ coverage.out
 /test/tmp/
 /test/version_tmp/
 /tmp/
+*.syso
 
 .env
 
