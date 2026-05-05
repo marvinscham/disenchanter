@@ -91,4 +91,4 @@ jobs:
             build/disenchanter_up.exe \
             --verify-tag \
             --title "${GITHUB_REF_NAME}" \
-            --notes "Release ${GITHUB_REF_NAME}"
+            --notes "[Changelog](CHANGELOG.md)"
