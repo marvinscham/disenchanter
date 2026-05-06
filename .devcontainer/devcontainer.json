@@ -10,7 +10,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "golang.Go"
+        "golang.Go",
+        "mhutchie.git-graph"
       ]
     }
   },
