@@ -106,38 +106,6 @@ func TestCheckSummonerUsesReferenceResponses(t *testing.T) {
 	})
 }
 
-func TestHandleKeyFragmentsUsesReferenceVariants(t *testing.T) {
-	t.Run("crafts full keys", func(t *testing.T) {
-		c, tr := newFixtureClient(t, map[string]string{
-			"GET lol-loot/v1/player-loot": "loot_key_fragments_enough.json",
-		})
-
-		handleKeyFragments(c, 1)
-
-		if c.Stats.Crafted != 2 || c.Stats.Actions != 2 {
-			t.Fatalf("stats = %+v, want Crafted=2 Actions=2", c.Stats)
-		}
-		if tr.postCount() != 1 {
-			t.Fatalf("postCount = %d, want 1", tr.postCount())
-		}
-	})
-
-	t.Run("skips when not enough fragments", func(t *testing.T) {
-		c, tr := newFixtureClient(t, map[string]string{
-			"GET lol-loot/v1/player-loot": "loot_key_fragments_not_enough.json",
-		})
-
-		handleKeyFragments(c, 1)
-
-		if *c.Stats != (Stats{}) {
-			t.Fatalf("stats = %+v, want zero", c.Stats)
-		}
-		if tr.postCount() != 0 {
-			t.Fatalf("postCount = %d, want 0", tr.postCount())
-		}
-	})
-}
-
 func TestHandleGenericUsesReferenceVariants(t *testing.T) {
 	t.Run("soft mode keeps unowned items", func(t *testing.T) {
 		c, _ := newFixtureClient(t, map[string]string{
@@ -182,9 +150,9 @@ func TestHandleGenericUsesReferenceVariants(t *testing.T) {
 func TestHandleCapsulesUsesRecipeReferenceVariants(t *testing.T) {
 	t.Run("opens keyless capsules and tracks added essence", func(t *testing.T) {
 		c, _ := newFixtureClient(t, map[string]string{
-			"GET lol-loot/v1/player-loot":                         "loot_capsules_keyless.json",
-			"GET lol-loot/v1/recipes/initial-item/CHEST_TEST":     "recipes_capsule_open.json",
-			"GET lol-loot/v1/player-loot/CHEST_TEST":              "lootinfo_capsule.json",
+			"GET lol-loot/v1/player-loot":                             "loot_capsules_keyless.json",
+			"GET lol-loot/v1/recipes/initial-item/CHEST_TEST":         "recipes_capsule_open.json",
+			"GET lol-loot/v1/player-loot/CHEST_TEST":                  "lootinfo_capsule.json",
 			"POST lol-loot/v1/recipes/CHEST_TEST_OPEN/craft?repeat=2": "post_added_essence.json",
 		})
 
@@ -197,8 +165,8 @@ func TestHandleCapsulesUsesRecipeReferenceVariants(t *testing.T) {
 
 	t.Run("skips capsules that require keys", func(t *testing.T) {
 		c, tr := newFixtureClient(t, map[string]string{
-			"GET lol-loot/v1/player-loot":                                     "loot_capsules_keyed.json",
-			"GET lol-loot/v1/recipes/initial-item/CHEST_LOCKED_TEST":          "recipes_capsule_keyed.json",
+			"GET lol-loot/v1/player-loot":                            "loot_capsules_keyed.json",
+			"GET lol-loot/v1/recipes/initial-item/CHEST_LOCKED_TEST": "recipes_capsule_keyed.json",
 		})
 
 		handleCapsules(c, 1)

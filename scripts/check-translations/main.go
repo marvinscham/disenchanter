@@ -35,6 +35,20 @@ func main() {
 		fatal(err)
 	}
 
+	failed := walkTranslationKeys(locales, used, remove)
+
+	if *remove {
+		fmt.Printf("translation cleanup completed: %d source keys, %d locale files\n", len(used), len(locales))
+		return
+	}
+
+	if failed {
+		os.Exit(1)
+	}
+	fmt.Printf("translation check passed: %d source keys, %d locale files\n", len(used), len(locales))
+}
+
+func walkTranslationKeys(locales []localeFile, used map[string]bool, remove *bool) bool {
 	failed := false
 	for _, file := range locales {
 		unused := difference(file.keys, used)
@@ -54,15 +68,7 @@ func main() {
 		}
 	}
 
-	if *remove {
-		fmt.Printf("translation cleanup completed: %d source keys, %d locale files\n", len(used), len(locales))
-		return
-	}
-
-	if failed {
-		os.Exit(1)
-	}
-	fmt.Printf("translation check passed: %d source keys, %d locale files\n", len(used), len(locales))
+	return failed
 }
 
 func usedTranslationKeys(root string) (map[string]bool, error) {
@@ -71,43 +77,63 @@ func usedTranslationKeys(root string) (map[string]bool, error) {
 		if err != nil {
 			return err
 		}
-		if entry.IsDir() {
-			switch entry.Name() {
-			case ".git", "build", "scripts", "vendor":
-				return filepath.SkipDir
-			}
-			return nil
-		}
-		if filepath.Ext(path) != ".go" {
-			return nil
-		}
-
-		file, err := parser.ParseFile(token.NewFileSet(), path, nil, 0)
-		if err != nil {
+		if skip, err := shouldSkipSourcePath(entry); skip || err != nil {
 			return err
 		}
-		ast.Inspect(file, func(node ast.Node) bool {
-			call, ok := node.(*ast.CallExpr)
-			if !ok || len(call.Args) == 0 {
-				return true
-			}
-			fn, ok := call.Fun.(*ast.Ident)
-			if !ok || fn.Name != "t" {
-				return true
-			}
-			arg, ok := call.Args[0].(*ast.BasicLit)
-			if !ok || arg.Kind != token.STRING {
-				return true
-			}
-			key, err := strconv.Unquote(arg.Value)
-			if err == nil {
-				keys[key] = true
-			}
-			return true
-		})
-		return nil
+		if !isGoSource(path) {
+			return nil
+		}
+		return collectTranslationKeys(path, keys)
 	})
 	return keys, err
+}
+
+func shouldSkipSourcePath(entry os.DirEntry) (bool, error) {
+	if !entry.IsDir() {
+		return false, nil
+	}
+	switch entry.Name() {
+	case ".git", "build", "scripts", "vendor":
+		return true, filepath.SkipDir
+	default:
+		return true, nil
+	}
+}
+
+func isGoSource(path string) bool {
+	return filepath.Ext(path) == ".go"
+}
+
+func collectTranslationKeys(path string, keys map[string]bool) error {
+	file, err := parser.ParseFile(token.NewFileSet(), path, nil, 0)
+	if err != nil {
+		return err
+	}
+	ast.Inspect(file, func(node ast.Node) bool {
+		key, ok := translationKeyFromCall(node)
+		if ok {
+			keys[key] = true
+		}
+		return true
+	})
+	return nil
+}
+
+func translationKeyFromCall(node ast.Node) (string, bool) {
+	call, ok := node.(*ast.CallExpr)
+	if !ok || len(call.Args) == 0 {
+		return "", false
+	}
+	fn, ok := call.Fun.(*ast.Ident)
+	if !ok || fn.Name != "t" {
+		return "", false
+	}
+	arg, ok := call.Args[0].(*ast.BasicLit)
+	if !ok || arg.Kind != token.STRING {
+		return "", false
+	}
+	key, err := strconv.Unquote(arg.Value)
+	return key, err == nil
 }
 
 func loadLocaleFiles(dir string) ([]localeFile, error) {
