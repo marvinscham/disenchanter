@@ -5,7 +5,7 @@ ICON := assets/BE_icon.ico
 RSRC := go run github.com/akavel/rsrc@latest
 export GOFLAGS
 
-.PHONY: build build-windows test vet clean
+.PHONY: build build-windows test vet check-translations report-missing-translations clean
 
 build:
 	go build -buildvcs=false -ldflags "-s -w" -o $(BINARY_DIR)/disenchanter ./cmd/disenchanter
@@ -24,6 +24,12 @@ test:
 
 vet:
 	go vet ./...
+
+check-translations:
+	go run ./scripts/check-translations
+
+report-missing-translations:
+	go run ./scripts/report-missing-translations
 
 clean:
 	rm -rf $(BINARY_DIR)

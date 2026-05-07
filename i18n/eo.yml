@@ -42,11 +42,9 @@ eo:
       found_some: Trovis %{count} da bitsportaj glumarkoj.
       none_found: Ne trovis bitsportajn glumarkojn por konverti.
     exception:
-      create_an_issue: Bonvolu fari ekrankopion kaj krei problemon ĉe %{url}
       error_occurred: Okazis eraro dum traktado de %{name}.
       network_error: Ups, probable ni atingis API-limon. Reprovu post minuto aŭ raportu
         al %{email} se tio daŭre okazas.
-      send_email_instead: Se vi ne havas GitHub-konton, sendu ĝin al %{email}
       skipping_step: Io misfunkciis. Preterlasante ĉi tiun paŝon...
     generic:
       action_cancelled: Ago nuligita
@@ -133,8 +131,6 @@ eo:
       time_saved: Ni ŝparis al vi ĉirkaŭ %{time_saved} sekundojn da atendo por finiĝi
         la animacioj.
       version_info: Lanĉante Malsorĉilo %{version}
-      what_to_do: 'Kion vi volus fari? (Aludo: iru de supre al malsupre por ke vi
-        ne preterlasu ion!)'
     materials:
       options:
         capsules: Kapsuloj
@@ -165,7 +161,6 @@ eo:
     auto_loaded_locale: 'Detektita klienta lingvo: %{locale_name} (kiel?!)'
     locale_name: Esperanto
     manually_set_locale: Agordita al %{locale_name}!
-    translation_note: 'Ĉu mankanta aŭ malbona traduko? Helpu per via propono: %{url}'
   update_checker:
     ask_download_now: Ĉu vi ŝatus elŝuti la novan version nun?
     done_downloading: Finiĝis elŝuto!

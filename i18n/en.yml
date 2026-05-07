@@ -39,10 +39,8 @@ en:
       found_some: Found %{count} Esports Emotes.
       none_found: Found no Esports Emotes to re-roll.
     exception:
-      create_an_issue: Please take a screenshot and create an issue at %{url}
       error_occurred: An error occurred while handling %{name}.
       network_error: Oops, we probably hit an API limit. Retry in a minute or report to %{email} if this keeps happening.
-      send_email_instead: If you don't have a GitHub account, send it to %{email}
       skipping_step: Something went wrong. Skipping this step...
     generic:
       action_cancelled: Action cancelled
@@ -150,7 +148,6 @@ en:
     auto_loaded_locale: 'Detected client language: %{locale_name}'
     locale_name: English
     manually_set_locale: Set to %{locale_name}!
-    translation_note: 'Missing or bad translation? Help by offering yours: %{url}'
   update_checker:
     ask_download_now: Would you like to download the new version now?
     done_downloading: Done downloading!

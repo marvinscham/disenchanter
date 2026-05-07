@@ -6,6 +6,7 @@ tmpout
 disenchanter_*.json
 settings.json
 coverage.out
+translation-report.txt
 
 *.test
 /.config

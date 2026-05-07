@@ -43,11 +43,9 @@ pl_PL:
       found_some: Znaleziono %{count} Emotek Esport.
       none_found: Nie znaleziono Emotek Esportu do wymiany na losową.
     exception:
-      create_an_issue: Proszę zrobić zrzut ekranu i stworzyć zagadnienie na %{url}
       error_occurred: Wydarzył się błąd w trakcie przetwarzania %{name}.
       network_error: Oops, prawdopodobnie Osiągnęliśmy limit API. Proszę spróbować
         ponownie lub zgłosić na %{email} jeśli będzie się to powtarzać.
-      send_email_instead: Jeśli nie Posiadasz konta GitHub, wyślij je na %{email}
       skipping_step: Coś poszło nie tak. Pomijanie kroku…
     generic:
       action_cancelled: Akcja anulowana
@@ -135,8 +133,6 @@ pl_PL:
       time_saved: Zaoszczędziliśmy Ci około %{time_saved} sekund czekania na zakończenie
         animacji.
       version_info: Uruchamiane Disenchanter %{version}
-      what_to_do: 'Co Chciałbyś zrobić? (Podpowiedź: idź z góry na dół, aby niczego
-        nie pominąć!)'
     materials:
       options:
         capsules: Kapsuły
@@ -166,7 +162,6 @@ pl_PL:
     auto_loaded_locale: 'Wykryty język klienta: %{locale_name}'
     locale_name: Polski
     manually_set_locale: Ustawiono na %{locale_name}!
-    translation_note: 'Brakujące lub złe tłumaczenie? Pomóż, oferując swoje: %{url}'
   update_checker:
     ask_download_now: Czy Chciałbyś pobrać nową wersję teraz?
     done_downloading: Pobieranie zakończone!

@@ -34,10 +34,8 @@ zh_TW:
       present_selection: '我們將分解 %{count} 個英雄碎片基於你選擇的選項:'
       shards_to_keep: 保留 %{count}
     exception:
-      create_an_issue: 請截圖並在 %{url} 發起一個新的問題討論串
       error_occurred: 在處理 %{name} 時發生了一個錯誤.
       network_error: 噢, 我們似乎超出了某個 API 的限制. 請等等再重新嘗試, 如果還是一直發生請回報至 %{email}.
-      send_email_instead: 如果你沒有或不希望申請一個 GitHub 帳號, 請將本截圖及你遇到的問題用英文寄信至 %{email}
       skipping_step: 出錯了, 跳過這一步驟...
     generic:
       action_cancelled: 操作取消
@@ -122,7 +120,6 @@ zh_TW:
       summoner_check_failed: 無法獲取召喚師資訊. 請重新啟動英雄聯盟客戶端.
       time_saved: 我們節省了大約 %{time_saved} 秒鐘等待分解動畫放完的時間.
       version_info: 執行分解者版本 %{version}
-      what_to_do: '你現在希望做些甚麼? (提示: 先從海克斯材料開始, 可以確保你接下來不會放過任何東西! 例如海克斯寶箱開出的造型碎片!)'
     materials:
       options:
         capsules: 典藏罐/禮包/晶球
@@ -150,7 +147,6 @@ zh_TW:
     auto_loaded_locale: '偵測到客戶端語言為: %{locale_name}'
     locale_name: 繁體中文
     manually_set_locale: 設為 %{locale_name}!
-    translation_note: '看到缺漏或不好的翻譯? 來幫忙提出你的翻譯: %{url}'
   update_checker:
     ask_download_now: 你希望現在下載新版本嗎?
     done_downloading: 下載完成!
