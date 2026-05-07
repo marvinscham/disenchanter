@@ -42,14 +42,12 @@ The script triggers the same server requests as you would in your League Client.
 
 ## Features
 - Soft Mode
-  - Crafts keys from your key fragments
   - Opens all capsules without using keys
   - Disenchants any loot of content you already own
 - Hard Mode
   - Soft Mode + Loot of things you don't own yet is disenchanted
 - Detailed Mode
   - Manually select loot types to mass disenchant
-  - Craft Mythic Essence to Skins or Blue/Orange Essence
 - Supported loot types (both shards and permanents)
   - Champions
   - Skins
