@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	if err := app.Run("v3.0.1"); err != nil {
+	if err := app.Run("v3.1.0"); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
