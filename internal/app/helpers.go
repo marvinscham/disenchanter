@@ -46,9 +46,6 @@ func isYes(s string) bool { return s == "y" || s == "yes" }
 func isNo(s string) bool  { return s == "n" || s == "no" }
 func exitString() string  { return cyan(t("common.press_enter_to_exit")) }
 func separator() string   { return black("____________________________________________________________") }
-func translationURL() string {
-	return "https://github.com/marvinscham/disenchanter/blob/main/CONTRIBUTING.md"
-}
 
 func keys(m map[string]string) []string {
 	out := make([]string, 0, len(m))
@@ -72,13 +69,6 @@ func todoString(items map[string]string, done map[string]bool) string {
 		} else {
 			out += cyan(items[k] + "\n")
 		}
-	}
-	return out
-}
-func rangeAnswers(n int) []string {
-	out := []string{"all", "x"}
-	for i := 1; i <= n; i++ {
-		out = append(out, strconv.Itoa(i))
 	}
 	return out
 }
@@ -263,7 +253,7 @@ func gatherStats(s *Stats) string {
 	return out
 }
 
-func languageMenu(c *Client) bool {
+func languageMenu() bool {
 	choices := map[string]string{"en": "English", "de": "Deutsch", "pl": "Polski", "zh": "繁體中文", "eo": "Esperanto", "x": t("menu.back_to_main")}
 	choice := inputCheck(cyan(t("menu.language.preferred"))+"\n\n"+todoString(choices, map[string]bool{}), keys(choices), t("menu.option"), "default")
 	if choice == "x" {
@@ -280,7 +270,8 @@ func debugMenu(c *Client) {
 	runMenu(c, t("menu.what_to_do"), choices, func(ch string) bool {
 		switch ch {
 		case "1":
-			saveJSON("disenchanter_loot.json", mustArray(c.GetArray("lol-loot/v1/player-loot")))
+			loot, _ := c.GetArray("lol-loot/v1/player-loot")
+			saveJSON("disenchanter_loot.json", loot)
 		case "2":
 			id := ask(cyan("Which lootId would you like the recipes for?\n"))
 			r, _ := c.GetRecipes(id)
@@ -320,7 +311,6 @@ func debugMenu(c *Client) {
 		return false
 	})
 }
-func mustArray(v []Loot, err error) []Loot { return v }
 func saveJSON(path string, v any) {
 	b, _ := json.Marshal(v)
 	os.WriteFile(path, b, 0644)
@@ -330,11 +320,12 @@ func saveJSON(path string, v any) {
 func openURL(url, msg string) {
 	fmt.Println(blue(msg))
 	var cmd *exec.Cmd
-	if runtime.GOOS == "windows" {
+	switch runtime.GOOS {
+	case "windows":
 		cmd = exec.Command("rundll32", "url.dll,FileProtocolHandler", url)
-	} else if runtime.GOOS == "darwin" {
+	case "darwin":
 		cmd = exec.Command("open", url)
-	} else {
+	default:
 		cmd = exec.Command("xdg-open", url)
 	}
 	_ = cmd.Start()

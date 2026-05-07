@@ -3,7 +3,11 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Related: [versioning strategy](./VERSIONING.md).
 
-## v3.0.2 - May 07, 2026
+## v3.1.0 - May 07, 2026
+
+### Changed
+
+- Removed handling for Mythic Essence and Key Fragment since they are not applicable/available anymore
 
 ### Fixed
 

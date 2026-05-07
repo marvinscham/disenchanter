@@ -23,6 +23,7 @@ type localeFile struct {
 
 func main() {
 	root := flag.String("root", ".", "repository root")
+	remove := flag.Bool("remove", false, "remove unused translations from locale files")
 	flag.Parse()
 
 	used, err := usedTranslationKeys(*root)
@@ -38,12 +39,24 @@ func main() {
 	for _, file := range locales {
 		unused := difference(file.keys, used)
 		if len(unused) > 0 {
+			if *remove {
+				if err := removeUnusedTranslations(file.path, file.locale, unused); err != nil {
+					fatal(err)
+				}
+				fmt.Printf("%s removed %d unused translations\n", file.path, len(unused))
+				continue
+			}
 			failed = true
 			fmt.Printf("%s has unused translations:\n", file.path)
 			for _, key := range unused {
 				fmt.Printf("  %s\n", key)
 			}
 		}
+	}
+
+	if *remove {
+		fmt.Printf("translation cleanup completed: %d source keys, %d locale files\n", len(used), len(locales))
+		return
 	}
 
 	if failed {
@@ -149,6 +162,70 @@ func flatten(out map[string]bool, prefix string, values map[string]any) {
 		}
 		out[fullKey] = true
 	}
+}
+
+func removeUnusedTranslations(path, locale string, unused []string) error {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	var doc yaml.Node
+	if err := yaml.Unmarshal(b, &doc); err != nil {
+		return err
+	}
+	if len(doc.Content) != 1 || doc.Content[0].Kind != yaml.MappingNode {
+		return fmt.Errorf("%s must contain one top-level mapping", path)
+	}
+	root := mappingValue(doc.Content[0], locale)
+	if root == nil || root.Kind != yaml.MappingNode {
+		return fmt.Errorf("%s must contain top-level locale %q", path, locale)
+	}
+	for _, key := range unused {
+		removeKey(root, strings.Split(key, "."))
+	}
+	out, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+	encoder := yaml.NewEncoder(out)
+	encoder.SetIndent(2)
+	if err := encoder.Encode(&doc); err != nil {
+		return err
+	}
+	return encoder.Close()
+}
+
+func mappingValue(node *yaml.Node, key string) *yaml.Node {
+	for i := 0; i < len(node.Content)-1; i += 2 {
+		if node.Content[i].Value == key {
+			return node.Content[i+1]
+		}
+	}
+	return nil
+}
+
+func removeKey(node *yaml.Node, parts []string) bool {
+	if node.Kind != yaml.MappingNode || len(parts) == 0 {
+		return false
+	}
+	for i := 0; i < len(node.Content)-1; i += 2 {
+		if node.Content[i].Value != parts[0] {
+			continue
+		}
+		if len(parts) == 1 {
+			node.Content = append(node.Content[:i], node.Content[i+2:]...)
+			return true
+		}
+		if !removeKey(node.Content[i+1], parts[1:]) {
+			return false
+		}
+		if node.Content[i+1].Kind == yaml.MappingNode && len(node.Content[i+1].Content) == 0 {
+			node.Content = append(node.Content[:i], node.Content[i+2:]...)
+		}
+		return true
+	}
+	return false
 }
 
 func difference(left, right map[string]bool) []string {

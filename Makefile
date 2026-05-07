@@ -5,6 +5,11 @@ ICON := assets/BE_icon.ico
 RSRC := go run github.com/akavel/rsrc@latest
 export GOFLAGS
 
+CHECK_TRANSLATIONS_FLAGS ?=
+ifeq ($(remove),1)
+CHECK_TRANSLATIONS_FLAGS += --remove
+endif
+
 .PHONY: build build-windows test vet check-translations report-missing-translations clean
 
 build:
@@ -26,7 +31,7 @@ vet:
 	go vet ./...
 
 check-translations:
-	go run ./scripts/check-translations
+	go run ./scripts/check-translations $(CHECK_TRANSLATIONS_FLAGS)
 
 report-missing-translations:
 	go run ./scripts/report-missing-translations

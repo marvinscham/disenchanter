@@ -46,17 +46,6 @@ zh_TW:
       found_nothing: 沒有找到可分解的 %{name}.
       found_some: 找到 %{count} %{name}.
       keep_unowned: 保留你未擁有的 %{loot} 嗎?
-    key_fragments:
-      ask_craft_keys: 製作 %{key_count} 個鑰匙, 花費 %{fragment_count} 個鑰匙碎片?
-      found_fragments: 找到 %{count} 個鑰匙碎片.
-      not_enough_fragments: 持有的鑰匙碎片不足以合成.
-    mythic_essence:
-      amount_to_use: 好的, 要使用多少神話結晶粉末來製作 %{target_name}?
-      cancelled: 已取消神話製作.
-      craft_confirm: 製作 %{quantity} %{loot_name} 花費 %{total_cost} 神話結晶粉末?
-      found_some: 找到 %{amount} 神話結晶粉末.
-      none_found: 沒有找到可使用的神話結晶粉末.
-      not_enough: 神話結晶粉末數量不足.
     stat_submission:
       ask_contribute: 你願意(匿名的)上傳你的數據到全球統計數據嗎?
       thanks: 非常的感謝你!
@@ -83,7 +72,6 @@ zh_TW:
     honor_4_orb: 榮譽等級 4 晶球
     honor_5_orb: 榮譽等級 5 晶球
     icons: 頭像
-    materials: 海克斯材料
     orange_essence: 橘色結晶粉末
     orange_essence_short: 橘粉
     skin_permanents: 永久造型
@@ -120,18 +108,6 @@ zh_TW:
       summoner_check_failed: 無法獲取召喚師資訊. 請重新啟動英雄聯盟客戶端.
       time_saved: 我們節省了大約 %{time_saved} 秒鐘等待分解動畫放完的時間.
       version_info: 執行分解者版本 %{version}
-    materials:
-      options:
-        capsules: 典藏罐/禮包/晶球
-        key_fragments: 鑰匙碎片
-        mythic_essence: 神話結晶粉末
-    mythic:
-      options:
-        blue_essence: 藍色結晶粉末
-        orange_essence: 橘色結晶粉末
-        random_skin_shards: 隨機造型碎片
-      recipe_found: '找到製作項目: %{thing_to_craft} 花費 %{amount} 神話結晶粉末'
-      recipes_unavailable: 似乎不可能進行 %{loot} 的製作.
     option: 選項
     option_chosen: 選擇的操作
     option_done: 完成

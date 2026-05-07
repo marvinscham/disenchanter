@@ -19,13 +19,10 @@ de_DE:
       found_capsules: "%{count} Kapseln gefunden:"
       no_capsules_found: Keine schlüssellosen Kapseln gefunden, die man öffnen könnte.
     champion:
-      already_done: 'Schon fertig: Keine Championsplitter übrig, die deiner Auswahl
-        entsprechen.'
-      ask_disenchant: Möchtest du %{count} Championsplitter für %{amount} Blaue Essenzen
-        entzaubern?
+      already_done: 'Schon fertig: Keine Championsplitter übrig, die deiner Auswahl entsprechen.'
+      ask_disenchant: Möchtest du %{count} Championsplitter für %{amount} Blaue Essenzen entzaubern?
       ask_include_permanents: Sollen wir permanente Champions in diesen Prozess einbeziehen?
-      ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch
-        nicht besitzt, behalten?
+      ask_keep_unowned_champs: Sollen wir einen Splitter für Champions, die du noch nicht besitzt, behalten?
       exclusions:
         ask: Möchtest du Ausschlüsse hinzufügen?
         ask_which: Okay, welche Champions?
@@ -33,10 +30,8 @@ de_DE:
         recognized: 'Erkannte Ausschlüsse:'
       found_shards: "%{count} Championsplitter gefunden."
       no_shards_found: Keine Championsplitter zum Entzaubern gefunden.
-      no_unowned_champs_found: Keine Splitter von Champions gefunden, die du noch
-        nicht besitzt.
-      present_selection: 'Wir würden %{count} Championsplitter mit der von dir gewählten
-        Option entzaubern:'
+      no_unowned_champs_found: Keine Splitter von Champions gefunden, die du noch nicht besitzt.
+      present_selection: 'Wir würden %{count} Championsplitter mit der von dir gewählten Option entzaubern:'
       shards_to_keep: behält %{count}
     esports_emotes:
       ask_re_roll: Möchtest du %{count} E-Sports-Sticker (bereits im Besitz) umwandeln?
@@ -44,36 +39,19 @@ de_DE:
       none_found: Es wurden keine E-Sports-Sticker zum Umwandeln gefunden.
     exception:
       error_occurred: Beim Bearbeiten von %{name} ist ein Fehler aufgetreten.
-      network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche
-        es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
+      network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
       skipping_step: Etwas ist schiefgelaufen. Überspringe diesen Schritt...
     generic:
       action_cancelled: Aktion abgebrochen
       ask_disenchant: "%{count} %{loot} entzaubern, um %{currency} zu erhalten?"
-      disenchant_preview: 'Wir würden %{count} %{loot} mit der von dir gewählten Option
-        entzaubern:'
+      disenchant_preview: 'Wir würden %{count} %{loot} mit der von dir gewählten Option entzaubern:'
       filtered_down: Auf %{count} Items gefiltert.
       found_no_owned: Keine %{name} (im Besitz) zum Entzaubern gefunden.
       found_nothing: Keine %{name} zum Entzaubern gefunden.
       found_some: "%{count} %{name} gefunden."
       keep_unowned: "%{loot}, die du noch nicht im Besitz hast, behalten?"
-    key_fragments:
-      ask_craft_keys: "%{key_count} Schlüssel aus %{fragment_count} Schlüsselfragmenten
-        herstellen?"
-      found_fragments: "%{count} Schlüsselfragmente gefunden."
-      not_enough_fragments: Nicht genug Schlüsselfragmente, um etwas herzustellen.
-    mythic_essence:
-      amount_to_use: Wie viel Mythische Essenzen sollen wir benutzen, um %{target_name}
-        herzustellen?
-      cancelled: Verwertung Mythischer Essenzen abgebrochen.
-      craft_confirm: "%{quantity} %{loot_name} für %{total_cost} Mythische Essenzen
-        herstellen?"
-      found_some: "%{amount} Mythische Essenzen gefunden."
-      none_found: Keine Mythischen Essenzen zum Benutzen gefunden.
-      not_enough: Nicht genug Mythische Essenzen dafür.
     stat_submission:
-      ask_contribute: Möchtest du deine Ergebnisse (anonym) zu den globalen Statistiken
-        einsenden?
+      ask_contribute: Möchtest du deine Ergebnisse (anonym) zu den globalen Statistiken einsenden?
       ask_submit: Anonyme Ergebnisse absenden?
       thanks: Vielen Dank!
     url:
@@ -94,7 +72,6 @@ de_DE:
     honor_4_orb: "„Ehrungsstufe 4“-Kugel"
     honor_5_orb: "„Ehrungsstufe 5“-Kugel"
     icons: Symbole
-    materials: Materialien
     orange_essence: Orangene Essenzen
     orange_essence_short: OE
     skin_permanents: Skin (permanent)
@@ -117,8 +94,7 @@ de_DE:
     main:
       all_done: Das war's!
       confirm_banner_example: Diese Aktion ausführen?
-      confirm_banner_intro: 'Deine Beute ist sicher, nichts wird passieren bis du
-        ein solches Banner bestätigst:'
+      confirm_banner_intro: 'Deine Beute ist sicher, nichts wird passieren bis du ein solches Banner bestätigst:'
       exit_shortcut_notice: Du kannst das Skript jederzeit mit [STRG + C] verlassen.
       hello: Moin! :)
       logged_in_as: 'Du bist als %{name} #%{tagline} eingeloggt.'
@@ -129,36 +105,20 @@ de_DE:
         open_repository: Öffne GitHub-Repository
         open_usage_stats: Globale Statistiken für Disenchanter öffnen
       see_you: Bis bald :)
-      summoner_check_failed: Konnte keine Spieler-Info sammeln. Starte deinen League-Client
-        neu.
-      time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen
-        gespart.
+      summoner_check_failed: Konnte keine Spieler-Info sammeln. Starte deinen League-Client neu.
+      time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen gespart.
       version_info: Starte Disenchanter %{version}
-    materials:
-      options:
-        capsules: Kapseln
-        key_fragments: Schlüsselfragmente
-        mythic_essence: Mythische Essenzen
-    mythic:
-      options:
-        blue_essence: Blaue Essenzen
-        orange_essence: Orangene Essenzen
-        random_skin_shards: Zufällige Skinsplitter
-      recipe_found: 'Rezept gefunden: %{thing_to_craft} für %{amount} Mythische Essenzen'
-      recipes_unavailable: Rezepte für %{loot} scheinen nicht verfügbar zu sein.
     option: Option
     option_chosen: Ausgewählte Option
     option_done: erledigt
     what_to_do: Was möchtest du machen?
     mass:
-      ask_run_soft: Das wird alle Beute, die du bereits permanent besitzt, entzaubern.
-        Fortfahren?
+      ask_run_soft: Das wird alle Beute, die du bereits permanent besitzt, entzaubern. Fortfahren?
       ask_run_hard: Das wird ALLE deine Beute entzaubern! Fortfahren?
       all_steps_success: Alle Schritte wurden erfolgreich ausgeführt!
     back_to_detail: Zurück zum detaillierten Menü
     detail:
-      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit
-        du nichts verpasst!)'
+      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit du nichts verpasst!)'
   meta:
     auto_loaded_locale: 'Sprache des Clients: %{locale_name}'
     locale_name: Deutsch
