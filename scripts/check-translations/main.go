@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"go/ast"
@@ -15,6 +16,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+const baseLocale = "en"
+
 type localeFile struct {
 	path   string
 	locale string
@@ -24,13 +27,23 @@ type localeFile struct {
 func main() {
 	root := flag.String("root", ".", "repository root")
 	remove := flag.Bool("remove", false, "remove unused translations from locale files")
+	reportMissing := flag.Bool("report-missing", false, "write missing and extra translation keys compared to the base locale")
+	output := flag.String("output", "translation-report.txt", "report output path")
 	flag.Parse()
 
-	used, err := usedTranslationKeys(*root)
+	locales, err := loadLocaleFiles(filepath.Join(*root, "i18n"))
 	if err != nil {
 		fatal(err)
 	}
-	locales, err := loadLocaleFiles(filepath.Join(*root, "i18n"))
+	if *reportMissing {
+		if err := writeMissingTranslationReport(locales, *output); err != nil {
+			fatal(err)
+		}
+		fmt.Printf("wrote translation report to %s\n", *output)
+		return
+	}
+
+	used, err := usedTranslationKeys(*root)
 	if err != nil {
 		fatal(err)
 	}
@@ -46,6 +59,54 @@ func main() {
 		os.Exit(1)
 	}
 	fmt.Printf("translation check passed: %d source keys, %d locale files\n", len(used), len(locales))
+}
+
+func writeMissingTranslationReport(locales []localeFile, output string) error {
+	base := localeByName(locales, baseLocale)
+	if base == nil {
+		return fmt.Errorf("missing base locale i18n/%s.yml", baseLocale)
+	}
+
+	var report bytes.Buffer
+	fmt.Fprintf(&report, "Translation report (baseline: %s)\n\n", base.path)
+
+	hasFindings := false
+	for _, file := range locales {
+		if file.locale == baseLocale {
+			continue
+		}
+		missing := difference(base.keys, file.keys)
+		extra := difference(file.keys, base.keys)
+		if len(missing) == 0 && len(extra) == 0 {
+			continue
+		}
+		hasFindings = true
+		fmt.Fprintf(&report, "%s (%s)\n", file.locale, file.path)
+		writeKeys(&report, "Missing", missing)
+		writeKeys(&report, "Not in baseline", extra)
+		fmt.Fprintln(&report)
+	}
+
+	if !hasFindings {
+		fmt.Fprintln(&report, "No missing or extra translation keys found.")
+	}
+	return os.WriteFile(output, report.Bytes(), 0644)
+}
+
+func localeByName(locales []localeFile, name string) *localeFile {
+	for i := range locales {
+		if locales[i].locale == name {
+			return &locales[i]
+		}
+	}
+	return nil
+}
+
+func writeKeys(report *bytes.Buffer, title string, keys []string) {
+	fmt.Fprintf(report, "  %s: %d\n", title, len(keys))
+	for _, key := range keys {
+		fmt.Fprintf(report, "    - %s\n", key)
+	}
 }
 
 func walkTranslationKeys(locales []localeFile, used map[string]bool, remove *bool) bool {

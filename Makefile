@@ -3,14 +3,8 @@ VERSION ?= v3.0.1
 GOFLAGS ?= -mod=mod
 ICON := assets/BE_icon.ico
 RSRC := go run github.com/akavel/rsrc@latest
-export GOFLAGS
 
-CHECK_TRANSLATIONS_FLAGS ?=
-ifeq ($(remove),1)
-CHECK_TRANSLATIONS_FLAGS += --remove
-endif
-
-.PHONY: build build-windows test vet check-translations report-missing-translations clean
+.PHONY: build build-windows test vet check-translations cleanup-translations report-missing-translations clean
 
 build:
 	go build -buildvcs=false -ldflags "-s -w" -o $(BINARY_DIR)/disenchanter ./cmd/disenchanter
@@ -31,10 +25,13 @@ vet:
 	go vet ./...
 
 check-translations:
-	go run ./scripts/check-translations $(CHECK_TRANSLATIONS_FLAGS)
+	go run ./scripts/check-translations
+
+cleanup-translations:
+	go run ./scripts/check-translations --remove
 
 report-missing-translations:
-	go run ./scripts/report-missing-translations
+	go run ./scripts/check-translations --report-missing
 
 clean:
 	rm -rf $(BINARY_DIR)
