@@ -334,44 +334,16 @@ func handleChampions(c *Client, accept int) {
 	if report(err, "champions") {
 		return
 	}
-	shards := filterLoot(loot, func(l Loot) bool { return str(l, "type") == championShard })
-	perms := filterLoot(loot, func(l Loot) bool { return str(l, "type") == championPermanent })
-	if accept >= 1 || (count(perms) > 0 && isYes(inputCheck(t("handler.champion.ask_include_permanents"), ansYN(), "[y|n]", "default"))) {
-		shards = append(shards, perms...)
-	}
+	shards := championLoot(loot, accept)
 	if count(shards) == 0 {
 		fmt.Println(yellow(t("handler.champion.no_shards_found")))
 		return
 	}
 	fmt.Println(blue(t("handler.champion.found_shards", "count", count(shards))))
-	for _, s := range shards {
-		s["count_keep"] = 0
-		s["disenchant_note"] = ""
-	}
-	if accept != 2 {
-		unowned := filterLoot(shards, func(l Loot) bool { return str(l, "redeemableStatus") != statusOwned })
-		if len(unowned) == 0 {
-			fmt.Println(blue(t("handler.champion.no_unowned_champs_found")))
-		} else if accept == 1 || isYes(inputCheck(t("handler.champion.ask_keep_unowned_champs"), ansYN(), "[y|n]", "default")) {
-			for _, s := range shards {
-				if str(s, "redeemableStatus") != statusOwned {
-					s["count"] = num(s, "count") - 1
-					s["count_keep"] = num(s, "count_keep") + 1
-				}
-			}
-		}
-	}
-	if accept < 1 {
-		choice := inputCheck(cyan(t("menu.choose_option"))+"\n\n"+todoString(map[string]string{"1": t("menu.champions.options.all"), "2": t("menu.champions.options.collector"), "x": t("menu.back_to_detail")}, map[string]bool{}), []string{"1", "2", "x"}, t("menu.option"), "default")
-		if choice == "x" {
-			return
-		}
-		if choice == "2" {
-			for _, s := range shards {
-				s["count"] = num(s, "count") - 1
-				s["count_keep"] = num(s, "count_keep") + 1
-			}
-		}
+	prepareChampionShards(shards)
+	keepUnownedChampions(shards, accept)
+	if !applyChampionChoice(shards, accept) {
+		return
 	}
 	shards = filterLoot(shards, func(l Loot) bool { return num(l, "count") > 0 })
 	if count(shards) == 0 {
@@ -385,6 +357,64 @@ func handleChampions(c *Client, accept int) {
 			return
 		}
 	}
+	disenchantChampions(c, shards, accept)
+	fmt.Println(green(t("common.done")))
+}
+
+func championLoot(loot []Loot, accept int) []Loot {
+	shards := filterLoot(loot, func(l Loot) bool { return str(l, "type") == championShard })
+	perms := filterLoot(loot, func(l Loot) bool { return str(l, "type") == championPermanent })
+	if accept >= 1 || (count(perms) > 0 && isYes(inputCheck(t("handler.champion.ask_include_permanents"), ansYN(), "[y|n]", "default"))) {
+		return append(shards, perms...)
+	}
+	return shards
+}
+
+func prepareChampionShards(shards []Loot) {
+	for _, s := range shards {
+		s["count_keep"] = 0
+		s["disenchant_note"] = ""
+	}
+}
+
+func keepUnownedChampions(shards []Loot, accept int) {
+	if accept == 2 {
+		return
+	}
+	unowned := filterLoot(shards, func(l Loot) bool { return str(l, "redeemableStatus") != statusOwned })
+	if len(unowned) == 0 {
+		fmt.Println(blue(t("handler.champion.no_unowned_champs_found")))
+		return
+	}
+	if accept == 1 || isYes(inputCheck(t("handler.champion.ask_keep_unowned_champs"), ansYN(), "[y|n]", "default")) {
+		keepChampionShards(shards, func(l Loot) bool { return str(l, "redeemableStatus") != statusOwned })
+	}
+}
+
+func applyChampionChoice(shards []Loot, accept int) bool {
+	if accept >= 1 {
+		return true
+	}
+	choice := inputCheck(cyan(t("menu.choose_option"))+"\n\n"+todoString(map[string]string{"1": t("menu.champions.options.all"), "2": t("menu.champions.options.collector"), "x": t("menu.back_to_detail")}, map[string]bool{}), []string{"1", "2", "x"}, t("menu.option"), "default")
+	if choice == "x" {
+		return false
+	}
+	if choice == "2" {
+		keepChampionShards(shards, func(l Loot) bool { return true })
+	}
+	return true
+}
+
+func keepChampionShards(shards []Loot, shouldKeep func(Loot) bool) {
+	for _, s := range shards {
+		if shouldKeep(s) {
+			s["count"] = num(s, "count") - 1
+			s["count_keep"] = num(s, "count_keep") + 1
+		}
+	}
+}
+
+func disenchantChampions(c *Client, shards []Loot, accept int) {
 	total := 0
 	for _, s := range shards {
 		total += num(s, "disenchantValue") * num(s, "count")
@@ -394,7 +424,6 @@ func handleChampions(c *Client, accept int) {
 		c.Stats.Disenchanted += count(shards)
 		parallel(shards, func(l Loot) { c.PostRecipe(str(l, "disenchantRecipeName"), str(l, "lootId"), num(l, "count")) })
 	}
-	fmt.Println(green(t("common.done")))
 }
 
 func handleSkins(c *Client, accept int) {
