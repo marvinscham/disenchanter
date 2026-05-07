@@ -25,7 +25,7 @@ build-windows:
 	rm -f cmd/disenchanter/rsrc_windows_amd64.syso cmd/disenchanter_up/rsrc_windows_amd64.syso
 
 test:
-	go test ./...
+	go test -coverprofile=coverage.out ./internal/app
 
 vet:
 	go vet ./...
