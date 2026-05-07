@@ -1,0 +1,4 @@
+[
+  {"count":2,"disenchantLootName":"CURRENCY_cosmetic","disenchantRecipeName":"SKIN_RENTAL_disenchant","disenchantValue":100,"itemDesc":"Owned Test Skin","lootId":"CHAMPION_SKIN_RENTAL_TEST_1","redeemableStatus":"ALREADY_OWNED","type":"SKIN_RENTAL"},
+  {"count":1,"disenchantLootName":"CURRENCY_cosmetic","disenchantRecipeName":"SKIN_RENTAL_disenchant","disenchantValue":200,"itemDesc":"Unowned Test Skin","lootId":"CHAMPION_SKIN_RENTAL_TEST_2","redeemableStatus":"REDEEMABLE_RENTAL","type":"SKIN_RENTAL"}
+]

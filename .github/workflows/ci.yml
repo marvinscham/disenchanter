@@ -79,10 +79,10 @@ jobs:
         run: go mod download
 
       - name: Test
-        run: go test ./...
+        run: make test
 
       - name: Vet
-        run: go vet ./...
+        run: make vet
 
       - name: Check translations
         run: make check-translations
