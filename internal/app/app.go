@@ -217,8 +217,11 @@ func mainMenu(c *Client) {
 		case "3":
 			detailMenu(c)
 		case "l":
-			languageMenu(c)
-			c.greet()
+			if languageMenu(c) {
+				c.greet()
+				mainMenu(c)
+				return true
+			}
 		case "m":
 			openMasteryChart(c)
 		case "s":

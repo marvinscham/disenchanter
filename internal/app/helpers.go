@@ -6,75 +6,12 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"runtime"
 	"sort"
 	"strconv"
 	"strings"
 	"sync"
-
-	assets "github.com/marvinscham/disenchanter"
-	"gopkg.in/yaml.v3"
 )
-
-func loadTranslations(want string) {
-	translations = map[string]string{}
-	load := func(name string, data []byte) {
-		var raw map[string]any
-		if yaml.Unmarshal(data, &raw) != nil {
-			return
-		}
-		root, ok := raw[name].(map[string]any)
-		if !ok {
-			return
-		}
-		flatten("", root)
-	}
-	if b, err := assets.I18n.ReadFile("i18n/en.yml"); err == nil {
-		load("en", b)
-	}
-	if want != "en" {
-		if b, err := assets.I18n.ReadFile(filepath.Join("i18n", want+".yml")); err == nil {
-			load(want, b)
-			return
-		}
-		for _, p := range []string{filepath.Join("i18n", want+".yml"), filepath.Join("..", "i18n", want+".yml")} {
-			if b, err := os.ReadFile(p); err == nil {
-				load(want, b)
-				break
-			}
-		}
-	}
-	locale = want
-}
-
-func flatten(prefix string, m map[string]any) {
-	for k, v := range m {
-		key := k
-		if prefix != "" {
-			key = prefix + "." + k
-		}
-		switch t := v.(type) {
-		case map[string]any:
-			flatten(key, t)
-		case string:
-			translations[key] = t
-		default:
-			translations[key] = fmt.Sprint(t)
-		}
-	}
-}
-
-func t(key string, args ...any) string {
-	out := translations[key]
-	if out == "" {
-		out = key
-	}
-	for i := 0; i+1 < len(args); i += 2 {
-		out = strings.ReplaceAll(out, "%{"+fmt.Sprint(args[i])+"}", fmt.Sprint(args[i+1]))
-	}
-	return out
-}
 
 func ask(q string) string {
 	fmt.Print(q)
@@ -118,7 +55,12 @@ func keys(m map[string]string) []string {
 	for k := range m {
 		out = append(out, k)
 	}
-	sort.Strings(out)
+	sort.Slice(out, func(i, j int) bool {
+		if out[i] == "x" || out[j] == "x" {
+			return out[j] == "x"
+		}
+		return out[i] < out[j]
+	})
 	return out
 }
 func todoString(items map[string]string, done map[string]bool) string {
@@ -321,15 +263,16 @@ func gatherStats(s *Stats) string {
 	return out
 }
 
-func languageMenu(c *Client) {
+func languageMenu(c *Client) bool {
 	choices := map[string]string{"en": "English", "de": "Deutsch", "pl": "Polski", "zh": "繁體中文", "eo": "Esperanto", "x": t("menu.back_to_main")}
 	choice := inputCheck(cyan(t("menu.language.preferred"))+"\n\n"+todoString(choices, map[string]bool{}), keys(choices), t("menu.option"), "default")
 	if choice == "x" {
-		return
+		return false
 	}
 	m := map[string]string{"de": "de_DE", "pl": "pl_PL", "zh": "zh_TW", "eo": "eo", "en": "en"}
 	loadTranslations(m[choice])
 	fmt.Println(t("meta.manually_set_locale", "locale_name", t("meta.locale_name")))
+	return true
 }
 
 func debugMenu(c *Client) {

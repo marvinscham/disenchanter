@@ -43,12 +43,9 @@ de_DE:
       found_some: "%{count} E-Sports-Sticker gefunden."
       none_found: Es wurden keine E-Sports-Sticker zum Umwandeln gefunden.
     exception:
-      create_an_issue: Bitte mach einen Screenshot und erstelle einen Issue unter
-        %{url}
       error_occurred: Beim Bearbeiten von %{name} ist ein Fehler aufgetreten.
       network_error: Ups, wir haben wahrscheinlich ein API-Limit erreicht. Versuche
         es in einer Minute nochmal oder melde es an %{email}, wenn das weiterhin passiert.
-      send_email_instead: Wenn du kein GitHub-Konto hast, schick ihn an %{email}
       skipping_step: Etwas ist schiefgelaufen. Überspringe diesen Schritt...
     generic:
       action_cancelled: Aktion abgebrochen
@@ -137,8 +134,6 @@ de_DE:
       time_saved: Wir haben ungefähr %{time_saved} Sekunden des Wartens auf Animationen
         gespart.
       version_info: Starte Disenchanter %{version}
-      what_to_do: 'Was möchtest du machen? (Tipp: Geh von oben nach unten durch, damit
-        du nichts verpasst!)'
     materials:
       options:
         capsules: Kapseln
@@ -168,8 +163,6 @@ de_DE:
     auto_loaded_locale: 'Sprache des Clients: %{locale_name}'
     locale_name: Deutsch
     manually_set_locale: Auf %{locale_name} gestellt!
-    translation_note: 'Fehlende oder schlechte Übersetzung? Hilf mit, indem du deine
-      anbietest: %{url}'
   update_checker:
     ask_download_now: Möchtest du die neue Version jetzt herunterladen?
     done_downloading: Download abgeschlossen!
