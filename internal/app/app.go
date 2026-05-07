@@ -18,9 +18,6 @@ import (
 const (
 	blueEssence       = "CURRENCY_champion"
 	orangeEssence     = "CURRENCY_cosmetic"
-	mythicEssence     = "CURRENCY_mythic"
-	keyFragment       = "MATERIAL_key_fragment"
-	keyRecipe         = "MATERIAL_key_fragment_forge"
 	championShard     = "CHAMPION_RENTAL"
 	championPermanent = "CHAMPION"
 	skinShard         = "SKIN_RENTAL"
@@ -33,7 +30,6 @@ const (
 	iconType          = "SUMMONERICON"
 	tacticianType     = "COMPANION"
 	emoteRerollRecipe = "EMOTE_forge"
-	randomSkinShard   = "CHEST_291"
 	statusOwned       = "ALREADY_OWNED"
 )
 
@@ -217,7 +213,7 @@ func mainMenu(c *Client) {
 		case "3":
 			detailMenu(c)
 		case "l":
-			if languageMenu(c) {
+			if languageMenu() {
 				c.greet()
 				mainMenu(c)
 				return true
@@ -241,11 +237,11 @@ func mainMenu(c *Client) {
 }
 
 func detailMenu(c *Client) {
-	items := map[string]string{"1": t("loot.materials"), "2": t("loot.champions"), "3": t("loot.skins"), "4": t("loot.tacticians"), "5": t("loot.eternals"), "6": t("loot.emotes"), "7": t("loot.ward_skins"), "8": t("loot.icons"), "x": t("menu.back_to_main")}
+	items := map[string]string{"1": t("loot.capsules"), "2": t("loot.champions"), "3": t("loot.skins"), "4": t("loot.tacticians"), "5": t("loot.eternals"), "6": t("loot.emotes"), "7": t("loot.ward_skins"), "8": t("loot.icons"), "x": t("menu.back_to_main")}
 	runMenu(c, t("menu.detail.what_to_do"), items, func(choice string) bool {
 		switch choice {
 		case "1":
-			materialsMenu(c)
+			handleCapsules(c, 0)
 		case "2":
 			handleChampions(c, 0)
 		case "3":
@@ -266,25 +262,6 @@ func detailMenu(c *Client) {
 			return false
 		}
 		c.RefreshLoot()
-		return false
-	})
-}
-
-func materialsMenu(c *Client) {
-	items := map[string]string{"1": t("menu.materials.options.mythic_essence"), "2": t("menu.materials.options.key_fragments"), "3": t("menu.materials.options.capsules"), "x": t("menu.back_to_detail")}
-	runMenu(c, t("menu.what_to_do"), items, func(choice string) bool {
-		switch choice {
-		case "1":
-			handleMythic(c)
-		case "2":
-			handleKeyFragments(c, 0)
-		case "3":
-			handleCapsules(c, 0)
-		case "x":
-			return true
-		default:
-			return false
-		}
 		return false
 	})
 }
@@ -310,7 +287,6 @@ func handleMass(c *Client, accept int) {
 	if accept == 2 && inputCheck(t("menu.mass.ask_run_hard"), []string{"YES", "n"}, "[YES|n]", "confirm") == "n" {
 		return
 	}
-	handleKeyFragments(c, accept)
 	handleCapsules(c, accept)
 	handleChampions(c, accept)
 	handleSkins(c, accept)
@@ -320,25 +296,6 @@ func handleMass(c *Client, accept int) {
 	handleWards(c, accept)
 	handleGeneric(c, t("loot.icons"), iconType, accept)
 	fmt.Println(green(t("menu.mass.all_steps_success")))
-}
-
-func handleKeyFragments(c *Client, accept int) {
-	loot, err := c.GetArray("lol-loot/v1/player-loot")
-	if report(err, "key fragments") {
-		return
-	}
-	fragments := count(filterLoot(loot, func(l Loot) bool { return str(l, "lootId") == keyFragment }))
-	keys := fragments / 3
-	if fragments < 3 {
-		fmt.Println(yellow(t("handler.key_fragments.not_enough_fragments")))
-		return
-	}
-	fmt.Println(blue(t("handler.key_fragments.found_fragments", "count", fragments)))
-	if accept >= 1 || isYes(inputCheck(t("handler.key_fragments.ask_craft_keys", "key_count", keys, "fragment_count", fragments), ansYN(), "[y|n]", "confirm")) {
-		c.Stats.Crafted += keys
-		c.PostRecipe(keyRecipe, keyFragment, keys)
-		fmt.Println(green(t("common.done")))
-	}
 }
 
 func handleCapsules(c *Client, accept int) {
@@ -502,11 +459,12 @@ func handleGenericOwned(items []Loot, name string, accept int) []Loot {
 		return items
 	}
 	choice := ""
-	if accept == 2 {
+	switch accept {
+	case 2:
 		choice = "n"
-	} else if accept == 1 {
+	case 1:
 		choice = "y"
-	} else {
+	default:
 		choice = inputCheck(cyan(t("handler.generic.keep_unowned", "loot", name)+"\n")+white("[y] ")+cyan(t("common.yup")+"\n")+white("[n] ")+cyan(t("common.nah")+"\n")+white("[x] ")+cyan(t("menu.back_to_main")+"\n"+t("menu.option")+" "), []string{"y", "n", "x"}, "[y|n|x]", "raw")
 	}
 	if choice == "x" {
@@ -542,74 +500,6 @@ func handleEsportsEmotes(c *Client, accept int) bool {
 		return true
 	}
 	return false
-}
-
-func handleMythic(c *Client) {
-	loot, err := c.GetArray("lol-loot/v1/player-loot")
-	if report(err, "mythic essence") {
-		return
-	}
-	var essence Loot
-	for _, l := range loot {
-		if str(l, "lootId") == mythicEssence {
-			essence = l
-		}
-	}
-	if essence == nil || num(essence, "count") == 0 {
-		fmt.Println(yellow(t("handler.mythic_essence.none_found")))
-		return
-	}
-	fmt.Println(blue(t("handler.mythic_essence.found_some", "amount", num(essence, "count"))))
-	choices := map[string]string{"1": t("menu.mythic.options.blue_essence"), "2": t("menu.mythic.options.orange_essence"), "3": t("menu.mythic.options.random_skin_shards"), "x": t("menu.back_to_detail")}
-	choice := inputCheck(cyan(t("menu.what_to_do"))+"\n\n"+todoString(choices, map[string]bool{}), keys(choices), t("menu.option"), "default")
-	if choice == "x" {
-		return
-	}
-	target := map[string]string{"1": blueEssence, "2": orangeEssence, "3": randomSkinShard}[choice]
-	recipes, err := c.GetRecipes(mythicEssence)
-	if report(err, "mythic essence") {
-		return
-	}
-	var recipe Recipe
-	for _, r := range recipes {
-		outs := arr(r, "outputs")
-		if len(outs) > 0 && str(Loot(outs[0]), "lootName") == target {
-			recipe = r
-		}
-	}
-	if recipe == nil {
-		fmt.Println(yellow(t("menu.mythic.recipes_unavailable", "loot", choices[choice])))
-		return
-	}
-	cost := num(Loot(arr(recipe, "slots")[0]), "quantity")
-	outQty := num(Loot(arr(recipe, "outputs")[0]), "quantity")
-	fmt.Println(blue(t("menu.mythic.recipe_found", "thing_to_craft", str(recipe, "contextMenuText"), "amount", cost)))
-	amountStr := inputCheck(t("handler.mythic_essence.amount_to_use", "target_name", choices[choice]), rangeAnswers(num(essence, "count")), "[1.."+strconv.Itoa(num(essence, "count"))+"|all|x]", "default")
-	if amountStr == "x" {
-		fmt.Println(yellow(t("handler.mythic_essence.cancelled")))
-		return
-	}
-	amount := num(essence, "count")
-	if amountStr != "all" {
-		amount, _ = strconv.Atoi(amountStr)
-	}
-	repeat := amount / cost
-	if repeat == 0 {
-		fmt.Println(yellow(t("handler.mythic_essence.not_enough")))
-		return
-	}
-	qty := repeat * outQty
-	price := repeat * cost
-	if isYes(inputCheck(t("handler.mythic_essence.craft_confirm", "quantity", qty, "loot_name", choices[choice], "total_cost", price), ansYN(), "[y|n]", "confirm")) {
-		if target == blueEssence {
-			c.Stats.BlueEssence += qty
-		} else if target == orangeEssence {
-			c.Stats.OrangeEssence += qty
-		}
-		c.Stats.Crafted += repeat
-		c.PostRecipe(str(recipe, "recipeName"), mythicEssence, repeat)
-		fmt.Println(green(t("common.done")))
-	}
 }
 
 func finish(s *Stats) {

@@ -1,4 +1,3 @@
----
 en:
   common:
     actions: Actions
@@ -51,17 +50,6 @@ en:
       found_nothing: Found no %{name} to disenchant.
       found_some: Found %{count} %{name}.
       keep_unowned: Keep %{loot} you don't own yet?
-    key_fragments:
-      ask_craft_keys: Craft %{key_count} keys from %{fragment_count} key fragments?
-      found_fragments: Found %{count} key fragments.
-      not_enough_fragments: Not enough key fragments to craft anything.
-    mythic_essence:
-      amount_to_use: Alright, how much Mythic Essence should we use to craft %{target_name}?
-      cancelled: Mythic crafting cancelled.
-      craft_confirm: Craft %{quantity} %{loot_name} from %{total_cost} Mythic Essence?
-      found_some: Found %{amount} Mythic Essence.
-      none_found: Found no Mythic Essence to use.
-      not_enough: Not enough Mythic Essence for that.
     stat_submission:
       ask_contribute: Would you like to contribute your (anonymous) stats to the global stats?
       ask_submit: Submit anonymous stats?
@@ -73,6 +61,7 @@ en:
   loot:
     blue_essence: Blue Essence
     blue_essence_short: BE
+    capsules: Capsules
     champion_capsule: Champion Capsule
     champions: Champions
     detailed: Detailed (choose things to mass disenchant)
@@ -86,7 +75,6 @@ en:
     honor_4_orb: Honor Level 4 Orb
     honor_5_orb: Honor Level 5 Orb
     icons: Icons
-    materials: Materials
     orange_essence: Orange Essence
     orange_essence_short: OE
     skin_permanents: Skin Permanents
@@ -128,18 +116,6 @@ en:
       all_steps_success: All steps ran successfully!
       ask_run_hard: This will disenchant ALL of your loot items! Proceed?
       ask_run_soft: This will disenchant all loot of items you already own. Proceed?
-    materials:
-      options:
-        capsules: Capsules
-        key_fragments: Key Fragments
-        mythic_essence: Mythic Essence
-    mythic:
-      options:
-        blue_essence: Blue Essence
-        orange_essence: Orange Essence
-        random_skin_shards: Random Skin Shards
-      recipe_found: 'Recipe found: %{thing_to_craft} for %{amount} Mythic Essence'
-      recipes_unavailable: Recipes for %{loot} seem to be unavailable.
     option: Option
     option_chosen: Option chosen
     option_done: done
