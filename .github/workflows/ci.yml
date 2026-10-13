@@ -48,7 +48,7 @@ jobs:
 
       - name: Run Sonar scan
         if: ${{ env.SONAR_TOKEN != '' }}
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v8
         with:
           args: -Dsonar.qualitygate.wait=true
         env:
